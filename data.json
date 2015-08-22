@@ -27,6 +27,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/base/playback.js": {
+            "name": "src/base/playback.js",
+            "modules": {},
+            "classes": {
+                "Playback": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/components/container/container.js": {
             "name": "src/components/container/container.js",
             "modules": {},
@@ -87,13 +96,14 @@
             "submodules": {},
             "classes": {
                 "BaseObject": 1,
-                "Events": 1
+                "Events": 1,
+                "Playback": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/base/events.js",
-            "line": 13
+            "file": "src/base/playback.js",
+            "line": 4
         },
         "components": {
             "name": "components",
@@ -136,6 +146,22 @@
             "file": "src/base/events.js",
             "line": 13,
             "is_constructor": 1
+        },
+        "Playback": {
+            "name": "Playback",
+            "shortname": "Playback",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "base",
+            "namespace": "",
+            "file": "src/base/playback.js",
+            "line": 4,
+            "description": "An abstraction to represent a generic playback, it's like an interface to be implemented by subclasses.",
+            "is_constructor": 1,
+            "extends": "UIObject"
         },
         "Player": {
             "name": "Player",
@@ -473,6 +499,141 @@
                 }
             ],
             "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 12,
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "the options object",
+                    "type": "Object"
+                }
+            ],
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 21,
+            "description": "plays the playback.",
+            "itemtype": "method",
+            "name": "play",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 27,
+            "description": "pauses the playback.",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 33,
+            "description": "stops the playback.",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 39,
+            "description": "seeks the playback to a given `time` in percentage",
+            "itemtype": "method",
+            "name": "seek",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "should be a number between 0 and 100",
+                    "type": "Number"
+                }
+            ],
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 46,
+            "description": "gets the duration in seconds",
+            "itemtype": "method",
+            "name": "getDuration",
+            "return": {
+                "description": "duration time (in seconds) of the current source",
+                "type": "Number"
+            },
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 53,
+            "description": "checks if the playback is playing.",
+            "itemtype": "method",
+            "name": "isPlaying",
+            "return": {
+                "description": "`true` if the current playback is playing, otherwise `false`",
+                "type": "Boolean"
+            },
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 62,
+            "description": "gets the playback type",
+            "itemtype": "method",
+            "name": "getPlaybackType",
+            "return": {
+                "description": "you should write the playback type otherwise it'll assume `'no_op'`",
+                "type": "String"
+            },
+            "example": [
+                "\n```javascript\nhtml5VideoPlayback.getPlaybackType() //html5_video\nflashHlsPlayback.getPlaybackType() //hls\n```"
+            ],
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 76,
+            "description": "checks if the playback is in HD.",
+            "itemtype": "method",
+            "name": "isHighDefinitionInUse",
+            "return": {
+                "description": "`true` if the playback is playing in HD, otherwise `false`",
+                "type": "Boolean"
+            },
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 85,
+            "description": "sets the volume for the playback",
+            "itemtype": "method",
+            "name": "volume",
+            "return": {
+                "description": "a number between 0 (`muted`) to 100 (`max`)",
+                "type": "Number"
+            },
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 92,
+            "description": "destroys the playback, removing it from DOM",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Playback",
             "module": "base"
         },
         {

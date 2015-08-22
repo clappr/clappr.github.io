@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Playback - Clappr</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.2.5</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/BaseObject.html">BaseObject</a></li>
+                                <li><a href="../classes/Events.html">Events</a></li>
+                                <li><a href="../classes/Playback.html">Playback</a></li>
+                                <li><a href="../classes/Player.html">Player</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/base.html">base</a></li>
+                                <li><a href="../modules/components.html">components</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>Playback Class</h1>
+<div class="box meta">
+
+        <div class="extends">
+            Extends UIObject
+        </div>
+
+        <div class="foundat">
+            Defined in: <a href="../files/src_base_playback.js.html#l4"><code>src&#x2F;base&#x2F;playback.js:4</code></a>
+        </div>
+
+            Module: <a href="../modules/base.html">base</a>
+
+</div>
+
+
+<div class="box intro">
+    <p>An abstraction to represent a generic playback, it's like an interface to be implemented by subclasses.</p>
+
+</div>
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+<div id="method_Playback" class="method item">
+    <h3 class="name"><code>Playback</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l4"><code>src&#x2F;base&#x2F;playback.js:4</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+
+
+
+</div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method">
+                                <a href="#method_constructor">constructor</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_destroy">destroy</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getDuration">getDuration</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getPlaybackType">getPlaybackType</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_isHighDefinitionInUse">isHighDefinitionInUse</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_isPlaying">isPlaying</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_pause">pause</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_play">play</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_seek">seek</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_stop">stop</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_volume">volume</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_constructor" class="method item">
+    <h3 class="name"><code>constructor</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l12"><code>src&#x2F;base&#x2F;playback.js:12</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>the options object</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_destroy" class="method item">
+    <h3 class="name"><code>destroy</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l92"><code>src&#x2F;base&#x2F;playback.js:92</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>destroys the playback, removing it from DOM</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_getDuration" class="method item">
+    <h3 class="name"><code>getDuration</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l46"><code>src&#x2F;base&#x2F;playback.js:46</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>gets the duration in seconds</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>duration time (in seconds) of the current source</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getPlaybackType" class="method item">
+    <h3 class="name"><code>getPlaybackType</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l62"><code>src&#x2F;base&#x2F;playback.js:62</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>gets the playback type</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>you should write the playback type otherwise it'll assume <code>'no_op'</code></p>
+
+            </div>
+        </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">html5VideoPlayback.getPlaybackType() //html5_video
+flashHlsPlayback.getPlaybackType() //hls
+</code></pre>
+
+            </div>
+        </div>
+</div>
+<div id="method_isHighDefinitionInUse" class="method item">
+    <h3 class="name"><code>isHighDefinitionInUse</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l76"><code>src&#x2F;base&#x2F;playback.js:76</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>checks if the playback is in HD.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    <p><code>true</code> if the playback is playing in HD, otherwise <code>false</code></p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_isPlaying" class="method item">
+    <h3 class="name"><code>isPlaying</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l53"><code>src&#x2F;base&#x2F;playback.js:53</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>checks if the playback is playing.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                    <p><code>true</code> if the current playback is playing, otherwise <code>false</code></p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_pause" class="method item">
+    <h3 class="name"><code>pause</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l27"><code>src&#x2F;base&#x2F;playback.js:27</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>pauses the playback.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_play" class="method item">
+    <h3 class="name"><code>play</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l21"><code>src&#x2F;base&#x2F;playback.js:21</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>plays the playback.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_seek" class="method item">
+    <h3 class="name"><code>seek</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>time</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l39"><code>src&#x2F;base&#x2F;playback.js:39</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>seeks the playback to a given <code>time</code> in percentage</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">time</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+                    <div class="param-description">
+                        <p>should be a number between 0 and 100</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_stop" class="method item">
+    <h3 class="name"><code>stop</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l33"><code>src&#x2F;base&#x2F;playback.js:33</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>stops the playback.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_volume" class="method item">
+    <h3 class="name"><code>volume</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l85"><code>src&#x2F;base&#x2F;playback.js:85</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>sets the volume for the playback</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>a number between 0 (<code>muted</code>) to 100 (<code>max</code>)</p>
+
+            </div>
+        </div>
+
+
+</div>
+            </div>
+
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

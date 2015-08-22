@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components - Clappr</title>
+    <title>src/base/playback.js - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -80,37 +80,119 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>components Module</h1>
-<div class="box clearfix meta">
+<h1 class="file-heading">File: src/base/playback.js</h1>
 
+<div class="file">
+    <pre class="code prettyprint linenums">
+import {extend} from &#x27;./utils&#x27;
+import UIObject from &#x27;./ui_object&#x27;
 
-        <div class="foundat">
-            Defined in: <a href="../files/src_components_player.js.html#l17"><code>src&#x2F;components&#x2F;player.js:17</code></a>
-        </div>
+/**
+ * An abstraction to represent a generic playback, it&#x27;s like an interface to be implemented by subclasses.
+ * @class Playback
+ * @constructor
+ * @extends UIObject
+ * @module base
+ */
+export default class Playback extends UIObject {
+  /**
+   * @method constructor
+   * @param {Object} options the options object
+   */
+  constructor(options) {
+    super(options)
+    this.settings = {}
+  }
 
-</div>
+  /**
+   * plays the playback.
+   * @method play
+   */
+  play() {}
 
+  /**
+   * pauses the playback.
+   * @method pause
+   */
+  pause() {}
 
-<div class="box intro">
-    
-</div>
+  /**
+   * stops the playback.
+   * @method stop
+   */
+  stop() {}
 
+  /**
+   * seeks the playback to a given &#x60;time&#x60; in percentage
+   * @method seek
+   * @param {Number} time should be a number between 0 and 100
+   */
+  seek(time) {}
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-            <p>This module provides the following classes:</p>
+  /**
+   * gets the duration in seconds
+   * @method getDuration
+   * @return {Number} duration time (in seconds) of the current source
+   */
+  getDuration() { return 0 }
 
-            <ul class="module-classes">
-                <li class="module-class">
-                    <a href="../classes/Player.html">
-                        Player
-                    </a>
-                </li>
-            </ul>
-    </div>
+  /**
+   * checks if the playback is playing.
+   * @method isPlaying
+   * @return {Boolean} &#x60;true&#x60; if the current playback is playing, otherwise &#x60;false&#x60;
+   */
+  isPlaying() {
+    return false
+  }
 
-    <div class="yui3-u-1-2">
-    </div>
+  /**
+   * gets the playback type
+   * @method getPlaybackType
+   * @return {String} you should write the playback type otherwise it&#x27;ll assume &#x60;&#x27;no_op&#x27;&#x60;
+   * @example
+   * &#x60;&#x60;&#x60;javascript
+   * html5VideoPlayback.getPlaybackType() //html5_video
+   * flashHlsPlayback.getPlaybackType() //hls
+   * &#x60;&#x60;&#x60;
+   */
+  getPlaybackType() {
+    return &#x27;no_op&#x27;
+  }
+
+  /**
+   * checks if the playback is in HD.
+   * @method isHighDefinitionInUse
+   * @return {Boolean} &#x60;true&#x60; if the playback is playing in HD, otherwise &#x60;false&#x60;
+   */
+  isHighDefinitionInUse() {
+    return false
+  }
+
+  /**
+   * sets the volume for the playback
+   * @method volume
+   * @return {Number} a number between 0 (&#x60;muted&#x60;) to 100 (&#x60;max&#x60;)
+   */
+  volume(value) {}
+
+  /**
+   * destroys the playback, removing it from DOM
+   * @method destroy
+   */
+  destroy() {
+    this.$el.remove()
+  }
+}
+
+Playback.extend = function(properties) {
+  return extend(Playback, properties)
+}
+
+Playback.canPlay = (source) =&gt; {
+  return false
+}
+
+    </pre>
 </div>
                     </div>
                 </div>

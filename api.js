@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "BaseObject",
         "Events",
+        "Playback",
         "Player"
     ],
     "modules": [
