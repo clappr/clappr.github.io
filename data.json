@@ -185,7 +185,7 @@
         {
             "file": "src/base/events.js",
             "line": 19,
-            "description": "listen to an event indefinitely, if you want to stop you need to call `off`\n*also known as `listenTo`*",
+            "description": "listen to an event indefinitely, if you want to stop you need to call `off`",
             "itemtype": "method",
             "name": "on",
             "params": [
@@ -210,8 +210,8 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 35,
-            "description": "listen to an event only once\n*also known as `listenOnceTo`*",
+            "line": 34,
+            "description": "listen to an event only once",
             "itemtype": "method",
             "name": "once",
             "params": [
@@ -236,7 +236,137 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 164,
+            "line": 52,
+            "description": "stop listening to an event",
+            "itemtype": "method",
+            "name": "off",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 87,
+            "description": "triggers an event given its `name`",
+            "itemtype": "method",
+            "name": "trigger",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 109,
+            "description": "stop listening an event for a given object",
+            "itemtype": "method",
+            "name": "stopListening",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 167,
+            "description": "listen to an event indefinitely for a given `obj`",
+            "itemtype": "method",
+            "name": "listenTo",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 175,
+            "description": "listen to an event once for a given `obj`",
+            "itemtype": "method",
+            "name": "listenToOnce",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 197,
             "description": "Fired when player risezes",
             "itemtype": "event",
             "name": "PLAYER_RESIZE",
@@ -252,7 +382,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 171,
+            "line": 204,
             "description": "Fired when player starts to play",
             "itemtype": "event",
             "name": "PLAYER_PLAY",
@@ -261,7 +391,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 177,
+            "line": 210,
             "description": "Fired when player pauses",
             "itemtype": "event",
             "name": "PLAYER_PAUSE",
@@ -270,7 +400,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 183,
+            "line": 216,
             "description": "Fired when player stops",
             "itemtype": "event",
             "name": "PLAYER_STOP",
@@ -279,7 +409,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 189,
+            "line": 222,
             "description": "Fired when player ends the video",
             "itemtype": "event",
             "name": "PLAYER_ENDED",
@@ -288,7 +418,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 195,
+            "line": 228,
             "description": "Fired when player ends the video",
             "itemtype": "event",
             "name": "PLAYER_SEEK",
@@ -304,7 +434,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 202,
+            "line": 235,
             "description": "Fired when player receives an error",
             "itemtype": "event",
             "name": "PLAYER_ERROR",
@@ -320,7 +450,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 209,
+            "line": 242,
             "description": "Fired when player updates its execution",
             "itemtype": "event",
             "name": "PLAYER_ERROR",

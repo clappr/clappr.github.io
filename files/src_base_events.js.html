@@ -83,7 +83,7 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-// Copyright 2014 Globo.com Player authors. All rights reserved.
+/ Copyright 2014 Globo.com Player authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -103,7 +103,6 @@ var slice = Array.prototype.slice
 export default class Events {
   /**
    * listen to an event indefinitely, if you want to stop you need to call &#x60;off&#x60;
-   * *also known as &#x60;listenTo&#x60;*
    * @method on
    * @param {String} name
    * @param {Function} callback
@@ -119,7 +118,6 @@ export default class Events {
 
   /**
    * listen to an event only once
-   * *also known as &#x60;listenOnceTo&#x60;*
    * @method once
    * @param {String} name
    * @param {Function} callback
@@ -136,6 +134,13 @@ export default class Events {
     return this.on(name, once, context)
   }
 
+  /**
+   * stop listening to an event
+   * @method off
+   * @param {String} name
+   * @param {Function} callback
+   * @param {Object} context
+   */
   off(name, callback, context) {
     var retain, ev, events, names, i, l, j, k
     if (!this._events || !eventsApi(this, &#x27;off&#x27;, name, [callback, context])) return this
@@ -164,6 +169,11 @@ export default class Events {
     return this
   }
 
+  /**
+   * triggers an event given its &#x60;name&#x60;
+   * @method trigger
+   * @param {String} name
+   */
   trigger(name) {
     try {
       var klass = this.name || this.constructor.name
@@ -181,6 +191,13 @@ export default class Events {
     return this
   }
 
+  /**
+   * stop listening an event for a given object
+   * @method stopListening
+   * @param {Object} obj
+   * @param {String} name
+   * @param {Function} callback
+   */
   stopListening(obj, name, callback) {
     var listeningTo = this._listeningTo
     if (!listeningTo) return this
@@ -232,6 +249,22 @@ var triggerEvents = function(events, args) {
   }
 }
 
+/**
+ * listen to an event indefinitely for a given &#x60;obj&#x60;
+ * @method listenTo
+ * @param {Object} obj
+ * @param {String} name
+ * @param {Function} callback
+ * @param {Object} context
+ */
+/**
+ * listen to an event once for a given &#x60;obj&#x60;
+ * @method listenToOnce
+ * @param {Object} obj
+ * @param {String} name
+ * @param {Function} callback
+ * @param {Object} context
+ */
 var listenMethods = {listenTo: &#x27;on&#x27;, listenToOnce: &#x27;once&#x27;}
 
 Object.keys(listenMethods).forEach(function(method) {
