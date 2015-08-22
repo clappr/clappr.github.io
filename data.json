@@ -1,0 +1,495 @@
+{
+    "project": {
+        "name": "Clappr",
+        "description": "An extensible media player for the web",
+        "version": "0.2.5",
+        "url": "https://github.com/clappr/clappr",
+        "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
+    },
+    "files": {
+        "src/components/container/container.js": {
+            "name": "src/components/container/container.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/container_factory/container_factory.js": {
+            "name": "src/components/container_factory/container_factory.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/core/core.js": {
+            "name": "src/components/core/core.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/core_factory/core_factory.js": {
+            "name": "src/components/core_factory/core_factory.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/media_control/media_control.js": {
+            "name": "src/components/media_control/media_control.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/mediator.js": {
+            "name": "src/components/mediator.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/player.js": {
+            "name": "src/components/player.js",
+            "modules": {
+                "components": 1
+            },
+            "classes": {
+                "Player": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "components": {
+            "name": "components",
+            "submodules": {},
+            "classes": {
+                "Player": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/components/player.js",
+            "line": 17
+        }
+    },
+    "classes": {
+        "Player": {
+            "name": "Player",
+            "shortname": "Player",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "components",
+            "file": "src/components/player.js",
+            "line": 17,
+            "is_constructor": 1,
+            "extends": "BaseObject",
+            "example": [
+                "\n### Using the Player\n\nAdd the following script on your HTML:\n```html\n<head>\n  <script type=\"text/javascript\" src=\"http://cdn.clappr.io/latest/clappr.min.js\"></script>\n</head>\n```\nNow, create the player:\n```html\n<body>\n  <div id=\"player\"></div>\n  <script>\n    var player = new Clappr.Player({source: \"http://your.video/here.mp4\", parentId: \"#player\"});\n  </script>\n</body>\n```"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/components/container/container.js",
+            "line": 5,
+            "description": "Container is responsible for the video rendering and state",
+            "class": "Player"
+        },
+        {
+            "file": "src/components/container_factory/container_factory.js",
+            "line": 5,
+            "description": "The ContainerFactory is responsible for manage playback bootstrap and create containers.",
+            "class": "Player"
+        },
+        {
+            "file": "src/components/core/core.js",
+            "line": 5,
+            "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
+            "class": "Player"
+        },
+        {
+            "file": "src/components/core_factory/core_factory.js",
+            "line": 5,
+            "description": "The Core Factory is responsible for instantiate the core and it's plugins.",
+            "class": "Player"
+        },
+        {
+            "file": "src/components/media_control/media_control.js",
+            "line": 5,
+            "description": "The MediaControl is responsible for displaying the Player controls.",
+            "class": "Player"
+        },
+        {
+            "file": "src/components/mediator.js",
+            "line": 5,
+            "description": "The mediator is a singleton for handling global events.",
+            "class": "Player"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 42,
+            "description": "## Player's constructor\n\nYou might pass the options object to build the player.\n```javascript\nvar options = {source: \"http://example.com/video.mp4\", param1: \"val1\"};\nvar player = new Clappr.Player(options);\n```",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Data\noptions to build a player instance",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "width",
+                            "description": "\nplayer's width **default**: `640`",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "height",
+                            "description": "\nplayer's height **default**: `360`",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "autoPlay",
+                            "description": "\nautomatically play after page load **default**: `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "loop",
+                            "description": "\nautomatically replay after it ends **default**: `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "chromeless",
+                            "description": "\nplayer acts in chromeless mode **default**: `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "muted",
+                            "description": "\nstart the video muted **default**: `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "persistConfig",
+                            "description": "\npersist player's settings (volume) through the same domain **default**: `true`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "preload",
+                            "description": "\nvideo will be preloaded according to `preload` attribute options **default**: `'metadata'`",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "maxBufferLength",
+                            "description": "\nthe default behavior for the **HLS playback** is to keep buffering indefinitely, even on VoD. This replicates the behavior for progressive download, which continues buffering when pausing the video, thus making the video available for playback even on slow networks. To change this behavior use `maxBufferLength` where **value is in seconds**.",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "gaAccount",
+                            "description": "\nenable Google Analytics events dispatch **(play/pause/stop/buffering/etc)** by adding your `gaAccount`",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "gaTrackerName",
+                            "description": "\nbesides `gaAccount` you can optionally, pass your favorite trackerName as `gaTrackerName`",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "mediacontrol",
+                            "description": "\ncustomize control bar colors, example: `mediacontrol: {seekbar: \"#E113D3\", buttons: \"#66B2FF\"}`",
+                            "type": "Object",
+                            "optional": true
+                        },
+                        {
+                            "name": "hideMediaControl",
+                            "description": "\ncontrol media control auto hide **default**: `true`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "hideVolumeBar",
+                            "description": "\nwhen embedded with width less than 320, volume bar will hide. You can force this behavior for all sizes by adding `true` **default**: `false`",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
+                            "name": "watermark",
+                            "description": "\nput `watermark: 'http://url/img.png'` on your embed parameters to automatically add watermark on your video. You can customize corner position by defining position parameter. Positions can be `bottom-left`, `bottom-right`, `top-left` and `top-right`.",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "poster",
+                            "description": "\ndefine a poster by adding its address `poster: 'http://url/img.png'`. It will appear after video embed, disappear on play and go back when user stops the video.",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 103,
+            "description": "Specify a `parentId` to the player.",
+            "itemtype": "method",
+            "name": "setParentId",
+            "params": [
+                {
+                    "name": "parentId",
+                    "description": "the element parent id.",
+                    "type": "String"
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 115,
+            "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
+            "itemtype": "method",
+            "name": "attachTo",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "a given element.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 182,
+            "description": "resizes the current player canvas.",
+            "itemtype": "method",
+            "name": "resize",
+            "params": [
+                {
+                    "name": "size",
+                    "description": "should be a literal object with `height` and `width`.",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n```javascript\nplayer.resize({height: 360, width: 640})\n```"
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 195,
+            "description": "loads a new source.",
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "sources",
+                    "description": "source or sources of video.",
+                    "type": "Object"
+                },
+                {
+                    "name": "mimeType",
+                    "description": "a mime type, example: `'application/vnd.apple.mpegurl'`",
+                    "type": "Object"
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 206,
+            "description": "destroys the current player and removes it from the DOM.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 214,
+            "description": "plays the current video (`source`).",
+            "itemtype": "method",
+            "name": "play",
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 222,
+            "description": "pauses the current video (`source`).",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 230,
+            "description": "stops the current video (`source`).",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 238,
+            "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
+            "itemtype": "method",
+            "name": "seek",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "should be a number between 0 and 100.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 247,
+            "description": "Set the volume for the current video (`source`).",
+            "itemtype": "method",
+            "name": "setVolume",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "should be a number between 0 and 100, 0 being mute and 100 the max volume.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 256,
+            "description": "mutes the current video (`source`).",
+            "itemtype": "method",
+            "name": "mute",
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 264,
+            "description": "unmutes the current video (`source`).",
+            "itemtype": "method",
+            "name": "unmute",
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 272,
+            "description": "checks if the player is playing.",
+            "itemtype": "method",
+            "name": "isPlaying",
+            "return": {
+                "description": "`true` if the current source is playing, otherwise `false`",
+                "type": "Boolean"
+            },
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 281,
+            "description": "get a plugin by its name.",
+            "itemtype": "method",
+            "name": "getPlugin",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "of the plugin.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the plugin instance",
+                "type": "Object"
+            },
+            "example": [
+                "\n```javascript\nvar poster = player.getPlugin('poster');\nposter.hidePlayButton();\n```"
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 299,
+            "description": "the current time in seconds.",
+            "itemtype": "method",
+            "name": "getCurrentTime",
+            "return": {
+                "description": "current time (in seconds) of the current source",
+                "type": "Number"
+            },
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 308,
+            "description": "the duration time in seconds.",
+            "itemtype": "method",
+            "name": "getDuration",
+            "return": {
+                "description": "duration time (in seconds) of the current source",
+                "type": "Number"
+            },
+            "class": "Player",
+            "module": "components"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nContainer is responsible for the video rendering and state",
+            "line": " src/components/container/container.js:5"
+        },
+        {
+            "message": "Missing item type\nThe ContainerFactory is responsible for manage playback bootstrap and create containers.",
+            "line": " src/components/container_factory/container_factory.js:5"
+        },
+        {
+            "message": "Missing item type\nThe Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
+            "line": " src/components/core/core.js:5"
+        },
+        {
+            "message": "Missing item type\nThe Core Factory is responsible for instantiate the core and it's plugins.",
+            "line": " src/components/core_factory/core_factory.js:5"
+        },
+        {
+            "message": "Missing item type\nThe MediaControl is responsible for displaying the Player controls.",
+            "line": " src/components/media_control/media_control.js:5"
+        },
+        {
+            "message": "Missing item type\nThe mediator is a singleton for handling global events.",
+            "line": " src/components/mediator.js:5"
+        }
+    ]
+}

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/components/player.js - Clappr</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.2.5</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Player.html">Player</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/components.html">components</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/components/player.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+// Copyright 2014 Globo.com Player authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+import {uniqueId, currentScriptUrl} from &#x27;../base/utils&#x27;
+
+import BaseObject from &#x27;../base/base_object&#x27;
+import Events from &#x27;../base/events&#x27;
+import CoreFactory from &#x27;./core_factory&#x27;
+import Loader from &#x27;./loader&#x27;
+import assign from &#x27;lodash.assign&#x27;
+import find from &#x27;lodash.find&#x27;
+import PlayerInfo from &#x27;./player_info&#x27;
+
+var baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &quot;&quot;)
+
+/**
+ * @class Player
+ * @constructor
+ * @extends BaseObject
+ * @module components
+ * @example
+ * ### Using the Player
+ *
+ * Add the following script on your HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;head&gt;
+ *   &lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.clappr.io/latest/clappr.min.js&quot;&gt;&lt;/script&gt;
+ * &lt;/head&gt;
+ * &#x60;&#x60;&#x60;
+ * Now, create the player:
+ * &#x60;&#x60;&#x60;html
+ * &lt;body&gt;
+ *   &lt;div id=&quot;player&quot;&gt;&lt;/div&gt;
+ *   &lt;script&gt;
+ *     var player = new Clappr.Player({source: &quot;http://your.video/here.mp4&quot;, parentId: &quot;#player&quot;});
+ *   &lt;/script&gt;
+ * &lt;/body&gt;
+ * &#x60;&#x60;&#x60;
+ */
+export default class Player extends BaseObject {
+  /**
+   * ## Player&#x27;s constructor
+   *
+   * You might pass the options object to build the player.
+   * &#x60;&#x60;&#x60;javascript
+   * var options = {source: &quot;http://example.com/video.mp4&quot;, param1: &quot;val1&quot;};
+   * var player = new Clappr.Player(options);
+   * &#x60;&#x60;&#x60;
+   *
+   * @method constructor
+   * @param {Object} options Data
+   * options to build a player instance
+   * @param {Number} [options.width]
+   * player&#x27;s width **default**: &#x60;640&#x60;
+   * @param {Number} [options.height]
+   * player&#x27;s height **default**: &#x60;360&#x60;
+   * @param {Boolean} [options.autoPlay]
+   * automatically play after page load **default**: &#x60;false&#x60;
+   * @param {Boolean} [options.loop]
+   * automatically replay after it ends **default**: &#x60;false&#x60;
+   * @param {Boolean} [options.chromeless]
+   * player acts in chromeless mode **default**: &#x60;false&#x60;
+   * @param {Boolean} [options.muted]
+   * start the video muted **default**: &#x60;false&#x60;
+   * @param {Boolean} [options.persistConfig]
+   * persist player&#x27;s settings (volume) through the same domain **default**: &#x60;true&#x60;
+   * @param {String} [options.preload]
+   * video will be preloaded according to &#x60;preload&#x60; attribute options **default**: &#x60;&#x27;metadata&#x27;&#x60;
+   * @param {Number} [options.maxBufferLength]
+   * the default behavior for the **HLS playback** is to keep buffering indefinitely, even on VoD. This replicates the behavior for progressive download, which continues buffering when pausing the video, thus making the video available for playback even on slow networks. To change this behavior use &#x60;maxBufferLength&#x60; where **value is in seconds**.
+   * @param {String} [options.gaAccount]
+   * enable Google Analytics events dispatch **(play/pause/stop/buffering/etc)** by adding your &#x60;gaAccount&#x60;
+   * @param {String} [options.gaTrackerName]
+   * besides &#x60;gaAccount&#x60; you can optionally, pass your favorite trackerName as &#x60;gaTrackerName&#x60;
+   * @param {Object} [options.mediacontrol]
+   * customize control bar colors, example: &#x60;mediacontrol: {seekbar: &quot;#E113D3&quot;, buttons: &quot;#66B2FF&quot;}&#x60;
+   * @param {Boolean} [options.hideMediaControl]
+   * control media control auto hide **default**: &#x60;true&#x60;
+   * @param {Boolean} [options.hideVolumeBar]
+   * when embedded with width less than 320, volume bar will hide. You can force this behavior for all sizes by adding &#x60;true&#x60; **default**: &#x60;false&#x60;
+   * @param {String} [options.watermark]
+   * put &#x60;watermark: &#x27;http://url/img.png&#x27;&#x60; on your embed parameters to automatically add watermark on your video. You can customize corner position by defining position parameter. Positions can be &#x60;bottom-left&#x60;, &#x60;bottom-right&#x60;, &#x60;top-left&#x60; and &#x60;top-right&#x60;.
+   * @param {String} [options.poster]
+   * define a poster by adding its address &#x60;poster: &#x27;http://url/img.png&#x27;&#x60;. It will appear after video embed, disappear on play and go back when user stops the video.
+   */
+  constructor(options) {
+    super(options)
+    window.p = this
+    var defaultOptions = {playerId: uniqueId(&quot;&quot;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl}
+    this.options = assign(defaultOptions, options)
+    this.options.sources = this.normalizeSources(options)
+    this.loader = new Loader(this.options.plugins || {}, this.options.playerId)
+    this.coreFactory = new CoreFactory(this, this.loader)
+    this.playerInfo = PlayerInfo.getInstance(this.options.playerId)
+    this.playerInfo.currentSize = {width: options.width, height: options.height}
+    this.playerInfo.options = this.options
+    if (this.options.parentId) {
+      this.setParentId(this.options.parentId)
+    }
+  }
+
+  /**
+   * Specify a &#x60;parentId&#x60; to the player.
+   * @method setParentId
+   * @param {String} parentId the element parent id.
+   */
+  setParentId(parentId) {
+    var el = document.querySelector(parentId)
+    if (el) {
+      this.attachTo(el)
+    }
+  }
+
+  /**
+   * You can use this method to attach the player to a given element. You don&#x27;t need to do this when you specify it during the player instantiation passing the &#x60;parentId&#x60; param.
+   * @method attachTo
+   * @param {Object} element a given element.
+   */
+  attachTo(element) {
+    this.options.parentElement = element
+    this.core = this.coreFactory.create()
+    this.addEventListeners()
+  }
+
+  addEventListeners() {
+    this.listenTo(this.core.mediaControl,  Events.MEDIACONTROL_CONTAINERCHANGED, this.containerChanged)
+    var container = this.core.mediaControl.container
+    if (!!container) {
+      this.listenTo(container, Events.CONTAINER_PLAY, this.onPlay)
+      this.listenTo(container, Events.CONTAINER_PAUSE, this.onPause)
+      this.listenTo(container, Events.CONTAINER_STOP, this.onStop)
+      this.listenTo(container, Events.CONTAINER_ENDED, this.onEnded)
+      this.listenTo(container, Events.CONTAINER_SEEK, this.onSeek)
+      this.listenTo(container, Events.CONTAINER_ERROR, this.onError)
+      this.listenTo(container, Events.CONTAINER_TIMEUPDATE, this.onTimeUpdate)
+    }
+  }
+
+  containerChanged() {
+    this.stopListening()
+    this.addEventListeners()
+  }
+
+  onPlay() {
+    this.trigger(Events.PLAYER_PLAY)
+  }
+
+  onPause() {
+    this.trigger(Events.PLAYER_PAUSE)
+  }
+
+  onStop() {
+    this.trigger(Events.PLAYER_STOP, this.getCurrentTime())
+  }
+
+  onEnded() {
+    this.trigger(Events.PLAYER_ENDED)
+  }
+
+  onSeek(percent) {
+    this.trigger(Events.PLAYER_SEEK, percent)
+  }
+
+  onTimeUpdate(position, duration) {
+    this.trigger(Events.PLAYER_TIMEUPDATE, position, duration)
+  }
+
+  onError(error) {
+    this.trigger(Events.PLAYER_ERROR, error)
+  }
+
+  is(value, type) {
+    return value.constructor === type
+  }
+
+  normalizeSources(options) {
+    var sources = options.sources || (options.source !== undefined? [options.source.toString()] : [])
+    return sources.length === 0 ? [&#x27;no.op&#x27;] : sources
+  }
+
+  /**
+   * resizes the current player canvas.
+   * @method resize
+   * @param {Object} size should be a literal object with &#x60;height&#x60; and &#x60;width&#x60;.
+   * @example
+   * &#x60;&#x60;&#x60;javascript
+   * player.resize({height: 360, width: 640})
+   * &#x60;&#x60;&#x60;
+   */
+  resize(size) {
+    this.core.resize(size);
+  }
+
+  /**
+   * loads a new source.
+   * @method load
+   * @param {Object} sources source or sources of video.
+   * @param {Object} mimeType a mime type, example: &#x60;&#x27;application/vnd.apple.mpegurl&#x27;&#x60;
+   *
+   */
+  load(sources, mimeType) {
+    this.core.load(sources, mimeType)
+  }
+
+  /**
+   * destroys the current player and removes it from the DOM.
+   * @method destroy
+   */
+  destroy() {
+    this.core.destroy()
+  }
+
+  /**
+   * plays the current video (&#x60;source&#x60;).
+   * @method play
+   */
+  play() {
+    this.core.mediaControl.container.play();
+  }
+
+  /**
+   * pauses the current video (&#x60;source&#x60;).
+   * @method pause
+   */
+  pause() {
+    this.core.mediaControl.container.pause();
+  }
+
+  /**
+   * stops the current video (&#x60;source&#x60;).
+   * @method stop
+   */
+  stop() {
+    this.core.mediaControl.container.stop();
+  }
+
+  /**
+   * seeks the current video (&#x60;source&#x60;). For example, &#x60;player.seek(50)&#x60; will seek to the middle of the current video.
+   * @method seek
+   * @param {Number} time should be a number between 0 and 100.
+   */
+  seek(time) {
+    this.core.mediaControl.container.setCurrentTime(time);
+  }
+
+  /**
+   * Set the volume for the current video (&#x60;source&#x60;).
+   * @method setVolume
+   * @param {Number} time should be a number between 0 and 100, 0 being mute and 100 the max volume.
+   */
+  setVolume(volume) {
+    this.core.mediaControl.container.setVolume(volume);
+  }
+
+  /**
+   * mutes the current video (&#x60;source&#x60;).
+   * @method mute
+   */
+  mute() {
+    this.core.mediaControl.container.setVolume(0);
+  }
+
+  /**
+   * unmutes the current video (&#x60;source&#x60;).
+   * @method unmute
+   */
+  unmute() {
+    this.core.mediaControl.container.setVolume(100);
+  }
+
+  /**
+   * checks if the player is playing.
+   * @method isPlaying
+   * @return {Boolean} &#x60;true&#x60; if the current source is playing, otherwise &#x60;false&#x60;
+   */
+  isPlaying() {
+    return this.core.mediaControl.container.isPlaying();
+  }
+
+  /**
+   * get a plugin by its name.
+   * @method getPlugin
+   * @param {String} name of the plugin.
+   * @return {Object} the plugin instance
+   * @example
+   * &#x60;&#x60;&#x60;javascript
+   * var poster = player.getPlugin(&#x27;poster&#x27;);
+   * poster.hidePlayButton();
+   * &#x60;&#x60;&#x60;
+   */
+  getPlugin(name) {
+    var plugins = this.core.plugins.concat(this.core.mediaControl.container.plugins);
+    return find(plugins, function(plugin) {
+      return plugin.name === name;
+    });
+  }
+
+  /**
+   * the current time in seconds.
+   * @method getCurrentTime
+   * @return {Number} current time (in seconds) of the current source
+   */
+  getCurrentTime() {
+    return this.core.mediaControl.container.getCurrentTime()
+  }
+
+  /**
+   * the duration time in seconds.
+   * @method getDuration
+   * @return {Number} duration time (in seconds) of the current source
+   */
+  getDuration() {
+    return this.core.mediaControl.container.getDuration()
+  }
+}
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

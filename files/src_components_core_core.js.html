@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/components/core/core.js - Clappr</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.2.5</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/Player.html">Player</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/components.html">components</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/components/core/core.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+// Copyright 2014 Globo.com Player authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+/**
+ * The Core is responsible to manage Containers, the mediator, MediaControl
+ * and the player state.
+ */
+
+import {
+    isNumber,
+    Fullscreen,
+    requestAnimationFrame,
+    cancelAnimationFrame
+} from &#x27;../../base/utils&#x27;
+
+import assign from &#x27;lodash.assign&#x27;
+import $ from &#x27;clappr-zepto&#x27;
+import UIObject from &#x27;../../base/ui_object&#x27;
+import ContainerFactory from &#x27;../container_factory&#x27;
+import Styler from &#x27;../../base/styler&#x27;
+import MediaControl from &#x27;../media_control&#x27;
+import PlayerInfo from &#x27;../player_info&#x27;
+import Mediator from &#x27;../mediator&#x27;
+import Events from &#x27;../../base/events&#x27;
+import Browser from &#x27;../browser&#x27;
+import coreStyle from &#x27;./public/style.scss&#x27;
+import find from &#x27;lodash.find&#x27;
+
+export default class Core extends UIObject {
+  get events() {
+    return {
+      &#x27;webkitfullscreenchange&#x27;: &#x27;exit&#x27;,
+      &#x27;mousemove&#x27;: &#x27;showMediaControl&#x27;,
+      &#x27;mouseleave&#x27;: &#x27;hideMediaControl&#x27;
+    }
+  }
+
+  get attributes() {
+    return {
+      &#x27;data-player&#x27;: &#x27;&#x27;,
+      tabindex: 9999,
+    }
+  }
+
+  constructor(options) {
+    super(options)
+    this.playerInfo = PlayerInfo.getInstance(options.playerId)
+    this.options = options
+    this.plugins = []
+    this.containers = []
+    this.createContainers(options)
+    //FIXME fullscreen api sucks
+    $(document).bind(&#x27;fullscreenchange&#x27;, () =&gt; this.exit())
+    $(document).bind(&#x27;MSFullscreenChange&#x27;, () =&gt; this.exit())
+    $(document).bind(&#x27;mozfullscreenchange&#x27;, () =&gt; this.exit())
+  }
+
+  createContainers(options) {
+    this.defer = $.Deferred()
+    this.defer.promise(this)
+    this.containerFactory = new ContainerFactory(options, options.loader)
+    this.containerFactory
+      .createContainers()
+      .then((containers) =&gt; this.setupContainers(containers))
+      .then((containers) =&gt; this.resolveOnContainersReady(containers))
+  }
+
+  updateSize() {
+    if (Fullscreen.isFullscreen()) {
+      this.setFullscreen()
+    } else {
+      this.setPlayerSize()
+    }
+    Mediator.trigger(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerInfo.currentSize)
+  }
+
+  setFullscreen() {
+    if(!Browser.isiOs) {
+      this.$el.addClass(&#x27;fullscreen&#x27;)
+      this.$el.removeAttr(&#x27;style&#x27;)
+      this.playerInfo.previousSize = this.playerInfo.currentSize
+      this.playerInfo.currentSize = { width: $(window).width(), height: $(window).height() }
+    }
+  }
+
+  setPlayerSize() {
+    this.$el.removeClass(&#x27;fullscreen&#x27;)
+    this.playerInfo.currentSize = this.playerInfo.previousSize
+    this.playerInfo.previousSize = { width: $(window).width(), height: $(window).height() }
+    this.resize(this.playerInfo.currentSize)
+  }
+
+  resize(options) {
+    if (!isNumber(options.height) &amp;&amp; !isNumber(options.width))  {
+      this.el.style.height = &#x60;${options.height}&#x60;;
+      this.el.style.width = &#x60;${options.width}&#x60;;
+    } else {
+      this.el.style.height = &#x60;${options.height}px&#x60;;
+      this.el.style.width = &#x60;${options.width}px&#x60;;
+    }
+    this.playerInfo.previousSize = this.playerInfo.currentSize
+    this.playerInfo.currentSize = options
+    Mediator.trigger(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerInfo.currentSize)
+  }
+
+  enableResizeObserver() {
+    var checkSizeCallback = () =&gt; {
+      if (this.reqAnimFrame) clearTimeout(this.reqAnimFrame)
+      if (this.playerInfo.computedSize.width != this.el.clientWidth ||
+          this.playerInfo.computedSize.height != this.el.clientHeight) {
+        this.playerInfo.computedSize = { width: this.el.clientWidth, height: this.el.clientHeight }
+        Mediator.trigger(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerInfo.computedSize)
+      }
+      this.reqAnimFrame = setTimeout(checkSizeCallback, 500)
+    }
+    this.reqAnimFrame = setTimeout(checkSizeCallback, 500)
+  }
+
+  disableResizeObserver() {
+    if (this.reqAnimFrame) cancelAnimationFrame(this.reqAnimFrame)
+  }
+
+  resolveOnContainersReady(containers) {
+    $.when.apply($, containers).done(() =&gt;this.defer.resolve(this))
+  }
+
+  addPlugin(plugin) {
+    this.plugins.push(plugin)
+  }
+
+  hasPlugin(name) {
+    return !!this.getPlugin(name)
+  }
+
+  getPlugin(name) {
+    return find(this.plugins, (plugin) =&gt; plugin.name === name)
+  }
+
+  load(sources, mimeType) {
+    this.options.mimeType = mimeType
+    sources = sources &amp;&amp; sources.constructor === Array ? sources : [sources.toString()];
+    this.containers.forEach((container) =&gt; container.destroy())
+    this.containerFactory.options = assign(this.options, {sources})
+    this.containerFactory.createContainers().then((containers) =&gt; {
+      this.setupContainers(containers)
+    })
+  }
+
+  destroy() {
+    this.disableResizeObserver()
+    this.containers.forEach((container) =&gt; container.destroy())
+    this.plugins.forEach((plugin) =&gt; plugin.destroy())
+    this.$el.remove()
+    this.mediaControl.destroy()
+    $(document).unbind(&#x27;fullscreenchange&#x27;)
+    $(document).unbind(&#x27;MSFullscreenChange&#x27;)
+    $(document).unbind(&#x27;mozfullscreenchange&#x27;)
+}
+
+  exit() {
+    this.updateSize()
+    this.mediaControl.show()
+  }
+
+  setMediaControlContainer(container) {
+    this.mediaControl.setContainer(container)
+    this.mediaControl.render()
+  }
+
+  disableMediaControl() {
+    this.mediaControl.disable()
+    this.$el.removeClass(&#x27;nocursor&#x27;)
+  }
+
+  enableMediaControl() {
+    this.mediaControl.enable()
+  }
+
+  removeContainer(container) {
+    this.stopListening(container)
+    this.containers = this.containers.filter((c) =&gt; c !== container)
+  }
+
+  appendContainer(container) {
+    this.listenTo(container, Events.CONTAINER_DESTROYED, this.removeContainer)
+    this.el.appendChild(container.render().el)
+    this.containers.push(container)
+  }
+
+  setupContainers(containers) {
+    containers.map(this.appendContainer.bind(this))
+    this.setupMediaControl(this.getCurrentContainer())
+    this.render()
+    this.$el.appendTo(this.options.parentElement)
+    return containers
+  }
+
+  createContainer(source, options) {
+    var container = this.containerFactory.createContainer(source, options)
+    this.appendContainer(container)
+    return container
+  }
+
+  setupMediaControl(container) {
+    if (this.mediaControl) {
+      this.mediaControl.setContainer(container)
+    } else {
+      this.mediaControl = this.createMediaControl(assign({container: container, focusElement: this.el}, this.options))
+      this.listenTo(this.mediaControl, Events.MEDIACONTROL_FULLSCREEN, this.toggleFullscreen)
+      this.listenTo(this.mediaControl, Events.MEDIACONTROL_SHOW, this.onMediaControlShow.bind(this, true))
+      this.listenTo(this.mediaControl, Events.MEDIACONTROL_HIDE, this.onMediaControlShow.bind(this, false))
+    }
+  }
+
+  createMediaControl(options) {
+    if(options.mediacontrol &amp;&amp; options.mediacontrol.external) {
+      return new options.mediacontrol.external(options);
+    } else {
+      return new MediaControl(options);
+    }
+  }
+
+  getCurrentContainer() {
+    if (!this.mediacontrol) {
+      return this.containers[0]
+    }
+    return this.mediaControl.container
+  }
+
+  getPlaybackType() {
+    return this.getCurrentContainer().getPlaybackType()
+  }
+
+  toggleFullscreen() {
+    if (!Fullscreen.isFullscreen()) {
+      Fullscreen.requestFullscreen(this.el)
+      if(!Browser.isiOs) {
+        this.$el.addClass(&#x27;fullscreen&#x27;)
+      }
+    } else {
+      Fullscreen.cancelFullscreen()
+      if(!Browser.isiOs) {
+        this.$el.removeClass(&#x27;fullscreen nocursor&#x27;)
+      }
+    }
+    this.mediaControl.show()
+  }
+
+  showMediaControl(event) {
+    this.mediaControl.show(event)
+  }
+
+  hideMediaControl(event) {
+    this.mediaControl.hide(this.options.hideMediaControlDelay)
+  }
+
+  onMediaControlShow(showing) {
+    if (showing)
+      this.$el.removeClass(&#x27;nocursor&#x27;)
+    else if (Fullscreen.isFullscreen())
+      this.$el.addClass(&#x27;nocursor&#x27;)
+  }
+
+  render() {
+    var style = Styler.getStyleFor(coreStyle);
+    //FIXME
+    //this.$el.empty()
+    this.$el.append(style)
+    this.$el.append(this.mediaControl.render().el)
+
+    this.options.width = this.options.width || this.$el.width()
+    this.options.height = this.options.height || this.$el.height()
+    var size = {width: this.options.width, height: this.options.height}
+    this.playerInfo.previousSize = this.playerInfo.currentSize = this.playerInfo.computedSize = size
+    this.updateSize()
+
+    this.previousSize = { width: this.$el.width(), height: this.$el.height() }
+
+    this.enableResizeObserver()
+
+    return this
+  }
+}
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
