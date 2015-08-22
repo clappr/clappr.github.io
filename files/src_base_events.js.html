@@ -83,7 +83,7 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/ Copyright 2014 Globo.com Player authors. All rights reserved.
+// Copyright 2014 Globo.com Player authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -256,6 +256,10 @@ var triggerEvents = function(events, args) {
  * @param {String} name
  * @param {Function} callback
  * @param {Object} context
+ * @example
+ * &#x60;&#x60;&#x60;javascript
+ * this.listenTo(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)
+ * &#x60;&#x60;&#x60;
  */
 /**
  * listen to an event once for a given &#x60;obj&#x60;
@@ -264,6 +268,10 @@ var triggerEvents = function(events, args) {
  * @param {String} name
  * @param {Function} callback
  * @param {Object} context
+ * @example
+ * &#x60;&#x60;&#x60;javascript
+ * this.listenToOnce(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)
+ * &#x60;&#x60;&#x60;
  */
 var listenMethods = {listenTo: &#x27;on&#x27;, listenToOnce: &#x27;once&#x27;}
 

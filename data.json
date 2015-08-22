@@ -330,12 +330,15 @@
                     "type": "Object"
                 }
             ],
+            "example": [
+                "\n```javascript\nthis.listenTo(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)\n```"
+            ],
             "class": "Events",
             "module": "base"
         },
         {
             "file": "src/base/events.js",
-            "line": 175,
+            "line": 179,
             "description": "listen to an event once for a given `obj`",
             "itemtype": "method",
             "name": "listenToOnce",
@@ -361,12 +364,15 @@
                     "type": "Object"
                 }
             ],
+            "example": [
+                "\n```javascript\nthis.listenToOnce(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)\n```"
+            ],
             "class": "Events",
             "module": "base"
         },
         {
             "file": "src/base/events.js",
-            "line": 197,
+            "line": 205,
             "description": "Fired when player risezes",
             "itemtype": "event",
             "name": "PLAYER_RESIZE",
@@ -382,7 +388,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 204,
+            "line": 212,
             "description": "Fired when player starts to play",
             "itemtype": "event",
             "name": "PLAYER_PLAY",
@@ -391,7 +397,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 210,
+            "line": 218,
             "description": "Fired when player pauses",
             "itemtype": "event",
             "name": "PLAYER_PAUSE",
@@ -400,7 +406,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 216,
+            "line": 224,
             "description": "Fired when player stops",
             "itemtype": "event",
             "name": "PLAYER_STOP",
@@ -409,7 +415,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 222,
+            "line": 230,
             "description": "Fired when player ends the video",
             "itemtype": "event",
             "name": "PLAYER_ENDED",
@@ -418,7 +424,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 228,
+            "line": 236,
             "description": "Fired when player ends the video",
             "itemtype": "event",
             "name": "PLAYER_SEEK",
@@ -434,7 +440,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 235,
+            "line": 243,
             "description": "Fired when player receives an error",
             "itemtype": "event",
             "name": "PLAYER_ERROR",
@@ -450,7 +456,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 242,
+            "line": 250,
             "description": "Fired when player updates its execution",
             "itemtype": "event",
             "name": "PLAYER_ERROR",
