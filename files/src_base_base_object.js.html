@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/components/container_factory/container_factory.js - Clappr</title>
+    <title>src/base/base_object.js - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -79,7 +79,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/components/container_factory/container_factory.js</h1>
+<h1 class="file-heading">File: src/base/base_object.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -87,56 +87,32 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import {uniqueId} from &#x27;./utils&#x27;
+import Events from &#x27;./events&#x27;
+
 /**
- * The ContainerFactory is responsible for manage playback bootstrap and create containers.
+ * @class BaseObject
+ * @constructor
+ * @extends Events
+ * @module base
  */
-
-import assign from &#x27;lodash.assign&#x27;
-import BaseObject from &#x27;../../base/base_object&#x27;
-import Container from &#x27;../container&#x27;
-import $ from &#x27;clappr-zepto&#x27;
-import Events from &#x27;../../base/events&#x27;
-import find from &#x27;lodash.find&#x27;
-
-export default class ContainerFactory extends BaseObject {
-  constructor(options, loader) {
-    super(options);
-    this.options = options;
-    this.loader = loader;
+export default class BaseObject extends Events {
+  /**
+   * @method constructor
+   * @param {Object} options
+   */
+  constructor(options={}) {
+    super(options)
+    this.uniqueId = uniqueId(&#x27;o&#x27;)
   }
-
-  createContainers() {
-    return $.Deferred((promise) =&gt; {
-      promise.resolve(this.options.sources.map((source) =&gt; {
-        return this.createContainer(source);
-      }));
-    });
-  }
-
-  findPlaybackPlugin(source) {
-    return find(this.loader.playbackPlugins, (p) =&gt; { return p.canPlay(source.toString(), this.options.mimeType) })
-  }
-
-  createContainer(source, options) {
-    if (!!source.match(/^\/\//)) source = window.location.protocol + source
-    options = assign({}, this.options, {src: source, autoPlay: !!this.options.autoPlay}, options)
-    var playbackPlugin = this.findPlaybackPlugin(source)
-    var playback = new playbackPlugin(options)
-    var container = new Container({playback: playback})
-    var defer = $.Deferred()
-    defer.promise(container)
-    this.addContainerPlugins(container, source)
-    this.listenToOnce(container, Events.CONTAINER_READY, () =&gt; defer.resolve(container))
-    return container
-  }
-
-  addContainerPlugins(container, source) {
-    this.loader.containerPlugins.forEach((Plugin) =&gt; {
-      var options = assign(this.options, {container: container, src: source});
-      container.addPlugin(new Plugin(options));
-    });
-  }
+  /**
+  * a unique id prefixed with &#x60;&#x27;o&#x27;&#x60;, &#x60;o1, o232&#x60;
+  *
+  * @property uniqueId
+  * @type String
+  */
 }
+
 
     </pre>
 </div>

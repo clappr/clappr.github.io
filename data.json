@@ -7,6 +7,26 @@
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
     "files": {
+        "src/base/base_object.js": {
+            "name": "src/base/base_object.js",
+            "modules": {
+                "base": 1
+            },
+            "classes": {
+                "BaseObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/base/events.js": {
+            "name": "src/base/events.js",
+            "modules": {},
+            "classes": {
+                "Events": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/components/container/container.js": {
             "name": "src/components/container/container.js",
             "modules": {},
@@ -62,6 +82,19 @@
         }
     },
     "modules": {
+        "base": {
+            "name": "base",
+            "submodules": {},
+            "classes": {
+                "BaseObject": 1,
+                "Events": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/base/events.js",
+            "line": 13
+        },
         "components": {
             "name": "components",
             "submodules": {},
@@ -76,6 +109,34 @@
         }
     },
     "classes": {
+        "BaseObject": {
+            "name": "BaseObject",
+            "shortname": "BaseObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "base",
+            "file": "src/base/base_object.js",
+            "line": 8,
+            "is_constructor": 1,
+            "extends": "Events"
+        },
+        "Events": {
+            "name": "Events",
+            "shortname": "Events",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "base",
+            "namespace": "",
+            "file": "src/base/events.js",
+            "line": 13,
+            "is_constructor": 1
+        },
         "Player": {
             "name": "Player",
             "shortname": "Player",
@@ -85,6 +146,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "components",
+            "namespace": "",
             "file": "src/components/player.js",
             "line": 17,
             "is_constructor": 1,
@@ -96,40 +158,228 @@
     },
     "classitems": [
         {
+            "file": "src/base/base_object.js",
+            "line": 15,
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "BaseObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/base_object.js",
+            "line": 23,
+            "description": "a unique id prefixed with `'o'`, `o1, o232`",
+            "itemtype": "property",
+            "name": "uniqueId",
+            "type": "String",
+            "class": "BaseObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 19,
+            "description": "listen to an event indefinitely, if you want to stop you need to call `off`\n*also known as `listenTo`*",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 35,
+            "description": "listen to an event only once\n*also known as `listenOnceTo`*",
+            "itemtype": "method",
+            "name": "once",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 164,
+            "description": "Fired when player risezes",
+            "itemtype": "event",
+            "name": "PLAYER_RESIZE",
+            "params": [
+                {
+                    "name": "currentSize",
+                    "description": "an object with the current size",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 171,
+            "description": "Fired when player starts to play",
+            "itemtype": "event",
+            "name": "PLAYER_PLAY",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 177,
+            "description": "Fired when player pauses",
+            "itemtype": "event",
+            "name": "PLAYER_PAUSE",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 183,
+            "description": "Fired when player stops",
+            "itemtype": "event",
+            "name": "PLAYER_STOP",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 189,
+            "description": "Fired when player ends the video",
+            "itemtype": "event",
+            "name": "PLAYER_ENDED",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 195,
+            "description": "Fired when player ends the video",
+            "itemtype": "event",
+            "name": "PLAYER_SEEK",
+            "params": [
+                {
+                    "name": "percent",
+                    "description": "a percentagem of seek",
+                    "type": "Number"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 202,
+            "description": "Fired when player receives an error",
+            "itemtype": "event",
+            "name": "PLAYER_ERROR",
+            "params": [
+                {
+                    "name": "error",
+                    "description": "the error",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 209,
+            "description": "Fired when player updates its execution",
+            "itemtype": "event",
+            "name": "PLAYER_ERROR",
+            "params": [
+                {
+                    "name": "postion",
+                    "description": "the current position (in seconds)",
+                    "type": "Number"
+                },
+                {
+                    "name": "duration",
+                    "description": "the total duration (in seconds)",
+                    "type": "Number"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
             "file": "src/components/container/container.js",
             "line": 5,
             "description": "Container is responsible for the video rendering and state",
-            "class": "Player"
+            "class": "Player",
+            "module": "base"
         },
         {
             "file": "src/components/container_factory/container_factory.js",
             "line": 5,
             "description": "The ContainerFactory is responsible for manage playback bootstrap and create containers.",
-            "class": "Player"
+            "class": "Player",
+            "module": "base"
         },
         {
             "file": "src/components/core/core.js",
             "line": 5,
             "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
-            "class": "Player"
+            "class": "Player",
+            "module": "base"
         },
         {
             "file": "src/components/core_factory/core_factory.js",
             "line": 5,
             "description": "The Core Factory is responsible for instantiate the core and it's plugins.",
-            "class": "Player"
+            "class": "Player",
+            "module": "base"
         },
         {
             "file": "src/components/media_control/media_control.js",
             "line": 5,
             "description": "The MediaControl is responsible for displaying the Player controls.",
-            "class": "Player"
+            "class": "Player",
+            "module": "base"
         },
         {
             "file": "src/components/mediator.js",
             "line": 5,
             "description": "The mediator is a singleton for handling global events.",
-            "class": "Player"
+            "class": "Player",
+            "module": "base"
         },
         {
             "file": "src/components/player.js",
