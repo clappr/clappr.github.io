@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/base/ui_object.js - Clappr</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.2.5</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/BaseObject.html">BaseObject</a></li>
+                                <li><a href="../classes/Events.html">Events</a></li>
+                                <li><a href="../classes/Playback.html">Playback</a></li>
+                                <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIObject.html">UIObject</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/base.html">base</a></li>
+                                <li><a href="../modules/components.html">components</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/base/ui_object.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+// Copyright 2014 Globo.com Player authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+import {uniqueId} from &#x27;./utils&#x27;
+import $ from &#x27;clappr-zepto&#x27;
+import result from &#x27;lodash.result&#x27;
+import assign from &#x27;lodash.assign&#x27;
+import BaseObject from &#x27;./base_object&#x27;
+
+var delegateEventSplitter = /^(\S+)\s*(.*)$/
+
+/**
+ * A base class to create ui object.
+ * @class UIObject
+ * @constructor
+ * @extends BaseObject
+ * @module base
+ */
+export default class UIObject extends BaseObject {
+
+  /**
+   * gets the tag name for the ui component
+   * @method tagName
+   * @return {String} tag&#x27;s name
+   */
+  get tagName() { return &#x27;div&#x27; }
+
+  /**
+   * it builds an ui component by:
+   *  * creating an id for the component &#x60;cid&#x60;
+   *  * making sure the element is created &#x60;$el&#x60;
+   *  * delegating all &#x60;events&#x60; to the element
+   * @method constructor
+   * @param {Object} options the options object
+   */
+  /**
+   * a unique id prefixed with &#x60;&#x27;c&#x27;&#x60;, &#x60;c1, c232&#x60;
+   *
+   * @property cid
+   * @type String
+   */
+  /**
+   * the dom element itself
+   *
+   * @property el
+   * @type HTMLElement
+   */
+  /**
+   * the dom element wrapped by $zepto
+   *
+   * @property $el
+   * @type HTMLElement
+   */
+  /**
+   * an implicit property which consists of an key/value, being key the
+   * element&#x27;s event and the value the callback for that element
+   *&#x60;&#x60;&#x60;javascript
+   * html5VideoPlayback.events = {&#x27;pause&#x27;, &#x27;pause&#x27;} //will map pause event from video tag to our function pause
+   *&#x60;&#x60;&#x60;
+   *
+   * @property events
+   * @type Object
+   */
+  constructor(options) {
+    super(options)
+    this.cid = uniqueId(&#x27;c&#x27;);
+    this._ensureElement();
+    this.delegateEvents();
+  }
+
+  /**
+   * selects within the component.
+   * @method $
+   * @param {String} selector a selector to find within the component.
+   * @return {HTMLElement} an element, if it exists.
+   * @example
+   * &#x60;&#x60;&#x60;javascript
+   * fullScreenBarUIComponent.$(&#x27;.button-full&#x27;) //will return only &#x60;.button-full&#x60; within the component
+   * &#x60;&#x60;&#x60;
+   */
+  $(selector) {
+    return this.$el.find(selector)
+  }
+
+  /**
+   * render the component, usually attach it to a real existent &#x60;element&#x60;
+   * @method render
+   * @return {UIObject} itself
+   */
+  render() {
+    return this
+  }
+
+  /**
+   * removes the ui component from DOM
+   * @method remove
+   * @return {UIObject} itself
+   */
+  remove() {
+    this.$el.remove()
+    this.stopListening()
+    return this
+  }
+
+  /**
+   * set element to &#x60;el&#x60; and &#x60;$el&#x60;
+   * @method setElement
+   * @param {HTMLElement} element
+   * @param {Boolean} delegate whether is delegate or not
+   */
+  setElement(element, delegate) {
+    if (this.$el) this.undelegateEvents()
+    this.$el = element instanceof $ ? element : $(element)
+    this.el = this.$el[0]
+    if (delegate !== false) this.delegateEvents()
+    return this
+  }
+
+  /**
+   * delegats all the original &#x60;events&#x60; on &#x60;element&#x60; to its callbacks
+   * @method delegateEvents
+   * @param {Object} events
+   */
+  delegateEvents(events) {
+    if (!(events || (events = result(this, &#x27;events&#x27;)))) return this
+    this.undelegateEvents()
+    for (var key in events) {
+      var method = events[key]
+      if ((method &amp;&amp; method.constructor !== Function)) method = this[events[key]]
+      if (!method) continue
+
+      var match = key.match(delegateEventSplitter)
+      var eventName = match[1], selector = match[2]
+      //method = _.bind(method, this)
+      eventName += &#x27;.delegateEvents&#x27; + this.cid
+      if (selector === &#x27;&#x27;) {
+        this.$el.on(eventName, method.bind(this))
+      } else {
+        this.$el.on(eventName, selector, method.bind(this))
+      }
+    }
+    return this
+  }
+
+  /**
+   * undelegats all the &#x60;events&#x60;
+   * @method undelegateEvents
+   */
+  undelegateEvents() {
+    this.$el.off(&#x27;.delegateEvents&#x27; + this.cid)
+    return this
+  }
+
+  /**
+   * ensures the creation of this ui component
+   * @method _ensureElement
+   * @private
+   */
+  _ensureElement() {
+    if (!this.el) {
+      var attrs = assign({}, result(this, &#x27;attributes&#x27;))
+      if (this.id) attrs.id = result(this, &#x27;id&#x27;)
+      if (this.className) attrs[&#x27;class&#x27;] = result(this, &#x27;className&#x27;)
+      var $el = $(&#x27;&lt;&#x27; + result(this, &#x27;tagName&#x27;) + &#x27;&gt;&#x27;).attr(attrs)
+      this.setElement($el, false)
+    } else {
+      this.setElement(result(this, &#x27;el&#x27;), false)
+    }
+  }
+}
+
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

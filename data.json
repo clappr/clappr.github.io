@@ -36,6 +36,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/base/ui_object.js": {
+            "name": "src/base/ui_object.js",
+            "modules": {},
+            "classes": {
+                "UIObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/components/container/container.js": {
             "name": "src/components/container/container.js",
             "modules": {},
@@ -97,13 +106,14 @@
             "classes": {
                 "BaseObject": 1,
                 "Events": 1,
-                "Playback": 1
+                "Playback": 1,
+                "UIObject": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/base/playback.js",
-            "line": 4
+            "file": "src/base/ui_object.js",
+            "line": 13
         },
         "components": {
             "name": "components",
@@ -162,6 +172,22 @@
             "description": "An abstraction to represent a generic playback, it's like an interface to be implemented by subclasses.",
             "is_constructor": 1,
             "extends": "UIObject"
+        },
+        "UIObject": {
+            "name": "UIObject",
+            "shortname": "UIObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "base",
+            "namespace": "",
+            "file": "src/base/ui_object.js",
+            "line": 13,
+            "description": "A base class to create ui object.",
+            "is_constructor": 1,
+            "extends": "BaseObject"
         },
         "Player": {
             "name": "Player",
@@ -620,10 +646,13 @@
             "description": "sets the volume for the playback",
             "itemtype": "method",
             "name": "volume",
-            "return": {
-                "description": "a number between 0 (`muted`) to 100 (`max`)",
-                "type": "Number"
-            },
+            "params": [
+                {
+                    "name": "value",
+                    "description": "a number between 0 (`muted`) to 100 (`max`)",
+                    "type": "Number"
+                }
+            ],
             "class": "Playback",
             "module": "base"
         },
@@ -634,6 +663,181 @@
             "itemtype": "method",
             "name": "destroy",
             "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 22,
+            "description": "gets the tag name for the ui component",
+            "itemtype": "method",
+            "name": "tagName",
+            "return": {
+                "description": "tag's name",
+                "type": "String"
+            },
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 29,
+            "description": "it builds an ui component by:\n * creating an id for the component `cid`\n * making sure the element is created `$el`\n * delegating all `events` to the element",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "the options object",
+                    "type": "Object"
+                }
+            ],
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 37,
+            "description": "a unique id prefixed with `'c'`, `c1, c232`",
+            "itemtype": "property",
+            "name": "cid",
+            "type": "String",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 43,
+            "description": "the dom element itself",
+            "itemtype": "property",
+            "name": "el",
+            "type": "HTMLElement",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 49,
+            "description": "the dom element wrapped by $zepto",
+            "itemtype": "property",
+            "name": "$el",
+            "type": "HTMLElement",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 55,
+            "description": "an implicit property which consists of an key/value, being key the\nelement's event and the value the callback for that element\n```javascript\nhtml5VideoPlayback.events = {'pause', 'pause'} //will map pause event from video tag to our function pause\n```",
+            "itemtype": "property",
+            "name": "events",
+            "type": "Object",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 72,
+            "description": "selects within the component.",
+            "itemtype": "method",
+            "name": "$",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "a selector to find within the component.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "an element, if it exists.",
+                "type": "HTMLElement"
+            },
+            "example": [
+                "\n```javascript\nfullScreenBarUIComponent.$('.button-full') //will return only `.button-full` within the component\n```"
+            ],
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 86,
+            "description": "render the component, usually attach it to a real existent `element`",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "itself",
+                "type": "UIObject"
+            },
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 95,
+            "description": "removes the ui component from DOM",
+            "itemtype": "method",
+            "name": "remove",
+            "return": {
+                "description": "itself",
+                "type": "UIObject"
+            },
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 106,
+            "description": "set element to `el` and `$el`",
+            "itemtype": "method",
+            "name": "setElement",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "HTMLElement"
+                },
+                {
+                    "name": "delegate",
+                    "description": "whether is delegate or not",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 120,
+            "description": "delegats all the original `events` on `element` to its callbacks",
+            "itemtype": "method",
+            "name": "delegateEvents",
+            "params": [
+                {
+                    "name": "events",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 146,
+            "description": "undelegats all the `events`",
+            "itemtype": "method",
+            "name": "undelegateEvents",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 155,
+            "description": "ensures the creation of this ui component",
+            "itemtype": "method",
+            "name": "_ensureElement",
+            "access": "private",
+            "tagname": "",
+            "class": "UIObject",
             "module": "base"
         },
         {

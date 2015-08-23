@@ -42,6 +42,7 @@
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -84,7 +85,7 @@
 <div class="box meta">
 
         <div class="extends">
-            Extends UIObject
+            Extends <a href="../classes/UIObject.html" class="crosslink">UIObject</a>
         </div>
 
         <div class="foundat">
@@ -140,6 +141,8 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
     <div>
@@ -150,8 +153,20 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods extends">
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
+                                <a href="#method_$">$</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
+                                <a href="#method__ensureElement">_ensureElement</a>
+
+                            </li>
+                            <li class="index-item method inherited">
                                 <a href="#method_constructor">constructor</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_delegateEvents">delegateEvents</a>
 
                             </li>
                             <li class="index-item method">
@@ -174,6 +189,26 @@
                                 <a href="#method_isPlaying">isPlaying</a>
 
                             </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_listenTo">listenTo</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_listenToOnce">listenToOnce</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_off">off</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_on">on</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_once">once</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_pause">pause</a>
 
@@ -182,12 +217,40 @@
                                 <a href="#method_play">play</a>
 
                             </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_remove">remove</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_render">render</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_seek">seek</a>
 
                             </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_setElement">setElement</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_stop">stop</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_stopListening">stopListening</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_tagName">tagName</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_trigger">trigger</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_undelegateEvents">undelegateEvents</a>
 
                             </li>
                             <li class="index-item method">
@@ -197,13 +260,176 @@
                     </ul>
                 </div>
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property inherited">
+                                <a href="#property_$el">$el</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_cid">cid</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_el">el</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_events">events</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_uniqueId">uniqueId</a>
+
+                            </li>
+                    </ul>
+                </div>
 
 
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events extends">
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_ENDED">PLAYER_ENDED</a>
+
+                            </li>
+                            <li class="index-item event inherited inherited">
+                                <a href="#event_PLAYER_ERROR">PLAYER_ERROR</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_PAUSE">PLAYER_PAUSE</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_PLAY">PLAYER_PLAY</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_RESIZE">PLAYER_RESIZE</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_SEEK">PLAYER_SEEK</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_STOP">PLAYER_STOP</a>
+
+                            </li>
+                    </ul>
+                </div>
         </div>
 
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_$" class="method item inherited">
+    <h3 class="name"><code>$</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>selector</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_$">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l72"><code>src&#x2F;base&#x2F;ui_object.js:72</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        selects within the component.
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">selector</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        a selector to find within the component.
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
+                    an element, if it exists.
+            </div>
+        </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">fullScreenBarUIComponent.$('.button-full') //will return only <code>.button-full</code> within the component
+</code></pre>
+
+            </div>
+        </div>
+</div>
+<div id="method__ensureElement" class="method item private inherited">
+    <h3 class="name"><code>_ensureElement</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method__ensureElement">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l155"><code>src&#x2F;base&#x2F;ui_object.js:155</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        ensures the creation of this ui component
+    </div>
+
+
+
+
+</div>
 <div id="method_constructor" class="method item">
     <h3 class="name"><code>constructor</code></h3>
 
@@ -223,8 +449,11 @@
 
 
     <div class="meta">
-                <p>
-                Defined in
+            <p>Inherited from
+            <a href="../classes/BaseObject.html#method_constructor">
+                BaseObject
+            </a>
+            but overwritten in
         <a href="../files/src_base_playback.js.html#l12"><code>src&#x2F;base&#x2F;playback.js:12</code></a>
         </p>
 
@@ -248,6 +477,58 @@
                     <div class="param-description">
                         <p>the options object</p>
 
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_delegateEvents" class="method item inherited">
+    <h3 class="name"><code>delegateEvents</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>events</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_delegateEvents">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l120"><code>src&#x2F;base&#x2F;ui_object.js:120</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        delegats all the original <code>events</code> on <code>element</code> to its callbacks
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">events</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
                     </div>
 
                 </li>
@@ -470,6 +751,445 @@ flashHlsPlayback.getPlaybackType() //hls
 
 
 </div>
+<div id="method_listenTo" class="method item inherited">
+    <h3 class="name"><code>listenTo</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>obj</code>
+                </li>
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_listenTo">Events</a>:
+        <a href="../files/src_base_events.js.html#l167"><code>src&#x2F;base&#x2F;events.js:167</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>listen to an event indefinitely for a given <code>obj</code></p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">this.listenTo(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)
+</code></pre>
+
+            </div>
+        </div>
+</div>
+<div id="method_listenToOnce" class="method item inherited">
+    <h3 class="name"><code>listenToOnce</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>obj</code>
+                </li>
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_listenToOnce">Events</a>:
+        <a href="../files/src_base_events.js.html#l179"><code>src&#x2F;base&#x2F;events.js:179</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>listen to an event once for a given <code>obj</code></p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">this.listenToOnce(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)
+</code></pre>
+
+            </div>
+        </div>
+</div>
+<div id="method_off" class="method item inherited">
+    <h3 class="name"><code>off</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_off">Events</a>:
+        <a href="../files/src_base_events.js.html#l52"><code>src&#x2F;base&#x2F;events.js:52</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>stop listening to an event</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_on" class="method item inherited">
+    <h3 class="name"><code>on</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_on">Events</a>:
+        <a href="../files/src_base_events.js.html#l19"><code>src&#x2F;base&#x2F;events.js:19</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>listen to an event indefinitely, if you want to stop you need to call <code>off</code></p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_once" class="method item inherited">
+    <h3 class="name"><code>once</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+                <li class="arg">
+                        <code>context</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_once">Events</a>:
+        <a href="../files/src_base_events.js.html#l34"><code>src&#x2F;base&#x2F;events.js:34</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>listen to an event only once</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">context</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_pause" class="method item">
     <h3 class="name"><code>pause</code></h3>
 
@@ -532,6 +1252,88 @@ flashHlsPlayback.getPlaybackType() //hls
 
 
 </div>
+<div id="method_remove" class="method item inherited">
+    <h3 class="name"><code>remove</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_remove">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l95"><code>src&#x2F;base&#x2F;ui_object.js:95</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        removes the ui component from DOM
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
+                    itself
+            </div>
+        </div>
+
+
+</div>
+<div id="method_render" class="method item inherited">
+    <h3 class="name"><code>render</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_render">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l86"><code>src&#x2F;base&#x2F;ui_object.js:86</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        render the component, usually attach it to a real existent <code>element</code>
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
+                    itself
+            </div>
+        </div>
+
+
+</div>
 <div id="method_seek" class="method item">
     <h3 class="name"><code>seek</code></h3>
 
@@ -586,6 +1388,71 @@ flashHlsPlayback.getPlaybackType() //hls
 
 
 </div>
+<div id="method_setElement" class="method item inherited">
+    <h3 class="name"><code>setElement</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>element</code>
+                </li>
+                <li class="arg">
+                        <code>delegate</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_setElement">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l106"><code>src&#x2F;base&#x2F;ui_object.js:106</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        set element to <code>el</code> and <code>$el</code>
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">element</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">delegate</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+                    <div class="param-description">
+                        whether is delegate or not
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
 <div id="method_stop" class="method item">
     <h3 class="name"><code>stop</code></h3>
 
@@ -617,14 +1484,220 @@ flashHlsPlayback.getPlaybackType() //hls
 
 
 </div>
-<div id="method_volume" class="method item">
-    <h3 class="name"><code>volume</code></h3>
+<div id="method_stopListening" class="method item inherited">
+    <h3 class="name"><code>stopListening</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>obj</code>
+                </li>
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_stopListening">Events</a>:
+        <a href="../files/src_base_events.js.html#l109"><code>src&#x2F;base&#x2F;events.js:109</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>stop listening an event for a given object</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">obj</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_tagName" class="method item inherited">
+    <h3 class="name"><code>tagName</code></h3>
 
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
         </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_tagName">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l22"><code>src&#x2F;base&#x2F;ui_object.js:22</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        gets the tag name for the ui component
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    tag's name
+            </div>
+        </div>
+
+
+</div>
+<div id="method_trigger" class="method item inherited">
+    <h3 class="name"><code>trigger</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/Events.html#method_trigger">Events</a>:
+        <a href="../files/src_base_events.js.html#l87"><code>src&#x2F;base&#x2F;events.js:87</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>triggers an event given its <code>name</code></p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_undelegateEvents" class="method item inherited">
+    <h3 class="name"><code>undelegateEvents</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#method_undelegateEvents">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l146"><code>src&#x2F;base&#x2F;ui_object.js:146</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        undelegats all the <code>events</code>
+    </div>
+
+
+
+
+</div>
+<div id="method_volume" class="method item">
+    <h3 class="name"><code>volume</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
 
 
 
@@ -647,23 +1720,393 @@ flashHlsPlayback.getPlaybackType() //hls
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
 
-        <div class="returns">
-            <h4>Returns:</h4>
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
 
-            <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
-                    <p>a number between 0 (<code>muted</code>) to 100 (<code>max</code>)</p>
 
-            </div>
+                    <div class="param-description">
+                        <p>a number between 0 (<code>muted</code>) to 100 (<code>max</code>)</p>
+
+                    </div>
+
+                </li>
+            </ul>
         </div>
+
 
 
 </div>
             </div>
 
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_$el" class="property item inherited">
+                        <h3 class="name"><code>$el</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/UIObject.html#property_$el">UIObject</a>:
+                            <a href="../files/src_base_ui_object.js.html#l49"><code>src&#x2F;base&#x2F;ui_object.js:49</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            the dom element wrapped by $zepto
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_cid" class="property item inherited">
+                        <h3 class="name"><code>cid</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/UIObject.html#property_cid">UIObject</a>:
+                            <a href="../files/src_base_ui_object.js.html#l37"><code>src&#x2F;base&#x2F;ui_object.js:37</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            a unique id prefixed with <code>&#x27;c&#x27;</code>, <code>c1, c232</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_el" class="property item inherited">
+                        <h3 class="name"><code>el</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/UIObject.html#property_el">UIObject</a>:
+                            <a href="../files/src_base_ui_object.js.html#l43"><code>src&#x2F;base&#x2F;ui_object.js:43</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            the dom element itself
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_events" class="property item inherited">
+                        <h3 class="name"><code>events</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/UIObject.html#property_events">UIObject</a>:
+                            <a href="../files/src_base_ui_object.js.html#l55"><code>src&#x2F;base&#x2F;ui_object.js:55</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            an implicit property which consists of an key/value, being key the
+                    element's event and the value the callback for that element
+                    <code>&#x60;</code>javascript
+                    html5VideoPlayback.events = {'pause', 'pause'} //will map pause event from video tag to our function pause
+                    <code>&#x60;</code>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_uniqueId" class="property item inherited">
+                        <h3 class="name"><code>uniqueId</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/BaseObject.html#property_uniqueId">BaseObject</a>:
+                            <a href="../files/src_base_base_object.js.html#l23"><code>src&#x2F;base&#x2F;base_object.js:23</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>a unique id prefixed with <code>'o'</code>, <code>o1, o232</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
 
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_PLAYER_ENDED" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_ENDED</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_ENDED">Events</a>:
+                            <a href="../files/src_base_events.js.html#l230"><code>src&#x2F;base&#x2F;events.js:230</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player ends the video</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_ERROR" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_ERROR</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/Events.html#event_PLAYER_ERROR">
+                                    Events
+                                </a>
+                                but overwritten in
+                            <a href="../files/src_base_events.js.html#l243"><code>src&#x2F;base&#x2F;events.js:243</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player receives an error</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">error</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>the error</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_PAUSE" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_PAUSE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_PAUSE">Events</a>:
+                            <a href="../files/src_base_events.js.html#l218"><code>src&#x2F;base&#x2F;events.js:218</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player pauses</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_PLAY" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_PLAY</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_PLAY">Events</a>:
+                            <a href="../files/src_base_events.js.html#l212"><code>src&#x2F;base&#x2F;events.js:212</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player starts to play</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_RESIZE" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_RESIZE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_RESIZE">Events</a>:
+                            <a href="../files/src_base_events.js.html#l205"><code>src&#x2F;base&#x2F;events.js:205</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player risezes</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">currentSize</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>an object with the current size</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_SEEK" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_SEEK</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_SEEK">Events</a>:
+                            <a href="../files/src_base_events.js.html#l236"><code>src&#x2F;base&#x2F;events.js:236</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player ends the video</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">percent</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>a percentagem of seek</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_STOP" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_STOP</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_STOP">Events</a>:
+                            <a href="../files/src_base_events.js.html#l224"><code>src&#x2F;base&#x2F;events.js:224</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player stops</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
     </div>
 </div>
                     </div>

@@ -4,7 +4,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "BaseObject",
         "Events",
         "Playback",
-        "Player"
+        "Player",
+        "UIObject"
     ],
     "modules": [
         "base",
