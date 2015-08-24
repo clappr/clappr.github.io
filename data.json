@@ -187,7 +187,8 @@
             "line": 13,
             "description": "A base class to create ui object.",
             "is_constructor": 1,
-            "extends": "BaseObject"
+            "extends": "BaseObject",
+            "since": "1.0.0"
         },
         "Player": {
             "name": "Player",
@@ -668,9 +669,40 @@
         {
             "file": "src/base/ui_object.js",
             "line": 22,
+            "description": "a unique id prefixed with `'c'`, `c1, c232`",
+            "itemtype": "property",
+            "name": "cid",
+            "type": "String",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 28,
+            "description": "the dom element itself",
+            "itemtype": "property",
+            "name": "el",
+            "type": "HTMLElement",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 34,
+            "description": "the dom element wrapped by `$`",
+            "itemtype": "property",
+            "name": "$el",
+            "type": "HTMLElement",
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 41,
             "description": "gets the tag name for the ui component",
             "itemtype": "method",
             "name": "tagName",
+            "default": "div",
             "return": {
                 "description": "tag's name",
                 "type": "String"
@@ -680,7 +712,33 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 29,
+            "line": 48,
+            "description": "a literal object mapping element's events to methods",
+            "itemtype": "property",
+            "name": "events",
+            "type": "Object",
+            "example": [
+                "\n\n```javascript\n\nclass MyButton extends UIObject {\n  constructor(options) {\n    super(options)\n    this.myId = 0\n  }\n  get events() { return { 'click': 'myClick' } }\n  myClick(){ this.myId = 42 }\n}\n\n// when you click on MyButton the method `myClick` will be called\n```"
+            ],
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 69,
+            "description": "a literal object mapping attributes and values to the element\nelement's attribute name and the value the attribute value",
+            "itemtype": "property",
+            "name": "attributes",
+            "type": "Object",
+            "example": [
+                "\n\n```javascript\n\nclass MyButton extends UIObject {\n   constructor(options) { super(options) }\n   get attributes() { return { class: 'my-button'} }\n}\n\n// MyButton.el.className will be 'my-button'\n```"
+            ],
+            "class": "UIObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/ui_object.js",
+            "line": 88,
             "description": "it builds an ui component by:\n * creating an id for the component `cid`\n * making sure the element is created `$el`\n * delegating all `events` to the element",
             "itemtype": "method",
             "name": "constructor",
@@ -696,47 +754,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 37,
-            "description": "a unique id prefixed with `'c'`, `c1, c232`",
-            "itemtype": "property",
-            "name": "cid",
-            "type": "String",
-            "class": "UIObject",
-            "module": "base"
-        },
-        {
-            "file": "src/base/ui_object.js",
-            "line": 43,
-            "description": "the dom element itself",
-            "itemtype": "property",
-            "name": "el",
-            "type": "HTMLElement",
-            "class": "UIObject",
-            "module": "base"
-        },
-        {
-            "file": "src/base/ui_object.js",
-            "line": 49,
-            "description": "the dom element wrapped by $zepto",
-            "itemtype": "property",
-            "name": "$el",
-            "type": "HTMLElement",
-            "class": "UIObject",
-            "module": "base"
-        },
-        {
-            "file": "src/base/ui_object.js",
-            "line": 55,
-            "description": "an implicit property which consists of an key/value, being key the\nelement's event and the value the callback for that element\n```javascript\nhtml5VideoPlayback.events = {'pause', 'pause'} //will map pause event from video tag to our function pause\n```",
-            "itemtype": "property",
-            "name": "events",
-            "type": "Object",
-            "class": "UIObject",
-            "module": "base"
-        },
-        {
-            "file": "src/base/ui_object.js",
-            "line": 72,
+            "line": 103,
             "description": "selects within the component.",
             "itemtype": "method",
             "name": "$",
@@ -759,7 +777,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 86,
+            "line": 117,
             "description": "render the component, usually attach it to a real existent `element`",
             "itemtype": "method",
             "name": "render",
@@ -772,7 +790,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 95,
+            "line": 126,
             "description": "removes the ui component from DOM",
             "itemtype": "method",
             "name": "remove",
@@ -785,7 +803,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 106,
+            "line": 138,
             "description": "set element to `el` and `$el`",
             "itemtype": "method",
             "name": "setElement",
@@ -801,13 +819,17 @@
                     "type": "Boolean"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "UIObject"
+            },
             "class": "UIObject",
             "module": "base"
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 120,
-            "description": "delegats all the original `events` on `element` to its callbacks",
+            "line": 153,
+            "description": "delegates all the original `events` on `element` to its callbacks",
             "itemtype": "method",
             "name": "delegateEvents",
             "params": [
@@ -817,21 +839,29 @@
                     "type": "Object"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "UIObject"
+            },
             "class": "UIObject",
             "module": "base"
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 146,
+            "line": 180,
             "description": "undelegats all the `events`",
             "itemtype": "method",
             "name": "undelegateEvents",
+            "return": {
+                "description": "itself",
+                "type": "UIObject"
+            },
             "class": "UIObject",
             "module": "base"
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 155,
+            "line": 190,
             "description": "ensures the creation of this ui component",
             "itemtype": "method",
             "name": "_ensureElement",

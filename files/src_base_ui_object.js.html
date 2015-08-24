@@ -103,24 +103,9 @@ var delegateEventSplitter = /^(\S+)\s*(.*)$/
  * @constructor
  * @extends BaseObject
  * @module base
+ * @since 1.0.0
  */
 export default class UIObject extends BaseObject {
-
-  /**
-   * gets the tag name for the ui component
-   * @method tagName
-   * @return {String} tag&#x27;s name
-   */
-  get tagName() { return &#x27;div&#x27; }
-
-  /**
-   * it builds an ui component by:
-   *  * creating an id for the component &#x60;cid&#x60;
-   *  * making sure the element is created &#x60;$el&#x60;
-   *  * delegating all &#x60;events&#x60; to the element
-   * @method constructor
-   * @param {Object} options the options object
-   */
   /**
    * a unique id prefixed with &#x60;&#x27;c&#x27;&#x60;, &#x60;c1, c232&#x60;
    *
@@ -134,20 +119,66 @@ export default class UIObject extends BaseObject {
    * @type HTMLElement
    */
   /**
-   * the dom element wrapped by $zepto
+   * the dom element wrapped by &#x60;$&#x60;
    *
    * @property $el
    * @type HTMLElement
    */
+
   /**
-   * an implicit property which consists of an key/value, being key the
-   * element&#x27;s event and the value the callback for that element
-   *&#x60;&#x60;&#x60;javascript
-   * html5VideoPlayback.events = {&#x27;pause&#x27;, &#x27;pause&#x27;} //will map pause event from video tag to our function pause
-   *&#x60;&#x60;&#x60;
-   *
+   * gets the tag name for the ui component
+   * @method tagName
+   * @default div
+   * @return {String} tag&#x27;s name
+   */
+  get tagName() { return &#x27;div&#x27; }
+  /**
+   * a literal object mapping element&#x27;s events to methods
    * @property events
    * @type Object
+   * @example
+   *
+   *&#x60;&#x60;&#x60;javascript
+   *
+   * class MyButton extends UIObject {
+   *   constructor(options) {
+   *     super(options)
+   *     this.myId = 0
+   *   }
+   *   get events() { return { &#x27;click&#x27;: &#x27;myClick&#x27; } }
+   *   myClick(){ this.myId = 42 }
+   * }
+   *
+   * // when you click on MyButton the method &#x60;myClick&#x60; will be called
+   *&#x60;&#x60;&#x60;
+   */
+  get events() { return {} }
+  /**
+   * a literal object mapping attributes and values to the element
+   * element&#x27;s attribute name and the value the attribute value
+   * @property attributes
+   * @type Object
+   * @example
+   *
+   *&#x60;&#x60;&#x60;javascript
+   *
+   * class MyButton extends UIObject {
+   *    constructor(options) { super(options) }
+   *    get attributes() { return { class: &#x27;my-button&#x27;} }
+   * }
+   *
+   * // MyButton.el.className will be &#x27;my-button&#x27;
+   * &#x60;&#x60;&#x60;
+   */
+  get attributes() { return {} }
+
+  /**
+   * it builds an ui component by:
+   *  * creating an id for the component &#x60;cid&#x60;
+   *  * making sure the element is created &#x60;$el&#x60;
+   *  * delegating all &#x60;events&#x60; to the element
+   * @method constructor
+   * @param {Object} options the options object
    */
   constructor(options) {
     super(options)
@@ -187,6 +218,7 @@ export default class UIObject extends BaseObject {
   remove() {
     this.$el.remove()
     this.stopListening()
+    this.undelegateEvents()
     return this
   }
 
@@ -195,6 +227,7 @@ export default class UIObject extends BaseObject {
    * @method setElement
    * @param {HTMLElement} element
    * @param {Boolean} delegate whether is delegate or not
+   * @return {UIObject} itself
    */
   setElement(element, delegate) {
     if (this.$el) this.undelegateEvents()
@@ -205,9 +238,10 @@ export default class UIObject extends BaseObject {
   }
 
   /**
-   * delegats all the original &#x60;events&#x60; on &#x60;element&#x60; to its callbacks
+   * delegates all the original &#x60;events&#x60; on &#x60;element&#x60; to its callbacks
    * @method delegateEvents
    * @param {Object} events
+   * @return {UIObject} itself
    */
   delegateEvents(events) {
     if (!(events || (events = result(this, &#x27;events&#x27;)))) return this
@@ -233,6 +267,7 @@ export default class UIObject extends BaseObject {
   /**
    * undelegats all the &#x60;events&#x60;
    * @method undelegateEvents
+   * @return {UIObject} itself
    */
   undelegateEvents() {
     this.$el.off(&#x27;.delegateEvents&#x27; + this.cid)
