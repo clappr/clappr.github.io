@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.5</em>
+            <em>API Docs for: 0.2.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -39,6 +39,7 @@
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
+                                <li><a href="../classes/Container.html">Container</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
@@ -89,11 +90,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+import Log from &#x27;plugins/log&#x27;
 import {uniqueId} from &#x27;./utils&#x27;
 import execOnce from &#x27;lodash.once&#x27;
-import Log from &#x27;../plugins/log&#x27;
-
-var logger = Log.getInstance()
 
 var slice = Array.prototype.slice
 
@@ -179,7 +178,7 @@ export default class Events {
   trigger(name) {
     try {
       var klass = this.name || this.constructor.name
-      logger.debug.apply(logger, [klass].concat(Array.prototype.slice.call(arguments)))
+      Log.debug.apply(Log, [klass].concat(Array.prototype.slice.call(arguments)))
       if (!this._events) return this
       var args = slice.call(arguments, 1)
       if (!eventsApi(this, &#x27;trigger&#x27;, name, args)) return this
@@ -188,7 +187,7 @@ export default class Events {
       if (events) triggerEvents(events, args)
       if (allEvents) triggerEvents(allEvents, arguments)
     } catch (exception) {
-      logger.error.apply(logger, [klass, &#x27;error on event&#x27;, name, &#x27;trigger&#x27;,&#x27;-&#x27;, exception])
+      Log.error.apply(Log, [klass, &#x27;error on event&#x27;, name, &#x27;trigger&#x27;,&#x27;-&#x27;, exception])
     }
     return this
   }

@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.5</em>
+            <em>API Docs for: 0.2.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -39,6 +39,7 @@
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
+                                <li><a href="../classes/Container.html">Container</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
@@ -93,11 +94,12 @@
  * The ContainerFactory is responsible for manage playback bootstrap and create containers.
  */
 
-import assign from &#x27;lodash.assign&#x27;
-import BaseObject from &#x27;../../base/base_object&#x27;
-import Container from &#x27;../container&#x27;
+import BaseObject from &#x27;base/base_object&#x27;
+import Events from &#x27;base/events&#x27;
+import Container from &#x27;components/container&#x27;
 import $ from &#x27;clappr-zepto&#x27;
-import Events from &#x27;../../base/events&#x27;
+
+import assign from &#x27;lodash.assign&#x27;
 import find from &#x27;lodash.find&#x27;
 
 export default class ContainerFactory extends BaseObject {
@@ -121,7 +123,7 @@ export default class ContainerFactory extends BaseObject {
 
   createContainer(source, options) {
     if (!!source.match(/^\/\//)) source = window.location.protocol + source
-    options = assign({}, this.options, {src: source, autoPlay: !!this.options.autoPlay}, options)
+    options = assign({}, this.options, {src: source}, options)
     var playbackPlugin = this.findPlaybackPlugin(source)
     var playback = new playbackPlugin(options)
     var container = new Container({playback: playback})

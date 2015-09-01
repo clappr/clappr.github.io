@@ -2,7 +2,7 @@
     "project": {
         "name": "Clappr",
         "description": "An extensible media player for the web",
-        "version": "0.2.5",
+        "version": "0.2.9",
         "url": "https://github.com/clappr/clappr",
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
@@ -48,7 +48,9 @@
         "src/components/container/container.js": {
             "name": "src/components/container/container.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Container": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -107,13 +109,14 @@
                 "BaseObject": 1,
                 "Events": 1,
                 "Playback": 1,
-                "UIObject": 1
+                "UIObject": 1,
+                "Container": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/base/ui_object.js",
-            "line": 13
+            "file": "src/components/container/container.js",
+            "line": 15
         },
         "components": {
             "name": "components",
@@ -154,7 +157,7 @@
             "module": "base",
             "namespace": "",
             "file": "src/base/events.js",
-            "line": 13,
+            "line": 11,
             "is_constructor": 1
         },
         "Playback": {
@@ -187,8 +190,23 @@
             "line": 13,
             "description": "A base class to create ui object.",
             "is_constructor": 1,
-            "extends": "BaseObject",
-            "since": "1.0.0"
+            "extends": "BaseObject"
+        },
+        "Container": {
+            "name": "Container",
+            "shortname": "Container",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "base",
+            "namespace": "",
+            "file": "src/components/container/container.js",
+            "line": 15,
+            "description": "An abstraction to represent a container for a given playback\nTODO: describe its responsabilities",
+            "is_constructor": 1,
+            "extends": "UIObject"
         },
         "Player": {
             "name": "Player",
@@ -237,7 +255,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 19,
+            "line": 17,
             "description": "listen to an event indefinitely, if you want to stop you need to call `off`",
             "itemtype": "method",
             "name": "on",
@@ -263,7 +281,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 34,
+            "line": 32,
             "description": "listen to an event only once",
             "itemtype": "method",
             "name": "once",
@@ -289,7 +307,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 52,
+            "line": 50,
             "description": "stop listening to an event",
             "itemtype": "method",
             "name": "off",
@@ -315,7 +333,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 87,
+            "line": 85,
             "description": "triggers an event given its `name`",
             "itemtype": "method",
             "name": "trigger",
@@ -331,7 +349,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 109,
+            "line": 107,
             "description": "stop listening an event for a given object",
             "itemtype": "method",
             "name": "stopListening",
@@ -357,7 +375,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 167,
+            "line": 165,
             "description": "listen to an event indefinitely for a given `obj`",
             "itemtype": "method",
             "name": "listenTo",
@@ -391,7 +409,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 179,
+            "line": 177,
             "description": "listen to an event once for a given `obj`",
             "itemtype": "method",
             "name": "listenToOnce",
@@ -425,7 +443,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 205,
+            "line": 203,
             "description": "Fired when player risezes",
             "itemtype": "event",
             "name": "PLAYER_RESIZE",
@@ -441,7 +459,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 212,
+            "line": 210,
             "description": "Fired when player starts to play",
             "itemtype": "event",
             "name": "PLAYER_PLAY",
@@ -450,7 +468,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 218,
+            "line": 216,
             "description": "Fired when player pauses",
             "itemtype": "event",
             "name": "PLAYER_PAUSE",
@@ -459,7 +477,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 224,
+            "line": 222,
             "description": "Fired when player stops",
             "itemtype": "event",
             "name": "PLAYER_STOP",
@@ -468,7 +486,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 230,
+            "line": 228,
             "description": "Fired when player ends the video",
             "itemtype": "event",
             "name": "PLAYER_ENDED",
@@ -477,7 +495,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 236,
+            "line": 234,
             "description": "Fired when player ends the video",
             "itemtype": "event",
             "name": "PLAYER_SEEK",
@@ -493,7 +511,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 243,
+            "line": 241,
             "description": "Fired when player receives an error",
             "itemtype": "event",
             "name": "PLAYER_ERROR",
@@ -509,7 +527,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 250,
+            "line": 248,
             "description": "Fired when player updates its execution",
             "itemtype": "event",
             "name": "PLAYER_ERROR",
@@ -668,7 +686,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 22,
+            "line": 21,
             "description": "a unique id prefixed with `'c'`, `c1, c232`",
             "itemtype": "property",
             "name": "cid",
@@ -678,7 +696,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 28,
+            "line": 27,
             "description": "the dom element itself",
             "itemtype": "property",
             "name": "el",
@@ -688,7 +706,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 34,
+            "line": 33,
             "description": "the dom element wrapped by `$`",
             "itemtype": "property",
             "name": "$el",
@@ -698,7 +716,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 41,
+            "line": 40,
             "description": "gets the tag name for the ui component",
             "itemtype": "method",
             "name": "tagName",
@@ -712,7 +730,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 48,
+            "line": 47,
             "description": "a literal object mapping element's events to methods",
             "itemtype": "property",
             "name": "events",
@@ -725,7 +743,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 69,
+            "line": 68,
             "description": "a literal object mapping attributes and values to the element\nelement's attribute name and the value the attribute value",
             "itemtype": "property",
             "name": "attributes",
@@ -738,7 +756,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 88,
+            "line": 87,
             "description": "it builds an ui component by:\n * creating an id for the component `cid`\n * making sure the element is created `$el`\n * delegating all `events` to the element",
             "itemtype": "method",
             "name": "constructor",
@@ -754,7 +772,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 103,
+            "line": 102,
             "description": "selects within the component.",
             "itemtype": "method",
             "name": "$",
@@ -777,7 +795,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 117,
+            "line": 116,
             "description": "render the component, usually attach it to a real existent `element`",
             "itemtype": "method",
             "name": "render",
@@ -790,7 +808,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 126,
+            "line": 125,
             "description": "removes the ui component from DOM",
             "itemtype": "method",
             "name": "remove",
@@ -803,7 +821,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 138,
+            "line": 137,
             "description": "set element to `el` and `$el`",
             "itemtype": "method",
             "name": "setElement",
@@ -828,7 +846,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 153,
+            "line": 152,
             "description": "delegates all the original `events` on `element` to its callbacks",
             "itemtype": "method",
             "name": "delegateEvents",
@@ -848,7 +866,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 180,
+            "line": 179,
             "description": "undelegats all the `events`",
             "itemtype": "method",
             "name": "undelegateEvents",
@@ -861,7 +879,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 190,
+            "line": 189,
             "description": "ensures the creation of this ui component",
             "itemtype": "method",
             "name": "_ensureElement",
@@ -874,7 +892,156 @@
             "file": "src/components/container/container.js",
             "line": 5,
             "description": "Container is responsible for the video rendering and state",
-            "class": "Player",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 24,
+            "description": "container's name",
+            "itemtype": "method",
+            "name": "name",
+            "default": "Container",
+            "return": {
+                "description": "container's name",
+                "type": "String"
+            },
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 42,
+            "description": "it builds a container",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "the options object",
+                    "type": "Object"
+                }
+            ],
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 58,
+            "description": "binds playback events to the methods of the container.\nit listens to playback's events and triggers them as container events.\n\n| Playback |\n|----------|\n| progress |\n| timeupdate |\n| ready |\n| buffering |\n| bufferfull |\n| settingsupdate |\n| loadedmetadata |\n| highdefinitionupdate |\n| bitrate |\n| playbackstate |\n| dvr |\n| mediacontrol_disable |\n| mediacontrol_enable |\n| ended |\n| play |\n| pause |\n| error |\n\nps: the events usually translate from PLABACK_x to CONTAINER_x, you can check all the events at `Event` class.",
+            "itemtype": "method",
+            "name": "bindEvents",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 128,
+            "description": "returns `true` if DVR is enable otherwise `false`.",
+            "itemtype": "method",
+            "name": "isDvrEnabled",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 137,
+            "description": "returns `true` if DVR is in use otherwise `false`.",
+            "itemtype": "method",
+            "name": "isDvrInUse",
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 146,
+            "description": "destroys the container",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 210,
+            "description": "plays the playback",
+            "itemtype": "method",
+            "name": "play",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 218,
+            "description": "stops the playback",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 228,
+            "description": "pauses the playback",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 271,
+            "description": "adds plugin to the container",
+            "itemtype": "method",
+            "name": "addPlugin",
+            "params": [
+                {
+                    "name": "plugin",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 280,
+            "description": "checks if a plugin, given its name, exist",
+            "itemtype": "method",
+            "name": "addPlugin",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 289,
+            "description": "get the plugin given its name",
+            "itemtype": "method",
+            "name": "getPlugin",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Container",
             "module": "base"
         },
         {

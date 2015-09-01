@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.5</em>
+            <em>API Docs for: 0.2.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -39,6 +39,7 @@
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
+                                <li><a href="../classes/Container.html">Container</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
@@ -94,25 +95,22 @@
  * and the player state.
  */
 
-import {
-    isNumber,
-    Fullscreen,
-    requestAnimationFrame,
-    cancelAnimationFrame
-} from &#x27;../../base/utils&#x27;
+import {isNumber,Fullscreen, requestAnimationFrame, cancelAnimationFrame} from &#x27;base/utils&#x27;
+
+import Events from &#x27;base/events&#x27;
+import Styler from &#x27;base/styler&#x27;
+import UIObject from &#x27;base/ui_object&#x27;
+import Browser from &#x27;components/browser&#x27;
+import ContainerFactory from &#x27;components/container_factory&#x27;
+import MediaControl from &#x27;components/media_control&#x27;
+import Mediator from &#x27;components/mediator&#x27;
+import PlayerInfo from &#x27;components/player_info&#x27;
 
 import assign from &#x27;lodash.assign&#x27;
-import $ from &#x27;clappr-zepto&#x27;
-import UIObject from &#x27;../../base/ui_object&#x27;
-import ContainerFactory from &#x27;../container_factory&#x27;
-import Styler from &#x27;../../base/styler&#x27;
-import MediaControl from &#x27;../media_control&#x27;
-import PlayerInfo from &#x27;../player_info&#x27;
-import Mediator from &#x27;../mediator&#x27;
-import Events from &#x27;../../base/events&#x27;
-import Browser from &#x27;../browser&#x27;
-import coreStyle from &#x27;./public/style.scss&#x27;
 import find from &#x27;lodash.find&#x27;
+import $ from &#x27;clappr-zepto&#x27;
+
+import coreStyle from &#x27;./public/style.scss&#x27;
 
 export default class Core extends UIObject {
   get events() {
@@ -166,7 +164,7 @@ export default class Core extends UIObject {
     if(!Browser.isiOs) {
       this.$el.addClass(&#x27;fullscreen&#x27;)
       this.$el.removeAttr(&#x27;style&#x27;)
-      this.playerInfo.previousSize = this.playerInfo.currentSize
+      this.playerInfo.previousSize = { width: this.options.width, height: this.options.height }
       this.playerInfo.currentSize = { width: $(window).width(), height: $(window).height() }
     }
   }
@@ -186,7 +184,9 @@ export default class Core extends UIObject {
       this.el.style.height = &#x60;${options.height}px&#x60;;
       this.el.style.width = &#x60;${options.width}px&#x60;;
     }
-    this.playerInfo.previousSize = this.playerInfo.currentSize
+    this.playerInfo.previousSize = { width: this.options.width, height: this.options.height }
+    this.options.width = options.width
+    this.options.height = options.height
     this.playerInfo.currentSize = options
     Mediator.trigger(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerInfo.currentSize)
   }
@@ -313,6 +313,10 @@ export default class Core extends UIObject {
       return this.containers[0]
     }
     return this.mediaControl.container
+  }
+
+  getCurrentPlayback() {
+    return this.getCurrentContainer().playback
   }
 
   getPlaybackType() {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Playback - Clappr</title>
+    <title>Container - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -82,7 +82,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Playback Class</h1>
+<h1>Container Class</h1>
 <div class="box meta">
 
         <div class="extends">
@@ -90,7 +90,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_base_playback.js.html#l4"><code>src&#x2F;base&#x2F;playback.js:4</code></a>
+            Defined in: <a href="../files/src_components_container_container.js.html#l15"><code>src&#x2F;components&#x2F;container&#x2F;container.js:15</code></a>
         </div>
 
             Module: <a href="../modules/base.html">base</a>
@@ -99,14 +99,15 @@
 
 
 <div class="box intro">
-    <p>An abstraction to represent a generic playback, it's like an interface to be implemented by subclasses.</p>
+    <p>An abstraction to represent a container for a given playback
+TODO: describe its responsabilities</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Playback" class="method item">
-    <h3 class="name"><code>Playback</code></h3>
+<div id="method_Container" class="method item">
+    <h3 class="name"><code>Container</code></h3>
 
         <span class="paren">()</span>
 
@@ -120,7 +121,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l4"><code>src&#x2F;base&#x2F;playback.js:4</code></a>
+        <a href="../files/src_components_container_container.js.html#l15"><code>src&#x2F;components&#x2F;container&#x2F;container.js:15</code></a>
         </p>
 
 
@@ -162,6 +163,18 @@
                                 <a href="#method__ensureElement">_ensureElement</a>
 
                             </li>
+                            <li class="index-item method">
+                                <a href="#method_addPlugin">addPlugin</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_addPlugin">addPlugin</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_bindEvents">bindEvents</a>
+
+                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_constructor">constructor</a>
 
@@ -175,19 +188,15 @@
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_getDuration">getDuration</a>
+                                <a href="#method_getPlugin">getPlugin</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_getPlaybackType">getPlaybackType</a>
+                                <a href="#method_isDvrEnabled">isDvrEnabled</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_isHighDefinitionInUse">isHighDefinitionInUse</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_isPlaying">isPlaying</a>
+                                <a href="#method_isDvrInUse">isDvrInUse</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -196,6 +205,10 @@
                             </li>
                             <li class="index-item method inherited">
                                 <a href="#method_listenToOnce">listenToOnce</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_name">name</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -226,10 +239,6 @@
                                 <a href="#method_render">render</a>
 
                             </li>
-                            <li class="index-item method">
-                                <a href="#method_seek">seek</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_setElement">setElement</a>
 
@@ -252,10 +261,6 @@
                             </li>
                             <li class="index-item method inherited">
                                 <a href="#method_undelegateEvents">undelegateEvents</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_volume">volume</a>
 
                             </li>
                     </ul>
@@ -364,7 +369,8 @@
     </div>
 
     <div class="description">
-        selects within the component.
+        <p>selects within the component.</p>
+
     </div>
 
         <div class="params">
@@ -377,7 +383,8 @@
 
 
                     <div class="param-description">
-                        a selector to find within the component.
+                        <p>a selector to find within the component.</p>
+
                     </div>
 
                 </li>
@@ -389,7 +396,8 @@
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
-                    an element, if it exists.
+                    <p>an element, if it exists.</p>
+
             </div>
         </div>
 
@@ -428,7 +436,207 @@
     </div>
 
     <div class="description">
-        ensures the creation of this ui component
+        <p>ensures the creation of this ui component</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_addPlugin" class="method item">
+    <h3 class="name"><code>addPlugin</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>plugin</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l271"><code>src&#x2F;components&#x2F;container&#x2F;container.js:271</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>adds plugin to the container</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">plugin</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_addPlugin" class="method item">
+    <h3 class="name"><code>addPlugin</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l280"><code>src&#x2F;components&#x2F;container&#x2F;container.js:280</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>checks if a plugin, given its name, exist</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_bindEvents" class="method item">
+    <h3 class="name"><code>bindEvents</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l58"><code>src&#x2F;components&#x2F;container&#x2F;container.js:58</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>binds playback events to the methods of the container.
+it listens to playback's events and triggers them as container events.</p>
+<table>
+<thead>
+<tr>
+<th>Playback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>progress</td>
+</tr>
+<tr>
+<td>timeupdate</td>
+</tr>
+<tr>
+<td>ready</td>
+</tr>
+<tr>
+<td>buffering</td>
+</tr>
+<tr>
+<td>bufferfull</td>
+</tr>
+<tr>
+<td>settingsupdate</td>
+</tr>
+<tr>
+<td>loadedmetadata</td>
+</tr>
+<tr>
+<td>highdefinitionupdate</td>
+</tr>
+<tr>
+<td>bitrate</td>
+</tr>
+<tr>
+<td>playbackstate</td>
+</tr>
+<tr>
+<td>dvr</td>
+</tr>
+<tr>
+<td>mediacontrol_disable</td>
+</tr>
+<tr>
+<td>mediacontrol_enable</td>
+</tr>
+<tr>
+<td>ended</td>
+</tr>
+<tr>
+<td>play</td>
+</tr>
+<tr>
+<td>pause</td>
+</tr>
+<tr>
+<td>error</td>
+</tr>
+</tbody>
+</table>
+<p>ps: the events usually translate from PLABACK_x to CONTAINER_x, you can check all the events at <code>Event</code> class.</p>
+
     </div>
 
 
@@ -459,7 +667,7 @@
                 BaseObject
             </a>
             but overwritten in
-        <a href="../files/src_base_playback.js.html#l12"><code>src&#x2F;base&#x2F;playback.js:12</code></a>
+        <a href="../files/src_components_container_container.js.html#l42"><code>src&#x2F;components&#x2F;container&#x2F;container.js:42</code></a>
         </p>
 
 
@@ -467,7 +675,8 @@
     </div>
 
     <div class="description">
-        
+        <p>it builds a container</p>
+
     </div>
 
         <div class="params">
@@ -523,7 +732,8 @@
     </div>
 
     <div class="description">
-        delegates all the original <code>events</code> on <code>element</code> to its callbacks
+        <p>delegates all the original <code>events</code> on <code>element</code> to its callbacks</p>
+
     </div>
 
         <div class="params">
@@ -548,7 +758,8 @@
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    itself
+                    <p>itself</p>
+
             </div>
         </div>
 
@@ -569,7 +780,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l92"><code>src&#x2F;base&#x2F;playback.js:92</code></a>
+        <a href="../files/src_components_container_container.js.html#l146"><code>src&#x2F;components&#x2F;container&#x2F;container.js:146</code></a>
         </p>
 
 
@@ -577,7 +788,7 @@
     </div>
 
     <div class="description">
-        <p>destroys the playback, removing it from DOM</p>
+        <p>destroys the container</p>
 
     </div>
 
@@ -585,14 +796,17 @@
 
 
 </div>
-<div id="method_getDuration" class="method item">
-    <h3 class="name"><code>getDuration</code></h3>
+<div id="method_getPlugin" class="method item">
+    <h3 class="name"><code>getPlugin</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-        </span>
 
 
 
@@ -603,7 +817,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l46"><code>src&#x2F;base&#x2F;playback.js:46</code></a>
+        <a href="../files/src_components_container_container.js.html#l289"><code>src&#x2F;components&#x2F;container&#x2F;container.js:289</code></a>
         </p>
 
 
@@ -611,78 +825,32 @@
     </div>
 
     <div class="description">
-        <p>gets the duration in seconds</p>
+        <p>get the plugin given its name</p>
 
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
 
-        <div class="returns">
-            <h4>Returns:</h4>
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
-            <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
-                    <p>duration time (in seconds) of the current source</p>
 
-            </div>
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
         </div>
+
 
 
 </div>
-<div id="method_getPlaybackType" class="method item">
-    <h3 class="name"><code>getPlaybackType</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_playback.js.html#l62"><code>src&#x2F;base&#x2F;playback.js:62</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>gets the playback type</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    <p>you should write the playback type otherwise it'll assume <code>'no_op'</code></p>
-
-            </div>
-        </div>
-
-
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code class="language-javascript">html5VideoPlayback.getPlaybackType() //html5_video
-flashHlsPlayback.getPlaybackType() //hls
-</code></pre>
-
-            </div>
-        </div>
-</div>
-<div id="method_isHighDefinitionInUse" class="method item">
-    <h3 class="name"><code>isHighDefinitionInUse</code></h3>
+<div id="method_isDvrEnabled" class="method item">
+    <h3 class="name"><code>isDvrEnabled</code></h3>
 
         <span class="paren">()</span>
 
@@ -699,7 +867,7 @@ flashHlsPlayback.getPlaybackType() //hls
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l76"><code>src&#x2F;base&#x2F;playback.js:76</code></a>
+        <a href="../files/src_components_container_container.js.html#l128"><code>src&#x2F;components&#x2F;container&#x2F;container.js:128</code></a>
         </p>
 
 
@@ -707,7 +875,7 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        <p>checks if the playback is in HD.</p>
+        <p>returns <code>true</code> if DVR is enable otherwise <code>false</code>.</p>
 
     </div>
 
@@ -717,15 +885,13 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
-                    <p><code>true</code> if the playback is playing in HD, otherwise <code>false</code></p>
-
             </div>
         </div>
 
 
 </div>
-<div id="method_isPlaying" class="method item">
-    <h3 class="name"><code>isPlaying</code></h3>
+<div id="method_isDvrInUse" class="method item">
+    <h3 class="name"><code>isDvrInUse</code></h3>
 
         <span class="paren">()</span>
 
@@ -742,7 +908,7 @@ flashHlsPlayback.getPlaybackType() //hls
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l53"><code>src&#x2F;base&#x2F;playback.js:53</code></a>
+        <a href="../files/src_components_container_container.js.html#l137"><code>src&#x2F;components&#x2F;container&#x2F;container.js:137</code></a>
         </p>
 
 
@@ -750,7 +916,7 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        <p>checks if the playback is playing.</p>
+        <p>returns <code>true</code> if DVR is in use otherwise <code>false</code>.</p>
 
     </div>
 
@@ -760,8 +926,6 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
-                    <p><code>true</code> if the current playback is playing, otherwise <code>false</code></p>
-
             </div>
         </div>
 
@@ -968,6 +1132,49 @@ flashHlsPlayback.getPlaybackType() //hls
 
             </div>
         </div>
+</div>
+<div id="method_name" class="method item">
+    <h3 class="name"><code>name</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l24"><code>src&#x2F;components&#x2F;container&#x2F;container.js:24</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>container's name</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>container's name</p>
+
+            </div>
+        </div>
+
+
 </div>
 <div id="method_off" class="method item inherited">
     <h3 class="name"><code>off</code></h3>
@@ -1221,7 +1428,7 @@ flashHlsPlayback.getPlaybackType() //hls
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l27"><code>src&#x2F;base&#x2F;playback.js:27</code></a>
+        <a href="../files/src_components_container_container.js.html#l228"><code>src&#x2F;components&#x2F;container&#x2F;container.js:228</code></a>
         </p>
 
 
@@ -1229,7 +1436,7 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        <p>pauses the playback.</p>
+        <p>pauses the playback</p>
 
     </div>
 
@@ -1252,7 +1459,7 @@ flashHlsPlayback.getPlaybackType() //hls
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l21"><code>src&#x2F;base&#x2F;playback.js:21</code></a>
+        <a href="../files/src_components_container_container.js.html#l210"><code>src&#x2F;components&#x2F;container&#x2F;container.js:210</code></a>
         </p>
 
 
@@ -1260,7 +1467,7 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        <p>plays the playback.</p>
+        <p>plays the playback</p>
 
     </div>
 
@@ -1294,7 +1501,8 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        removes the ui component from DOM
+        <p>removes the ui component from DOM</p>
+
     </div>
 
 
@@ -1303,7 +1511,8 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    itself
+                    <p>itself</p>
+
             </div>
         </div>
 
@@ -1335,7 +1544,8 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        render the component, usually attach it to a real existent <code>element</code>
+        <p>render the component, usually attach it to a real existent <code>element</code></p>
+
     </div>
 
 
@@ -1344,63 +1554,10 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    itself
+                    <p>itself</p>
+
             </div>
         </div>
-
-
-</div>
-<div id="method_seek" class="method item">
-    <h3 class="name"><code>seek</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>time</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_playback.js.html#l39"><code>src&#x2F;base&#x2F;playback.js:39</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>seeks the playback to a given <code>time</code> in percentage</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">time</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-
-                    <div class="param-description">
-                        <p>should be a number between 0 and 100</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
 
 
 </div>
@@ -1439,7 +1596,8 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        set element to <code>el</code> and <code>$el</code>
+        <p>set element to <code>el</code> and <code>$el</code></p>
+
     </div>
 
         <div class="params">
@@ -1462,7 +1620,8 @@ flashHlsPlayback.getPlaybackType() //hls
 
 
                     <div class="param-description">
-                        whether is delegate or not
+                        <p>whether is delegate or not</p>
+
                     </div>
 
                 </li>
@@ -1474,7 +1633,8 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    itself
+                    <p>itself</p>
+
             </div>
         </div>
 
@@ -1495,7 +1655,7 @@ flashHlsPlayback.getPlaybackType() //hls
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l33"><code>src&#x2F;base&#x2F;playback.js:33</code></a>
+        <a href="../files/src_components_container_container.js.html#l218"><code>src&#x2F;components&#x2F;container&#x2F;container.js:218</code></a>
         </p>
 
 
@@ -1503,7 +1663,7 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        <p>stops the playback.</p>
+        <p>stops the playback</p>
 
     </div>
 
@@ -1616,7 +1776,8 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        gets the tag name for the ui component
+        <p>gets the tag name for the ui component</p>
+
     </div>
 
 
@@ -1625,7 +1786,8 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    tag's name
+                    <p>tag's name</p>
+
             </div>
         </div>
 
@@ -1710,7 +1872,8 @@ flashHlsPlayback.getPlaybackType() //hls
     </div>
 
     <div class="description">
-        undelegats all the <code>events</code>
+        <p>undelegats all the <code>events</code></p>
+
     </div>
 
 
@@ -1719,63 +1882,10 @@ flashHlsPlayback.getPlaybackType() //hls
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    itself
+                    <p>itself</p>
+
             </div>
         </div>
-
-
-</div>
-<div id="method_volume" class="method item">
-    <h3 class="name"><code>volume</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>value</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_playback.js.html#l85"><code>src&#x2F;base&#x2F;playback.js:85</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>sets the volume for the playback</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-
-
-                    <div class="param-description">
-                        <p>a number between 0 (<code>muted</code>) to 100 (<code>max</code>)</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
 
 
 </div>
@@ -1802,7 +1912,8 @@ flashHlsPlayback.getPlaybackType() //hls
                         </div>
                     
                         <div class="description">
-                            the dom element wrapped by <code>$</code>
+                            <p>the dom element wrapped by <code>$</code></p>
+                    
                         </div>
                     
                     
@@ -1826,8 +1937,9 @@ flashHlsPlayback.getPlaybackType() //hls
                         </div>
                     
                         <div class="description">
-                            a literal object mapping attributes and values to the element
-                    element's attribute name and the value the attribute value
+                            <p>a literal object mapping attributes and values to the element
+                    element's attribute name and the value the attribute value</p>
+                    
                         </div>
                     
                     
@@ -1866,7 +1978,8 @@ flashHlsPlayback.getPlaybackType() //hls
                         </div>
                     
                         <div class="description">
-                            a unique id prefixed with <code>&#x27;c&#x27;</code>, <code>c1, c232</code>
+                            <p>a unique id prefixed with <code>'c'</code>, <code>c1, c232</code></p>
+                    
                         </div>
                     
                     
@@ -1890,7 +2003,8 @@ flashHlsPlayback.getPlaybackType() //hls
                         </div>
                     
                         <div class="description">
-                            the dom element itself
+                            <p>the dom element itself</p>
+                    
                         </div>
                     
                     
@@ -1914,7 +2028,8 @@ flashHlsPlayback.getPlaybackType() //hls
                         </div>
                     
                         <div class="description">
-                            a literal object mapping element's events to methods
+                            <p>a literal object mapping element's events to methods</p>
+                    
                         </div>
                     
                     

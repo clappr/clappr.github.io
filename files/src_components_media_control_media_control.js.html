@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.5</em>
+            <em>API Docs for: 0.2.9</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -39,6 +39,7 @@
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
+                                <li><a href="../classes/Container.html">Container</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
@@ -93,19 +94,21 @@
  * The MediaControl is responsible for displaying the Player controls.
  */
 
-import {Config, Fullscreen, formatTime} from &#x27;../../base/utils&#x27;
+import {Config, Fullscreen, formatTime} from &#x27;base/utils&#x27;
+
+import  Events from &#x27;base/events&#x27;
+import  Kibo from &#x27;base/kibo&#x27;
+import  Styler from &#x27;base/styler&#x27;
+import  UIObject from &#x27;base/ui_object&#x27;
+import  Browser from &#x27;components/browser&#x27;
+import  SeekTime from &#x27;components/seek_time&#x27;
+import  Mediator from &#x27;components/mediator&#x27;
+import  PlayerInfo from &#x27;components/player_info&#x27;
+import  template from &#x27;base/template&#x27;
 
 import  $ from &#x27;clappr-zepto&#x27;
-import  Styler from &#x27;../../base/styler&#x27;
-import  UIObject from &#x27;../../base/ui_object&#x27;
-import  Browser from &#x27;../browser&#x27;
-import  SeekTime from &#x27;../seek_time&#x27;
-import  Mediator from &#x27;../mediator&#x27;
-import  PlayerInfo from &#x27;../player_info&#x27;
-import  Events from &#x27;../../base/events&#x27;
-import  Kibo from &#x27;../../base/kibo&#x27;
+
 import  mediaControlStyle from &#x27;./public/media-control.scss&#x27;
-import  template from &#x27;../../base/template&#x27;
 import  mediaControlHTML from &#x27;./public/media-control.html&#x27;
 
 export default class MediaControl extends UIObject {
@@ -585,6 +588,7 @@ export default class MediaControl extends UIObject {
   }
 
   destroy() {
+    this.remove()
     $(document).unbind(&#x27;mouseup&#x27;, this.stopDragHandler)
     $(document).unbind(&#x27;mousemove&#x27;, this.updateDragHandler)
     this.unbindKeyEvents()
