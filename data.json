@@ -12,9 +12,7 @@
             "modules": {
                 "base": 1
             },
-            "classes": {
-                "BaseObject": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -63,15 +61,30 @@
         },
         "src/components/core/core.js": {
             "name": "src/components/core/core.js",
-            "modules": {},
-            "classes": {},
+            "modules": {
+                "components": 1
+            },
+            "classes": {
+                "Core": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "src/components/core_factory/core_factory.js": {
             "name": "src/components/core_factory/core_factory.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "CoreFactory": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/loader/loader.js": {
+            "name": "src/components/loader/loader.js",
+            "modules": {},
+            "classes": {
+                "BaseObject": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -91,9 +104,7 @@
         },
         "src/components/player.js": {
             "name": "src/components/player.js",
-            "modules": {
-                "components": 1
-            },
+            "modules": {},
             "classes": {
                 "Player": 1
             },
@@ -106,7 +117,6 @@
             "name": "base",
             "submodules": {},
             "classes": {
-                "BaseObject": 1,
                 "Events": 1,
                 "Playback": 1,
                 "UIObject": 1,
@@ -122,13 +132,17 @@
             "name": "components",
             "submodules": {},
             "classes": {
+                "BaseObject": 1,
+                "Core": 1,
+                "CoreFactory": 1,
                 "Player": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "src/components/player.js",
-            "line": 17
+            "line": 17,
+            "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state."
         }
     },
     "classes": {
@@ -140,11 +154,12 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "base",
-            "file": "src/base/base_object.js",
-            "line": 8,
+            "module": "components",
+            "file": "src/components/loader/loader.js",
+            "line": 30,
             "is_constructor": 1,
-            "extends": "Events"
+            "extends": "Events",
+            "description": "It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals."
         },
         "Events": {
             "name": "Events",
@@ -207,6 +222,38 @@
             "description": "An abstraction to represent a container for a given playback\nTODO: describe its responsabilities",
             "is_constructor": 1,
             "extends": "UIObject"
+        },
+        "Core": {
+            "name": "Core",
+            "shortname": "Core",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "components",
+            "namespace": "",
+            "file": "src/components/core/core.js",
+            "line": 22,
+            "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
+            "is_constructor": 1,
+            "extends": "UIObject"
+        },
+        "CoreFactory": {
+            "name": "CoreFactory",
+            "shortname": "CoreFactory",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "components",
+            "namespace": "",
+            "file": "src/components/core_factory/core_factory.js",
+            "line": 8,
+            "description": "The Core Factory is responsible for instantiate the core and it's plugins.",
+            "is_constructor": 1,
+            "extends": "BaseObject"
         },
         "Player": {
             "name": "Player",
@@ -1048,36 +1095,90 @@
             "file": "src/components/container_factory/container_factory.js",
             "line": 5,
             "description": "The ContainerFactory is responsible for manage playback bootstrap and create containers.",
-            "class": "Player",
-            "module": "base"
-        },
-        {
-            "file": "src/components/core/core.js",
-            "line": 5,
-            "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
-            "class": "Player",
+            "class": "Core",
             "module": "base"
         },
         {
             "file": "src/components/core_factory/core_factory.js",
-            "line": 5,
-            "description": "The Core Factory is responsible for instantiate the core and it's plugins.",
-            "class": "Player",
-            "module": "base"
+            "line": 16,
+            "description": "it builds the core factory",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "player",
+                    "description": "the player object",
+                    "type": "Player"
+                },
+                {
+                    "name": "loader",
+                    "description": "the loader object",
+                    "type": "Loader"
+                }
+            ],
+            "class": "CoreFactory",
+            "module": "components"
+        },
+        {
+            "file": "src/components/core_factory/core_factory.js",
+            "line": 30,
+            "description": "creates a core and its plugins",
+            "itemtype": "method",
+            "name": "create",
+            "return": {
+                "description": "created core",
+                "type": "Core"
+            },
+            "class": "CoreFactory",
+            "module": "components"
+        },
+        {
+            "file": "src/components/core_factory/core_factory.js",
+            "line": 41,
+            "description": "given the core plugins (`loader.corePlugins`) it builds each one",
+            "itemtype": "method",
+            "name": "addCorePlugins",
+            "return": {
+                "description": "the core with all plugins",
+                "type": "Core"
+            },
+            "class": "CoreFactory",
+            "module": "components"
+        },
+        {
+            "file": "src/components/loader/loader.js",
+            "line": 38,
+            "description": "it builds the loader",
+            "itemtype": "method",
+            "name": "constructor",
+            "params": [
+                {
+                    "name": "externalPlugins",
+                    "description": "the external plugins",
+                    "type": "Object"
+                },
+                {
+                    "name": "playerId",
+                    "description": "you can embed multiple instances of clappr, therefore this is the unique id of each one.",
+                    "type": "Number"
+                }
+            ],
+            "class": "BaseObject",
+            "module": "components"
         },
         {
             "file": "src/components/media_control/media_control.js",
             "line": 5,
             "description": "The MediaControl is responsible for displaying the Player controls.",
             "class": "Player",
-            "module": "base"
+            "module": "components"
         },
         {
             "file": "src/components/mediator.js",
             "line": 5,
             "description": "The mediator is a singleton for handling global events.",
             "class": "Player",
-            "module": "base"
+            "module": "components"
         },
         {
             "file": "src/components/player.js",
@@ -1422,14 +1523,6 @@
         {
             "message": "Missing item type\nThe ContainerFactory is responsible for manage playback bootstrap and create containers.",
             "line": " src/components/container_factory/container_factory.js:5"
-        },
-        {
-            "message": "Missing item type\nThe Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
-            "line": " src/components/core/core.js:5"
-        },
-        {
-            "message": "Missing item type\nThe Core Factory is responsible for instantiate the core and it's plugins.",
-            "line": " src/components/core_factory/core_factory.js:5"
         },
         {
             "message": "Missing item type\nThe MediaControl is responsible for displaying the Player controls.",

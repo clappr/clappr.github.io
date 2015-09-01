@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BaseObject - Clappr</title>
+    <title>CoreFactory - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -84,15 +84,15 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>BaseObject Class</h1>
+<h1>CoreFactory Class</h1>
 <div class="box meta">
 
         <div class="extends">
-            Extends <a href="../classes/Events.html" class="crosslink">Events</a>
+            Extends <a href="../classes/BaseObject.html" class="crosslink">BaseObject</a>
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_components_loader_loader.js.html#l30"><code>src&#x2F;components&#x2F;loader&#x2F;loader.js:30</code></a>
+            Defined in: <a href="../files/src_components_core_factory_core_factory.js.html#l8"><code>src&#x2F;components&#x2F;core_factory&#x2F;core_factory.js:8</code></a>
         </div>
 
             Module: <a href="../modules/components.html">components</a>
@@ -101,14 +101,14 @@
 
 
 <div class="box intro">
-    <p>It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.</p>
+    <p>The Core Factory is responsible for instantiate the core and it's plugins.</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_BaseObject" class="method item">
-    <h3 class="name"><code>BaseObject</code></h3>
+<div id="method_CoreFactory" class="method item">
+    <h3 class="name"><code>CoreFactory</code></h3>
 
         <span class="paren">()</span>
 
@@ -122,7 +122,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_loader_loader.js.html#l30"><code>src&#x2F;components&#x2F;loader&#x2F;loader.js:30</code></a>
+        <a href="../files/src_components_core_factory_core_factory.js.html#l8"><code>src&#x2F;components&#x2F;core_factory&#x2F;core_factory.js:8</code></a>
         </p>
 
 
@@ -157,11 +157,15 @@
 
                     <ul class="index-list methods extends">
                             <li class="index-item method">
+                                <a href="#method_addCorePlugins">addCorePlugins</a>
+
+                            </li>
+                            <li class="index-item method inherited">
                                 <a href="#method_constructor">constructor</a>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_constructor">constructor</a>
+                                <a href="#method_create">create</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -199,7 +203,7 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property">
+                            <li class="index-item property inherited">
                                 <a href="#property_uniqueId">uniqueId</a>
 
                             </li>
@@ -246,17 +250,14 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_constructor" class="method item">
-    <h3 class="name"><code>constructor</code></h3>
+<div id="method_addCorePlugins" class="method item">
+    <h3 class="name"><code>addCorePlugins</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>options</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Core.html" class="crosslink">Core</a></span>
+        </span>
 
 
 
@@ -265,10 +266,9 @@
 
 
     <div class="meta">
-                    <p>Provided by the <a href="../modules/base.html">base</a> module.</p>
                 <p>
                 Defined in
-        <a href="../files/src_base_base_object.js.html#l15"><code>src&#x2F;base&#x2F;base_object.js:15</code></a>
+        <a href="../files/src_components_core_factory_core_factory.js.html#l41"><code>src&#x2F;components&#x2F;core_factory&#x2F;core_factory.js:41</code></a>
         </p>
 
 
@@ -276,26 +276,20 @@
     </div>
 
     <div class="description">
-        
+        <p>given the core plugins (<code>loader.corePlugins</code>) it builds each one</p>
+
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">options</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        <div class="returns">
+            <h4>Returns:</h4>
 
+            <div class="returns-description">
+                        <span class="type"><a href="../classes/Core.html" class="crosslink">Core</a></span>:
+                    <p>the core with all plugins</p>
 
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
+            </div>
         </div>
-
 
 
 </div>
@@ -305,10 +299,10 @@
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>externalPlugins</code>
+                        <code>player</code>
                 </li>
                 <li class="arg">
-                        <code>playerId</code>
+                        <code>loader</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -321,9 +315,12 @@
 
 
     <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_components_loader_loader.js.html#l38"><code>src&#x2F;components&#x2F;loader&#x2F;loader.js:38</code></a>
+            <p>Inherited from
+            <a href="../classes/BaseObject.html#method_constructor">
+                BaseObject
+            </a>
+            but overwritten in
+        <a href="../files/src_components_core_factory_core_factory.js.html#l16"><code>src&#x2F;components&#x2F;core_factory&#x2F;core_factory.js:16</code></a>
         </p>
 
 
@@ -331,7 +328,7 @@
     </div>
 
     <div class="description">
-        <p>it builds the loader</p>
+        <p>it builds the core factory</p>
 
     </div>
 
@@ -340,23 +337,23 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">externalPlugins</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <code class="param-name">player</code>
+                        <span class="type"><a href="../classes/Player.html" class="crosslink">Player</a></span>
 
 
                     <div class="param-description">
-                        <p>the external plugins</p>
+                        <p>the player object</p>
 
                     </div>
 
                 </li>
                 <li class="param">
-                        <code class="param-name">playerId</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <code class="param-name">loader</code>
+                        <span class="type">Loader</span>
 
 
                     <div class="param-description">
-                        <p>you can embed multiple instances of clappr, therefore this is the unique id of each one.</p>
+                        <p>the loader object</p>
 
                     </div>
 
@@ -364,6 +361,49 @@
             </ul>
         </div>
 
+
+
+</div>
+<div id="method_create" class="method item">
+    <h3 class="name"><code>create</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/Core.html" class="crosslink">Core</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_core_factory_core_factory.js.html#l30"><code>src&#x2F;components&#x2F;core_factory&#x2F;core_factory.js:30</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>creates a core and its plugins</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="../classes/Core.html" class="crosslink">Core</a></span>:
+                    <p>created core</p>
+
+            </div>
+        </div>
 
 
 </div>
@@ -405,7 +445,8 @@
     </div>
 
     <div class="description">
-        listen to an event indefinitely for a given <code>obj</code>
+        <p>listen to an event indefinitely for a given <code>obj</code></p>
+
     </div>
 
         <div class="params">
@@ -505,7 +546,8 @@
     </div>
 
     <div class="description">
-        listen to an event once for a given <code>obj</code>
+        <p>listen to an event once for a given <code>obj</code></p>
+
     </div>
 
         <div class="params">
@@ -602,7 +644,8 @@
     </div>
 
     <div class="description">
-        stop listening to an event
+        <p>stop listening to an event</p>
+
     </div>
 
         <div class="params">
@@ -680,7 +723,8 @@
     </div>
 
     <div class="description">
-        listen to an event indefinitely, if you want to stop you need to call <code>off</code>
+        <p>listen to an event indefinitely, if you want to stop you need to call <code>off</code></p>
+
     </div>
 
         <div class="params">
@@ -758,7 +802,8 @@
     </div>
 
     <div class="description">
-        listen to an event only once
+        <p>listen to an event only once</p>
+
     </div>
 
         <div class="params">
@@ -836,7 +881,8 @@
     </div>
 
     <div class="description">
-        stop listening an event for a given object
+        <p>stop listening an event for a given object</p>
+
     </div>
 
         <div class="params">
@@ -908,7 +954,8 @@
     </div>
 
     <div class="description">
-        triggers an event given its <code>name</code>
+        <p>triggers an event given its <code>name</code></p>
+
     </div>
 
         <div class="params">
@@ -936,7 +983,7 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_uniqueId" class="property item">
+                    <div id="property_uniqueId" class="property item inherited">
                         <h3 class="name"><code>uniqueId</code></h3>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
@@ -945,9 +992,8 @@
                     
                     
                         <div class="meta">
-                                        <p>Provided by the <a href="../modules/base.html">base</a> module.</p>
-                                    <p>
-                                    Defined in
+                                    <p>Inherited from
+                                    <a href="../classes/BaseObject.html#property_uniqueId">BaseObject</a>:
                             <a href="../files/src_base_base_object.js.html#l23"><code>src&#x2F;base&#x2F;base_object.js:23</code></a>
                             </p>
                     
@@ -986,7 +1032,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player ends the video
+                            <p>Fired when player ends the video</p>
+                    
                         </div>
                     
                     
@@ -1013,7 +1060,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player receives an error
+                            <p>Fired when player receives an error</p>
+                    
                         </div>
                     
                             <div class="params">
@@ -1026,7 +1074,8 @@
                     
                     
                                         <div class="param-description">
-                                            the error
+                                            <p>the error</p>
+                    
                                         </div>
                     
                                     </li>
@@ -1053,7 +1102,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player pauses
+                            <p>Fired when player pauses</p>
+                    
                         </div>
                     
                     
@@ -1077,7 +1127,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player starts to play
+                            <p>Fired when player starts to play</p>
+                    
                         </div>
                     
                     
@@ -1101,7 +1152,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player risezes
+                            <p>Fired when player risezes</p>
+                    
                         </div>
                     
                             <div class="params">
@@ -1114,7 +1166,8 @@
                     
                     
                                         <div class="param-description">
-                                            an object with the current size
+                                            <p>an object with the current size</p>
+                    
                                         </div>
                     
                                     </li>
@@ -1141,7 +1194,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player ends the video
+                            <p>Fired when player ends the video</p>
+                    
                         </div>
                     
                             <div class="params">
@@ -1154,7 +1208,8 @@
                     
                     
                                         <div class="param-description">
-                                            a percentagem of seek
+                                            <p>a percentagem of seek</p>
+                    
                                         </div>
                     
                                     </li>
@@ -1181,7 +1236,8 @@
                         </div>
                     
                         <div class="description">
-                            Fired when player stops
+                            <p>Fired when player stops</p>
+                    
                         </div>
                     
                     

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/components/container_factory/container_factory.js - Clappr</title>
+    <title>src/components/loader/loader.js - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -84,7 +84,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/components/container_factory/container_factory.js</h1>
+<h1 class="file-heading">File: src/components/loader/loader.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -92,55 +92,67 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/**
- * The ContainerFactory is responsible for manage playback bootstrap and create containers.
- */
-
 import BaseObject from &#x27;base/base_object&#x27;
-import Events from &#x27;base/events&#x27;
-import Container from &#x27;components/container&#x27;
-import $ from &#x27;clappr-zepto&#x27;
+import PlayerInfo from &#x27;components/player_info&#x27;
+import uniq from &#x27;lodash.uniq&#x27;
 
-import assign from &#x27;lodash.assign&#x27;
-import find from &#x27;lodash.find&#x27;
+/* Playback Plugins */
+import HTML5VideoPlayback from &#x27;playbacks/html5_video&#x27;
+import FlashVideoPlayback from &#x27;playbacks/flash&#x27;
+import HTML5AudioPlayback from &#x27;playbacks/html5_audio&#x27;
+import HLSVideoPlayback from &#x27;playbacks/hls&#x27;
+import HTMLImgPlayback from &#x27;playbacks/html_img&#x27;
+import NoOp from &#x27;playbacks/no_op&#x27;
 
-export default class ContainerFactory extends BaseObject {
-  constructor(options, loader) {
-    super(options);
-    this.options = options;
-    this.loader = loader;
+/* Container Plugins */
+import SpinnerThreeBouncePlugin from &#x27;plugins/spinner_three_bounce&#x27;
+import StatsPlugin from &#x27;plugins/stats&#x27;
+import WaterMarkPlugin from &#x27;plugins/watermark&#x27;
+import PosterPlugin from &#x27;plugins/poster&#x27;
+import GoogleAnalyticsPlugin from &#x27;plugins/google_analytics&#x27;
+import ClickToPausePlugin from &#x27;plugins/click_to_pause&#x27;
+import Chromecast from &#x27;plugins/chromecast&#x27;
+
+/* Core Plugins */
+import DVRControls from &#x27;plugins/dvr_controls&#x27;
+import Favicon from &#x27;plugins/favicon&#x27;
+
+/**
+ * It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.
+ * @class BaseObject
+ * @constructor
+ * @extends Loader
+ * @module components
+ */
+export default class Loader extends BaseObject {
+  /**
+   * it builds the loader
+   * @method constructor
+   * @param {Object} externalPlugins the external plugins
+   * @param {Number} playerId you can embed multiple instances of clappr, therefore this is the unique id of each one.
+   */
+  constructor(externalPlugins, playerId) {
+    super()
+    this.playerId = playerId
+    this.playbackPlugins = [HTML5AudioPlayback, HTML5VideoPlayback, FlashVideoPlayback, HLSVideoPlayback, HTMLImgPlayback, NoOp]
+    this.containerPlugins = [SpinnerThreeBouncePlugin, WaterMarkPlugin, PosterPlugin, StatsPlugin, GoogleAnalyticsPlugin, ClickToPausePlugin]
+    this.corePlugins = [DVRControls, Favicon, Chromecast]
+    if (externalPlugins) {
+      this.addExternalPlugins(externalPlugins)
+    }
   }
 
-  createContainers() {
-    return $.Deferred((promise) =&gt; {
-      promise.resolve(this.options.sources.map((source) =&gt; {
-        return this.createContainer(source);
-      }));
-    });
+  addExternalPlugins(plugins) {
+    var pluginName = function(plugin) { return plugin.prototype.name }
+    if (plugins.playback) { this.playbackPlugins = uniq(plugins.playback.concat(this.playbackPlugins), pluginName) }
+    if (plugins.container) { this.containerPlugins = uniq(plugins.container.concat(this.containerPlugins), pluginName) }
+    if (plugins.core) { this.corePlugins = uniq(plugins.core.concat(this.corePlugins), pluginName) }
+    PlayerInfo.getInstance(this.playerId).playbackPlugins = this.playbackPlugins
   }
 
-  findPlaybackPlugin(source) {
-    return find(this.loader.playbackPlugins, (p) =&gt; { return p.canPlay(source.toString(), this.options.mimeType) })
-  }
-
-  createContainer(source, options) {
-    if (!!source.match(/^\/\//)) source = window.location.protocol + source
-    options = assign({}, this.options, {src: source}, options)
-    var playbackPlugin = this.findPlaybackPlugin(source)
-    var playback = new playbackPlugin(options)
-    var container = new Container({playback: playback})
-    var defer = $.Deferred()
-    defer.promise(container)
-    this.addContainerPlugins(container, source)
-    this.listenToOnce(container, Events.CONTAINER_READY, () =&gt; defer.resolve(container))
-    return container
-  }
-
-  addContainerPlugins(container, source) {
-    this.loader.containerPlugins.forEach((Plugin) =&gt; {
-      var options = assign(this.options, {container: container, src: source});
-      container.addPlugin(new Plugin(options));
-    });
+  getPlugin(name) {
+    var allPlugins = this.containerPlugins.concat(this.playbackPlugins).concat(this.corePlugins)
+    return allPlugins.find((plugin) =&gt; { return plugin.prototype.name === name })
   }
 }
 

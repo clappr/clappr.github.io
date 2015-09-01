@@ -40,6 +40,8 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/Core.html">Core</a></li>
+                                <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
@@ -90,11 +92,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-/**
- * The Core is responsible to manage Containers, the mediator, MediaControl
- * and the player state.
- */
-
 import {isNumber,Fullscreen, requestAnimationFrame, cancelAnimationFrame} from &#x27;base/utils&#x27;
 
 import Events from &#x27;base/events&#x27;
@@ -112,6 +109,14 @@ import $ from &#x27;clappr-zepto&#x27;
 
 import coreStyle from &#x27;./public/style.scss&#x27;
 
+/**
+ * The Core is responsible to manage Containers, the mediator, MediaControl
+ * and the player state.
+ * @class Core
+ * @constructor
+ * @extends UIObject
+ * @module components
+ */
 export default class Core extends UIObject {
   get events() {
     return {

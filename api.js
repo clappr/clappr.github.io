@@ -3,6 +3,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "BaseObject",
         "Container",
+        "Core",
+        "CoreFactory",
         "Events",
         "Playback",
         "Player",
@@ -19,7 +21,8 @@ YUI.add("yuidoc-meta", function(Y) {
         },
         {
             "displayName": "components",
-            "name": "components"
+            "name": "components",
+            "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state."
         }
     ]
 } };
