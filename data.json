@@ -12,7 +12,9 @@
             "modules": {
                 "base": 1
             },
-            "classes": {},
+            "classes": {
+                "BaseObject": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -83,7 +85,7 @@
             "name": "src/components/loader/loader.js",
             "modules": {},
             "classes": {
-                "BaseObject": 1
+                "Loader": 1
             },
             "fors": {},
             "namespaces": {}
@@ -117,6 +119,7 @@
             "name": "base",
             "submodules": {},
             "classes": {
+                "BaseObject": 1,
                 "Events": 1,
                 "Playback": 1,
                 "UIObject": 1,
@@ -132,9 +135,9 @@
             "name": "components",
             "submodules": {},
             "classes": {
-                "BaseObject": 1,
                 "Core": 1,
                 "CoreFactory": 1,
+                "Loader": 1,
                 "Player": 1
             },
             "fors": {},
@@ -154,12 +157,11 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "components",
-            "file": "src/components/loader/loader.js",
-            "line": 30,
+            "module": "base",
+            "file": "src/base/base_object.js",
+            "line": 8,
             "is_constructor": 1,
-            "extends": "Events",
-            "description": "It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals."
+            "extends": "Events"
         },
         "Events": {
             "name": "Events",
@@ -252,6 +254,22 @@
             "file": "src/components/core_factory/core_factory.js",
             "line": 8,
             "description": "The Core Factory is responsible for instantiate the core and it's plugins.",
+            "is_constructor": 1,
+            "extends": "BaseObject"
+        },
+        "Loader": {
+            "name": "Loader",
+            "shortname": "Loader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "components",
+            "namespace": "",
+            "file": "src/components/loader/loader.js",
+            "line": 30,
+            "description": "It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.",
             "is_constructor": 1,
             "extends": "BaseObject"
         },
@@ -1163,7 +1181,7 @@
                     "type": "Number"
                 }
             ],
-            "class": "BaseObject",
+            "class": "Loader",
             "module": "components"
         },
         {

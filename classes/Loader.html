@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>UIObject - Clappr</title>
+    <title>Loader - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -85,7 +85,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>UIObject Class</h1>
+<h1>Loader Class</h1>
 <div class="box meta">
 
         <div class="extends">
@@ -93,23 +93,23 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_base_ui_object.js.html#l13"><code>src&#x2F;base&#x2F;ui_object.js:13</code></a>
+            Defined in: <a href="../files/src_components_loader_loader.js.html#l30"><code>src&#x2F;components&#x2F;loader&#x2F;loader.js:30</code></a>
         </div>
 
-            Module: <a href="../modules/base.html">base</a>
+            Module: <a href="../modules/components.html">components</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>A base class to create ui object.</p>
+    <p>It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_UIObject" class="method item">
-    <h3 class="name"><code>UIObject</code></h3>
+<div id="method_Loader" class="method item">
+    <h3 class="name"><code>Loader</code></h3>
 
         <span class="paren">()</span>
 
@@ -123,7 +123,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_ui_object.js.html#l13"><code>src&#x2F;base&#x2F;ui_object.js:13</code></a>
+        <a href="../files/src_components_loader_loader.js.html#l30"><code>src&#x2F;components&#x2F;loader&#x2F;loader.js:30</code></a>
         </p>
 
 
@@ -157,20 +157,8 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods extends">
-                            <li class="index-item method">
-                                <a href="#method_$">$</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method__ensureElement">_ensureElement</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_constructor">constructor</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_delegateEvents">delegateEvents</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -193,32 +181,12 @@
                                 <a href="#method_once">once</a>
 
                             </li>
-                            <li class="index-item method">
-                                <a href="#method_remove">remove</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_render">render</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setElement">setElement</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_stopListening">stopListening</a>
 
                             </li>
-                            <li class="index-item method">
-                                <a href="#method_tagName">tagName</a>
-
-                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_trigger">trigger</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_undelegateEvents">undelegateEvents</a>
 
                             </li>
                     </ul>
@@ -228,26 +196,6 @@
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
-                            <li class="index-item property">
-                                <a href="#property_$el">$el</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_attributes">attributes</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_cid">cid</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_el">el</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_events">events</a>
-
-                            </li>
                             <li class="index-item property inherited">
                                 <a href="#property_uniqueId">uniqueId</a>
 
@@ -295,120 +243,16 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_$" class="method item">
-    <h3 class="name"><code>$</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>selector</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l102"><code>src&#x2F;base&#x2F;ui_object.js:102</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>selects within the component.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">selector</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-
-                    <div class="param-description">
-                        <p>a selector to find within the component.</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
-                    <p>an element, if it exists.</p>
-
-            </div>
-        </div>
-
-
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code class="language-javascript">fullScreenBarUIComponent.$('.button-full') //will return only <code>.button-full</code> within the component
-</code></pre>
-
-            </div>
-        </div>
-</div>
-<div id="method__ensureElement" class="method item private">
-    <h3 class="name"><code>_ensureElement</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-        <span class="flag private">private</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l189"><code>src&#x2F;base&#x2F;ui_object.js:189</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>ensures the creation of this ui component</p>
-
-    </div>
-
-
-
-
-</div>
 <div id="method_constructor" class="method item">
     <h3 class="name"><code>constructor</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>options</code>
+                        <code>externalPlugins</code>
+                </li>
+                <li class="arg">
+                        <code>playerId</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -426,7 +270,7 @@
                 BaseObject
             </a>
             but overwritten in
-        <a href="../files/src_base_ui_object.js.html#l87"><code>src&#x2F;base&#x2F;ui_object.js:87</code></a>
+        <a href="../files/src_components_loader_loader.js.html#l38"><code>src&#x2F;components&#x2F;loader&#x2F;loader.js:38</code></a>
         </p>
 
 
@@ -434,12 +278,7 @@
     </div>
 
     <div class="description">
-        <p>it builds an ui component by:</p>
-<ul>
-<li>creating an id for the component <code>cid</code></li>
-<li>making sure the element is created <code>$el</code></li>
-<li>delegating all <code>events</code> to the element</li>
-</ul>
+        <p>it builds the loader</p>
 
     </div>
 
@@ -448,84 +287,30 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">options</code>
+                        <code class="param-name">externalPlugins</code>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
-                        <p>the options object</p>
+                        <p>the external plugins</p>
 
                     </div>
 
                 </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_delegateEvents" class="method item">
-    <h3 class="name"><code>delegateEvents</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>events</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l152"><code>src&#x2F;base&#x2F;ui_object.js:152</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>delegates all the original <code>events</code> on <code>element</code> to its callbacks</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">events</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <code class="param-name">playerId</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
 
 
                     <div class="param-description">
-                        
+                        <p>you can embed multiple instances of clappr, therefore this is the unique id of each one.</p>
+
                     </div>
 
                 </li>
             </ul>
         </div>
 
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
-            </div>
-        </div>
 
 
 </div>
@@ -968,171 +753,6 @@
 
 
 </div>
-<div id="method_remove" class="method item">
-    <h3 class="name"><code>remove</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l125"><code>src&#x2F;base&#x2F;ui_object.js:125</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>removes the ui component from DOM</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_render" class="method item">
-    <h3 class="name"><code>render</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l116"><code>src&#x2F;base&#x2F;ui_object.js:116</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>render the component, usually attach it to a real existent <code>element</code></p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
-            </div>
-        </div>
-
-
-</div>
-<div id="method_setElement" class="method item">
-    <h3 class="name"><code>setElement</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>element</code>
-                </li>
-                <li class="arg">
-                        <code>delegate</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l137"><code>src&#x2F;base&#x2F;ui_object.js:137</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>set element to <code>el</code> and <code>$el</code></p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-
-
-                    <div class="param-description">
-                        
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">delegate</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-
-
-                    <div class="param-description">
-                        <p>whether is delegate or not</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
-            </div>
-        </div>
-
-
-</div>
 <div id="method_stopListening" class="method item inherited">
     <h3 class="name"><code>stopListening</code></h3>
 
@@ -1212,49 +832,6 @@
 
 
 </div>
-<div id="method_tagName" class="method item">
-    <h3 class="name"><code>tagName</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l40"><code>src&#x2F;base&#x2F;ui_object.js:40</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>gets the tag name for the ui component</p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    <p>tag's name</p>
-
-            </div>
-        </div>
-
-
-</div>
 <div id="method_trigger" class="method item inherited">
     <h3 class="name"><code>trigger</code></h3>
 
@@ -1308,214 +885,11 @@
 
 
 </div>
-<div id="method_undelegateEvents" class="method item">
-    <h3 class="name"><code>undelegateEvents</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_base_ui_object.js.html#l179"><code>src&#x2F;base&#x2F;ui_object.js:179</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>undelegats all the <code>events</code></p>
-
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
-            </div>
-        </div>
-
-
-</div>
             </div>
 
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_$el" class="property item">
-                        <h3 class="name"><code>$el</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_ui_object.js.html#l33"><code>src&#x2F;base&#x2F;ui_object.js:33</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>the dom element wrapped by <code>$</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_attributes" class="property item">
-                        <h3 class="name"><code>attributes</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_ui_object.js.html#l68"><code>src&#x2F;base&#x2F;ui_object.js:68</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a literal object mapping attributes and values to the element
-                    element's attribute name and the value the attribute value</p>
-                    
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <pre class="code prettyprint"><code class="language-javascript">
-                    class MyButton extends UIObject {
-                       constructor(options) { super(options) }
-                       get attributes() { return { class: 'my-button'} }
-                    }
-                    
-                    // MyButton.el.className will be 'my-button'
-                    </code></pre>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
-                    <div id="property_cid" class="property item">
-                        <h3 class="name"><code>cid</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_ui_object.js.html#l21"><code>src&#x2F;base&#x2F;ui_object.js:21</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a unique id prefixed with <code>'c'</code>, <code>c1, c232</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_el" class="property item">
-                        <h3 class="name"><code>el</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_ui_object.js.html#l27"><code>src&#x2F;base&#x2F;ui_object.js:27</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>the dom element itself</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_events" class="property item">
-                        <h3 class="name"><code>events</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_ui_object.js.html#l47"><code>src&#x2F;base&#x2F;ui_object.js:47</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a literal object mapping element's events to methods</p>
-                    
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <pre class="code prettyprint"><code class="language-javascript">
-                    class MyButton extends UIObject {
-                      constructor(options) {
-                        super(options)
-                        this.myId = 0
-                      }
-                      get events() { return { 'click': 'myClick' } }
-                      myClick(){ this.myId = 42 }
-                    }
-                    
-                    // when you click on MyButton the method <code>myClick</code> will be called
-                    </code></pre>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
                     <div id="property_uniqueId" class="property item inherited">
                         <h3 class="name"><code>uniqueId</code></h3>
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
