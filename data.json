@@ -750,6 +750,33 @@
             "module": "base"
         },
         {
+            "file": "src/base/playback.js",
+            "line": 105,
+            "description": "checks if the playback can play a given `source` and optionally a `mimeType`",
+            "itemtype": "method",
+            "name": "canPlay",
+            "static": 1,
+            "params": [
+                {
+                    "name": "source",
+                    "description": "the given source ex: `http://example.com/play.mp4`",
+                    "type": "String"
+                },
+                {
+                    "name": "mimeType",
+                    "description": "the given mime type, ex: `'application/vnd.apple.mpegurl'`",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "`true` if the playback is playable, otherwise `false`",
+                "type": "Boolean"
+            },
+            "class": "Playback",
+            "module": "base"
+        },
+        {
             "file": "src/base/ui_object.js",
             "line": 21,
             "description": "a unique id prefixed with `'c'`, `c1, c232`",

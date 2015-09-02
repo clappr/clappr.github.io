@@ -193,7 +193,15 @@ Playback.extend = function(properties) {
   return extend(Playback, properties)
 }
 
-Playback.canPlay = (source) =&gt; {
+  /**
+   * checks if the playback can play a given &#x60;source&#x60; and optionally a &#x60;mimeType&#x60;
+   * @method canPlay
+   * @static
+   * @param {String} source the given source ex: &#x60;http://example.com/play.mp4&#x60;
+   * @param {String} [mimeType] the given mime type, ex: &#x60;&#x27;application/vnd.apple.mpegurl&#x27;&#x60;
+   * @return {Boolean} &#x60;true&#x60; if the playback is playable, otherwise &#x60;false&#x60;
+   */
+Playback.canPlay = (source, mimeType) =&gt; {
   return false
 }
 
