@@ -1328,6 +1328,12 @@
                             "optional": true
                         },
                         {
+                            "name": "disableVideoTagContextMenu",
+                            "description": "\ndisables the context menu (right click) on the video element if a HTML5Video playback is used.",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
                             "name": "poster",
                             "description": "\ndefine a poster by adding its address `poster: 'http://url/img.png'`. It will appear after video embed, disappear on play and go back when user stops the video.",
                             "type": "String",
@@ -1341,7 +1347,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 103,
+            "line": 105,
             "description": "Specify a `parentId` to the player.",
             "itemtype": "method",
             "name": "setParentId",
@@ -1357,7 +1363,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 115,
+            "line": 117,
             "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
             "itemtype": "method",
             "name": "attachTo",
@@ -1373,7 +1379,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 182,
+            "line": 184,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -1392,7 +1398,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 195,
+            "line": 197,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
@@ -1413,7 +1419,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 206,
+            "line": 208,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -1422,7 +1428,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 214,
+            "line": 216,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -1431,7 +1437,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 222,
+            "line": 224,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -1440,7 +1446,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 230,
+            "line": 232,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -1449,7 +1455,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 238,
+            "line": 240,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -1465,7 +1471,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 247,
+            "line": 249,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -1481,7 +1487,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 256,
+            "line": 258,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -1490,7 +1496,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 264,
+            "line": 266,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -1499,7 +1505,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 272,
+            "line": 274,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -1512,7 +1518,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 281,
+            "line": 283,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -1535,7 +1541,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 299,
+            "line": 301,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -1548,7 +1554,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 308,
+            "line": 310,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",
