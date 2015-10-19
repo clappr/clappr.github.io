@@ -2,7 +2,7 @@
     "project": {
         "name": "Clappr",
         "description": "An extensible media player for the web",
-        "version": "0.2.9",
+        "version": "0.2.13",
         "url": "https://github.com/clappr/clappr",
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
@@ -129,7 +129,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src/components/container/container.js",
-            "line": 15
+            "line": 16
         },
         "components": {
             "name": "components",
@@ -220,7 +220,7 @@
             "module": "base",
             "namespace": "",
             "file": "src/components/container/container.js",
-            "line": 15,
+            "line": 16,
             "description": "An abstraction to represent a container for a given playback\nTODO: describe its responsabilities",
             "is_constructor": 1,
             "extends": "UIObject"
@@ -989,7 +989,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 24,
+            "line": 25,
             "description": "container's name",
             "itemtype": "method",
             "name": "name",
@@ -1003,7 +1003,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 42,
+            "line": 43,
             "description": "it builds a container",
             "itemtype": "method",
             "name": "constructor",
@@ -1019,7 +1019,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 58,
+            "line": 59,
             "description": "binds playback events to the methods of the container.\nit listens to playback's events and triggers them as container events.\n\n| Playback |\n|----------|\n| progress |\n| timeupdate |\n| ready |\n| buffering |\n| bufferfull |\n| settingsupdate |\n| loadedmetadata |\n| highdefinitionupdate |\n| bitrate |\n| playbackstate |\n| dvr |\n| mediacontrol_disable |\n| mediacontrol_enable |\n| ended |\n| play |\n| pause |\n| error |\n\nps: the events usually translate from PLABACK_x to CONTAINER_x, you can check all the events at `Event` class.",
             "itemtype": "method",
             "name": "bindEvents",
@@ -1028,7 +1028,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 128,
+            "line": 129,
             "description": "returns `true` if DVR is enable otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrEnabled",
@@ -1041,7 +1041,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 137,
+            "line": 138,
             "description": "returns `true` if DVR is in use otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrInUse",
@@ -1054,7 +1054,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 146,
+            "line": 147,
             "description": "destroys the container",
             "itemtype": "method",
             "name": "destroy",
@@ -1063,7 +1063,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 210,
+            "line": 209,
             "description": "plays the playback",
             "itemtype": "method",
             "name": "play",
@@ -1072,7 +1072,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 218,
+            "line": 217,
             "description": "stops the playback",
             "itemtype": "method",
             "name": "stop",
@@ -1081,7 +1081,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 228,
+            "line": 227,
             "description": "pauses the playback",
             "itemtype": "method",
             "name": "pause",
@@ -1090,7 +1090,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 271,
+            "line": 270,
             "description": "adds plugin to the container",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1106,7 +1106,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 280,
+            "line": 279,
             "description": "checks if a plugin, given its name, exist",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1122,7 +1122,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 289,
+            "line": 288,
             "description": "get the plugin given its name",
             "itemtype": "method",
             "name": "getPlugin",

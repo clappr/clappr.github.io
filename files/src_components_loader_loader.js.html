@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.9</em>
+            <em>API Docs for: 0.2.13</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -101,6 +101,7 @@ import uniq from &#x27;lodash.uniq&#x27;
 import HTML5VideoPlayback from &#x27;playbacks/html5_video&#x27;
 import FlashVideoPlayback from &#x27;playbacks/flash&#x27;
 import HTML5AudioPlayback from &#x27;playbacks/html5_audio&#x27;
+import FlasHLSVideoPlayback from &#x27;playbacks/flashls&#x27;
 import HLSVideoPlayback from &#x27;playbacks/hls&#x27;
 import HTMLImgPlayback from &#x27;playbacks/html_img&#x27;
 import NoOp from &#x27;playbacks/no_op&#x27;
@@ -112,7 +113,6 @@ import WaterMarkPlugin from &#x27;plugins/watermark&#x27;
 import PosterPlugin from &#x27;plugins/poster&#x27;
 import GoogleAnalyticsPlugin from &#x27;plugins/google_analytics&#x27;
 import ClickToPausePlugin from &#x27;plugins/click_to_pause&#x27;
-import Chromecast from &#x27;plugins/chromecast&#x27;
 
 /* Core Plugins */
 import DVRControls from &#x27;plugins/dvr_controls&#x27;
@@ -135,9 +135,9 @@ export default class Loader extends BaseObject {
   constructor(externalPlugins, playerId) {
     super()
     this.playerId = playerId
-    this.playbackPlugins = [HTML5AudioPlayback, HTML5VideoPlayback, FlashVideoPlayback, HLSVideoPlayback, HTMLImgPlayback, NoOp]
+    this.playbackPlugins = [HTML5AudioPlayback, HTML5VideoPlayback, FlashVideoPlayback, HLSVideoPlayback, FlasHLSVideoPlayback, HTMLImgPlayback, NoOp]
     this.containerPlugins = [SpinnerThreeBouncePlugin, WaterMarkPlugin, PosterPlugin, StatsPlugin, GoogleAnalyticsPlugin, ClickToPausePlugin]
-    this.corePlugins = [DVRControls, Favicon, Chromecast]
+    this.corePlugins = [DVRControls, Favicon]
     if (externalPlugins) {
       this.addExternalPlugins(externalPlugins)
     }

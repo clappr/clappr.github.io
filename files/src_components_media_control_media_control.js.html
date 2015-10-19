@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.9</em>
+            <em>API Docs for: 0.2.13</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -99,20 +99,20 @@
 
 import {Config, Fullscreen, formatTime} from &#x27;base/utils&#x27;
 
-import  Events from &#x27;base/events&#x27;
-import  Kibo from &#x27;base/kibo&#x27;
-import  Styler from &#x27;base/styler&#x27;
-import  UIObject from &#x27;base/ui_object&#x27;
-import  Browser from &#x27;components/browser&#x27;
-import  SeekTime from &#x27;components/seek_time&#x27;
-import  Mediator from &#x27;components/mediator&#x27;
-import  PlayerInfo from &#x27;components/player_info&#x27;
-import  template from &#x27;base/template&#x27;
+import Events from &#x27;base/events&#x27;
+import Kibo from &#x27;base/kibo&#x27;
+import Styler from &#x27;base/styler&#x27;
+import UIObject from &#x27;base/ui_object&#x27;
+import Browser from &#x27;components/browser&#x27;
+import SeekTime from &#x27;components/seek_time&#x27;
+import Mediator from &#x27;components/mediator&#x27;
+import PlayerInfo from &#x27;components/player_info&#x27;
+import template from &#x27;base/template&#x27;
 
-import  $ from &#x27;clappr-zepto&#x27;
+import $ from &#x27;clappr-zepto&#x27;
 
-import  mediaControlStyle from &#x27;./public/media-control.scss&#x27;
-import  mediaControlHTML from &#x27;./public/media-control.html&#x27;
+import mediaControlStyle from &#x27;./public/media-control.scss&#x27;
+import mediaControlHTML from &#x27;./public/media-control.html&#x27;
 
 export default class MediaControl extends UIObject {
   get name() { return &#x27;MediaControl&#x27; }
@@ -159,17 +159,21 @@ export default class MediaControl extends UIObject {
     this.mute = this.options.mute
     this.persistConfig = this.options.persistConfig
     this.container = options.container
-    var initialVolume = (this.persistConfig) ? Config.restore(&quot;volume&quot;) : 100;
+    var initialVolume = (this.persistConfig) ? Config.restore(&quot;volume&quot;) : 100
     this.setVolume(this.mute ? 0 : initialVolume)
     this.keepVisible = false
-    this.volumeBarClickDown = false;
+    this.volumeBarClickDown = false
     this.addEventListeners()
     this.settings = {
       left: [&#x27;play&#x27;, &#x27;stop&#x27;, &#x27;pause&#x27;],
       right: [&#x27;volume&#x27;],
       default: [&#x27;position&#x27;, &#x27;seekbar&#x27;, &#x27;duration&#x27;]
     }
-    this.settings = Object.keys(this.container.settings).length === 0 ? this.settings : this.container.settings
+
+    if (!$.isEmptyObject(this.container.settings)) {
+      this.settings = $.extend({}, this.container.settings)
+    }
+
     this.disabled = false
     if (this.container.mediaControlDisabled || this.options.chromeless) {
       this.disable()
@@ -223,11 +227,11 @@ export default class MediaControl extends UIObject {
     if (this.container.isPlaying()) {
       this.$playPauseToggle.removeClass(&#x27;paused&#x27;).addClass(&#x27;playing&#x27;)
       this.$playStopToggle.removeClass(&#x27;stopped&#x27;).addClass(&#x27;playing&#x27;)
-      this.trigger(Events.MEDIACONTROL_PLAYING);
+      this.trigger(Events.MEDIACONTROL_PLAYING)
     } else {
       this.$playPauseToggle.removeClass(&#x27;playing&#x27;).addClass(&#x27;paused&#x27;)
       this.$playStopToggle.removeClass(&#x27;playing&#x27;).addClass(&#x27;stopped&#x27;)
-      this.trigger(Events.MEDIACONTROL_NOTPLAYING);
+      this.trigger(Events.MEDIACONTROL_NOTPLAYING)
     }
   }
 
@@ -236,60 +240,58 @@ export default class MediaControl extends UIObject {
       var offsetX = event.pageX - this.$seekBarContainer.offset().left - (this.$seekBarHover.width() / 2)
       this.$seekBarHover.css({left: offsetX})
     }
-    this.trigger(Events.MEDIACONTROL_MOUSEMOVE_SEEKBAR, event);
+    this.trigger(Events.MEDIACONTROL_MOUSEMOVE_SEEKBAR, event)
   }
 
   mouseleaveOnSeekBar(event) {
-    this.trigger(Events.MEDIACONTROL_MOUSELEAVE_SEEKBAR, event);
+    this.trigger(Events.MEDIACONTROL_MOUSELEAVE_SEEKBAR, event)
   }
 
   mousemoveOnVolumeBar(event) {
     if(this.volumeBarClickDown){
-      this.volume(event);
+      this.volume(event)
     }
   }
 
   mousedownOnVolumeBar() {
-    var cursorStyleProperty = &#x27;url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur), move&#x27;;
-    this.$volumeBarContainer.css(&#x27;cursor&#x27;, cursorStyleProperty);
-    this.$volumeBarContainer.css(&#x27;cursor&#x27;, &#x27;-webkit-grabbing&#x27;);
-    this.$volumeBarContainer.css(&#x27;cursor&#x27;, &#x27;-moz-grabbing&#x27;);
-    this.volumeBarClickDown = true;
+    var cursorStyleProperty = &#x27;url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur), move&#x27;
+    this.$volumeBarContainer.css(&#x27;cursor&#x27;, cursorStyleProperty)
+    this.$volumeBarContainer.css(&#x27;cursor&#x27;, &#x27;-webkit-grabbing&#x27;)
+    this.$volumeBarContainer.css(&#x27;cursor&#x27;, &#x27;-moz-grabbing&#x27;)
+    this.volumeBarClickDown = true
   }
 
   mouseupOnVolumeBar() {
-    this.$volumeBarContainer.css( &#x27;cursor&#x27;, &#x27;pointer&#x27; );
-    this.volumeBarClickDown = false;
+    this.$volumeBarContainer.css( &#x27;cursor&#x27;, &#x27;pointer&#x27; )
+    this.volumeBarClickDown = false
   }
 
   mouseleaveOnVolumeBar(event) {
-    var volOffset = this.$volumeBarContainer.offset();
+    var volOffset = this.$volumeBarContainer.offset()
 
-    var outsideByLeft = event.pageX &lt; this.$seekBarContainer.offset().left;
-    var outsideByRight = event.pageX &gt; (volOffset.left + volOffset.width);
-    var outsideHorizontally = (outsideByLeft || outsideByRight);
+    var outsideByLeft = event.pageX &lt; this.$seekBarContainer.offset().left
+    var outsideByRight = event.pageX &gt; (volOffset.left + volOffset.width)
+    var outsideHorizontally = (outsideByLeft || outsideByRight)
 
-    var outsideByTop = event.pageY &lt; volOffset.top;
-    var outsideByBottom = event.pageY &gt; (volOffset.top + volOffset.height);
+    var outsideByTop = event.pageY &lt; volOffset.top
+    var outsideByBottom = event.pageY &gt; (volOffset.top + volOffset.height)
 
-    var outsideVertically = (outsideByTop || outsideByBottom);
+    var outsideVertically = (outsideByTop || outsideByBottom)
 
     if(outsideHorizontally || outsideVertically) {
-      this.mouseupOnVolumeBar();
+      this.mouseupOnVolumeBar()
     }
   }
 
   playerResize(size) {
-    if (!this.disabled) {
-      if (Fullscreen.isFullscreen()) {
-        this.$fullscreenToggle.addClass(&#x27;shrink&#x27;)
-      } else {
-        this.$fullscreenToggle.removeClass(&#x27;shrink&#x27;)
-      }
-      this.$el.removeClass(&#x27;w320&#x27;)
-      if (size.width &lt;= 320 || this.options.hideVolumeBar) {
-        this.$el.addClass(&#x27;w320&#x27;)
-      }
+    if (Fullscreen.isFullscreen()) {
+      this.$fullscreenToggle.addClass(&#x27;shrink&#x27;)
+    } else {
+      this.$fullscreenToggle.removeClass(&#x27;shrink&#x27;)
+    }
+    this.$el.removeClass(&#x27;w320&#x27;)
+    if (size.width &lt;= 320 || this.options.hideVolumeBar) {
+      this.$el.addClass(&#x27;w320&#x27;)
     }
   }
 
@@ -455,6 +457,11 @@ export default class MediaControl extends UIObject {
     this.keepVisible = true
   }
 
+  remove() {
+    this.seekTime.remove()
+    super.remove()
+  }
+
   resetKeepVisible() {
     this.keepVisible = false
   }
@@ -501,11 +508,10 @@ export default class MediaControl extends UIObject {
   }
 
   settingsUpdate() {
-    if (this.container.getPlaybackType() !== null &amp;&amp; Object.keys(this.container.settings).length !== 0) {
-      this.settings = this.container.settings
+    var settingsChanged = (JSON.stringify(this.settings) !== JSON.stringify(this.container.settings))
+    if (this.container.getPlaybackType() &amp;&amp; settingsChanged) {
+      this.settings = $.extend({}, this.container.settings)
       this.render()
-    } else {
-      this.disable()
     }
   }
 
@@ -549,7 +555,7 @@ export default class MediaControl extends UIObject {
   setSeekPercentage(value) {
     value = Math.min(value, 100.0)
     var pos = (this.$seekBarContainer.width() * value / 100.0) - (this.$seekBarScrubber.width() / 2.0)
-    this.currentSeekPercentage = value;
+    this.currentSeekPercentage = value
     this.$seekBarPosition.css({ width: value + &#x27;%&#x27; })
     this.$seekBarScrubber.css({ left: pos })
   }
@@ -582,8 +588,8 @@ export default class MediaControl extends UIObject {
 
   parseColors() {
     if (this.options.mediacontrol) {
-      var buttonsColor = this.options.mediacontrol.buttons;
-      var seekbarColor = this.options.mediacontrol.seekbar;
+      var buttonsColor = this.options.mediacontrol.buttons
+      var seekbarColor = this.options.mediacontrol.seekbar
       this.$el.find(&#x27;.bar-fill-2[data-seekbar]&#x27;).css(&#x27;background-color&#x27;, seekbarColor)
       this.$el.find(&#x27;[data-media-control] &gt; .media-control-icon, .drawer-icon&#x27;).css(&#x27;color&#x27;, buttonsColor)
       this.$el.find(&#x27;.segmented-bar-element[data-volume]&#x27;).css(&#x27;boxShadow&#x27;, &quot;inset 2px 0 0 &quot; + buttonsColor)
@@ -599,7 +605,7 @@ export default class MediaControl extends UIObject {
 
   render() {
     var timeout = 1000
-    var style = Styler.getStyleFor(mediaControlStyle, {baseUrl: this.options.baseUrl});
+    var style = Styler.getStyleFor(mediaControlStyle, {baseUrl: this.options.baseUrl})
     this.$el.html(this.template({ settings: this.settings }))
     this.$el.append(style)
     this.createCachedElements()
@@ -624,13 +630,14 @@ export default class MediaControl extends UIObject {
     }
     this.setSeekPercentage(this.currentSeekPercentage)
 
-    this.$el.ready(() =&gt; {
+    process.nextTick(() =&gt; {
       if (!this.container.settings.seekEnabled) {
         this.$seekBarContainer.addClass(&#x27;seek-disabled&#x27;)
       }
 
       this.setVolume(this.currentVolume)
       this.bindKeyEvents()
+      this.playerResize({width: this.options.width, height: this.options.height})
       this.hideVolumeBar(0)
     })
 
