@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -106,7 +106,6 @@ import UIObject from &#x27;base/ui_object&#x27;
 import Browser from &#x27;components/browser&#x27;
 import SeekTime from &#x27;components/seek_time&#x27;
 import Mediator from &#x27;components/mediator&#x27;
-import PlayerInfo from &#x27;components/player_info&#x27;
 import template from &#x27;base/template&#x27;
 
 import $ from &#x27;clappr-zepto&#x27;
@@ -154,11 +153,11 @@ export default class MediaControl extends UIObject {
 
   constructor(options) {
     super(options)
-    this.seekTime = new SeekTime(this)
     this.options = options
     this.mute = this.options.mute
     this.persistConfig = this.options.persistConfig
     this.container = options.container
+    this.seekTime = new SeekTime(this)
     var initialVolume = (this.persistConfig) ? Config.restore(&quot;volume&quot;) : 100
     this.setVolume(this.mute ? 0 : initialVolume)
     this.keepVisible = false
@@ -254,22 +253,19 @@ export default class MediaControl extends UIObject {
   }
 
   mousedownOnVolumeBar() {
-    var cursorStyleProperty = &#x27;url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur), move&#x27;
-    this.$volumeBarContainer.css(&#x27;cursor&#x27;, cursorStyleProperty)
-    this.$volumeBarContainer.css(&#x27;cursor&#x27;, &#x27;-webkit-grabbing&#x27;)
-    this.$volumeBarContainer.css(&#x27;cursor&#x27;, &#x27;-moz-grabbing&#x27;)
+    this.$el.addClass(&#x27;dragging&#x27;)
     this.volumeBarClickDown = true
   }
 
   mouseupOnVolumeBar() {
-    this.$volumeBarContainer.css( &#x27;cursor&#x27;, &#x27;pointer&#x27; )
+    this.$el.removeClass(&#x27;dragging&#x27;)
     this.volumeBarClickDown = false
   }
 
   mouseleaveOnVolumeBar(event) {
     var volOffset = this.$volumeBarContainer.offset()
 
-    var outsideByLeft = event.pageX &lt; this.$seekBarContainer.offset().left
+    var outsideByLeft = event.pageX &lt; volOffset.left
     var outsideByRight = event.pageX &gt; (volOffset.left + volOffset.width)
     var outsideHorizontally = (outsideByLeft || outsideByRight)
 
@@ -435,12 +431,24 @@ export default class MediaControl extends UIObject {
   updateSeekBar(position, duration) {
     if (this.draggingSeekBar) return
     if (position &lt; 0) position = duration
+
+    var seekbarValue = (100 / duration) * position
+    var currentPosition = formatTime(position)
+    var currentDuration = formatTime(duration)
+
     this.$seekBarPosition.removeClass(&#x27;media-control-notransition&#x27;)
     this.$seekBarScrubber.removeClass(&#x27;media-control-notransition&#x27;)
-    var seekbarValue = (100 / duration) * position
+
     this.setSeekPercentage(seekbarValue)
-    this.$(&#x27;[data-position]&#x27;).html(formatTime(position))
-    this.$(&#x27;[data-duration]&#x27;).html(formatTime(duration))
+
+    if (currentPosition !== this.displayedPosition) {
+      this.$position.text(currentPosition)
+      this.displayedPosition = currentPosition
+    }
+    if (currentDuration !== this.displayedDuration) {
+      this.$duration.text(currentDuration)
+      this.displayedDuration = currentDuration
+    }
   }
 
   seek(event) {
@@ -524,17 +532,20 @@ export default class MediaControl extends UIObject {
   }
 
   createCachedElements() {
-    this.$playPauseToggle = this.$el.find(&#x27;button.media-control-button[data-playpause]&#x27;)
-    this.$playStopToggle = this.$el.find(&#x27;button.media-control-button[data-playstop]&#x27;)
-    this.$fullscreenToggle = this.$el.find(&#x27;button.media-control-button[data-fullscreen]&#x27;)
-    this.$seekBarContainer = this.$el.find(&#x27;.bar-container[data-seekbar]&#x27;)
-    this.$seekBarLoaded = this.$el.find(&#x27;.bar-fill-1[data-seekbar]&#x27;)
-    this.$seekBarPosition = this.$el.find(&#x27;.bar-fill-2[data-seekbar]&#x27;)
-    this.$seekBarScrubber = this.$el.find(&#x27;.bar-scrubber[data-seekbar]&#x27;)
-    this.$seekBarHover = this.$el.find(&#x27;.bar-hover[data-seekbar]&#x27;)
-    this.$volumeContainer = this.$el.find(&#x27;.drawer-container[data-volume]&#x27;)
-    this.$volumeBarContainer = this.$el.find(&#x27;.bar-container[data-volume]&#x27;)
-    this.$volumeIcon = this.$el.find(&#x27;.drawer-icon[data-volume]&#x27;)
+    var $layer = this.$el.find(&#x27;.media-control-layer&#x27;)
+    this.$duration = $layer.find(&#x27;.media-control-indicator[data-duration]&#x27;)
+    this.$fullscreenToggle = $layer.find(&#x27;button.media-control-button[data-fullscreen]&#x27;)
+    this.$playPauseToggle = $layer.find(&#x27;button.media-control-button[data-playpause]&#x27;)
+    this.$playStopToggle = $layer.find(&#x27;button.media-control-button[data-playstop]&#x27;)
+    this.$position = $layer.find(&#x27;.media-control-indicator[data-position]&#x27;)
+    this.$seekBarContainer = $layer.find(&#x27;.bar-container[data-seekbar]&#x27;)
+    this.$seekBarHover = $layer.find(&#x27;.bar-hover[data-seekbar]&#x27;)
+    this.$seekBarLoaded = $layer.find(&#x27;.bar-fill-1[data-seekbar]&#x27;)
+    this.$seekBarPosition = $layer.find(&#x27;.bar-fill-2[data-seekbar]&#x27;)
+    this.$seekBarScrubber = $layer.find(&#x27;.bar-scrubber[data-seekbar]&#x27;)
+    this.$volumeBarContainer = $layer.find(&#x27;.bar-container[data-volume]&#x27;)
+    this.$volumeContainer = $layer.find(&#x27;.drawer-container[data-volume]&#x27;)
+    this.$volumeIcon = $layer.find(&#x27;.drawer-icon[data-volume]&#x27;)
   }
 
   setVolumeLevel(value) {
@@ -583,6 +594,8 @@ export default class MediaControl extends UIObject {
 
   unbindKeyEvents() {
     this.kibo.off(&#x27;space&#x27;)
+    this.kibo.off(&#x27;left&#x27;)
+    this.kibo.off(&#x27;right&#x27;)
     this.kibo.off([1,2,3,4,5,6,7,8,9,0])
   }
 
@@ -605,6 +618,8 @@ export default class MediaControl extends UIObject {
 
   render() {
     var timeout = 1000
+    this.displayedPosition = null
+    this.displayedDuration = null
     var style = Styler.getStyleFor(mediaControlStyle, {baseUrl: this.options.baseUrl})
     this.$el.html(this.template({ settings: this.settings }))
     this.$el.append(style)

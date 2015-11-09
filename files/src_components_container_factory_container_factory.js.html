@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -102,7 +102,6 @@ import Events from &#x27;base/events&#x27;
 import Container from &#x27;components/container&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 
-import assign from &#x27;lodash.assign&#x27;
 import find from &#x27;lodash.find&#x27;
 
 export default class ContainerFactory extends BaseObject {
@@ -126,7 +125,7 @@ export default class ContainerFactory extends BaseObject {
 
   createContainer(source, options) {
     if (!!source.match(/^\/\//)) source = window.location.protocol + source
-    options = assign({}, this.options, {src: source}, options)
+    options = $.extend({}, this.options, {src: source}, options)
     var playbackPlugin = this.findPlaybackPlugin(source)
     var playback = new playbackPlugin(options)
     var container = new Container({playback: playback})
@@ -139,7 +138,7 @@ export default class ContainerFactory extends BaseObject {
 
   addContainerPlugins(container, source) {
     this.loader.containerPlugins.forEach((Plugin) =&gt; {
-      var options = assign(this.options, {container: container, src: source});
+      var options = $.extend(this.options, {container: container, src: source});
       container.addPlugin(new Plugin(options));
     });
   }

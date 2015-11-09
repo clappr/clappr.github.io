@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -151,17 +151,19 @@ export default class Playback extends UIObject {
   }
 
   /**
-   * gets the playback type
+   * gets the playback type (&#x60;&#x27;vod&#x27;, &#x27;live&#x27;, &#x27;aod&#x27;&#x60;)
    * @method getPlaybackType
    * @return {String} you should write the playback type otherwise it&#x27;ll assume &#x60;&#x27;no_op&#x27;&#x60;
    * @example
    * &#x60;&#x60;&#x60;javascript
-   * html5VideoPlayback.getPlaybackType() //html5_video
-   * flashHlsPlayback.getPlaybackType() //hls
+   * html5VideoPlayback.getPlaybackType() //vod
+   * html5AudioPlayback.getPlaybackType() //aod
+   * html5VideoPlayback.getPlaybackType() //live
+   * flashHlsPlayback.getPlaybackType() //live
    * &#x60;&#x60;&#x60;
    */
   getPlaybackType() {
-    return &#x27;no_op&#x27;
+    return Playback.NO_OP
   }
 
   /**
@@ -193,17 +195,59 @@ Playback.extend = function(properties) {
   return extend(Playback, properties)
 }
 
-  /**
-   * checks if the playback can play a given &#x60;source&#x60; and optionally a &#x60;mimeType&#x60;
-   * @method canPlay
-   * @static
-   * @param {String} source the given source ex: &#x60;http://example.com/play.mp4&#x60;
-   * @param {String} [mimeType] the given mime type, ex: &#x60;&#x27;application/vnd.apple.mpegurl&#x27;&#x60;
-   * @return {Boolean} &#x60;true&#x60; if the playback is playable, otherwise &#x60;false&#x60;
-   */
+/**
+ * a playback type for video on demand
+ *
+ * @property VOD
+ * @static
+ * @type String
+ */
+Playback.VOD = &#x27;vod&#x27;
+/**
+ * a playback type for audio on demand
+ *
+ * @property AOD
+ * @static
+ * @type String
+ */
+Playback.AOD = &#x27;aod&#x27;
+/**
+ * a playback type for live video
+ *
+ * @property LIVE
+ * @static
+ * @type String
+ */
+Playback.LIVE = &#x27;live&#x27;
+/**
+ * a default playback type
+ *
+ * @property NO_OP
+ * @static
+ * @type String
+ */
+Playback.NO_OP = &#x27;no_op&#x27;
+
+/**
+ * checks if the playback can play a given &#x60;source&#x60; and optionally a &#x60;mimeType&#x60;
+ * @method canPlay
+ * @static
+ * @param {String} source the given source ex: &#x60;http://example.com/play.mp4&#x60;
+ * @param {String} [mimeType] the given mime type, ex: &#x60;&#x27;application/vnd.apple.mpegurl&#x27;&#x60;
+ * @return {Boolean} &#x60;true&#x60; if the playback is playable, otherwise &#x60;false&#x60;
+ */
 Playback.canPlay = (source, mimeType) =&gt; {
   return false
 }
+
+/**
+ * the plugin type
+ *
+ * @property type
+ * @static
+ * @type String
+ */
+Playback.type = &#x27;playback&#x27;
 
     </pre>
 </div>

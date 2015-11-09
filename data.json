@@ -2,7 +2,7 @@
     "project": {
         "name": "Clappr",
         "description": "An extensible media player for the web",
-        "version": "0.2.13",
+        "version": "0.2.18",
         "url": "https://github.com/clappr/clappr",
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
@@ -204,7 +204,7 @@
             "module": "base",
             "namespace": "",
             "file": "src/base/ui_object.js",
-            "line": 13,
+            "line": 12,
             "description": "A base class to create ui object.",
             "is_constructor": 1,
             "extends": "BaseObject"
@@ -236,7 +236,7 @@
             "module": "components",
             "namespace": "",
             "file": "src/components/core/core.js",
-            "line": 22,
+            "line": 21,
             "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state.",
             "is_constructor": 1,
             "extends": "UIObject"
@@ -595,7 +595,7 @@
             "line": 248,
             "description": "Fired when player updates its execution",
             "itemtype": "event",
-            "name": "PLAYER_ERROR",
+            "name": "PLAYER_TIMEUPDATE",
             "params": [
                 {
                     "name": "postion",
@@ -606,6 +606,90 @@
                     "name": "duration",
                     "description": "the total duration (in seconds)",
                     "type": "Number"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 266,
+            "description": "Fired when playback updates its bitrate",
+            "itemtype": "event",
+            "name": "PLAYBACK_BITRATE",
+            "params": [
+                {
+                    "name": "bitrate",
+                    "description": "Data\nbitrate object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "bandwidth",
+                            "description": "\nbitrate bandwidth when it's available",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "width",
+                            "description": "\nplayback width (ex: 720, 640, 1080)",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "height",
+                            "description": "\nplayback height (ex: 240, 480, 720)",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "level",
+                            "description": "\nplayback level when it's available, it could be just a map for width (0 => 240, 1 => 480, 2 => 720)",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 297,
+            "description": "Fired when the container updates its bitrate",
+            "itemtype": "event",
+            "name": "CONTAINER_BITRATE",
+            "params": [
+                {
+                    "name": "bitrate",
+                    "description": "Data\nbitrate object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "bandwidth",
+                            "description": "\nbitrate bandwidth when it's available",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "width",
+                            "description": "\nplayback width (ex: 720, 640, 1080)",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "height",
+                            "description": "\nplayback height (ex: 240, 480, 720)",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "level",
+                            "description": "\nplayback level when it's available, it could be just a map for width (0 => 240, 1 => 480, 2 => 720)",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
                 }
             ],
             "class": "Events",
@@ -698,7 +782,7 @@
         {
             "file": "src/base/playback.js",
             "line": 62,
-            "description": "gets the playback type",
+            "description": "gets the playback type (`'vod', 'live', 'aod'`)",
             "itemtype": "method",
             "name": "getPlaybackType",
             "return": {
@@ -706,14 +790,14 @@
                 "type": "String"
             },
             "example": [
-                "\n```javascript\nhtml5VideoPlayback.getPlaybackType() //html5_video\nflashHlsPlayback.getPlaybackType() //hls\n```"
+                "\n```javascript\nhtml5VideoPlayback.getPlaybackType() //vod\nhtml5AudioPlayback.getPlaybackType() //aod\nhtml5VideoPlayback.getPlaybackType() //live\nflashHlsPlayback.getPlaybackType() //live\n```"
             ],
             "class": "Playback",
             "module": "base"
         },
         {
             "file": "src/base/playback.js",
-            "line": 76,
+            "line": 78,
             "description": "checks if the playback is in HD.",
             "itemtype": "method",
             "name": "isHighDefinitionInUse",
@@ -726,7 +810,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 85,
+            "line": 87,
             "description": "sets the volume for the playback",
             "itemtype": "method",
             "name": "volume",
@@ -742,7 +826,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 92,
+            "line": 94,
             "description": "destroys the playback, removing it from DOM",
             "itemtype": "method",
             "name": "destroy",
@@ -751,7 +835,51 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 105,
+            "line": 107,
+            "description": "a playback type for video on demand",
+            "itemtype": "property",
+            "name": "VOD",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 115,
+            "description": "a playback type for audio on demand",
+            "itemtype": "property",
+            "name": "AOD",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 123,
+            "description": "a playback type for live video",
+            "itemtype": "property",
+            "name": "LIVE",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 131,
+            "description": "a default playback type",
+            "itemtype": "property",
+            "name": "NO_OP",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 140,
             "description": "checks if the playback can play a given `source` and optionally a `mimeType`",
             "itemtype": "method",
             "name": "canPlay",
@@ -777,8 +905,19 @@
             "module": "base"
         },
         {
+            "file": "src/base/playback.js",
+            "line": 152,
+            "description": "the plugin type",
+            "itemtype": "property",
+            "name": "type",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
             "file": "src/base/ui_object.js",
-            "line": 21,
+            "line": 20,
             "description": "a unique id prefixed with `'c'`, `c1, c232`",
             "itemtype": "property",
             "name": "cid",
@@ -788,7 +927,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 27,
+            "line": 26,
             "description": "the dom element itself",
             "itemtype": "property",
             "name": "el",
@@ -798,7 +937,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 33,
+            "line": 32,
             "description": "the dom element wrapped by `$`",
             "itemtype": "property",
             "name": "$el",
@@ -808,7 +947,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 40,
+            "line": 39,
             "description": "gets the tag name for the ui component",
             "itemtype": "method",
             "name": "tagName",
@@ -822,7 +961,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 47,
+            "line": 46,
             "description": "a literal object mapping element's events to methods",
             "itemtype": "property",
             "name": "events",
@@ -835,7 +974,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 68,
+            "line": 67,
             "description": "a literal object mapping attributes and values to the element\nelement's attribute name and the value the attribute value",
             "itemtype": "property",
             "name": "attributes",
@@ -848,7 +987,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 87,
+            "line": 86,
             "description": "it builds an ui component by:\n * creating an id for the component `cid`\n * making sure the element is created `$el`\n * delegating all `events` to the element",
             "itemtype": "method",
             "name": "constructor",
@@ -864,7 +1003,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 102,
+            "line": 101,
             "description": "selects within the component.",
             "itemtype": "method",
             "name": "$",
@@ -887,7 +1026,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 116,
+            "line": 115,
             "description": "render the component, usually attach it to a real existent `element`",
             "itemtype": "method",
             "name": "render",
@@ -900,7 +1039,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 125,
+            "line": 124,
             "description": "removes the ui component from DOM",
             "itemtype": "method",
             "name": "remove",
@@ -913,7 +1052,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 137,
+            "line": 136,
             "description": "set element to `el` and `$el`",
             "itemtype": "method",
             "name": "setElement",
@@ -938,7 +1077,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 152,
+            "line": 151,
             "description": "delegates all the original `events` on `element` to its callbacks",
             "itemtype": "method",
             "name": "delegateEvents",
@@ -958,7 +1097,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 179,
+            "line": 178,
             "description": "undelegats all the `events`",
             "itemtype": "method",
             "name": "undelegateEvents",
@@ -971,7 +1110,7 @@
         },
         {
             "file": "src/base/ui_object.js",
-            "line": 189,
+            "line": 188,
             "description": "ensures the creation of this ui component",
             "itemtype": "method",
             "name": "_ensureElement",
@@ -1193,7 +1332,7 @@
         {
             "file": "src/components/loader/loader.js",
             "line": 38,
-            "description": "it builds the loader",
+            "description": "builds the loader",
             "itemtype": "method",
             "name": "constructor",
             "params": [
@@ -1206,6 +1345,42 @@
                     "name": "playerId",
                     "description": "you can embed multiple instances of clappr, therefore this is the unique id of each one.",
                     "type": "Number"
+                }
+            ],
+            "class": "Loader",
+            "module": "components"
+        },
+        {
+            "file": "src/components/loader/loader.js",
+            "line": 56,
+            "description": "adds all the external plugins that were passed through `options.plugins`",
+            "itemtype": "method",
+            "name": "addExternalPlugins",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "plugins",
+                    "description": "the config object with all plugins",
+                    "type": "Object"
+                }
+            ],
+            "class": "Loader",
+            "module": "components"
+        },
+        {
+            "file": "src/components/loader/loader.js",
+            "line": 70,
+            "description": "validate if the external plugins that were passed through `options.plugins` are associated to the correct type",
+            "itemtype": "method",
+            "name": "validateExternalPluginsType",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "plugins",
+                    "description": "the config object with all plugins",
+                    "type": "Object"
                 }
             ],
             "class": "Loader",

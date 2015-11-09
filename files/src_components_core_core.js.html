@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -104,7 +104,6 @@ import MediaControl from &#x27;components/media_control&#x27;
 import Mediator from &#x27;components/mediator&#x27;
 import PlayerInfo from &#x27;components/player_info&#x27;
 
-import assign from &#x27;lodash.assign&#x27;
 import find from &#x27;lodash.find&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 
@@ -234,7 +233,7 @@ export default class Core extends UIObject {
     this.options.mimeType = mimeType
     sources = sources &amp;&amp; sources.constructor === Array ? sources : [sources.toString()];
     this.containers.forEach((container) =&gt; container.destroy())
-    this.containerFactory.options = assign(this.options, {sources})
+    this.containerFactory.options = $.extend(this.options, {sources})
     this.containerFactory.createContainers().then((containers) =&gt; {
       this.setupContainers(containers)
     })
@@ -299,7 +298,7 @@ export default class Core extends UIObject {
     if (this.mediaControl) {
       this.mediaControl.setContainer(container)
     } else {
-      this.mediaControl = this.createMediaControl(assign({container: container, focusElement: this.el}, this.options))
+      this.mediaControl = this.createMediaControl($.extend({container: container, focusElement: this.el}, this.options))
       this.listenTo(this.mediaControl, Events.MEDIACONTROL_FULLSCREEN, this.toggleFullscreen)
       this.listenTo(this.mediaControl, Events.MEDIACONTROL_SHOW, this.onMediaControlShow.bind(this, true))
       this.listenTo(this.mediaControl, Events.MEDIACONTROL_HIDE, this.onMediaControlShow.bind(this, false))

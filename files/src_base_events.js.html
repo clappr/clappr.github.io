@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -339,7 +339,7 @@ Events.PLAYER_ERROR = &#x27;error&#x27;
 /**
  * Fired when player updates its execution
  *
- * @event PLAYER_ERROR
+ * @event PLAYER_TIMEUPDATE
  * @param {Number} postion the current position (in seconds)
  * @param {Number} duration the total duration (in seconds)
  */
@@ -354,6 +354,21 @@ Events.PLAYBACK_BUFFERFULL = &#x27;playback:bufferfull&#x27;
 Events.PLAYBACK_SETTINGSUPDATE = &#x27;playback:settingsupdate&#x27;
 Events.PLAYBACK_LOADEDMETADATA = &#x27;playback:loadedmetadata&#x27;
 Events.PLAYBACK_HIGHDEFINITIONUPDATE = &#x27;playback:highdefinitionupdate&#x27;
+/**
+ * Fired when playback updates its bitrate
+ *
+ * @event PLAYBACK_BITRATE
+ * @param {Object} bitrate Data
+ * bitrate object
+ * @param {Number} [bitrate.bandwidth]
+ * bitrate bandwidth when it&#x27;s available
+ * @param {Number} [bitrate.width]
+ * playback width (ex: 720, 640, 1080)
+ * @param {Number} [bitrate.height]
+ * playback height (ex: 240, 480, 720)
+ * @param {Number} [bitrate.level]
+ * playback level when it&#x27;s available, it could be just a map for width (0 =&gt; 240, 1 =&gt; 480, 2 =&gt; 720)
+ */
 Events.PLAYBACK_BITRATE = &#x27;playback:bitrate&#x27;
 Events.PLAYBACK_PLAYBACKSTATE = &#x27;playback:playbackstate&#x27;
 Events.PLAYBACK_DVR = &#x27;playback:dvr&#x27;
@@ -365,10 +380,26 @@ Events.PLAYBACK_PAUSE = &#x27;playback:pause&#x27;
 Events.PLAYBACK_ERROR = &#x27;playback:error&#x27;
 Events.PLAYBACK_STATS_ADD = &#x27;playback:stats:add&#x27;
 Events.PLAYBACK_FRAGMENT_LOADED = &#x27;playback:fragment:loaded&#x27;
+Events.PLAYBACK_LEVEL_SWITCH = &#x27;playback:level:switch&#x27;
 
 // Container Events
 Events.CONTAINER_PLAYBACKSTATE = &#x27;container:playbackstate&#x27;
 Events.CONTAINER_PLAYBACKDVRSTATECHANGED = &#x27;container:dvr&#x27;
+/**
+ * Fired when the container updates its bitrate
+ *
+ * @event CONTAINER_BITRATE
+ * @param {Object} bitrate Data
+ * bitrate object
+ * @param {Number} [bitrate.bandwidth]
+ * bitrate bandwidth when it&#x27;s available
+ * @param {Number} [bitrate.width]
+ * playback width (ex: 720, 640, 1080)
+ * @param {Number} [bitrate.height]
+ * playback height (ex: 240, 480, 720)
+ * @param {Number} [bitrate.level]
+ * playback level when it&#x27;s available, it could be just a map for width (0 =&gt; 240, 1 =&gt; 480, 2 =&gt; 720)
+ */
 Events.CONTAINER_BITRATE = &#x27;container:bitrate&#x27;
 Events.CONTAINER_STATS_REPORT = &#x27;container:stats:report&#x27;
 Events.CONTAINER_DESTROYED = &#x27;container:destroyed&#x27;

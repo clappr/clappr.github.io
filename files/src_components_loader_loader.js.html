@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -127,7 +127,7 @@ import Favicon from &#x27;plugins/favicon&#x27;
  */
 export default class Loader extends BaseObject {
   /**
-   * it builds the loader
+   * builds the loader
    * @method constructor
    * @param {Object} externalPlugins the external plugins
    * @param {Number} playerId you can embed multiple instances of clappr, therefore this is the unique id of each one.
@@ -139,10 +139,17 @@ export default class Loader extends BaseObject {
     this.containerPlugins = [SpinnerThreeBouncePlugin, WaterMarkPlugin, PosterPlugin, StatsPlugin, GoogleAnalyticsPlugin, ClickToPausePlugin]
     this.corePlugins = [DVRControls, Favicon]
     if (externalPlugins) {
+      this.validateExternalPluginsType(externalPlugins)
       this.addExternalPlugins(externalPlugins)
     }
   }
 
+  /**
+   * adds all the external plugins that were passed through &#x60;options.plugins&#x60;
+   * @method addExternalPlugins
+   * @private
+   * @param {Object} plugins the config object with all plugins
+   */
   addExternalPlugins(plugins) {
     var pluginName = function(plugin) { return plugin.prototype.name }
     if (plugins.playback) { this.playbackPlugins = uniq(plugins.playback.concat(this.playbackPlugins), pluginName) }
@@ -151,9 +158,20 @@ export default class Loader extends BaseObject {
     PlayerInfo.getInstance(this.playerId).playbackPlugins = this.playbackPlugins
   }
 
-  getPlugin(name) {
-    var allPlugins = this.containerPlugins.concat(this.playbackPlugins).concat(this.corePlugins)
-    return allPlugins.find((plugin) =&gt; { return plugin.prototype.name === name })
+  /**
+   * validate if the external plugins that were passed through &#x60;options.plugins&#x60; are associated to the correct type
+   * @method validateExternalPluginsType
+   * @private
+   * @param {Object} plugins the config object with all plugins
+   */
+  validateExternalPluginsType(plugins) {
+    var plugintypes = [&quot;playback&quot;, &quot;container&quot;, &quot;core&quot;]
+    plugintypes.forEach((type) =&gt; {
+      (plugins[type] || []).forEach((el) =&gt; {
+        var errorMessage = &quot;external &quot; + el.type + &quot; plugin on &quot; + type + &quot; array&quot;
+        if (el.type !== type) { throw new ReferenceError(errorMessage) }
+      })
+    })
   }
 }
 

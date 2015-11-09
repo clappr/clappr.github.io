@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.13</em>
+            <em>API Docs for: 0.2.18</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -100,7 +100,7 @@ import Events from &#x27;base/events&#x27;
 import CoreFactory from &#x27;components/core_factory&#x27;
 import Loader from &#x27;components/loader&#x27;
 import PlayerInfo from &#x27;components/player_info&#x27;
-import assign from &#x27;lodash.assign&#x27;
+import $ from &#x27;clappr-zepto&#x27;
 import find from &#x27;lodash.find&#x27;
 
 var baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &quot;&quot;)
@@ -181,7 +181,7 @@ export default class Player extends BaseObject {
     super(options)
     window.p = this
     var defaultOptions = {playerId: uniqueId(&quot;&quot;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl}
-    this.options = assign(defaultOptions, options)
+    this.options = $.extend(defaultOptions, options)
     this.options.sources = this.normalizeSources(options)
     this.loader = new Loader(this.options.plugins || {}, this.options.playerId)
     this.coreFactory = new CoreFactory(this, this.loader)
