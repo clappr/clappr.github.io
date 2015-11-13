@@ -509,7 +509,7 @@
         {
             "file": "src/base/events.js",
             "line": 203,
-            "description": "Fired when player risezes",
+            "description": "Fired when player resizes",
             "itemtype": "event",
             "name": "PLAYER_RESIZE",
             "params": [
@@ -561,7 +561,7 @@
         {
             "file": "src/base/events.js",
             "line": 234,
-            "description": "Fired when player ends the video",
+            "description": "Fired when player seeks the video",
             "itemtype": "event",
             "name": "PLAYER_SEEK",
             "params": [
@@ -613,7 +613,23 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 266,
+            "line": 256,
+            "description": "Fired when player updates its volume",
+            "itemtype": "event",
+            "name": "PLAYER_VOLUMEUPDATE",
+            "params": [
+                {
+                    "name": "volume",
+                    "description": "the current volume",
+                    "type": "Number"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 273,
             "description": "Fired when playback updates its bitrate",
             "itemtype": "event",
             "name": "PLAYBACK_BITRATE",
@@ -655,7 +671,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 297,
+            "line": 304,
             "description": "Fired when the container updates its bitrate",
             "itemtype": "event",
             "name": "CONTAINER_BITRATE",
@@ -1142,7 +1158,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 43,
+            "line": 44,
             "description": "it builds a container",
             "itemtype": "method",
             "name": "constructor",
@@ -1158,7 +1174,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 59,
+            "line": 61,
             "description": "binds playback events to the methods of the container.\nit listens to playback's events and triggers them as container events.\n\n| Playback |\n|----------|\n| progress |\n| timeupdate |\n| ready |\n| buffering |\n| bufferfull |\n| settingsupdate |\n| loadedmetadata |\n| highdefinitionupdate |\n| bitrate |\n| playbackstate |\n| dvr |\n| mediacontrol_disable |\n| mediacontrol_enable |\n| ended |\n| play |\n| pause |\n| error |\n\nps: the events usually translate from PLABACK_x to CONTAINER_x, you can check all the events at `Event` class.",
             "itemtype": "method",
             "name": "bindEvents",
@@ -1167,7 +1183,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 129,
+            "line": 131,
             "description": "returns `true` if DVR is enable otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrEnabled",
@@ -1180,7 +1196,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 138,
+            "line": 140,
             "description": "returns `true` if DVR is in use otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrInUse",
@@ -1193,7 +1209,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 147,
+            "line": 149,
             "description": "destroys the container",
             "itemtype": "method",
             "name": "destroy",
@@ -1202,7 +1218,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 209,
+            "line": 211,
             "description": "plays the playback",
             "itemtype": "method",
             "name": "play",
@@ -1211,7 +1227,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 217,
+            "line": 219,
             "description": "stops the playback",
             "itemtype": "method",
             "name": "stop",
@@ -1220,7 +1236,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 227,
+            "line": 229,
             "description": "pauses the playback",
             "itemtype": "method",
             "name": "pause",
@@ -1229,7 +1245,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 270,
+            "line": 277,
             "description": "adds plugin to the container",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1245,7 +1261,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 279,
+            "line": 286,
             "description": "checks if a plugin, given its name, exist",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1261,7 +1277,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 288,
+            "line": 295,
             "description": "get the plugin given its name",
             "itemtype": "method",
             "name": "getPlugin",
@@ -1554,7 +1570,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 184,
+            "line": 189,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -1573,7 +1589,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 197,
+            "line": 202,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
@@ -1594,7 +1610,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 208,
+            "line": 213,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -1603,7 +1619,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 216,
+            "line": 221,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -1612,7 +1628,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 224,
+            "line": 229,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -1621,7 +1637,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 232,
+            "line": 237,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -1630,7 +1646,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 240,
+            "line": 245,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -1646,13 +1662,13 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 249,
+            "line": 254,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
             "params": [
                 {
-                    "name": "time",
+                    "name": "volume",
                     "description": "should be a number between 0 and 100, 0 being mute and 100 the max volume.",
                     "type": "Number"
                 }
@@ -1662,7 +1678,20 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 258,
+            "line": 263,
+            "description": "Get the volume for the current video",
+            "itemtype": "method",
+            "name": "getVolume",
+            "return": {
+                "description": "volume should be a number between 0 and 100, 0 being mute and 100 the max volume.",
+                "type": "Number"
+            },
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 272,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -1671,7 +1700,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 266,
+            "line": 280,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -1680,7 +1709,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 274,
+            "line": 288,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -1693,7 +1722,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 283,
+            "line": 297,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -1716,7 +1745,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 301,
+            "line": 315,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -1729,7 +1758,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 310,
+            "line": 324,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",

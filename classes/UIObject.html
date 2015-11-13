@@ -300,6 +300,10 @@
                                 <a href="#event_PLAYER_TIMEUPDATE">PLAYER_TIMEUPDATE</a>
 
                             </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYER_VOLUMEUPDATE">PLAYER_VOLUMEUPDATE</a>
+
+                            </li>
                     </ul>
                 </div>
         </div>
@@ -1570,7 +1574,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_BITRATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l297"><code>src&#x2F;base&#x2F;events.js:297</code></a>
+                            <a href="../files/src_base_events.js.html#l304"><code>src&#x2F;base&#x2F;events.js:304</code></a>
                             </p>
                     
                     
@@ -1659,7 +1663,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_PLAYBACK_BITRATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l266"><code>src&#x2F;base&#x2F;events.js:266</code></a>
+                            <a href="../files/src_base_events.js.html#l273"><code>src&#x2F;base&#x2F;events.js:273</code></a>
                             </p>
                     
                     
@@ -1872,7 +1876,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player risezes</p>
+                            <p>Fired when player resizes</p>
                     
                         </div>
                     
@@ -1914,7 +1918,7 @@
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player ends the video</p>
+                            <p>Fired when player seeks the video</p>
                     
                         </div>
                     
@@ -2007,6 +2011,48 @@
                     
                                         <div class="param-description">
                                             <p>the total duration (in seconds)</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_VOLUMEUPDATE" class="events item inherited">
+                        <h3 class="name"><code>PLAYER_VOLUMEUPDATE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYER_VOLUMEUPDATE">Events</a>:
+                            <a href="../files/src_base_events.js.html#l256"><code>src&#x2F;base&#x2F;events.js:256</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when player updates its volume</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">volume</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>the current volume</p>
                     
                                         </div>
                     

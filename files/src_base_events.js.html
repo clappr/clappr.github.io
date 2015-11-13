@@ -292,7 +292,7 @@ Object.keys(listenMethods).forEach(function(method) {
 
 // PLAYER EVENTS
 /**
- * Fired when player risezes
+ * Fired when player resizes
  *
  * @event PLAYER_RESIZE
  * @param {Object} currentSize an object with the current size
@@ -323,7 +323,7 @@ Events.PLAYER_STOP = &#x27;stop&#x27;
  */
 Events.PLAYER_ENDED = &#x27;ended&#x27;
 /**
- * Fired when player ends the video
+ * Fired when player seeks the video
  *
  * @event PLAYER_SEEK
  * @param {Number} percent a percentagem of seek
@@ -344,6 +344,13 @@ Events.PLAYER_ERROR = &#x27;error&#x27;
  * @param {Number} duration the total duration (in seconds)
  */
 Events.PLAYER_TIMEUPDATE = &#x27;timeupdate&#x27;
+/**
+ * Fired when player updates its volume
+ *
+ * @event PLAYER_VOLUMEUPDATE
+ * @param {Number} volume the current volume
+ */
+Events.PLAYER_VOLUMEUPDATE = &#x27;volumeupdate&#x27;
 
 // Playback Events
 Events.PLAYBACK_PROGRESS = &#x27;playback:progress&#x27;
@@ -414,6 +421,7 @@ Events.CONTAINER_PAUSE = &#x27;container:pause&#x27;
 Events.CONTAINER_ENDED = &#x27;container:ended&#x27;
 Events.CONTAINER_CLICK = &#x27;container:click&#x27;
 Events.CONTAINER_DBLCLICK = &#x27;container:dblclick&#x27;
+Events.CONTAINER_CONTEXTMENU = &#x27;container:contextmenu&#x27;
 Events.CONTAINER_MOUSE_ENTER = &#x27;container:mouseenter&#x27;
 Events.CONTAINER_MOUSE_LEAVE = &#x27;container:mouseleave&#x27;
 Events.CONTAINER_SEEK = &#x27;container:seek&#x27;
