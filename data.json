@@ -740,7 +740,37 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 320,
+            "line": 319,
+            "description": "Fired when playback loaded its metadata",
+            "itemtype": "event",
+            "name": "PLAYBACK_LOADEDMETADATA",
+            "params": [
+                {
+                    "name": "metadata",
+                    "description": "Data\nsettings object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "duration",
+                            "description": "\nthe playback duration",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "data",
+                            "description": "\nextra meta data",
+                            "type": "Object",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 331,
             "description": "Fired when playback updates its video quality",
             "itemtype": "event",
             "name": "PLAYBACK_HIGHDEFINITIONUPDATE",
@@ -756,7 +786,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 328,
+            "line": 339,
             "description": "Fired when playback updates its bitrate",
             "itemtype": "event",
             "name": "PLAYBACK_BITRATE",
@@ -798,7 +828,55 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 359,
+            "line": 355,
+            "description": "Fired when playback internal state changes",
+            "itemtype": "event",
+            "name": "PLAYBACK_PLAYBACKSTATE",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "Data\nstate object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "type",
+                            "description": "\nthe playback type",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 377,
+            "description": "Fired when the container internal state changes",
+            "itemtype": "event",
+            "name": "CONTAINER_PLAYBACKSTATE",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "Data\nstate object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "type",
+                            "description": "\nthe playback type",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 388,
             "description": "Fired when the container updates its bitrate",
             "itemtype": "event",
             "name": "CONTAINER_BITRATE",
@@ -840,7 +918,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 377,
+            "line": 406,
             "description": "Fired when the container is ready",
             "itemtype": "event",
             "name": "CONTAINER_READY",
@@ -849,7 +927,37 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 385,
+            "line": 413,
+            "description": "Fired when the container loaded its metadata",
+            "itemtype": "event",
+            "name": "CONTAINER_LOADEDMETADATA",
+            "params": [
+                {
+                    "name": "metadata",
+                    "description": "Data\nsettings object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "duration",
+                            "description": "\nthe playback duration",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "data",
+                            "description": "\nextra meta data",
+                            "type": "Object",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 425,
             "description": "Fired when the time is updated on container",
             "itemtype": "event",
             "name": "CONTAINER_TIMEUPDATE",
@@ -879,7 +987,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 397,
+            "line": 437,
             "description": "Fired when the container is downloading the media",
             "itemtype": "event",
             "name": "CONTAINER_PROGRESS",
@@ -915,7 +1023,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 423,
+            "line": 463,
             "description": "Fired when container is buffering",
             "itemtype": "event",
             "name": "CONTAINER_STATE_BUFFERING",
@@ -924,7 +1032,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 429,
+            "line": 469,
             "description": "Fired when the container filled the buffer",
             "itemtype": "event",
             "name": "CONTAINER_STATE_BUFFERFULL",
@@ -933,7 +1041,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 435,
+            "line": 475,
             "description": "Fired when the container changes any settings (volume, seek and etc)",
             "itemtype": "event",
             "name": "CONTAINER_SETTINGSUPDATE",
@@ -942,7 +1050,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 441,
+            "line": 481,
             "description": "Fired when container updates its video quality",
             "itemtype": "event",
             "name": "CONTAINER_HIGHDEFINITIONUPDATE",
@@ -953,6 +1061,92 @@
                     "type": "Boolean"
                 }
             ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 495,
+            "description": "Fired when the player enters/exit on fullscreen",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_SHOW",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 501,
+            "description": "Fired when the media control shows",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_SHOW",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 507,
+            "description": "Fired when the media control hides",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_HIDE",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 513,
+            "description": "Fired when mouse enters on the seekbar",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_MOUSEMOVE_SEEKBAR",
+            "params": [
+                {
+                    "name": "event\nthe",
+                    "description": "javascript event",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 521,
+            "description": "Fired when mouse leaves the seekbar",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_MOUSELEAVE_SEEKBAR",
+            "params": [
+                {
+                    "name": "event\nthe",
+                    "description": "javascript event",
+                    "type": "Object"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 529,
+            "description": "Fired when the media is being played",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_PLAYING",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 535,
+            "description": "Fired when the media is not being played",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_NOTPLAYING",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 541,
+            "description": "Fired when the container was changed",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_CONTAINERCHANGED",
             "class": "Events",
             "module": "base"
         },
@@ -1722,6 +1916,12 @@
                             "optional": true
                         },
                         {
+                            "name": "mimeType",
+                            "description": "\nadd `mimeType: \"application/vnd.apple.mpegurl\"` if you need to use a url without extension.",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
                             "name": "persistConfig",
                             "description": "\npersist player's settings (volume) through the same domain **default**: `true`",
                             "type": "Boolean",
@@ -1795,7 +1995,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 111,
+            "line": 113,
             "description": "Specify a `parentId` to the player.",
             "itemtype": "method",
             "name": "setParentId",
@@ -1811,7 +2011,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 123,
+            "line": 125,
             "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
             "itemtype": "method",
             "name": "attachTo",
@@ -1827,7 +2027,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 195,
+            "line": 197,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -1846,7 +2046,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 208,
+            "line": 210,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
@@ -1867,7 +2067,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 219,
+            "line": 221,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -1876,7 +2076,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 227,
+            "line": 229,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -1885,7 +2085,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 235,
+            "line": 237,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -1894,7 +2094,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 243,
+            "line": 245,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -1903,7 +2103,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 251,
+            "line": 253,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -1919,7 +2119,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 260,
+            "line": 262,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -1935,7 +2135,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 269,
+            "line": 271,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -1948,7 +2148,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 278,
+            "line": 280,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -1957,7 +2157,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 286,
+            "line": 288,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -1966,7 +2166,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 294,
+            "line": 296,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -1979,7 +2179,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 303,
+            "line": 305,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2002,7 +2202,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 321,
+            "line": 323,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -2015,7 +2215,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 330,
+            "line": 332,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",

@@ -407,6 +407,17 @@ Events.PLAYBACK_BUFFERFULL = &#x27;playback:bufferfull&#x27;
  * @event PLAYBACK_SETTINGSUPDATE
  */
 Events.PLAYBACK_SETTINGSUPDATE = &#x27;playback:settingsupdate&#x27;
+/**
+ * Fired when playback loaded its metadata
+ *
+ * @event PLAYBACK_LOADEDMETADATA
+ * @param {Object} metadata Data
+ * settings object
+ * @param {Number} [metadata.duration]
+ * the playback duration
+ * @param {Object} [metadata.data]
+ * extra meta data
+ */
 Events.PLAYBACK_LOADEDMETADATA = &#x27;playback:loadedmetadata&#x27;
 /**
  * Fired when playback updates its video quality
@@ -432,6 +443,15 @@ Events.PLAYBACK_HIGHDEFINITIONUPDATE = &#x27;playback:highdefinitionupdate&#x27;
  * playback level when it&#x27;s available, it could be just a map for width (0 =&gt; 240, 1 =&gt; 480, 2 =&gt; 720)
  */
 Events.PLAYBACK_BITRATE = &#x27;playback:bitrate&#x27;
+/**
+ * Fired when playback internal state changes
+ *
+ * @event PLAYBACK_PLAYBACKSTATE
+ * @param {Object} state Data
+ * state object
+ * @param {String} [state.type]
+ * the playback type
+ */
 Events.PLAYBACK_PLAYBACKSTATE = &#x27;playback:playbackstate&#x27;
 Events.PLAYBACK_DVR = &#x27;playback:dvr&#x27;
 Events.PLAYBACK_MEDIACONTROL_DISABLE = &#x27;playback:mediacontrol:disable&#x27;
@@ -445,6 +465,15 @@ Events.PLAYBACK_FRAGMENT_LOADED = &#x27;playback:fragment:loaded&#x27;
 Events.PLAYBACK_LEVEL_SWITCH = &#x27;playback:level:switch&#x27;
 
 // Container Events
+/**
+ * Fired when the container internal state changes
+ *
+ * @event CONTAINER_PLAYBACKSTATE
+ * @param {Object} state Data
+ * state object
+ * @param {String} [state.type]
+ * the playback type
+ */
 Events.CONTAINER_PLAYBACKSTATE = &#x27;container:playbackstate&#x27;
 Events.CONTAINER_PLAYBACKDVRSTATECHANGED = &#x27;container:dvr&#x27;
 /**
@@ -472,6 +501,17 @@ Events.CONTAINER_DESTROYED = &#x27;container:destroyed&#x27;
  */
 Events.CONTAINER_READY = &#x27;container:ready&#x27;
 Events.CONTAINER_ERROR = &#x27;container:error&#x27;
+/**
+ * Fired when the container loaded its metadata
+ *
+ * @event CONTAINER_LOADEDMETADATA
+ * @param {Object} metadata Data
+ * settings object
+ * @param {Number} [metadata.duration]
+ * the playback duration
+ * @param {Object} [metadata.data]
+ * extra meta data
+ */
 Events.CONTAINER_LOADEDMETADATA = &#x27;container:loadedmetadata&#x27;
 /**
  * Fired when the time is updated on container
@@ -543,13 +583,57 @@ Events.CONTAINER_STATS_ADD = &#x27;container:stats:add&#x27;
 
 // MediaControl Events
 Events.MEDIACONTROL_RENDERED = &#x27;mediacontrol:rendered&#x27;
+/**
+ * Fired when the player enters/exit on fullscreen
+ *
+ * @event MEDIACONTROL_SHOW
+ */
 Events.MEDIACONTROL_FULLSCREEN = &#x27;mediacontrol:fullscreen&#x27;
+/**
+ * Fired when the media control shows
+ *
+ * @event MEDIACONTROL_SHOW
+ */
 Events.MEDIACONTROL_SHOW = &#x27;mediacontrol:show&#x27;
+/**
+ * Fired when the media control hides
+ *
+ * @event MEDIACONTROL_HIDE
+ */
 Events.MEDIACONTROL_HIDE = &#x27;mediacontrol:hide&#x27;
+/**
+ * Fired when mouse enters on the seekbar
+ *
+ * @event MEDIACONTROL_MOUSEMOVE_SEEKBAR
+ * @param {Object} event
+ * the javascript event
+ */
 Events.MEDIACONTROL_MOUSEMOVE_SEEKBAR = &#x27;mediacontrol:mousemove:seekbar&#x27;
+/**
+ * Fired when mouse leaves the seekbar
+ *
+ * @event MEDIACONTROL_MOUSELEAVE_SEEKBAR
+ * @param {Object} event
+ * the javascript event
+ */
 Events.MEDIACONTROL_MOUSELEAVE_SEEKBAR = &#x27;mediacontrol:mouseleave:seekbar&#x27;
+/**
+ * Fired when the media is being played
+ *
+ * @event MEDIACONTROL_PLAYING
+ */
 Events.MEDIACONTROL_PLAYING = &#x27;mediacontrol:playing&#x27;
+/**
+ * Fired when the media is not being played
+ *
+ * @event MEDIACONTROL_NOTPLAYING
+ */
 Events.MEDIACONTROL_NOTPLAYING = &#x27;mediacontrol:notplaying&#x27;
+/**
+ * Fired when the container was changed
+ *
+ * @event MEDIACONTROL_CONTAINERCHANGED
+ */
 Events.MEDIACONTROL_CONTAINERCHANGED = &#x27;mediacontrol:containerchanged&#x27;
 
     </pre>

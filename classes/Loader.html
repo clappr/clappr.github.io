@@ -225,6 +225,14 @@
 
                             </li>
                             <li class="index-item event inherited">
+                                <a href="#event_CONTAINER_LOADEDMETADATA">CONTAINER_LOADEDMETADATA</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_CONTAINER_PLAYBACKSTATE">CONTAINER_PLAYBACKSTATE</a>
+
+                            </li>
+                            <li class="index-item event inherited">
                                 <a href="#event_CONTAINER_PROGRESS">CONTAINER_PROGRESS</a>
 
                             </li>
@@ -249,6 +257,34 @@
 
                             </li>
                             <li class="index-item event inherited">
+                                <a href="#event_MEDIACONTROL_CONTAINERCHANGED">MEDIACONTROL_CONTAINERCHANGED</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_MEDIACONTROL_HIDE">MEDIACONTROL_HIDE</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_MEDIACONTROL_MOUSELEAVE_SEEKBAR">MEDIACONTROL_MOUSELEAVE_SEEKBAR</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_MEDIACONTROL_MOUSEMOVE_SEEKBAR">MEDIACONTROL_MOUSEMOVE_SEEKBAR</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_MEDIACONTROL_NOTPLAYING">MEDIACONTROL_NOTPLAYING</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_MEDIACONTROL_PLAYING">MEDIACONTROL_PLAYING</a>
+
+                            </li>
+                            <li class="index-item event inherited inherited">
+                                <a href="#event_MEDIACONTROL_SHOW">MEDIACONTROL_SHOW</a>
+
+                            </li>
+                            <li class="index-item event inherited">
                                 <a href="#event_PLAYBACK_BITRATE">PLAYBACK_BITRATE</a>
 
                             </li>
@@ -262,6 +298,14 @@
                             </li>
                             <li class="index-item event inherited">
                                 <a href="#event_PLAYBACK_HIGHDEFINITIONUPDATE">PLAYBACK_HIGHDEFINITIONUPDATE</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYBACK_LOADEDMETADATA">PLAYBACK_LOADEDMETADATA</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_PLAYBACK_PLAYBACKSTATE">PLAYBACK_PLAYBACKSTATE</a>
 
                             </li>
                             <li class="index-item event inherited">
@@ -1118,7 +1162,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_BITRATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l359"><code>src&#x2F;base&#x2F;events.js:359</code></a>
+                            <a href="../files/src_base_events.js.html#l388"><code>src&#x2F;base&#x2F;events.js:388</code></a>
                             </p>
                     
                     
@@ -1207,7 +1251,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_HIGHDEFINITIONUPDATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l441"><code>src&#x2F;base&#x2F;events.js:441</code></a>
+                            <a href="../files/src_base_events.js.html#l481"><code>src&#x2F;base&#x2F;events.js:481</code></a>
                             </p>
                     
                     
@@ -1239,6 +1283,129 @@
                     
                     
                     </div>
+                    <div id="event_CONTAINER_LOADEDMETADATA" class="events item inherited">
+                        <h3 class="name"><code>CONTAINER_LOADEDMETADATA</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_CONTAINER_LOADEDMETADATA">Events</a>:
+                            <a href="../files/src_base_events.js.html#l413"><code>src&#x2F;base&#x2F;events.js:413</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the container loaded its metadata</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">metadata</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Data
+                    settings object</p>
+                    
+                                        </div>
+                    
+                                            <ul class="params-list">
+                                                <li class="param">
+                                                        <code class="param-name optional">[duration]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>the playback duration</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                                <li class="param">
+                                                        <code class="param-name optional">[data]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>extra meta data</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_CONTAINER_PLAYBACKSTATE" class="events item inherited">
+                        <h3 class="name"><code>CONTAINER_PLAYBACKSTATE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_CONTAINER_PLAYBACKSTATE">Events</a>:
+                            <a href="../files/src_base_events.js.html#l377"><code>src&#x2F;base&#x2F;events.js:377</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the container internal state changes</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">state</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Data
+                    state object</p>
+                    
+                                        </div>
+                    
+                                            <ul class="params-list">
+                                                <li class="param">
+                                                        <code class="param-name optional">[type]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>the playback type</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="event_CONTAINER_PROGRESS" class="events item inherited">
                         <h3 class="name"><code>CONTAINER_PROGRESS</code></h3>
                         <span class="type"></span>
@@ -1250,7 +1417,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_PROGRESS">Events</a>:
-                            <a href="../files/src_base_events.js.html#l397"><code>src&#x2F;base&#x2F;events.js:397</code></a>
+                            <a href="../files/src_base_events.js.html#l437"><code>src&#x2F;base&#x2F;events.js:437</code></a>
                             </p>
                     
                     
@@ -1328,7 +1495,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_READY">Events</a>:
-                            <a href="../files/src_base_events.js.html#l377"><code>src&#x2F;base&#x2F;events.js:377</code></a>
+                            <a href="../files/src_base_events.js.html#l406"><code>src&#x2F;base&#x2F;events.js:406</code></a>
                             </p>
                     
                     
@@ -1353,7 +1520,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_SETTINGSUPDATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l435"><code>src&#x2F;base&#x2F;events.js:435</code></a>
+                            <a href="../files/src_base_events.js.html#l475"><code>src&#x2F;base&#x2F;events.js:475</code></a>
                             </p>
                     
                     
@@ -1378,7 +1545,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_STATE_BUFFERFULL">Events</a>:
-                            <a href="../files/src_base_events.js.html#l429"><code>src&#x2F;base&#x2F;events.js:429</code></a>
+                            <a href="../files/src_base_events.js.html#l469"><code>src&#x2F;base&#x2F;events.js:469</code></a>
                             </p>
                     
                     
@@ -1403,7 +1570,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_STATE_BUFFERING">Events</a>:
-                            <a href="../files/src_base_events.js.html#l423"><code>src&#x2F;base&#x2F;events.js:423</code></a>
+                            <a href="../files/src_base_events.js.html#l463"><code>src&#x2F;base&#x2F;events.js:463</code></a>
                             </p>
                     
                     
@@ -1428,7 +1595,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_TIMEUPDATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l385"><code>src&#x2F;base&#x2F;events.js:385</code></a>
+                            <a href="../files/src_base_events.js.html#l425"><code>src&#x2F;base&#x2F;events.js:425</code></a>
                             </p>
                     
                     
@@ -1484,6 +1651,220 @@
                     
                     
                     </div>
+                    <div id="event_MEDIACONTROL_CONTAINERCHANGED" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_CONTAINERCHANGED</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_MEDIACONTROL_CONTAINERCHANGED">Events</a>:
+                            <a href="../files/src_base_events.js.html#l541"><code>src&#x2F;base&#x2F;events.js:541</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the container was changed</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_MEDIACONTROL_HIDE" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_HIDE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_MEDIACONTROL_HIDE">Events</a>:
+                            <a href="../files/src_base_events.js.html#l507"><code>src&#x2F;base&#x2F;events.js:507</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the media control hides</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_MEDIACONTROL_MOUSELEAVE_SEEKBAR" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_MOUSELEAVE_SEEKBAR</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_MEDIACONTROL_MOUSELEAVE_SEEKBAR">Events</a>:
+                            <a href="../files/src_base_events.js.html#l521"><code>src&#x2F;base&#x2F;events.js:521</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when mouse leaves the seekbar</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event
+                    the</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>javascript event</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_MEDIACONTROL_MOUSEMOVE_SEEKBAR" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_MOUSEMOVE_SEEKBAR</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_MEDIACONTROL_MOUSEMOVE_SEEKBAR">Events</a>:
+                            <a href="../files/src_base_events.js.html#l513"><code>src&#x2F;base&#x2F;events.js:513</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when mouse enters on the seekbar</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">event
+                    the</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>javascript event</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_MEDIACONTROL_NOTPLAYING" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_NOTPLAYING</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_MEDIACONTROL_NOTPLAYING">Events</a>:
+                            <a href="../files/src_base_events.js.html#l535"><code>src&#x2F;base&#x2F;events.js:535</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the media is not being played</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_MEDIACONTROL_PLAYING" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_PLAYING</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_MEDIACONTROL_PLAYING">Events</a>:
+                            <a href="../files/src_base_events.js.html#l529"><code>src&#x2F;base&#x2F;events.js:529</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the media is being played</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_MEDIACONTROL_SHOW" class="events item inherited">
+                        <h3 class="name"><code>MEDIACONTROL_SHOW</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/Events.html#event_MEDIACONTROL_SHOW">
+                                    Events
+                                </a>
+                                but overwritten in
+                            <a href="../files/src_base_events.js.html#l495"><code>src&#x2F;base&#x2F;events.js:495</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the player enters/exit on fullscreen</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="event_PLAYBACK_BITRATE" class="events item inherited">
                         <h3 class="name"><code>PLAYBACK_BITRATE</code></h3>
                         <span class="type"></span>
@@ -1495,7 +1876,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_PLAYBACK_BITRATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l328"><code>src&#x2F;base&#x2F;events.js:328</code></a>
+                            <a href="../files/src_base_events.js.html#l339"><code>src&#x2F;base&#x2F;events.js:339</code></a>
                             </p>
                     
                     
@@ -1634,7 +2015,7 @@
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_PLAYBACK_HIGHDEFINITIONUPDATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l320"><code>src&#x2F;base&#x2F;events.js:320</code></a>
+                            <a href="../files/src_base_events.js.html#l331"><code>src&#x2F;base&#x2F;events.js:331</code></a>
                             </p>
                     
                     
@@ -1660,6 +2041,129 @@
                     
                                         </div>
                     
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_PLAYBACK_LOADEDMETADATA" class="events item inherited">
+                        <h3 class="name"><code>PLAYBACK_LOADEDMETADATA</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYBACK_LOADEDMETADATA">Events</a>:
+                            <a href="../files/src_base_events.js.html#l319"><code>src&#x2F;base&#x2F;events.js:319</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when playback loaded its metadata</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">metadata</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Data
+                    settings object</p>
+                    
+                                        </div>
+                    
+                                            <ul class="params-list">
+                                                <li class="param">
+                                                        <code class="param-name optional">[duration]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>the playback duration</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                                <li class="param">
+                                                        <code class="param-name optional">[data]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>extra meta data</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_PLAYBACK_PLAYBACKSTATE" class="events item inherited">
+                        <h3 class="name"><code>PLAYBACK_PLAYBACKSTATE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_PLAYBACK_PLAYBACKSTATE">Events</a>:
+                            <a href="../files/src_base_events.js.html#l355"><code>src&#x2F;base&#x2F;events.js:355</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when playback internal state changes</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">state</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Data
+                    state object</p>
+                    
+                                        </div>
+                    
+                                            <ul class="params-list">
+                                                <li class="param">
+                                                        <code class="param-name optional">[type]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>the playback type</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                            </ul>
                                     </li>
                                 </ul>
                             </div>

@@ -197,8 +197,8 @@ export default class Container extends UIObject {
     this.listenTo(this.playback, Events.PLAYBACK_ERROR, this.error)
   }
 
-  playbackStateChanged() {
-    this.trigger(Events.CONTAINER_PLAYBACKSTATE)
+  playbackStateChanged(state) {
+    this.trigger(Events.CONTAINER_PLAYBACKSTATE, state)
   }
 
   playbackDvrStateChanged(dvrInUse) {
@@ -278,8 +278,8 @@ export default class Container extends UIObject {
     this.trigger(Events.CONTAINER_ERROR, {error: errorObj, container: this}, this.name)
   }
 
-  loadedMetadata(duration) {
-    this.trigger(Events.CONTAINER_LOADEDMETADATA, duration)
+  loadedMetadata(metadata) {
+    this.trigger(Events.CONTAINER_LOADEDMETADATA, metadata)
   }
 
   timeUpdated(timeProgress) {
