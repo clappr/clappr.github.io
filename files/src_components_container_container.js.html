@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.18</em>
+            <em>API Docs for: 0.2.19</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -282,13 +282,13 @@ export default class Container extends UIObject {
     this.trigger(Events.CONTAINER_LOADEDMETADATA, duration)
   }
 
-  timeUpdated(position, duration) {
-    this.currentTime = position
-    this.trigger(Events.CONTAINER_TIMEUPDATE, position, duration, this.name)
+  timeUpdated(timeProgress) {
+    this.currentTime = timeProgress.current
+    this.trigger(Events.CONTAINER_TIMEUPDATE, timeProgress, this.name)
   }
 
-  progress(startPosition, endPosition, duration) {
-    this.trigger(Events.CONTAINER_PROGRESS, startPosition, endPosition, duration, this.name)
+  progress(progressObj) {
+    this.trigger(Events.CONTAINER_PROGRESS, progressObj, this.name)
   }
 
   playing() {
@@ -405,8 +405,8 @@ export default class Container extends UIObject {
     this.trigger(Events.CONTAINER_SETTINGSUPDATE)
   }
 
-  highDefinitionUpdate() {
-    this.trigger(Events.CONTAINER_HIGHDEFINITIONUPDATE)
+  highDefinitionUpdate(isHD) {
+    this.trigger(Events.CONTAINER_HIGHDEFINITIONUPDATE, isHD)
   }
 
   isHighDefinitionInUse() {

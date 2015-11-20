@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.18</em>
+            <em>API Docs for: 0.2.19</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -146,6 +146,10 @@ export default class Player extends BaseObject {
    * player&#x27;s width **default**: &#x60;640&#x60;
    * @param {Number} [options.height]
    * player&#x27;s height **default**: &#x60;360&#x60;
+   * @param {String} [options.parentId]
+   * the id of the element on the page that the player should be inserted into
+   * @param {Object} [options.parent]
+   * a reference to a dom element that the player should be inserted into
    * @param {Boolean} [options.autoPlay]
    * automatically play after page load **default**: &#x60;false&#x60;
    * @param {Boolean} [options.loop]
@@ -179,7 +183,6 @@ export default class Player extends BaseObject {
    */
   constructor(options) {
     super(options)
-    window.p = this
     var defaultOptions = {playerId: uniqueId(&quot;&quot;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl}
     this.options = $.extend(defaultOptions, options)
     this.options.sources = this.normalizeSources(options)
@@ -190,6 +193,9 @@ export default class Player extends BaseObject {
     this.playerInfo.options = this.options
     if (this.options.parentId) {
       this.setParentId(this.options.parentId)
+    }
+    else if (this.options.parent) {
+      this.attachTo(this.options.parent)
     }
   }
 
@@ -260,8 +266,8 @@ export default class Player extends BaseObject {
     this.trigger(Events.PLAYER_SEEK, percent)
   }
 
-  onTimeUpdate(position, duration) {
-    this.trigger(Events.PLAYER_TIMEUPDATE, position, duration)
+  onTimeUpdate(timeProgress) {
+    this.trigger(Events.PLAYER_TIMEUPDATE, timeProgress)
   }
 
   onError(error) {

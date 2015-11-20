@@ -2,7 +2,7 @@
     "project": {
         "name": "Clappr",
         "description": "An extensible media player for the web",
-        "version": "0.2.18",
+        "version": "0.2.19",
         "url": "https://github.com/clappr/clappr",
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
@@ -593,19 +593,28 @@
         {
             "file": "src/base/events.js",
             "line": 248,
-            "description": "Fired when player updates its execution",
+            "description": "Fired when the time is updated on player",
             "itemtype": "event",
-            "name": "PLAYER_TIMEUPDATE",
+            "name": "PLAYBACK_TIMEUPDATE",
             "params": [
                 {
-                    "name": "postion",
-                    "description": "the current position (in seconds)",
-                    "type": "Number"
-                },
-                {
-                    "name": "duration",
-                    "description": "the total duration (in seconds)",
-                    "type": "Number"
+                    "name": "progress",
+                    "description": "Data\nprogress object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "current",
+                            "description": "\ncurrent time",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "total",
+                            "description": "\ntotal time",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
                 }
             ],
             "class": "Events",
@@ -613,7 +622,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 256,
+            "line": 260,
             "description": "Fired when player updates its volume",
             "itemtype": "event",
             "name": "PLAYER_VOLUMEUPDATE",
@@ -629,7 +638,125 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 273,
+            "line": 269,
+            "description": "Fired when the playback is downloading the media",
+            "itemtype": "event",
+            "name": "PLAYBACK_PROGRESS",
+            "params": [
+                {
+                    "name": "progress",
+                    "description": "Data\nprogress object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "start",
+                            "description": "\ninitial downloaded content",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "current",
+                            "description": "\ncurrent dowloaded content",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "total",
+                            "description": "\ntotal content to be downloaded",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 283,
+            "description": "Fired when the time is updated on playback",
+            "itemtype": "event",
+            "name": "PLAYBACK_TIMEUPDATE",
+            "params": [
+                {
+                    "name": "progress",
+                    "description": "Data\nprogress object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "current",
+                            "description": "\ncurrent time",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "total",
+                            "description": "\ntotal time",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 295,
+            "description": "Fired when playback is ready",
+            "itemtype": "event",
+            "name": "PLAYBACK_READY",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 301,
+            "description": "Fired when playback is buffering",
+            "itemtype": "event",
+            "name": "PLAYBACK_BUFFERING",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 307,
+            "description": "Fired when playback filled the buffer",
+            "itemtype": "event",
+            "name": "PLAYBACK_BUFFERFULL",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 313,
+            "description": "Fired when playback changes any settings (volume, seek and etc)",
+            "itemtype": "event",
+            "name": "PLAYBACK_SETTINGSUPDATE",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 320,
+            "description": "Fired when playback updates its video quality",
+            "itemtype": "event",
+            "name": "PLAYBACK_HIGHDEFINITIONUPDATE",
+            "params": [
+                {
+                    "name": "isHD\ntrue",
+                    "description": "when is on HD, false otherwise",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 328,
             "description": "Fired when playback updates its bitrate",
             "itemtype": "event",
             "name": "PLAYBACK_BITRATE",
@@ -671,7 +798,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 304,
+            "line": 359,
             "description": "Fired when the container updates its bitrate",
             "itemtype": "event",
             "name": "CONTAINER_BITRATE",
@@ -706,6 +833,124 @@
                             "optional": true
                         }
                     ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 377,
+            "description": "Fired when the container is ready",
+            "itemtype": "event",
+            "name": "CONTAINER_READY",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 385,
+            "description": "Fired when the time is updated on container",
+            "itemtype": "event",
+            "name": "CONTAINER_TIMEUPDATE",
+            "params": [
+                {
+                    "name": "progress",
+                    "description": "Data\nprogress object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "current",
+                            "description": "\ncurrent time",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "total",
+                            "description": "\ntotal time",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 397,
+            "description": "Fired when the container is downloading the media",
+            "itemtype": "event",
+            "name": "CONTAINER_PROGRESS",
+            "params": [
+                {
+                    "name": "progress",
+                    "description": "Data\nprogress object",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "start",
+                            "description": "\ninitial downloaded content",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "current",
+                            "description": "\ncurrent dowloaded content",
+                            "type": "Number",
+                            "optional": true
+                        },
+                        {
+                            "name": "total",
+                            "description": "\ntotal content to be downloaded",
+                            "type": "Number",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 423,
+            "description": "Fired when container is buffering",
+            "itemtype": "event",
+            "name": "CONTAINER_STATE_BUFFERING",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 429,
+            "description": "Fired when the container filled the buffer",
+            "itemtype": "event",
+            "name": "CONTAINER_STATE_BUFFERFULL",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 435,
+            "description": "Fired when the container changes any settings (volume, seek and etc)",
+            "itemtype": "event",
+            "name": "CONTAINER_SETTINGSUPDATE",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 441,
+            "description": "Fired when container updates its video quality",
+            "itemtype": "event",
+            "name": "CONTAINER_HIGHDEFINITIONUPDATE",
+            "params": [
+                {
+                    "name": "isHD\ntrue",
+                    "description": "when is on HD, false otherwise",
+                    "type": "Boolean"
                 }
             ],
             "class": "Events",
@@ -1441,6 +1686,18 @@
                             "optional": true
                         },
                         {
+                            "name": "parentId",
+                            "description": "\nthe id of the element on the page that the player should be inserted into",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "parent",
+                            "description": "\na reference to a dom element that the player should be inserted into",
+                            "type": "Object",
+                            "optional": true
+                        },
+                        {
                             "name": "autoPlay",
                             "description": "\nautomatically play after page load **default**: `false`",
                             "type": "Boolean",
@@ -1538,7 +1795,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 105,
+            "line": 111,
             "description": "Specify a `parentId` to the player.",
             "itemtype": "method",
             "name": "setParentId",
@@ -1554,7 +1811,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 117,
+            "line": 123,
             "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
             "itemtype": "method",
             "name": "attachTo",
@@ -1570,7 +1827,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 189,
+            "line": 195,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -1589,7 +1846,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 202,
+            "line": 208,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
@@ -1610,7 +1867,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 213,
+            "line": 219,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -1619,7 +1876,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 221,
+            "line": 227,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -1628,7 +1885,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 229,
+            "line": 235,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -1637,7 +1894,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 237,
+            "line": 243,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -1646,7 +1903,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 245,
+            "line": 251,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -1662,7 +1919,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 254,
+            "line": 260,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -1678,7 +1935,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 263,
+            "line": 269,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -1691,7 +1948,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 272,
+            "line": 278,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -1700,7 +1957,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 280,
+            "line": 286,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -1709,7 +1966,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 288,
+            "line": 294,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -1722,7 +1979,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 297,
+            "line": 303,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -1745,7 +2002,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 315,
+            "line": 321,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -1758,7 +2015,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 324,
+            "line": 330,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",

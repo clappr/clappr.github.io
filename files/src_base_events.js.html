@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.18</em>
+            <em>API Docs for: 0.2.19</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -337,11 +337,15 @@ Events.PLAYER_SEEK = &#x27;seek&#x27;
  */
 Events.PLAYER_ERROR = &#x27;error&#x27;
 /**
- * Fired when player updates its execution
+ * Fired when the time is updated on player
  *
- * @event PLAYER_TIMEUPDATE
- * @param {Number} postion the current position (in seconds)
- * @param {Number} duration the total duration (in seconds)
+ * @event PLAYBACK_TIMEUPDATE
+ * @param {Object} progress Data
+ * progress object
+ * @param {Number} [progress.current]
+ * current time
+ * @param {Number} [progress.total]
+ * total time
  */
 Events.PLAYER_TIMEUPDATE = &#x27;timeupdate&#x27;
 /**
@@ -353,13 +357,64 @@ Events.PLAYER_TIMEUPDATE = &#x27;timeupdate&#x27;
 Events.PLAYER_VOLUMEUPDATE = &#x27;volumeupdate&#x27;
 
 // Playback Events
+/**
+ * Fired when the playback is downloading the media
+ *
+ * @event PLAYBACK_PROGRESS
+ * @param {Object} progress Data
+ * progress object
+ * @param {Number} [progress.start]
+ * initial downloaded content
+ * @param {Number} [progress.current]
+ * current dowloaded content
+ * @param {Number} [progress.total]
+ * total content to be downloaded
+ */
 Events.PLAYBACK_PROGRESS = &#x27;playback:progress&#x27;
+/**
+ * Fired when the time is updated on playback
+ *
+ * @event PLAYBACK_TIMEUPDATE
+ * @param {Object} progress Data
+ * progress object
+ * @param {Number} [progress.current]
+ * current time
+ * @param {Number} [progress.total]
+ * total time
+ */
 Events.PLAYBACK_TIMEUPDATE = &#x27;playback:timeupdate&#x27;
+/**
+ * Fired when playback is ready
+ *
+ * @event PLAYBACK_READY
+ */
 Events.PLAYBACK_READY = &#x27;playback:ready&#x27;
+/**
+ * Fired when playback is buffering
+ *
+ * @event PLAYBACK_BUFFERING
+ */
 Events.PLAYBACK_BUFFERING = &#x27;playback:buffering&#x27;
+/**
+ * Fired when playback filled the buffer
+ *
+ * @event PLAYBACK_BUFFERFULL
+ */
 Events.PLAYBACK_BUFFERFULL = &#x27;playback:bufferfull&#x27;
+/**
+ * Fired when playback changes any settings (volume, seek and etc)
+ *
+ * @event PLAYBACK_SETTINGSUPDATE
+ */
 Events.PLAYBACK_SETTINGSUPDATE = &#x27;playback:settingsupdate&#x27;
 Events.PLAYBACK_LOADEDMETADATA = &#x27;playback:loadedmetadata&#x27;
+/**
+ * Fired when playback updates its video quality
+ *
+ * @event PLAYBACK_HIGHDEFINITIONUPDATE
+ * @param {Boolean} isHD
+ * true when is on HD, false otherwise
+ */
 Events.PLAYBACK_HIGHDEFINITIONUPDATE = &#x27;playback:highdefinitionupdate&#x27;
 /**
  * Fired when playback updates its bitrate
@@ -410,10 +465,39 @@ Events.CONTAINER_PLAYBACKDVRSTATECHANGED = &#x27;container:dvr&#x27;
 Events.CONTAINER_BITRATE = &#x27;container:bitrate&#x27;
 Events.CONTAINER_STATS_REPORT = &#x27;container:stats:report&#x27;
 Events.CONTAINER_DESTROYED = &#x27;container:destroyed&#x27;
+/**
+ * Fired when the container is ready
+ *
+ * @event CONTAINER_READY
+ */
 Events.CONTAINER_READY = &#x27;container:ready&#x27;
 Events.CONTAINER_ERROR = &#x27;container:error&#x27;
 Events.CONTAINER_LOADEDMETADATA = &#x27;container:loadedmetadata&#x27;
+/**
+ * Fired when the time is updated on container
+ *
+ * @event CONTAINER_TIMEUPDATE
+ * @param {Object} progress Data
+ * progress object
+ * @param {Number} [progress.current]
+ * current time
+ * @param {Number} [progress.total]
+ * total time
+ */
 Events.CONTAINER_TIMEUPDATE = &#x27;container:timeupdate&#x27;
+/**
+ * Fired when the container is downloading the media
+ *
+ * @event CONTAINER_PROGRESS
+ * @param {Object} progress Data
+ * progress object
+ * @param {Number} [progress.start]
+ * initial downloaded content
+ * @param {Number} [progress.current]
+ * current dowloaded content
+ * @param {Number} [progress.total]
+ * total content to be downloaded
+ */
 Events.CONTAINER_PROGRESS = &#x27;container:progress&#x27;
 Events.CONTAINER_PLAY = &#x27;container:play&#x27;
 Events.CONTAINER_STOP = &#x27;container:stop&#x27;
@@ -427,9 +511,31 @@ Events.CONTAINER_MOUSE_LEAVE = &#x27;container:mouseleave&#x27;
 Events.CONTAINER_SEEK = &#x27;container:seek&#x27;
 Events.CONTAINER_VOLUME = &#x27;container:volume&#x27;
 Events.CONTAINER_FULLSCREEN = &#x27;container:fullscreen&#x27;
+/**
+ * Fired when container is buffering
+ *
+ * @event CONTAINER_STATE_BUFFERING
+ */
 Events.CONTAINER_STATE_BUFFERING = &#x27;container:state:buffering&#x27;
+/**
+ * Fired when the container filled the buffer
+ *
+ * @event CONTAINER_STATE_BUFFERFULL
+ */
 Events.CONTAINER_STATE_BUFFERFULL = &#x27;container:state:bufferfull&#x27;
+/**
+ * Fired when the container changes any settings (volume, seek and etc)
+ *
+ * @event CONTAINER_SETTINGSUPDATE
+ */
 Events.CONTAINER_SETTINGSUPDATE = &#x27;container:settingsupdate&#x27;
+/**
+ * Fired when container updates its video quality
+ *
+ * @event CONTAINER_HIGHDEFINITIONUPDATE
+ * @param {Boolean} isHD
+ * true when is on HD, false otherwise
+ */
 Events.CONTAINER_HIGHDEFINITIONUPDATE = &#x27;container:highdefinitionupdate&#x27;
 Events.CONTAINER_MEDIACONTROL_DISABLE = &#x27;container:mediacontrol:disable&#x27;
 Events.CONTAINER_MEDIACONTROL_ENABLE = &#x27;container:mediacontrol:enable&#x27;

@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.18</em>
+            <em>API Docs for: 0.2.19</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -158,6 +158,8 @@ export default class MediaControl extends UIObject {
     this.persistConfig = this.options.persistConfig
     this.container = options.container
     this.seekTime = new SeekTime(this)
+    this.currentPositionValue = null
+    this.currentDurationValue = null
     var initialVolume = (this.persistConfig) ? Config.restore(&quot;volume&quot;) : 100
     this.setVolume(this.mute ? 0 : initialVolume)
     this.keepVisible = false
@@ -188,7 +190,7 @@ export default class MediaControl extends UIObject {
     this.listenTo(this.container, Events.CONTAINER_PLAY, this.changeTogglePlay)
     this.listenTo(this.container, Events.CONTAINER_PAUSE, this.changeTogglePlay)
     this.listenTo(this.container, Events.CONTAINER_DBLCLICK, this.toggleFullscreen)
-    this.listenTo(this.container, Events.CONTAINER_TIMEUPDATE, this.updateSeekBar)
+    this.listenTo(this.container, Events.CONTAINER_TIMEUPDATE, this.onTimeUpdate)
     this.listenTo(this.container, Events.CONTAINER_PROGRESS, this.updateProgressBar)
     this.listenTo(this.container, Events.CONTAINER_SETTINGSUPDATE, this.settingsUpdate)
     this.listenTo(this.container, Events.CONTAINER_PLAYBACKDVRSTATECHANGED, this.settingsUpdate)
@@ -428,32 +430,47 @@ export default class MediaControl extends UIObject {
     this.changeTogglePlay()
   }
 
-  updateProgressBar(startPosition, endPosition, duration) {
-    var loadedStart = startPosition / duration * 100
-    var loadedEnd = endPosition / duration * 100
-    this.$seekBarLoaded.css({ left: loadedStart + &#x27;%&#x27;, width: (loadedEnd - loadedStart) + &#x27;%&#x27; })
+  updateProgressBar(progress) {
+    var loadedStart = progress.start / progress.total * 100
+    var loadedEnd = progress.current / progress.total * 100
+    this.$seekBarLoaded.css({ left: &#x60;${loadedStart}%&#x60;, width: &#x60;${loadedEnd - loadedStart}%&#x60; })
   }
 
-  updateSeekBar(position, duration) {
+  onTimeUpdate(timeProgress) {
     if (this.draggingSeekBar) return
-    if (position &lt; 0) position = duration
+    // TODO why should current time ever be negative?
+    var position = (timeProgress.current &lt; 0) ? timeProgress.total : timeProgress.current
 
-    var seekbarValue = (100 / duration) * position
-    var currentPosition = formatTime(position)
-    var currentDuration = formatTime(duration)
+    this.currentPositionValue = position
+    this.currentDurationValue = timeProgress.total
+    this.renderSeekBar()
+  }
 
-    this.$seekBarPosition.removeClass(&#x27;media-control-notransition&#x27;)
-    this.$seekBarScrubber.removeClass(&#x27;media-control-notransition&#x27;)
-
-    this.setSeekPercentage(seekbarValue)
-
-    if (currentPosition !== this.displayedPosition) {
-      this.$position.text(currentPosition)
-      this.displayedPosition = currentPosition
+  renderSeekBar() {
+    if (this.currentPositionValue === null || this.currentDurationValue === null) {
+      // this will be triggered as soon as these beocome available
+      return
     }
-    if (currentDuration !== this.displayedDuration) {
-      this.$duration.text(currentDuration)
-      this.displayedDuration = currentDuration
+
+    // default to 100%
+    this.currentSeekBarPercentage = 100
+    // true if dvr is enabled but not in use. E.g. live stream with dvr but at live point
+    var dvrEnabledButNotInUse = this.container.isDvrEnabled() &amp;&amp; !this.container.isDvrInUse()
+    if (this.container.settings.seekEnabled &amp;&amp; !dvrEnabledButNotInUse) {
+      // if seek enabled or dvr is enabled and being used then set to the true percentage
+      this.currentSeekBarPercentage = (this.currentPositionValue / this.currentDurationValue) * 100
+    }
+    this.setSeekPercentage(this.currentSeekBarPercentage)
+
+    var newPosition = formatTime(this.currentPositionValue)
+    var newDuration = formatTime(this.currentDurationValue)
+    if (newPosition !== this.displayedPosition) {
+      this.$position.text(newPosition)
+      this.displayedPosition = newPosition
+    }
+    if (newDuration !== this.displayedDuration) {
+      this.$duration.text(newDuration)
+      this.displayedDuration = newDuration
     }
   }
 
@@ -529,12 +546,9 @@ export default class MediaControl extends UIObject {
     }
   }
 
-  highDefinitionUpdate() {
-    if (this.container.isHighDefinitionInUse()) {
-      this.$el.find(&#x27;button[data-hd-indicator]&#x27;).addClass(&quot;enabled&quot;)
-    } else {
-      this.$el.find(&#x27;button[data-hd-indicator]&#x27;).removeClass(&quot;enabled&quot;)
-    }
+  highDefinitionUpdate(isHD) {
+    var method = !!isHD ? &#x27;addClass&#x27; : &#x27;removeClass&#x27;
+    this.$el.find(&#x27;button[data-hd-indicator]&#x27;)[method](&#x27;enabled&#x27;)
   }
 
   createCachedElements() {
@@ -552,6 +566,12 @@ export default class MediaControl extends UIObject {
     this.$volumeBarContainer = $layer.find(&#x27;.bar-container[data-volume]&#x27;)
     this.$volumeContainer = $layer.find(&#x27;.drawer-container[data-volume]&#x27;)
     this.$volumeIcon = $layer.find(&#x27;.drawer-icon[data-volume]&#x27;)
+    this.resetIndicators()
+  }
+
+  resetIndicators() {
+    this.displayedPosition = this.$position.text()
+    this.displayedDuration = this.$duration.text()
   }
 
   setVolumeLevel(value) {
@@ -570,11 +590,17 @@ export default class MediaControl extends UIObject {
   }
 
   setSeekPercentage(value) {
-    value = Math.min(value, 100.0)
-    var pos = (this.$seekBarContainer.width() * value / 100.0) - (this.$seekBarScrubber.width() / 2.0)
-    this.currentSeekPercentage = value
-    this.$seekBarPosition.css({ width: value + &#x27;%&#x27; })
-    this.$seekBarScrubber.css({ left: pos })
+    value = Math.max(Math.min(value, 100.0), 0)
+    if (this.displayedSeekBarPercentage === value) {
+      // not changed since last update
+      return
+    }
+    this.displayedSeekBarPercentage = value
+
+    this.$seekBarPosition.removeClass(&#x27;media-control-notransition&#x27;)
+    this.$seekBarScrubber.removeClass(&#x27;media-control-notransition&#x27;)
+    this.$seekBarPosition.css({ width: &#x60;${value}%&#x60; })
+    this.$seekBarScrubber.css({ left: &#x60;${value}%&#x60; })
   }
 
   seekRelative(delta) {
@@ -624,8 +650,6 @@ export default class MediaControl extends UIObject {
 
   render() {
     var timeout = 1000
-    this.displayedPosition = null
-    this.displayedDuration = null
     var style = Styler.getStyleFor(mediaControlStyle, {baseUrl: this.options.baseUrl})
     this.$el.html(this.template({ settings: this.settings }))
     this.$el.append(style)
@@ -646,10 +670,12 @@ export default class MediaControl extends UIObject {
     this.$seekBarPosition.addClass(&#x27;media-control-notransition&#x27;)
     this.$seekBarScrubber.addClass(&#x27;media-control-notransition&#x27;)
 
-    if (!this.currentSeekPercentage) {
-      this.currentSeekPercentage = 0
+    var previousSeekPercentage = 0
+    if (this.displayedSeekBarPercentage) {
+      previousSeekPercentage = this.displayedSeekBarPercentage
     }
-    this.setSeekPercentage(this.currentSeekPercentage)
+    this.displayedSeekBarPercentage = null
+    this.setSeekPercentage(previousSeekPercentage)
 
     process.nextTick(() =&gt; {
       if (!this.container.settings.seekEnabled) {
