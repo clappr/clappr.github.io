@@ -238,6 +238,10 @@
                                 <a href="#method_seek">seek</a>
 
                             </li>
+                            <li class="index-item method">
+                                <a href="#method_seekPercentage">seekPercentage</a>
+
+                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_setElement">setElement</a>
 
@@ -360,6 +364,10 @@
                             </li>
                             <li class="index-item event inherited">
                                 <a href="#event_CONTAINER_READY">CONTAINER_READY</a>
+
+                            </li>
+                            <li class="index-item event inherited">
+                                <a href="#event_CONTAINER_SEEK">CONTAINER_SEEK</a>
 
                             </li>
                             <li class="index-item event inherited">
@@ -624,7 +632,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l140"><code>src&#x2F;base&#x2F;playback.js:140</code></a>
+        <a href="../files/src_base_playback.js.html#l114"><code>src&#x2F;base&#x2F;playback.js:114</code></a>
         </p>
 
 
@@ -812,7 +820,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l94"><code>src&#x2F;base&#x2F;playback.js:94</code></a>
+        <a href="../files/src_base_playback.js.html#l101"><code>src&#x2F;base&#x2F;playback.js:101</code></a>
         </p>
 
 
@@ -846,7 +854,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l46"><code>src&#x2F;base&#x2F;playback.js:46</code></a>
+        <a href="../files/src_base_playback.js.html#l53"><code>src&#x2F;base&#x2F;playback.js:53</code></a>
         </p>
 
 
@@ -889,7 +897,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l62"><code>src&#x2F;base&#x2F;playback.js:62</code></a>
+        <a href="../files/src_base_playback.js.html#l69"><code>src&#x2F;base&#x2F;playback.js:69</code></a>
         </p>
 
 
@@ -944,7 +952,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l78"><code>src&#x2F;base&#x2F;playback.js:78</code></a>
+        <a href="../files/src_base_playback.js.html#l85"><code>src&#x2F;base&#x2F;playback.js:85</code></a>
         </p>
 
 
@@ -987,7 +995,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l53"><code>src&#x2F;base&#x2F;playback.js:53</code></a>
+        <a href="../files/src_base_playback.js.html#l60"><code>src&#x2F;base&#x2F;playback.js:60</code></a>
         </p>
 
 
@@ -1624,7 +1632,61 @@ flashHlsPlayback.getPlaybackType() //live
     </div>
 
     <div class="description">
-        <p>seeks the playback to a given <code>time</code> in percentage</p>
+        <p>seeks the playback to a given <code>time</code> in seconds</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">time</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+                    <div class="param-description">
+                        <p>should be a number between 0 and the video duration</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_seekPercentage" class="method item">
+    <h3 class="name"><code>seekPercentage</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>time</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l46"><code>src&#x2F;base&#x2F;playback.js:46</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>seeks the playback to a given <code>percentage</code> in percentage</p>
 
     </div>
 
@@ -1991,7 +2053,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l87"><code>src&#x2F;base&#x2F;playback.js:87</code></a>
+        <a href="../files/src_base_playback.js.html#l94"><code>src&#x2F;base&#x2F;playback.js:94</code></a>
         </p>
 
 
@@ -2065,7 +2127,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l115"><code>src&#x2F;base&#x2F;playback.js:115</code></a>
+                            <a href="../files/src_base_playback.js.html#l134"><code>src&#x2F;base&#x2F;playback.js:134</code></a>
                             </p>
                     
                     
@@ -2222,7 +2284,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l123"><code>src&#x2F;base&#x2F;playback.js:123</code></a>
+                            <a href="../files/src_base_playback.js.html#l142"><code>src&#x2F;base&#x2F;playback.js:142</code></a>
                             </p>
                     
                     
@@ -2248,7 +2310,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l131"><code>src&#x2F;base&#x2F;playback.js:131</code></a>
+                            <a href="../files/src_base_playback.js.html#l150"><code>src&#x2F;base&#x2F;playback.js:150</code></a>
                             </p>
                     
                     
@@ -2274,7 +2336,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l152"><code>src&#x2F;base&#x2F;playback.js:152</code></a>
+                            <a href="../files/src_base_playback.js.html#l158"><code>src&#x2F;base&#x2F;playback.js:158</code></a>
                             </p>
                     
                     
@@ -2325,7 +2387,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l107"><code>src&#x2F;base&#x2F;playback.js:107</code></a>
+                            <a href="../files/src_base_playback.js.html#l126"><code>src&#x2F;base&#x2F;playback.js:126</code></a>
                             </p>
                     
                     
@@ -2445,7 +2507,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_HIGHDEFINITIONUPDATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l481"><code>src&#x2F;base&#x2F;events.js:481</code></a>
+                            <a href="../files/src_base_events.js.html#l487"><code>src&#x2F;base&#x2F;events.js:487</code></a>
                             </p>
                     
                     
@@ -2555,7 +2617,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_MEDIACONTROL_HIDE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l496"><code>src&#x2F;base&#x2F;events.js:496</code></a>
+                            <a href="../files/src_base_events.js.html#l502"><code>src&#x2F;base&#x2F;events.js:502</code></a>
                             </p>
                     
                     
@@ -2580,7 +2642,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_MEDIACONTROL_SHOW">Events</a>:
-                            <a href="../files/src_base_events.js.html#l490"><code>src&#x2F;base&#x2F;events.js:490</code></a>
+                            <a href="../files/src_base_events.js.html#l496"><code>src&#x2F;base&#x2F;events.js:496</code></a>
                             </p>
                     
                     
@@ -2753,6 +2815,48 @@ flashHlsPlayback.getPlaybackType() //live
                     
                     
                     </div>
+                    <div id="event_CONTAINER_SEEK" class="events item inherited">
+                        <h3 class="name"><code>CONTAINER_SEEK</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/Events.html#event_CONTAINER_SEEK">Events</a>:
+                            <a href="../files/src_base_events.js.html#l460"><code>src&#x2F;base&#x2F;events.js:460</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the container seeks the video</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">time</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>the current time in seconds</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="event_CONTAINER_SETTINGSUPDATE" class="events item inherited">
                         <h3 class="name"><code>CONTAINER_SETTINGSUPDATE</code></h3>
                         <span class="type"></span>
@@ -2764,7 +2868,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_SETTINGSUPDATE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l475"><code>src&#x2F;base&#x2F;events.js:475</code></a>
+                            <a href="../files/src_base_events.js.html#l481"><code>src&#x2F;base&#x2F;events.js:481</code></a>
                             </p>
                     
                     
@@ -2789,7 +2893,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_STATE_BUFFERFULL">Events</a>:
-                            <a href="../files/src_base_events.js.html#l469"><code>src&#x2F;base&#x2F;events.js:469</code></a>
+                            <a href="../files/src_base_events.js.html#l475"><code>src&#x2F;base&#x2F;events.js:475</code></a>
                             </p>
                     
                     
@@ -2814,7 +2918,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_CONTAINER_STATE_BUFFERING">Events</a>:
-                            <a href="../files/src_base_events.js.html#l463"><code>src&#x2F;base&#x2F;events.js:463</code></a>
+                            <a href="../files/src_base_events.js.html#l469"><code>src&#x2F;base&#x2F;events.js:469</code></a>
                             </p>
                     
                     
@@ -2906,7 +3010,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_CONTAINERCHANGED">Events</a>:
-                            <a href="../files/src_base_events.js.html#l555"><code>src&#x2F;base&#x2F;events.js:555</code></a>
+                            <a href="../files/src_base_events.js.html#l561"><code>src&#x2F;base&#x2F;events.js:561</code></a>
                             </p>
                     
                     
@@ -2931,7 +3035,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_FULLSCREEN">Events</a>:
-                            <a href="../files/src_base_events.js.html#l509"><code>src&#x2F;base&#x2F;events.js:509</code></a>
+                            <a href="../files/src_base_events.js.html#l515"><code>src&#x2F;base&#x2F;events.js:515</code></a>
                             </p>
                     
                     
@@ -2956,7 +3060,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_HIDE">Events</a>:
-                            <a href="../files/src_base_events.js.html#l521"><code>src&#x2F;base&#x2F;events.js:521</code></a>
+                            <a href="../files/src_base_events.js.html#l527"><code>src&#x2F;base&#x2F;events.js:527</code></a>
                             </p>
                     
                     
@@ -2981,7 +3085,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_MOUSELEAVE_SEEKBAR">Events</a>:
-                            <a href="../files/src_base_events.js.html#l535"><code>src&#x2F;base&#x2F;events.js:535</code></a>
+                            <a href="../files/src_base_events.js.html#l541"><code>src&#x2F;base&#x2F;events.js:541</code></a>
                             </p>
                     
                     
@@ -3024,7 +3128,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_MOUSEMOVE_SEEKBAR">Events</a>:
-                            <a href="../files/src_base_events.js.html#l527"><code>src&#x2F;base&#x2F;events.js:527</code></a>
+                            <a href="../files/src_base_events.js.html#l533"><code>src&#x2F;base&#x2F;events.js:533</code></a>
                             </p>
                     
                     
@@ -3067,7 +3171,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_NOTPLAYING">Events</a>:
-                            <a href="../files/src_base_events.js.html#l549"><code>src&#x2F;base&#x2F;events.js:549</code></a>
+                            <a href="../files/src_base_events.js.html#l555"><code>src&#x2F;base&#x2F;events.js:555</code></a>
                             </p>
                     
                     
@@ -3092,7 +3196,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_PLAYING">Events</a>:
-                            <a href="../files/src_base_events.js.html#l543"><code>src&#x2F;base&#x2F;events.js:543</code></a>
+                            <a href="../files/src_base_events.js.html#l549"><code>src&#x2F;base&#x2F;events.js:549</code></a>
                             </p>
                     
                     
@@ -3117,7 +3221,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/Events.html#event_MEDIACONTROL_SHOW">Events</a>:
-                            <a href="../files/src_base_events.js.html#l515"><code>src&#x2F;base&#x2F;events.js:515</code></a>
+                            <a href="../files/src_base_events.js.html#l521"><code>src&#x2F;base&#x2F;events.js:521</code></a>
                             </p>
                     
                     
@@ -3817,12 +3921,12 @@ flashHlsPlayback.getPlaybackType() //live
                     
                                 <ul class="params-list">
                                     <li class="param">
-                                            <code class="param-name">percent</code>
+                                            <code class="param-name">time</code>
                                             <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
-                                            <p>a percentagem of seek</p>
+                                            <p>the current time in seconds</p>
                     
                                         </div>
                     

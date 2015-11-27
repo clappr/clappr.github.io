@@ -566,8 +566,8 @@
             "name": "PLAYER_SEEK",
             "params": [
                 {
-                    "name": "percent",
-                    "description": "a percentagem of seek",
+                    "name": "time",
+                    "description": "the current time in seconds",
                     "type": "Number"
                 }
             ],
@@ -1023,7 +1023,23 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 463,
+            "line": 460,
+            "description": "Fired when the container seeks the video",
+            "itemtype": "event",
+            "name": "CONTAINER_SEEK",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "the current time in seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 469,
             "description": "Fired when container is buffering",
             "itemtype": "event",
             "name": "CONTAINER_STATE_BUFFERING",
@@ -1032,7 +1048,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 469,
+            "line": 475,
             "description": "Fired when the container filled the buffer",
             "itemtype": "event",
             "name": "CONTAINER_STATE_BUFFERFULL",
@@ -1041,7 +1057,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 475,
+            "line": 481,
             "description": "Fired when the container changes any settings (volume, seek and etc)",
             "itemtype": "event",
             "name": "CONTAINER_SETTINGSUPDATE",
@@ -1050,7 +1066,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 481,
+            "line": 487,
             "description": "Fired when container updates its video quality",
             "itemtype": "event",
             "name": "CONTAINER_HIGHDEFINITIONUPDATE",
@@ -1066,7 +1082,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 490,
+            "line": 496,
             "description": "Fired when the media control shows",
             "itemtype": "event",
             "name": "CONTAINER_MEDIACONTROL_SHOW",
@@ -1075,7 +1091,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 496,
+            "line": 502,
             "description": "Fired when the media control hides",
             "itemtype": "event",
             "name": "CONTAINER_MEDIACONTROL_HIDE",
@@ -1084,7 +1100,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 509,
+            "line": 515,
             "description": "Fired when the player enters/exit on fullscreen",
             "itemtype": "event",
             "name": "MEDIACONTROL_FULLSCREEN",
@@ -1093,7 +1109,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 515,
+            "line": 521,
             "description": "Fired when the media control shows",
             "itemtype": "event",
             "name": "MEDIACONTROL_SHOW",
@@ -1102,7 +1118,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 521,
+            "line": 527,
             "description": "Fired when the media control hides",
             "itemtype": "event",
             "name": "MEDIACONTROL_HIDE",
@@ -1111,7 +1127,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 527,
+            "line": 533,
             "description": "Fired when mouse enters on the seekbar",
             "itemtype": "event",
             "name": "MEDIACONTROL_MOUSEMOVE_SEEKBAR",
@@ -1127,7 +1143,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 535,
+            "line": 541,
             "description": "Fired when mouse leaves the seekbar",
             "itemtype": "event",
             "name": "MEDIACONTROL_MOUSELEAVE_SEEKBAR",
@@ -1143,7 +1159,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 543,
+            "line": 549,
             "description": "Fired when the media is being played",
             "itemtype": "event",
             "name": "MEDIACONTROL_PLAYING",
@@ -1152,7 +1168,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 549,
+            "line": 555,
             "description": "Fired when the media is not being played",
             "itemtype": "event",
             "name": "MEDIACONTROL_NOTPLAYING",
@@ -1161,7 +1177,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 555,
+            "line": 561,
             "description": "Fired when the container was changed",
             "itemtype": "event",
             "name": "MEDIACONTROL_CONTAINERCHANGED",
@@ -1213,9 +1229,25 @@
         {
             "file": "src/base/playback.js",
             "line": 39,
-            "description": "seeks the playback to a given `time` in percentage",
+            "description": "seeks the playback to a given `time` in seconds",
             "itemtype": "method",
             "name": "seek",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "should be a number between 0 and the video duration",
+                    "type": "Number"
+                }
+            ],
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 46,
+            "description": "seeks the playback to a given `percentage` in percentage",
+            "itemtype": "method",
+            "name": "seekPercentage",
             "params": [
                 {
                     "name": "time",
@@ -1228,7 +1260,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 46,
+            "line": 53,
             "description": "gets the duration in seconds",
             "itemtype": "method",
             "name": "getDuration",
@@ -1241,7 +1273,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 53,
+            "line": 60,
             "description": "checks if the playback is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -1254,7 +1286,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 62,
+            "line": 69,
             "description": "gets the playback type (`'vod', 'live', 'aod'`)",
             "itemtype": "method",
             "name": "getPlaybackType",
@@ -1270,7 +1302,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 78,
+            "line": 85,
             "description": "checks if the playback is in HD.",
             "itemtype": "method",
             "name": "isHighDefinitionInUse",
@@ -1283,7 +1315,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 87,
+            "line": 94,
             "description": "sets the volume for the playback",
             "itemtype": "method",
             "name": "volume",
@@ -1299,7 +1331,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 94,
+            "line": 101,
             "description": "destroys the playback, removing it from DOM",
             "itemtype": "method",
             "name": "destroy",
@@ -1308,51 +1340,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 107,
-            "description": "a playback type for video on demand",
-            "itemtype": "property",
-            "name": "VOD",
-            "static": 1,
-            "type": "String",
-            "class": "Playback",
-            "module": "base"
-        },
-        {
-            "file": "src/base/playback.js",
-            "line": 115,
-            "description": "a playback type for audio on demand",
-            "itemtype": "property",
-            "name": "AOD",
-            "static": 1,
-            "type": "String",
-            "class": "Playback",
-            "module": "base"
-        },
-        {
-            "file": "src/base/playback.js",
-            "line": 123,
-            "description": "a playback type for live video",
-            "itemtype": "property",
-            "name": "LIVE",
-            "static": 1,
-            "type": "String",
-            "class": "Playback",
-            "module": "base"
-        },
-        {
-            "file": "src/base/playback.js",
-            "line": 131,
-            "description": "a default playback type",
-            "itemtype": "property",
-            "name": "NO_OP",
-            "static": 1,
-            "type": "String",
-            "class": "Playback",
-            "module": "base"
-        },
-        {
-            "file": "src/base/playback.js",
-            "line": 140,
+            "line": 114,
             "description": "checks if the playback can play a given `source` and optionally a `mimeType`",
             "itemtype": "method",
             "name": "canPlay",
@@ -1379,7 +1367,51 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 152,
+            "line": 126,
+            "description": "a playback type for video on demand",
+            "itemtype": "property",
+            "name": "VOD",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 134,
+            "description": "a playback type for audio on demand",
+            "itemtype": "property",
+            "name": "AOD",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 142,
+            "description": "a playback type for live video",
+            "itemtype": "property",
+            "name": "LIVE",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 150,
+            "description": "a default playback type",
+            "itemtype": "property",
+            "name": "NO_OP",
+            "static": 1,
+            "type": "String",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 158,
             "description": "the plugin type",
             "itemtype": "property",
             "name": "type",
@@ -1702,7 +1734,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 277,
+            "line": 285,
             "description": "adds plugin to the container",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1718,7 +1750,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 286,
+            "line": 294,
             "description": "checks if a plugin, given its name, exist",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1734,7 +1766,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 295,
+            "line": 303,
             "description": "get the plugin given its name",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2121,10 +2153,26 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 253,
-            "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
+            "line": 254,
+            "description": "seeks the current video (`source`). For example, `player.seek(120)` will seek to second 120 (2minutes) of the current video.",
             "itemtype": "method",
             "name": "seek",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "should be a number between 0 and the video duration.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 263,
+            "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
+            "itemtype": "method",
+            "name": "seekPercentage",
             "params": [
                 {
                     "name": "time",
@@ -2137,7 +2185,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 262,
+            "line": 272,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -2153,7 +2201,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 271,
+            "line": 281,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -2166,7 +2214,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 280,
+            "line": 290,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -2175,7 +2223,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 288,
+            "line": 298,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -2184,7 +2232,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 296,
+            "line": 306,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -2197,7 +2245,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 305,
+            "line": 315,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2220,7 +2268,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 323,
+            "line": 333,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -2233,7 +2281,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 332,
+            "line": 342,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",
