@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.19</em>
+            <em>API Docs for: 0.2.21</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -302,10 +302,6 @@
 
                             </li>
                             <li class="index-item event">
-                                <a href="#event_PLAYBACK_TIMEUPDATE">PLAYBACK_TIMEUPDATE</a>
-
-                            </li>
-                            <li class="index-item event">
                                 <a href="#event_PLAYER_ENDED">PLAYER_ENDED</a>
 
                             </li>
@@ -331,6 +327,10 @@
                             </li>
                             <li class="index-item event">
                                 <a href="#event_PLAYER_STOP">PLAYER_STOP</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_PLAYER_TIMEUPDATE">PLAYER_TIMEUPDATE</a>
 
                             </li>
                             <li class="index-item event">
@@ -2102,73 +2102,6 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l248"><code>src&#x2F;base&#x2F;events.js:248</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Fired when the time is updated on player</p>
-                    
-                        </div>
-                    
-                            <div class="params">
-                                <h4>Event Payload:</h4>
-                    
-                                <ul class="params-list">
-                                    <li class="param">
-                                            <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                                        <div class="param-description">
-                                            <p>Data
-                    progress object</p>
-                    
-                                        </div>
-                    
-                                            <ul class="params-list">
-                                                <li class="param">
-                                                        <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-                                                    <div class="param-description">
-                                                        <p>current time</p>
-                    
-                                                    </div>
-                    
-                                                </li>
-                                                <li class="param">
-                                                        <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
-                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-                                                    <div class="param-description">
-                                                        <p>total time</p>
-                    
-                                                    </div>
-                    
-                                                </li>
-                                            </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                    
-                    
-                    </div>
-                    <div id="event_PLAYBACK_TIMEUPDATE" class="events item">
-                        <h3 class="name"><code>PLAYBACK_TIMEUPDATE</code></h3>
-                        <span class="type"></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
                             <a href="../files/src_base_events.js.html#l283"><code>src&#x2F;base&#x2F;events.js:283</code></a>
                             </p>
                     
@@ -2448,6 +2381,73 @@
                     
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="event_PLAYER_TIMEUPDATE" class="events item">
+                        <h3 class="name"><code>PLAYER_TIMEUPDATE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_events.js.html#l248"><code>src&#x2F;base&#x2F;events.js:248</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the time is updated on player</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">progress</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Data
+                    progress object</p>
+                    
+                                        </div>
+                    
+                                            <ul class="params-list">
+                                                <li class="param">
+                                                        <code class="param-name optional">[current]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>current time</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                                <li class="param">
+                                                        <code class="param-name optional">[total]</code>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+                                                    <div class="param-description">
+                                                        <p>total time</p>
+                    
+                                                    </div>
+                    
+                                                </li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
                     
                     
                     </div>
