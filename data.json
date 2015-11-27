@@ -2,7 +2,7 @@
     "project": {
         "name": "Clappr",
         "description": "An extensible media player for the web",
-        "version": "0.2.21",
+        "version": "0.2.22",
         "url": "https://github.com/clappr/clappr",
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
@@ -1066,16 +1066,34 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 495,
-            "description": "Fired when the player enters/exit on fullscreen",
+            "line": 490,
+            "description": "Fired when the media control shows",
             "itemtype": "event",
-            "name": "MEDIACONTROL_SHOW",
+            "name": "CONTAINER_MEDIACONTROL_SHOW",
             "class": "Events",
             "module": "base"
         },
         {
             "file": "src/base/events.js",
-            "line": 501,
+            "line": 496,
+            "description": "Fired when the media control hides",
+            "itemtype": "event",
+            "name": "CONTAINER_MEDIACONTROL_HIDE",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 509,
+            "description": "Fired when the player enters/exit on fullscreen",
+            "itemtype": "event",
+            "name": "MEDIACONTROL_FULLSCREEN",
+            "class": "Events",
+            "module": "base"
+        },
+        {
+            "file": "src/base/events.js",
+            "line": 515,
             "description": "Fired when the media control shows",
             "itemtype": "event",
             "name": "MEDIACONTROL_SHOW",
@@ -1084,7 +1102,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 507,
+            "line": 521,
             "description": "Fired when the media control hides",
             "itemtype": "event",
             "name": "MEDIACONTROL_HIDE",
@@ -1093,7 +1111,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 513,
+            "line": 527,
             "description": "Fired when mouse enters on the seekbar",
             "itemtype": "event",
             "name": "MEDIACONTROL_MOUSEMOVE_SEEKBAR",
@@ -1109,7 +1127,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 521,
+            "line": 535,
             "description": "Fired when mouse leaves the seekbar",
             "itemtype": "event",
             "name": "MEDIACONTROL_MOUSELEAVE_SEEKBAR",
@@ -1125,7 +1143,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 529,
+            "line": 543,
             "description": "Fired when the media is being played",
             "itemtype": "event",
             "name": "MEDIACONTROL_PLAYING",
@@ -1134,7 +1152,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 535,
+            "line": 549,
             "description": "Fired when the media is not being played",
             "itemtype": "event",
             "name": "MEDIACONTROL_NOTPLAYING",
@@ -1143,7 +1161,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 541,
+            "line": 555,
             "description": "Fired when the container was changed",
             "itemtype": "event",
             "name": "MEDIACONTROL_CONTAINERCHANGED",
