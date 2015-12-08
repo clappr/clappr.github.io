@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Core - Clappr</title>
+    <title>UIContainerPlugin - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -87,7 +87,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Core Class</h1>
+<h1>UIContainerPlugin Class</h1>
 <div class="box meta">
 
         <div class="extends">
@@ -95,24 +95,23 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_components_core_core.js.html#l21"><code>src&#x2F;components&#x2F;core&#x2F;core.js:21</code></a>
+            Defined in: <a href="../files/src_base_ui_container_plugin.js.html#l9"><code>src&#x2F;base&#x2F;ui_container_plugin.js:9</code></a>
         </div>
 
-            Module: <a href="../modules/components.html">components</a>
+            Module: <a href="../modules/base.html">base</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>The Core is responsible to manage Containers, the mediator, MediaControl
-and the player state.</p>
+    <p>The base class for an ui container plugin</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Core" class="method item">
-    <h3 class="name"><code>Core</code></h3>
+<div id="method_UIContainerPlugin" class="method item">
+    <h3 class="name"><code>UIContainerPlugin</code></h3>
 
         <span class="paren">()</span>
 
@@ -126,7 +125,7 @@ and the player state.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_core_core.js.html#l21"><code>src&#x2F;components&#x2F;core&#x2F;core.js:21</code></a>
+        <a href="../files/src_base_ui_container_plugin.js.html#l9"><code>src&#x2F;base&#x2F;ui_container_plugin.js:9</code></a>
         </p>
 
 
@@ -166,10 +165,6 @@ and the player state.</p>
                             </li>
                             <li class="index-item method private inherited">
                                 <a href="#method__ensureElement">_ensureElement</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_configure">configure</a>
 
                             </li>
                             <li class="index-item method inherited inherited">
@@ -253,6 +248,10 @@ and the player state.</p>
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_events">events</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options">options</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -486,8 +485,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>selects within the component.</p>
-
+        selects within the component.
     </div>
 
         <div class="params">
@@ -500,8 +498,7 @@ and the player state.</p>
 
 
                     <div class="param-description">
-                        <p>a selector to find within the component.</p>
-
+                        a selector to find within the component.
                     </div>
 
                 </li>
@@ -513,8 +510,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
-                    <p>an element, if it exists.</p>
-
+                    an element, if it exists.
             </div>
         </div>
 
@@ -553,64 +549,9 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>ensures the creation of this ui component</p>
-
+        ensures the creation of this ui component
     </div>
 
-
-
-
-</div>
-<div id="method_configure" class="method item">
-    <h3 class="name"><code>configure</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>options</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_components_core_core.js.html#l271"><code>src&#x2F;components&#x2F;core&#x2F;core.js:271</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>enables to configure the container after its creation</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">options</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-                    <div class="param-description">
-                        <p>all the options to change in form of a javascript object</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
 
 
@@ -647,13 +588,10 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>it builds an ui component by:</p>
-<ul>
-<li>creating an id for the component <code>cid</code></li>
-<li>making sure the element is created <code>$el</code></li>
-<li>delegating all <code>events</code> to the element</li>
-</ul>
-
+        it builds an ui component by:
+ * creating an id for the component <code>cid</code>
+ * making sure the element is created <code>$el</code>
+ * delegating all <code>events</code> to the element
     </div>
 
         <div class="params">
@@ -709,8 +647,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>delegates all the original <code>events</code> on <code>element</code> to its callbacks</p>
-
+        delegates all the original <code>events</code> on <code>element</code> to its callbacks
     </div>
 
         <div class="params">
@@ -735,8 +672,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1207,8 +1143,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>removes the ui component from DOM</p>
-
+        removes the ui component from DOM
     </div>
 
 
@@ -1217,8 +1152,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1250,8 +1184,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>render the component, usually attach it to a real existent <code>element</code></p>
-
+        render the component, usually attach it to a real existent <code>element</code>
     </div>
 
 
@@ -1260,8 +1193,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1302,8 +1234,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>set element to <code>el</code> and <code>$el</code></p>
-
+        set element to <code>el</code> and <code>$el</code>
     </div>
 
         <div class="params">
@@ -1326,8 +1257,7 @@ and the player state.</p>
 
 
                     <div class="param-description">
-                        <p>whether is delegate or not</p>
-
+                        whether is delegate or not
                     </div>
 
                 </li>
@@ -1339,8 +1269,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1451,8 +1380,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>gets the tag name for the ui component</p>
-
+        gets the tag name for the ui component
     </div>
 
 
@@ -1461,8 +1389,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    <p>tag's name</p>
-
+                    tag's name
             </div>
         </div>
 
@@ -1547,8 +1474,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>undelegats all the <code>events</code></p>
-
+        undelegats all the <code>events</code>
     </div>
 
 
@@ -1557,8 +1483,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1587,8 +1512,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>the dom element wrapped by <code>$</code></p>
-                    
+                            the dom element wrapped by <code>$</code>
                         </div>
                     
                     
@@ -1612,9 +1536,8 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>a literal object mapping attributes and values to the element
-                    element's attribute name and the value the attribute value</p>
-                    
+                            a literal object mapping attributes and values to the element
+                    element's attribute name and the value the attribute value
                         </div>
                     
                     
@@ -1653,8 +1576,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>a unique id prefixed with <code>'c'</code>, <code>c1, c232</code></p>
-                    
+                            a unique id prefixed with <code>&#x27;c&#x27;</code>, <code>c1, c232</code>
                         </div>
                     
                     
@@ -1678,8 +1600,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>the dom element itself</p>
-                    
+                            the dom element itself
                         </div>
                     
                     
@@ -1703,8 +1624,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>a literal object mapping element's events to methods</p>
-                    
+                            a literal object mapping element's events to methods
                         </div>
                     
                     
@@ -1727,6 +1647,32 @@ and the player state.</p>
                     
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="property_options" class="property item">
+                        <h3 class="name"><code>options</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_ui_container_plugin.js.html#l24"><code>src&#x2F;base&#x2F;ui_container_plugin.js:24</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>provides the read-only options to the ui container plugin</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &quot;&#x60;{}&#x60;&quot;</p>
+                    
                     
                     </div>
                     <div id="property_uniqueId" class="property item inherited">

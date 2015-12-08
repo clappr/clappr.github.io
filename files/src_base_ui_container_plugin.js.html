@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/base/base_object.js - Clappr</title>
+    <title>src/base/ui_container_plugin.js - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -87,7 +87,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/base/base_object.js</h1>
+<h1 class="file-heading">File: src/base/ui_container_plugin.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -95,32 +95,59 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import {uniqueId} from &#x27;./utils&#x27;
-import Events from &#x27;./events&#x27;
+import {extend} from &#x27;./utils&#x27;
+
+import UIObject from &#x27;./ui_object&#x27;
 
 /**
- * @class BaseObject
+ * The base class for an ui container plugin
+ * @class UIContainerPlugin
  * @constructor
- * @extends Events
+ * @extends UIObject
  * @module base
  */
-export default class BaseObject extends Events {
-  /**
-   * @method constructor
-   * @param {Object} options
-   */
-  constructor(options={}) {
-    super(options)
-    this.uniqueId = uniqueId(&#x27;o&#x27;)
+export default class UIContainerPlugin extends UIObject {
+  constructor(container) {
+    super(container.options)
+    this.container = container
+    this.enabled = true
+    this.bindEvents()
   }
+
   /**
-  * a unique id prefixed with &#x60;&#x27;o&#x27;&#x60;, &#x60;o1, o232&#x60;
-  *
-  * @property uniqueId
-  * @type String
-  */
+   * provides the read-only options to the ui container plugin
+   * @property options
+   * @type Object
+   * @default &quot;&#x60;{}&#x60;&quot;
+   */
+  get options() {return (this.container &amp;&amp; this.container.options) || {}}
+
+  enable() {
+    if (!this.enabled) {
+      this.bindEvents()
+      this.$el.show()
+      this.enabled = true
+    }
+  }
+
+  disable() {
+    this.stopListening()
+    this.$el.hide()
+    this.enabled = false
+  }
+
+  bindEvents() {}
+
+  destroy() {
+    this.remove()
+  }
 }
 
+UIContainerPlugin.extend = function(properties) {
+  return extend(UIContainerPlugin, properties)
+}
+
+UIContainerPlugin.type = &#x27;container&#x27;
 
     </pre>
 </div>

@@ -3,12 +3,14 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "BaseObject",
         "Container",
+        "ContainerPlugin",
         "Core",
         "CoreFactory",
         "Events",
         "Loader",
         "Playback",
         "Player",
+        "UIContainerPlugin",
         "UIObject"
     ],
     "modules": [

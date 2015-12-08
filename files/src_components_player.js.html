@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.22</em>
+            <em>API Docs for: 0.2.24</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,12 +40,14 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/ContainerPlugin.html">ContainerPlugin</a></li>
                                 <li><a href="../classes/Core.html">Core</a></li>
                                 <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
@@ -160,6 +162,10 @@ export default class Player extends BaseObject {
    * start the video muted **default**: &#x60;false&#x60;
    * @param {String} [options.mimeType]
    * add &#x60;mimeType: &quot;application/vnd.apple.mpegurl&quot;&#x60; if you need to use a url without extension.
+   * @param {String} [options.actualLiveTime]
+   * show duration and seek time relative to actual time.
+   * @param {String} [options.actualLiveServerTime]
+   * specify server time as a string, format: &quot;2015/11/26 06:01:03&quot;. This option is meant to be used with actualLiveTime.
    * @param {Boolean} [options.persistConfig]
    * persist player&#x27;s settings (volume) through the same domain **default**: &#x60;true&#x60;
    * @param {String} [options.preload]
@@ -180,8 +186,12 @@ export default class Player extends BaseObject {
    * put &#x60;watermark: &#x27;http://url/img.png&#x27;&#x60; on your embed parameters to automatically add watermark on your video. You can customize corner position by defining position parameter. Positions can be &#x60;bottom-left&#x60;, &#x60;bottom-right&#x60;, &#x60;top-left&#x60; and &#x60;top-right&#x60;.
    * @param {Boolean} [options.disableVideoTagContextMenu]
    * disables the context menu (right click) on the video element if a HTML5Video playback is used.
+   * @param {Boolean} [options.autoSeekFromUrl]
+   * Automatically seek to the seconds provided in the url (e.g example.com?t=100) **default**: &#x60;true&#x60;
    * @param {String} [options.poster]
    * define a poster by adding its address &#x60;poster: &#x27;http://url/img.png&#x27;&#x60;. It will appear after video embed, disappear on play and go back when user stops the video.
+   * @param {String} [options.playbackNotSupportedMessage]
+   * define a custom message to be displayed when a playback is not supported.
    */
   constructor(options) {
     super(options)
@@ -401,6 +411,15 @@ export default class Player extends BaseObject {
    */
   isPlaying() {
     return this.core.mediaControl.container.isPlaying();
+  }
+
+  /**
+   * enables to configure a player after its creation
+   * @method configure
+   * @param {Object} options all the options to change in form of a javascript object
+   */
+  configure(options) {
+    this.core.configure(options)
   }
 
   /**

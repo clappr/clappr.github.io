@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Core - Clappr</title>
+    <title>ContainerPlugin - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -87,7 +87,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>Core Class</h1>
+<h1>ContainerPlugin Class</h1>
 <div class="box meta">
 
         <div class="extends">
@@ -95,24 +95,23 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/src_components_core_core.js.html#l21"><code>src&#x2F;components&#x2F;core&#x2F;core.js:21</code></a>
+            Defined in: <a href="../files/src_base_container_plugin.js.html#l4"><code>src&#x2F;base&#x2F;container_plugin.js:4</code></a>
         </div>
 
-            Module: <a href="../modules/components.html">components</a>
+            Module: <a href="../modules/base.html">base</a>
 
 </div>
 
 
 <div class="box intro">
-    <p>The Core is responsible to manage Containers, the mediator, MediaControl
-and the player state.</p>
+    <p>The base class for a container plugin</p>
 
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_Core" class="method item">
-    <h3 class="name"><code>Core</code></h3>
+<div id="method_ContainerPlugin" class="method item">
+    <h3 class="name"><code>ContainerPlugin</code></h3>
 
         <span class="paren">()</span>
 
@@ -126,7 +125,7 @@ and the player state.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_core_core.js.html#l21"><code>src&#x2F;components&#x2F;core&#x2F;core.js:21</code></a>
+        <a href="../files/src_base_container_plugin.js.html#l4"><code>src&#x2F;base&#x2F;container_plugin.js:4</code></a>
         </p>
 
 
@@ -166,10 +165,6 @@ and the player state.</p>
                             </li>
                             <li class="index-item method private inherited">
                                 <a href="#method__ensureElement">_ensureElement</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_configure">configure</a>
 
                             </li>
                             <li class="index-item method inherited inherited">
@@ -253,6 +248,10 @@ and the player state.</p>
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_events">events</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options">options</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -486,8 +485,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>selects within the component.</p>
-
+        selects within the component.
     </div>
 
         <div class="params">
@@ -500,8 +498,7 @@ and the player state.</p>
 
 
                     <div class="param-description">
-                        <p>a selector to find within the component.</p>
-
+                        a selector to find within the component.
                     </div>
 
                 </li>
@@ -513,8 +510,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
-                    <p>an element, if it exists.</p>
-
+                    an element, if it exists.
             </div>
         </div>
 
@@ -553,64 +549,9 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>ensures the creation of this ui component</p>
-
+        ensures the creation of this ui component
     </div>
 
-
-
-
-</div>
-<div id="method_configure" class="method item">
-    <h3 class="name"><code>configure</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>options</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_components_core_core.js.html#l271"><code>src&#x2F;components&#x2F;core&#x2F;core.js:271</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>enables to configure the container after its creation</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">options</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-
-
-                    <div class="param-description">
-                        <p>all the options to change in form of a javascript object</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
 
 
@@ -647,13 +588,10 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>it builds an ui component by:</p>
-<ul>
-<li>creating an id for the component <code>cid</code></li>
-<li>making sure the element is created <code>$el</code></li>
-<li>delegating all <code>events</code> to the element</li>
-</ul>
-
+        it builds an ui component by:
+ * creating an id for the component <code>cid</code>
+ * making sure the element is created <code>$el</code>
+ * delegating all <code>events</code> to the element
     </div>
 
         <div class="params">
@@ -666,8 +604,7 @@ and the player state.</p>
 
 
                     <div class="param-description">
-                        <p>the options object</p>
-
+                        the options object
                     </div>
 
                 </li>
@@ -709,8 +646,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>delegates all the original <code>events</code> on <code>element</code> to its callbacks</p>
-
+        delegates all the original <code>events</code> on <code>element</code> to its callbacks
     </div>
 
         <div class="params">
@@ -735,8 +671,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -780,8 +715,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>listen to an event indefinitely for a given <code>obj</code></p>
-
+        listen to an event indefinitely for a given <code>obj</code>
     </div>
 
         <div class="params">
@@ -881,8 +815,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>listen to an event once for a given <code>obj</code></p>
-
+        listen to an event once for a given <code>obj</code>
     </div>
 
         <div class="params">
@@ -979,8 +912,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>stop listening to an event</p>
-
+        stop listening to an event
     </div>
 
         <div class="params">
@@ -1058,8 +990,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>listen to an event indefinitely, if you want to stop you need to call <code>off</code></p>
-
+        listen to an event indefinitely, if you want to stop you need to call <code>off</code>
     </div>
 
         <div class="params">
@@ -1137,8 +1068,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>listen to an event only once</p>
-
+        listen to an event only once
     </div>
 
         <div class="params">
@@ -1207,8 +1137,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>removes the ui component from DOM</p>
-
+        removes the ui component from DOM
     </div>
 
 
@@ -1217,8 +1146,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1250,8 +1178,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>render the component, usually attach it to a real existent <code>element</code></p>
-
+        render the component, usually attach it to a real existent <code>element</code>
     </div>
 
 
@@ -1260,8 +1187,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1302,8 +1228,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>set element to <code>el</code> and <code>$el</code></p>
-
+        set element to <code>el</code> and <code>$el</code>
     </div>
 
         <div class="params">
@@ -1326,8 +1251,7 @@ and the player state.</p>
 
 
                     <div class="param-description">
-                        <p>whether is delegate or not</p>
-
+                        whether is delegate or not
                     </div>
 
                 </li>
@@ -1339,8 +1263,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1381,8 +1304,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>stop listening an event for a given object</p>
-
+        stop listening an event for a given object
     </div>
 
         <div class="params">
@@ -1451,8 +1373,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>gets the tag name for the ui component</p>
-
+        gets the tag name for the ui component
     </div>
 
 
@@ -1461,8 +1382,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    <p>tag's name</p>
-
+                    tag's name
             </div>
         </div>
 
@@ -1497,8 +1417,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>triggers an event given its <code>name</code></p>
-
+        triggers an event given its <code>name</code>
     </div>
 
         <div class="params">
@@ -1547,8 +1466,7 @@ and the player state.</p>
     </div>
 
     <div class="description">
-        <p>undelegats all the <code>events</code></p>
-
+        undelegats all the <code>events</code>
     </div>
 
 
@@ -1557,8 +1475,7 @@ and the player state.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="../classes/UIObject.html" class="crosslink">UIObject</a></span>:
-                    <p>itself</p>
-
+                    itself
             </div>
         </div>
 
@@ -1587,8 +1504,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>the dom element wrapped by <code>$</code></p>
-                    
+                            the dom element wrapped by <code>$</code>
                         </div>
                     
                     
@@ -1612,9 +1528,8 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>a literal object mapping attributes and values to the element
-                    element's attribute name and the value the attribute value</p>
-                    
+                            a literal object mapping attributes and values to the element
+                    element's attribute name and the value the attribute value
                         </div>
                     
                     
@@ -1653,8 +1568,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>a unique id prefixed with <code>'c'</code>, <code>c1, c232</code></p>
-                    
+                            a unique id prefixed with <code>&#x27;c&#x27;</code>, <code>c1, c232</code>
                         </div>
                     
                     
@@ -1678,8 +1592,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>the dom element itself</p>
-                    
+                            the dom element itself
                         </div>
                     
                     
@@ -1703,8 +1616,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>a literal object mapping element's events to methods</p>
-                    
+                            a literal object mapping element's events to methods
                         </div>
                     
                     
@@ -1727,6 +1639,32 @@ and the player state.</p>
                     
                                 </div>
                             </div>
+                    
+                    </div>
+                    <div id="property_options" class="property item">
+                        <h3 class="name"><code>options</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_container_plugin.js.html#l19"><code>src&#x2F;base&#x2F;container_plugin.js:19</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>provides the read-only options to the container plugin</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &quot;&#x60;{}&#x60;&quot;</p>
+                    
                     
                     </div>
                     <div id="property_uniqueId" class="property item inherited">
@@ -1778,8 +1716,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container updates its bitrate</p>
-                    
+                            Fired when the container updates its bitrate
                         </div>
                     
                             <div class="params">
@@ -1792,9 +1729,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    bitrate object</p>
-                    
+                                            Data
+                    bitrate object
                                         </div>
                     
                                             <ul class="params-list">
@@ -1867,8 +1803,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when container updates its video quality</p>
-                    
+                            Fired when container updates its video quality
                         </div>
                     
                             <div class="params">
@@ -1882,8 +1817,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>when is on HD, false otherwise</p>
-                    
+                                            when is on HD, false otherwise
                                         </div>
                     
                                     </li>
@@ -1910,8 +1844,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container loaded its metadata</p>
-                    
+                            Fired when the container loaded its metadata
                         </div>
                     
                             <div class="params">
@@ -1924,9 +1857,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    settings object</p>
-                    
+                                            Data
+                    settings object
                                         </div>
                     
                                             <ul class="params-list">
@@ -1977,8 +1909,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the media control hides</p>
-                    
+                            Fired when the media control hides
                         </div>
                     
                     
@@ -2002,8 +1933,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the media control shows</p>
-                    
+                            Fired when the media control shows
                         </div>
                     
                     
@@ -2027,8 +1957,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the options were changed for the container</p>
-                    
+                            Fired when the options were changed for the container
                         </div>
                     
                     
@@ -2052,8 +1981,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container internal state changes</p>
-                    
+                            Fired when the container internal state changes
                         </div>
                     
                             <div class="params">
@@ -2066,9 +1994,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    state object</p>
-                    
+                                            Data
+                    state object
                                         </div>
                     
                                             <ul class="params-list">
@@ -2108,8 +2035,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container is downloading the media</p>
-                    
+                            Fired when the container is downloading the media
                         </div>
                     
                             <div class="params">
@@ -2122,9 +2048,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    progress object</p>
-                    
+                                            Data
+                    progress object
                                         </div>
                     
                                             <ul class="params-list">
@@ -2186,8 +2111,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container is ready</p>
-                    
+                            Fired when the container is ready
                         </div>
                     
                     
@@ -2211,8 +2135,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container seeks the video</p>
-                    
+                            Fired when the container seeks the video
                         </div>
                     
                             <div class="params">
@@ -2225,8 +2148,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>the current time in seconds</p>
-                    
+                                            the current time in seconds
                                         </div>
                     
                                     </li>
@@ -2253,8 +2175,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container changes any settings (volume, seek and etc)</p>
-                    
+                            Fired when the container changes any settings (volume, seek and etc)
                         </div>
                     
                     
@@ -2278,8 +2199,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container filled the buffer</p>
-                    
+                            Fired when the container filled the buffer
                         </div>
                     
                     
@@ -2303,8 +2223,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when container is buffering</p>
-                    
+                            Fired when container is buffering
                         </div>
                     
                     
@@ -2328,8 +2247,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the time is updated on container</p>
-                    
+                            Fired when the time is updated on container
                         </div>
                     
                             <div class="params">
@@ -2342,9 +2260,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    progress object</p>
-                    
+                                            Data
+                    progress object
                                         </div>
                     
                                             <ul class="params-list">
@@ -2395,8 +2312,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the options were changed for the core</p>
-                    
+                            Fired when the options were changed for the core
                         </div>
                     
                     
@@ -2420,8 +2336,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the container was changed</p>
-                    
+                            Fired when the container was changed
                         </div>
                     
                     
@@ -2445,8 +2360,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the player enters/exit on fullscreen</p>
-                    
+                            Fired when the player enters/exit on fullscreen
                         </div>
                     
                     
@@ -2470,8 +2384,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the media control hides</p>
-                    
+                            Fired when the media control hides
                         </div>
                     
                     
@@ -2495,8 +2408,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when mouse leaves the seekbar</p>
-                    
+                            Fired when mouse leaves the seekbar
                         </div>
                     
                             <div class="params">
@@ -2510,8 +2422,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>javascript event</p>
-                    
+                                            javascript event
                                         </div>
                     
                                     </li>
@@ -2538,8 +2449,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when mouse enters on the seekbar</p>
-                    
+                            Fired when mouse enters on the seekbar
                         </div>
                     
                             <div class="params">
@@ -2553,8 +2463,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>javascript event</p>
-                    
+                                            javascript event
                                         </div>
                     
                                     </li>
@@ -2581,8 +2490,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the media is not being played</p>
-                    
+                            Fired when the media is not being played
                         </div>
                     
                     
@@ -2606,8 +2514,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the media is being played</p>
-                    
+                            Fired when the media is being played
                         </div>
                     
                     
@@ -2631,8 +2538,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the media control shows</p>
-                    
+                            Fired when the media control shows
                         </div>
                     
                     
@@ -2656,8 +2562,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback updates its bitrate</p>
-                    
+                            Fired when playback updates its bitrate
                         </div>
                     
                             <div class="params">
@@ -2670,9 +2575,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    bitrate object</p>
-                    
+                                            Data
+                    bitrate object
                                         </div>
                     
                                             <ul class="params-list">
@@ -2745,8 +2649,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback filled the buffer</p>
-                    
+                            Fired when playback filled the buffer
                         </div>
                     
                     
@@ -2770,8 +2673,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback is buffering</p>
-                    
+                            Fired when playback is buffering
                         </div>
                     
                     
@@ -2795,8 +2697,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback updates its video quality</p>
-                    
+                            Fired when playback updates its video quality
                         </div>
                     
                             <div class="params">
@@ -2810,8 +2711,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>when is on HD, false otherwise</p>
-                    
+                                            when is on HD, false otherwise
                                         </div>
                     
                                     </li>
@@ -2838,8 +2738,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the playback ends the level switch</p>
-                    
+                            Fired when the playback ends the level switch
                         </div>
                     
                     
@@ -2863,8 +2762,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the playback starts to switch level</p>
-                    
+                            Fired when the playback starts to switch level
                         </div>
                     
                     
@@ -2888,8 +2786,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the playback has its levels</p>
-                    
+                            Fired when the playback has its levels
                         </div>
                     
                             <div class="params">
@@ -2903,8 +2800,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>ordered levels, each one with the following format <code>{id: 1, label: '500kbps'}</code> ps: id should be a number &gt;= 0</p>
-                    
+                                            ordered levels, each one with the following format <code>{id: 1, label: &#x27;500kbps&#x27;}</code> ps: id should be a number >= 0
                                         </div>
                     
                                     </li>
@@ -2931,8 +2827,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback loaded its metadata</p>
-                    
+                            Fired when playback loaded its metadata
                         </div>
                     
                             <div class="params">
@@ -2945,9 +2840,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    settings object</p>
-                    
+                                            Data
+                    settings object
                                         </div>
                     
                                             <ul class="params-list">
@@ -2998,8 +2892,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback internal state changes</p>
-                    
+                            Fired when playback internal state changes
                         </div>
                     
                             <div class="params">
@@ -3012,9 +2905,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    state object</p>
-                    
+                                            Data
+                    state object
                                         </div>
                     
                                             <ul class="params-list">
@@ -3054,8 +2946,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the playback is downloading the media</p>
-                    
+                            Fired when the playback is downloading the media
                         </div>
                     
                             <div class="params">
@@ -3068,9 +2959,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    progress object</p>
-                    
+                                            Data
+                    progress object
                                         </div>
                     
                                             <ul class="params-list">
@@ -3132,8 +3022,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback is ready</p>
-                    
+                            Fired when playback is ready
                         </div>
                     
                     
@@ -3157,8 +3046,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when playback changes any settings (volume, seek and etc)</p>
-                    
+                            Fired when playback changes any settings (volume, seek and etc)
                         </div>
                     
                     
@@ -3182,8 +3070,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the time is updated on playback</p>
-                    
+                            Fired when the time is updated on playback
                         </div>
                     
                             <div class="params">
@@ -3196,9 +3083,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    progress object</p>
-                    
+                                            Data
+                    progress object
                                         </div>
                     
                                             <ul class="params-list">
@@ -3249,8 +3135,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player ends the video</p>
-                    
+                            Fired when player ends the video
                         </div>
                     
                     
@@ -3274,8 +3159,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player receives an error</p>
-                    
+                            Fired when player receives an error
                         </div>
                     
                             <div class="params">
@@ -3288,8 +3172,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>the error</p>
-                    
+                                            the error
                                         </div>
                     
                                     </li>
@@ -3316,8 +3199,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player pauses</p>
-                    
+                            Fired when player pauses
                         </div>
                     
                     
@@ -3341,8 +3223,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player starts to play</p>
-                    
+                            Fired when player starts to play
                         </div>
                     
                     
@@ -3366,8 +3247,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player resizes</p>
-                    
+                            Fired when player resizes
                         </div>
                     
                             <div class="params">
@@ -3380,8 +3260,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>an object with the current size</p>
-                    
+                                            an object with the current size
                                         </div>
                     
                                     </li>
@@ -3408,8 +3287,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player seeks the video</p>
-                    
+                            Fired when player seeks the video
                         </div>
                     
                             <div class="params">
@@ -3422,8 +3300,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>the current time in seconds</p>
-                    
+                                            the current time in seconds
                                         </div>
                     
                                     </li>
@@ -3450,8 +3327,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player stops</p>
-                    
+                            Fired when player stops
                         </div>
                     
                     
@@ -3475,8 +3351,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when the time is updated on player</p>
-                    
+                            Fired when the time is updated on player
                         </div>
                     
                             <div class="params">
@@ -3489,9 +3364,8 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>Data
-                    progress object</p>
-                    
+                                            Data
+                    progress object
                                         </div>
                     
                                             <ul class="params-list">
@@ -3542,8 +3416,7 @@ and the player state.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Fired when player updates its volume</p>
-                    
+                            Fired when player updates its volume
                         </div>
                     
                             <div class="params">
@@ -3556,8 +3429,7 @@ and the player state.</p>
                     
                     
                                         <div class="param-description">
-                                            <p>the current volume</p>
-                    
+                                            the current volume
                                         </div>
                     
                                     </li>

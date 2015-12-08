@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.22</em>
+            <em>API Docs for: 0.2.24</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,12 +40,14 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/ContainerPlugin.html">ContainerPlugin</a></li>
                                 <li><a href="../classes/Core.html">Core</a></li>
                                 <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
@@ -166,7 +168,7 @@ export default class Core extends UIObject {
   }
 
   setFullscreen() {
-    if(!Browser.isiOs) {
+    if(!Browser.isiOS) {
       this.$el.addClass(&#x27;fullscreen&#x27;)
       this.$el.removeAttr(&#x27;style&#x27;)
       this.playerInfo.previousSize = { width: this.options.width, height: this.options.height }
@@ -198,19 +200,18 @@ export default class Core extends UIObject {
 
   enableResizeObserver() {
     var checkSizeCallback = () =&gt; {
-      if (this.reqAnimFrame) clearTimeout(this.reqAnimFrame)
+      if (this.resizeObserverInterval) clearInterval(this.resizeObserverInterval)
       if (this.playerInfo.computedSize.width != this.el.clientWidth ||
           this.playerInfo.computedSize.height != this.el.clientHeight) {
         this.playerInfo.computedSize = { width: this.el.clientWidth, height: this.el.clientHeight }
         Mediator.trigger(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerInfo.computedSize)
       }
-      this.reqAnimFrame = setTimeout(checkSizeCallback, 500)
     }
-    this.reqAnimFrame = setTimeout(checkSizeCallback, 500)
+    this.resizeObserverInterval = setInterval(checkSizeCallback, 500)
   }
 
   disableResizeObserver() {
-    if (this.reqAnimFrame) cancelAnimationFrame(this.reqAnimFrame)
+    if (this.resizeObserverInterval) clearInterval(this.resizeObserverInterval)
   }
 
   resolveOnContainersReady(containers) {
@@ -331,12 +332,12 @@ export default class Core extends UIObject {
   toggleFullscreen() {
     if (!Fullscreen.isFullscreen()) {
       Fullscreen.requestFullscreen(this.el)
-      if(!Browser.isiOs) {
+      if(!Browser.isiOS) {
         this.$el.addClass(&#x27;fullscreen&#x27;)
       }
     } else {
       Fullscreen.cancelFullscreen()
-      if(!Browser.isiOs) {
+      if(!Browser.isiOS) {
         this.$el.removeClass(&#x27;fullscreen nocursor&#x27;)
       }
     }
@@ -358,6 +359,26 @@ export default class Core extends UIObject {
       this.$el.removeClass(&#x27;nocursor&#x27;)
     else if (Fullscreen.isFullscreen())
       this.$el.addClass(&#x27;nocursor&#x27;)
+  }
+
+  /**
+   * enables to configure the container after its creation
+   * @method configure
+   * @param {Object} options all the options to change in form of a javascript object
+   */
+  configure(options) {
+    this.options = $.extend(this.options, options)
+    var sources = this.options.source || this.options.sources
+
+    if (sources) {
+      this.load(sources)
+    } else {
+      this.trigger(Events.CORE_OPTIONS_CHANGE)
+
+      this.containers.forEach((container) =&gt; {
+        container.configure(this.options)
+      })
+    }
   }
 
   render() {

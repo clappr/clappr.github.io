@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.22</em>
+            <em>API Docs for: 0.2.24</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,12 +40,14 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/ContainerPlugin.html">ContainerPlugin</a></li>
                                 <li><a href="../classes/Core.html">Core</a></li>
                                 <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
@@ -210,6 +212,10 @@
 
                             </li>
                             <li class="index-item event">
+                                <a href="#event_CONTAINER_OPTIONS_CHANGE">CONTAINER_OPTIONS_CHANGE</a>
+
+                            </li>
+                            <li class="index-item event">
                                 <a href="#event_CONTAINER_PLAYBACKSTATE">CONTAINER_PLAYBACKSTATE</a>
 
                             </li>
@@ -239,6 +245,10 @@
                             </li>
                             <li class="index-item event">
                                 <a href="#event_CONTAINER_TIMEUPDATE">CONTAINER_TIMEUPDATE</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_CORE_OPTIONS_CHANGE">CORE_OPTIONS_CHANGE</a>
 
                             </li>
                             <li class="index-item event">
@@ -287,6 +297,18 @@
                             </li>
                             <li class="index-item event">
                                 <a href="#event_PLAYBACK_HIGHDEFINITIONUPDATE">PLAYBACK_HIGHDEFINITIONUPDATE</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_PLAYBACK_LEVEL_SWITCH_END">PLAYBACK_LEVEL_SWITCH_END</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_PLAYBACK_LEVEL_SWITCH_START">PLAYBACK_LEVEL_SWITCH_START</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_PLAYBACK_LEVELS_AVAILABLE">PLAYBACK_LEVELS_AVAILABLE</a>
 
                             </li>
                             <li class="index-item event">
@@ -945,7 +967,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l388"><code>src&#x2F;base&#x2F;events.js:388</code></a>
+                            <a href="../files/src_base_events.js.html#l420"><code>src&#x2F;base&#x2F;events.js:420</code></a>
                             </p>
                     
                     
@@ -1034,7 +1056,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l487"><code>src&#x2F;base&#x2F;events.js:487</code></a>
+                            <a href="../files/src_base_events.js.html#l519"><code>src&#x2F;base&#x2F;events.js:519</code></a>
                             </p>
                     
                     
@@ -1077,7 +1099,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l413"><code>src&#x2F;base&#x2F;events.js:413</code></a>
+                            <a href="../files/src_base_events.js.html#l445"><code>src&#x2F;base&#x2F;events.js:445</code></a>
                             </p>
                     
                     
@@ -1144,7 +1166,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l502"><code>src&#x2F;base&#x2F;events.js:502</code></a>
+                            <a href="../files/src_base_events.js.html#l534"><code>src&#x2F;base&#x2F;events.js:534</code></a>
                             </p>
                     
                     
@@ -1169,7 +1191,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l496"><code>src&#x2F;base&#x2F;events.js:496</code></a>
+                            <a href="../files/src_base_events.js.html#l528"><code>src&#x2F;base&#x2F;events.js:528</code></a>
                             </p>
                     
                     
@@ -1177,6 +1199,31 @@
                     
                         <div class="description">
                             <p>Fired when the media control shows</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_CONTAINER_OPTIONS_CHANGE" class="events item">
+                        <h3 class="name"><code>CONTAINER_OPTIONS_CHANGE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_events.js.html#l544"><code>src&#x2F;base&#x2F;events.js:544</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the options were changed for the container</p>
                     
                         </div>
                     
@@ -1194,7 +1241,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l377"><code>src&#x2F;base&#x2F;events.js:377</code></a>
+                            <a href="../files/src_base_events.js.html#l409"><code>src&#x2F;base&#x2F;events.js:409</code></a>
                             </p>
                     
                     
@@ -1250,7 +1297,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l437"><code>src&#x2F;base&#x2F;events.js:437</code></a>
+                            <a href="../files/src_base_events.js.html#l469"><code>src&#x2F;base&#x2F;events.js:469</code></a>
                             </p>
                     
                     
@@ -1328,7 +1375,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l406"><code>src&#x2F;base&#x2F;events.js:406</code></a>
+                            <a href="../files/src_base_events.js.html#l438"><code>src&#x2F;base&#x2F;events.js:438</code></a>
                             </p>
                     
                     
@@ -1353,7 +1400,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l460"><code>src&#x2F;base&#x2F;events.js:460</code></a>
+                            <a href="../files/src_base_events.js.html#l492"><code>src&#x2F;base&#x2F;events.js:492</code></a>
                             </p>
                     
                     
@@ -1395,7 +1442,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l481"><code>src&#x2F;base&#x2F;events.js:481</code></a>
+                            <a href="../files/src_base_events.js.html#l513"><code>src&#x2F;base&#x2F;events.js:513</code></a>
                             </p>
                     
                     
@@ -1420,7 +1467,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l475"><code>src&#x2F;base&#x2F;events.js:475</code></a>
+                            <a href="../files/src_base_events.js.html#l507"><code>src&#x2F;base&#x2F;events.js:507</code></a>
                             </p>
                     
                     
@@ -1445,7 +1492,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l469"><code>src&#x2F;base&#x2F;events.js:469</code></a>
+                            <a href="../files/src_base_events.js.html#l501"><code>src&#x2F;base&#x2F;events.js:501</code></a>
                             </p>
                     
                     
@@ -1470,7 +1517,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l425"><code>src&#x2F;base&#x2F;events.js:425</code></a>
+                            <a href="../files/src_base_events.js.html#l457"><code>src&#x2F;base&#x2F;events.js:457</code></a>
                             </p>
                     
                     
@@ -1526,6 +1573,31 @@
                     
                     
                     </div>
+                    <div id="event_CORE_OPTIONS_CHANGE" class="events item">
+                        <h3 class="name"><code>CORE_OPTIONS_CHANGE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_events.js.html#l400"><code>src&#x2F;base&#x2F;events.js:400</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the options were changed for the core</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
                     <div id="event_MEDIACONTROL_CONTAINERCHANGED" class="events item">
                         <h3 class="name"><code>MEDIACONTROL_CONTAINERCHANGED</code></h3>
                         <span class="type"></span>
@@ -1537,7 +1609,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l561"><code>src&#x2F;base&#x2F;events.js:561</code></a>
+                            <a href="../files/src_base_events.js.html#l599"><code>src&#x2F;base&#x2F;events.js:599</code></a>
                             </p>
                     
                     
@@ -1562,7 +1634,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l515"><code>src&#x2F;base&#x2F;events.js:515</code></a>
+                            <a href="../files/src_base_events.js.html#l553"><code>src&#x2F;base&#x2F;events.js:553</code></a>
                             </p>
                     
                     
@@ -1587,7 +1659,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l527"><code>src&#x2F;base&#x2F;events.js:527</code></a>
+                            <a href="../files/src_base_events.js.html#l565"><code>src&#x2F;base&#x2F;events.js:565</code></a>
                             </p>
                     
                     
@@ -1612,7 +1684,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l541"><code>src&#x2F;base&#x2F;events.js:541</code></a>
+                            <a href="../files/src_base_events.js.html#l579"><code>src&#x2F;base&#x2F;events.js:579</code></a>
                             </p>
                     
                     
@@ -1655,7 +1727,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l533"><code>src&#x2F;base&#x2F;events.js:533</code></a>
+                            <a href="../files/src_base_events.js.html#l571"><code>src&#x2F;base&#x2F;events.js:571</code></a>
                             </p>
                     
                     
@@ -1698,7 +1770,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l555"><code>src&#x2F;base&#x2F;events.js:555</code></a>
+                            <a href="../files/src_base_events.js.html#l593"><code>src&#x2F;base&#x2F;events.js:593</code></a>
                             </p>
                     
                     
@@ -1723,7 +1795,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l549"><code>src&#x2F;base&#x2F;events.js:549</code></a>
+                            <a href="../files/src_base_events.js.html#l587"><code>src&#x2F;base&#x2F;events.js:587</code></a>
                             </p>
                     
                     
@@ -1748,7 +1820,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l521"><code>src&#x2F;base&#x2F;events.js:521</code></a>
+                            <a href="../files/src_base_events.js.html#l559"><code>src&#x2F;base&#x2F;events.js:559</code></a>
                             </p>
                     
                     
@@ -1944,6 +2016,99 @@
                     
                     
                     </div>
+                    <div id="event_PLAYBACK_LEVEL_SWITCH_END" class="events item">
+                        <h3 class="name"><code>PLAYBACK_LEVEL_SWITCH_END</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_events.js.html#l370"><code>src&#x2F;base&#x2F;events.js:370</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the playback ends the level switch</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_PLAYBACK_LEVEL_SWITCH_START" class="events item">
+                        <h3 class="name"><code>PLAYBACK_LEVEL_SWITCH_START</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_events.js.html#l363"><code>src&#x2F;base&#x2F;events.js:363</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the playback starts to switch level</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_PLAYBACK_LEVELS_AVAILABLE" class="events item">
+                        <h3 class="name"><code>PLAYBACK_LEVELS_AVAILABLE</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_base_events.js.html#l355"><code>src&#x2F;base&#x2F;events.js:355</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when the playback has its levels</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">levels
+                    the</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>ordered levels, each one with the following format <code>{id: 1, label: '500kbps'}</code> ps: id should be a number &gt;= 0</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
                     <div id="event_PLAYBACK_LOADEDMETADATA" class="events item">
                         <h3 class="name"><code>PLAYBACK_LOADEDMETADATA</code></h3>
                         <span class="type"></span>
@@ -2022,7 +2187,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_events.js.html#l355"><code>src&#x2F;base&#x2F;events.js:355</code></a>
+                            <a href="../files/src_base_events.js.html#l378"><code>src&#x2F;base&#x2F;events.js:378</code></a>
                             </p>
                     
                     

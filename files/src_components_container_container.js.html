@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.22</em>
+            <em>API Docs for: 0.2.24</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,12 +40,14 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/ContainerPlugin.html">ContainerPlugin</a></li>
                                 <li><a href="../classes/Core.html">Core</a></li>
                                 <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
@@ -141,6 +143,7 @@ export default class Container extends UIObject {
     super(options)
     this.currentTime = 0
     this.volume = 100
+    this.options = options
     this.playback = options.playback
     this.settings = $.extend({}, this.playback.settings)
     this.isReady = false
@@ -194,6 +197,7 @@ export default class Container extends UIObject {
     this.listenTo(this.playback, Events.PLAYBACK_ENDED, this.ended)
     this.listenTo(this.playback, Events.PLAYBACK_PLAY, this.playing)
     this.listenTo(this.playback, Events.PLAYBACK_PAUSE, this.paused)
+    this.listenTo(this.playback, Events.PLAYBACK_STOP, this.stopped)
     this.listenTo(this.playback, Events.PLAYBACK_ERROR, this.error)
   }
 
@@ -312,7 +316,6 @@ export default class Container extends UIObject {
    * @method stop
    */
   stop() {
-    this.trigger(Events.CONTAINER_STOP, this.name)
     this.playback.stop()
     this.currentTime = 0
   }
@@ -328,6 +331,10 @@ export default class Container extends UIObject {
   ended() {
     this.trigger(Events.CONTAINER_ENDED, this, this.name)
     this.currentTime = 0
+  }
+
+  stopped() {
+    this.trigger(Events.CONTAINER_STOP)
   }
 
   clicked() {
@@ -429,6 +436,16 @@ export default class Container extends UIObject {
   enableMediaControl() {
     this.mediaControlDisabled = false
     this.trigger(Events.CONTAINER_MEDIACONTROL_ENABLE)
+  }
+
+  /**
+   * enables to configure the container after its creation
+   * @method configure
+   * @param {Object} options all the options to change in form of a javascript object
+   */
+  configure(options) {
+    this.options = $.extend(this.options, options)
+    this.trigger(Events.CONTAINER_OPTIONS_CHANGE)
   }
 
   render() {

@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.22</em>
+            <em>API Docs for: 0.2.24</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,12 +40,14 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/ContainerPlugin.html">ContainerPlugin</a></li>
                                 <li><a href="../classes/Core.html">Core</a></li>
                                 <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
@@ -229,6 +231,7 @@ export default class MediaControl extends UIObject {
   onVolumeChanged(event) {
     this.mute = (this.currentVolume === 0)
     this.setVolumeLevel(event)
+    this.persistConfig &amp;&amp; Config.persist(&quot;volume&quot;, event)
   }
 
   changeTogglePlay() {
@@ -382,9 +385,7 @@ export default class MediaControl extends UIObject {
   setVolume(value) {
     this.currentVolume = Math.min(100, Math.max(value, 0))
     this.container.setVolume(this.currentVolume)
-    this.setVolumeLevel(this.currentVolume)
-    this.mute = (this.currentVolume === 0)
-    this.persistConfig &amp;&amp; Config.persist(&quot;volume&quot;, this.currentVolume)
+    this.onVolumeChanged(this.currentVolume)
   }
 
   toggleFullscreen() {

@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.22</em>
+            <em>API Docs for: 0.2.24</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,12 +40,14 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/BaseObject.html">BaseObject</a></li>
                                 <li><a href="../classes/Container.html">Container</a></li>
+                                <li><a href="../classes/ContainerPlugin.html">ContainerPlugin</a></li>
                                 <li><a href="../classes/Core.html">Core</a></li>
                                 <li><a href="../classes/CoreFactory.html">CoreFactory</a></li>
                                 <li><a href="../classes/Events.html">Events</a></li>
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
@@ -444,6 +446,29 @@ Events.PLAYBACK_HIGHDEFINITIONUPDATE = &#x27;playback:highdefinitionupdate&#x27;
  */
 Events.PLAYBACK_BITRATE = &#x27;playback:bitrate&#x27;
 /**
+ * Fired when the playback has its levels
+ *
+ * @event PLAYBACK_LEVELS_AVAILABLE
+ * @param {Array} levels
+ * the ordered levels, each one with the following format &#x60;{id: 1, label: &#x27;500kbps&#x27;}&#x60; ps: id should be a number &gt;= 0
+ */
+Events.PLAYBACK_LEVELS_AVAILABLE = &#x27;playback:levels:available&#x27;
+/**
+ * Fired when the playback starts to switch level
+ *
+ * @event PLAYBACK_LEVEL_SWITCH_START
+ *
+ */
+Events.PLAYBACK_LEVEL_SWITCH_START = &#x27;playback:levels:switch:start&#x27;
+/**
+ * Fired when the playback ends the level switch
+ *
+ * @event PLAYBACK_LEVEL_SWITCH_END
+ *
+ */
+Events.PLAYBACK_LEVEL_SWITCH_END = &#x27;playback:levels:switch:end&#x27;
+
+/**
  * Fired when playback internal state changes
  *
  * @event PLAYBACK_PLAYBACKSTATE
@@ -459,10 +484,19 @@ Events.PLAYBACK_MEDIACONTROL_ENABLE = &#x27;playback:mediacontrol:enable&#x27;
 Events.PLAYBACK_ENDED = &#x27;playback:ended&#x27;
 Events.PLAYBACK_PLAY = &#x27;playback:play&#x27;
 Events.PLAYBACK_PAUSE = &#x27;playback:pause&#x27;
+Events.PLAYBACK_STOP = &#x27;playback:stop&#x27;
 Events.PLAYBACK_ERROR = &#x27;playback:error&#x27;
 Events.PLAYBACK_STATS_ADD = &#x27;playback:stats:add&#x27;
 Events.PLAYBACK_FRAGMENT_LOADED = &#x27;playback:fragment:loaded&#x27;
 Events.PLAYBACK_LEVEL_SWITCH = &#x27;playback:level:switch&#x27;
+
+/**
+ * Fired when the options were changed for the core
+ *
+ * @event CORE_OPTIONS_CHANGE
+ */
+Events.CORE_OPTIONS_CHANGE = &#x27;core:options:change&#x27;
+
 
 // Container Events
 /**
@@ -600,6 +634,12 @@ Events.CONTAINER_MEDIACONTROL_HIDE = &#x27;container:mediacontrol:hide&#x27;
 Events.CONTAINER_MEDIACONTROL_DISABLE = &#x27;container:mediacontrol:disable&#x27;
 Events.CONTAINER_MEDIACONTROL_ENABLE = &#x27;container:mediacontrol:enable&#x27;
 Events.CONTAINER_STATS_ADD = &#x27;container:stats:add&#x27;
+/**
+ * Fired when the options were changed for the container
+ *
+ * @event CONTAINER_OPTIONS_CHANGE
+ */
+Events.CONTAINER_OPTIONS_CHANGE = &#x27;container:options:change&#x27;
 
 // MediaControl Events
 Events.MEDIACONTROL_RENDERED = &#x27;mediacontrol:rendered&#x27;
