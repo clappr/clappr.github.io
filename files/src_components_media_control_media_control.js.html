@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.24</em>
+            <em>API Docs for: 0.2.25</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -228,10 +228,10 @@ export default class MediaControl extends UIObject {
     this.container.stop()
   }
 
-  onVolumeChanged(event) {
+  onVolumeChanged(level) {
     this.mute = (this.currentVolume === 0)
-    this.setVolumeLevel(event)
-    this.persistConfig &amp;&amp; Config.persist(&quot;volume&quot;, event)
+    this.setVolumeLevel(level)
+    this.persistConfig &amp;&amp; Config.persist(&quot;volume&quot;, level)
   }
 
   changeTogglePlay() {
@@ -681,7 +681,7 @@ export default class MediaControl extends UIObject {
         this.$seekBarContainer.addClass(&#x27;seek-disabled&#x27;)
       }
 
-      this.setVolume(this.currentVolume)
+      this.onVolumeChanged(this.container.volume)
       this.bindKeyEvents()
       this.playerResize({width: this.options.width, height: this.options.height})
       this.hideVolumeBar(0)

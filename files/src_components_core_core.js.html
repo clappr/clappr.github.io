@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.24</em>
+            <em>API Docs for: 0.2.25</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -215,7 +215,10 @@ export default class Core extends UIObject {
   }
 
   resolveOnContainersReady(containers) {
-    $.when.apply($, containers).done(() =&gt;this.defer.resolve(this))
+    $.when.apply($, containers).done(() =&gt; {
+      this.defer.resolve(this)
+      this.trigger(Events.CORE_READY)
+    })
   }
 
   addPlugin(plugin) {
@@ -368,7 +371,7 @@ export default class Core extends UIObject {
    */
   configure(options) {
     this.options = $.extend(this.options, options)
-    var sources = this.options.source || this.options.sources
+    var sources = options.source || options.sources
 
     if (sources) {
       this.load(sources)
