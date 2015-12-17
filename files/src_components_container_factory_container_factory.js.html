@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.25</em>
+            <em>API Docs for: 0.2.28</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -121,14 +121,30 @@ export default class ContainerFactory extends BaseObject {
     });
   }
 
-  findPlaybackPlugin(source) {
-    return find(this.loader.playbackPlugins, (p) =&gt; { return p.canPlay(source.toString(), this.options.mimeType) })
+  findPlaybackPlugin(source, mimeType) {
+    return find(this.loader.playbackPlugins, (p) =&gt; { return p.canPlay(source, mimeType) })
   }
 
   createContainer(source) {
-    if (!!source.match(/^\/\//)) source = window.location.protocol + source
-    var options = $.extend({}, this.options, {src: source})
-    var playbackPlugin = this.findPlaybackPlugin(source)
+    var resolvedSource = null
+    var mimeType = this.options.mimeType
+    if (typeof source === &quot;string&quot; || source instanceof String) {
+      resolvedSource = source.toString()
+    }
+    else {
+      resolvedSource = source.source.toString()
+      if (source.mimeType) {
+        mimeType = source.mimeType
+      }
+    }
+    
+    if (!!resolvedSource.match(/^\/\//)) resolvedSource = window.location.protocol + resolvedSource
+
+    var options = $.extend({}, this.options, {
+      src: resolvedSource,
+      mimeType: mimeType
+    })
+    var playbackPlugin = this.findPlaybackPlugin(resolvedSource, mimeType)
     var playback = new playbackPlugin(options)
 
     options = $.extend(options, {playback: playback})
@@ -136,7 +152,7 @@ export default class ContainerFactory extends BaseObject {
     var container = new Container(options)
     var defer = $.Deferred()
     defer.promise(container)
-    this.addContainerPlugins(container, source)
+    this.addContainerPlugins(container, resolvedSource)
     this.listenToOnce(container, Events.CONTAINER_READY, () =&gt; defer.resolve(container))
     return container
   }

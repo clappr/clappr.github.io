@@ -2,7 +2,7 @@
     "project": {
         "name": "Clappr",
         "description": "An extensible media player for the web",
-        "version": "0.2.25",
+        "version": "0.2.28",
         "url": "https://github.com/clappr/clappr",
         "logo": "https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png"
     },
@@ -327,7 +327,7 @@
             "module": "components",
             "namespace": "",
             "file": "src/components/loader/loader.js",
-            "line": 30,
+            "line": 33,
             "description": "It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.",
             "is_constructor": 1,
             "extends": "BaseObject"
@@ -916,6 +916,11 @@
                     "name": "levels\nthe",
                     "description": "ordered levels, each one with the following format `{id: 1, label: '500kbps'}` ps: id should be a number >= 0",
                     "type": "Array"
+                },
+                {
+                    "name": "initial\nthe",
+                    "description": "initial level otherwise -1 (AUTO)",
+                    "type": "Number"
                 }
             ],
             "class": "Events",
@@ -923,7 +928,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 369,
+            "line": 371,
             "description": "Fired when the playback starts to switch level",
             "itemtype": "event",
             "name": "PLAYBACK_LEVEL_SWITCH_START",
@@ -932,7 +937,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 376,
+            "line": 378,
             "description": "Fired when the playback ends the level switch",
             "itemtype": "event",
             "name": "PLAYBACK_LEVEL_SWITCH_END",
@@ -941,7 +946,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 384,
+            "line": 386,
             "description": "Fired when playback internal state changes",
             "itemtype": "event",
             "name": "PLAYBACK_PLAYBACKSTATE",
@@ -965,7 +970,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 406,
+            "line": 408,
             "description": "Fired when the options were changed for the core",
             "itemtype": "event",
             "name": "CORE_OPTIONS_CHANGE",
@@ -974,7 +979,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 412,
+            "line": 414,
             "description": "Fired after creating containers, when the core is ready",
             "itemtype": "event",
             "name": "CORE_READY",
@@ -983,7 +988,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 420,
+            "line": 422,
             "description": "Fired when the container internal state changes",
             "itemtype": "event",
             "name": "CONTAINER_PLAYBACKSTATE",
@@ -1007,7 +1012,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 431,
+            "line": 433,
             "description": "Fired when the container updates its bitrate",
             "itemtype": "event",
             "name": "CONTAINER_BITRATE",
@@ -1049,7 +1054,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 449,
+            "line": 451,
             "description": "Fired when the container is ready",
             "itemtype": "event",
             "name": "CONTAINER_READY",
@@ -1058,7 +1063,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 456,
+            "line": 458,
             "description": "Fired when the container loaded its metadata",
             "itemtype": "event",
             "name": "CONTAINER_LOADEDMETADATA",
@@ -1088,7 +1093,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 468,
+            "line": 470,
             "description": "Fired when the time is updated on container",
             "itemtype": "event",
             "name": "CONTAINER_TIMEUPDATE",
@@ -1118,7 +1123,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 480,
+            "line": 482,
             "description": "Fired when the container is downloading the media",
             "itemtype": "event",
             "name": "CONTAINER_PROGRESS",
@@ -1154,7 +1159,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 503,
+            "line": 505,
             "description": "Fired when the container seeks the video",
             "itemtype": "event",
             "name": "CONTAINER_SEEK",
@@ -1170,7 +1175,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 512,
+            "line": 514,
             "description": "Fired when container is buffering",
             "itemtype": "event",
             "name": "CONTAINER_STATE_BUFFERING",
@@ -1179,7 +1184,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 518,
+            "line": 520,
             "description": "Fired when the container filled the buffer",
             "itemtype": "event",
             "name": "CONTAINER_STATE_BUFFERFULL",
@@ -1188,7 +1193,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 524,
+            "line": 526,
             "description": "Fired when the container changes any settings (volume, seek and etc)",
             "itemtype": "event",
             "name": "CONTAINER_SETTINGSUPDATE",
@@ -1197,7 +1202,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 530,
+            "line": 532,
             "description": "Fired when container updates its video quality",
             "itemtype": "event",
             "name": "CONTAINER_HIGHDEFINITIONUPDATE",
@@ -1213,7 +1218,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 539,
+            "line": 541,
             "description": "Fired when the media control shows",
             "itemtype": "event",
             "name": "CONTAINER_MEDIACONTROL_SHOW",
@@ -1222,7 +1227,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 545,
+            "line": 547,
             "description": "Fired when the media control hides",
             "itemtype": "event",
             "name": "CONTAINER_MEDIACONTROL_HIDE",
@@ -1231,7 +1236,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 555,
+            "line": 557,
             "description": "Fired when the options were changed for the container",
             "itemtype": "event",
             "name": "CONTAINER_OPTIONS_CHANGE",
@@ -1240,7 +1245,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 564,
+            "line": 566,
             "description": "Fired when the player enters/exit on fullscreen",
             "itemtype": "event",
             "name": "MEDIACONTROL_FULLSCREEN",
@@ -1249,7 +1254,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 570,
+            "line": 572,
             "description": "Fired when the media control shows",
             "itemtype": "event",
             "name": "MEDIACONTROL_SHOW",
@@ -1258,7 +1263,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 576,
+            "line": 578,
             "description": "Fired when the media control hides",
             "itemtype": "event",
             "name": "MEDIACONTROL_HIDE",
@@ -1267,7 +1272,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 582,
+            "line": 584,
             "description": "Fired when mouse enters on the seekbar",
             "itemtype": "event",
             "name": "MEDIACONTROL_MOUSEMOVE_SEEKBAR",
@@ -1283,7 +1288,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 590,
+            "line": 592,
             "description": "Fired when mouse leaves the seekbar",
             "itemtype": "event",
             "name": "MEDIACONTROL_MOUSELEAVE_SEEKBAR",
@@ -1299,7 +1304,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 598,
+            "line": 600,
             "description": "Fired when the media is being played",
             "itemtype": "event",
             "name": "MEDIACONTROL_PLAYING",
@@ -1308,7 +1313,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 604,
+            "line": 606,
             "description": "Fired when the media is not being played",
             "itemtype": "event",
             "name": "MEDIACONTROL_NOTPLAYING",
@@ -1317,7 +1322,7 @@
         },
         {
             "file": "src/base/events.js",
-            "line": 610,
+            "line": 612,
             "description": "Fired when the container was changed",
             "itemtype": "event",
             "name": "MEDIACONTROL_CONTAINERCHANGED",
@@ -1427,6 +1432,16 @@
         {
             "file": "src/base/playback.js",
             "line": 69,
+            "description": "checks if the playback is ready.",
+            "itemtype": "property",
+            "name": "isReady",
+            "type": "{Boolean} `true` if the current playback is ready, otherwise `false`",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 78,
             "description": "gets the playback type (`'vod', 'live', 'aod'`)",
             "itemtype": "method",
             "name": "getPlaybackType",
@@ -1442,7 +1457,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 85,
+            "line": 94,
             "description": "checks if the playback is in HD.",
             "itemtype": "method",
             "name": "isHighDefinitionInUse",
@@ -1455,7 +1470,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 94,
+            "line": 103,
             "description": "sets the volume for the playback",
             "itemtype": "method",
             "name": "volume",
@@ -1471,7 +1486,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 101,
+            "line": 110,
             "description": "destroys the playback, removing it from DOM",
             "itemtype": "method",
             "name": "destroy",
@@ -1480,7 +1495,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 114,
+            "line": 123,
             "description": "checks if the playback can play a given `source`\nIf a mimeType is provided then this will be used instead of inferring the mimetype\nfrom the source extension.",
             "itemtype": "method",
             "name": "canPlay",
@@ -1507,7 +1522,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 128,
+            "line": 137,
             "description": "a playback type for video on demand",
             "itemtype": "property",
             "name": "VOD",
@@ -1518,7 +1533,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 136,
+            "line": 145,
             "description": "a playback type for audio on demand",
             "itemtype": "property",
             "name": "AOD",
@@ -1529,7 +1544,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 144,
+            "line": 153,
             "description": "a playback type for live video",
             "itemtype": "property",
             "name": "LIVE",
@@ -1540,7 +1555,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 152,
+            "line": 161,
             "description": "a default playback type",
             "itemtype": "property",
             "name": "NO_OP",
@@ -1551,7 +1566,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 160,
+            "line": 169,
             "description": "the plugin type",
             "itemtype": "property",
             "name": "type",
@@ -1858,7 +1873,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 213,
+            "line": 216,
             "description": "plays the playback",
             "itemtype": "method",
             "name": "play",
@@ -1867,7 +1882,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 221,
+            "line": 224,
             "description": "stops the playback",
             "itemtype": "method",
             "name": "stop",
@@ -1876,7 +1891,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 230,
+            "line": 233,
             "description": "pauses the playback",
             "itemtype": "method",
             "name": "pause",
@@ -1885,7 +1900,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 290,
+            "line": 293,
             "description": "adds plugin to the container",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1901,7 +1916,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 299,
+            "line": 302,
             "description": "checks if a plugin, given its name, exist",
             "itemtype": "method",
             "name": "addPlugin",
@@ -1917,7 +1932,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 308,
+            "line": 311,
             "description": "get the plugin given its name",
             "itemtype": "method",
             "name": "getPlugin",
@@ -1933,7 +1948,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 348,
+            "line": 351,
             "description": "enables to configure the container after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -1956,7 +1971,18 @@
         },
         {
             "file": "src/components/core/core.js",
-            "line": 274,
+            "line": 284,
+            "description": "Determine if the core is ready.",
+            "return": {
+                "description": "true if the core is ready. ie CORE_READY event fired",
+                "type": "Boolean"
+            },
+            "class": "Core",
+            "module": "components"
+        },
+        {
+            "file": "src/components/core/core.js",
+            "line": 292,
             "description": "enables to configure the container after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -1972,7 +1998,7 @@
         },
         {
             "file": "src/components/core_factory/core_factory.js",
-            "line": 16,
+            "line": 19,
             "description": "it builds the core factory",
             "itemtype": "method",
             "name": "constructor",
@@ -1993,7 +2019,7 @@
         },
         {
             "file": "src/components/core_factory/core_factory.js",
-            "line": 30,
+            "line": 31,
             "description": "creates a core and its plugins",
             "itemtype": "method",
             "name": "create",
@@ -2006,7 +2032,7 @@
         },
         {
             "file": "src/components/core_factory/core_factory.js",
-            "line": 41,
+            "line": 44,
             "description": "given the core plugins (`loader.corePlugins`) it builds each one",
             "itemtype": "method",
             "name": "addCorePlugins",
@@ -2019,7 +2045,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 38,
+            "line": 41,
             "description": "builds the loader",
             "itemtype": "method",
             "name": "constructor",
@@ -2040,7 +2066,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 56,
+            "line": 59,
             "description": "adds all the external plugins that were passed through `options.plugins`",
             "itemtype": "method",
             "name": "addExternalPlugins",
@@ -2058,7 +2084,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 70,
+            "line": 73,
             "description": "validate if the external plugins that were passed through `options.plugins` are associated to the correct type",
             "itemtype": "method",
             "name": "validateExternalPluginsType",
@@ -2090,7 +2116,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 42,
+            "line": 46,
             "description": "## Player's constructor\n\nYou might pass the options object to build the player.\n```javascript\nvar options = {source: \"http://example.com/video.mp4\", param1: \"val1\"};\nvar player = new Clappr.Player(options);\n```",
             "itemtype": "method",
             "name": "constructor",
@@ -2121,6 +2147,18 @@
                         {
                             "name": "parent",
                             "description": "\na reference to a dom element that the player should be inserted into",
+                            "type": "Object",
+                            "optional": true
+                        },
+                        {
+                            "name": "source",
+                            "description": "\nThe media source URL, or {source: <<source URL>>, mimeType: <<source mime type>>}",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "sources",
+                            "description": "\nAn array of media source URL's, or an array of {source: <<source URL>>, mimeType: <<source mime type>>}",
                             "type": "Object",
                             "optional": true
                         },
@@ -2243,6 +2281,12 @@
                             "description": "\ndefine a custom message to be displayed when a playback is not supported.",
                             "type": "String",
                             "optional": true
+                        },
+                        {
+                            "name": "events",
+                            "description": "\nSpecify listeners which will be registered with their corresponding player events.\nE.g. onReady -> \"PLAYER_READY\", onTimeUpdate -> \"PLAYER_TIMEUPDATE\"",
+                            "type": "Object",
+                            "optional": true
                         }
                     ]
                 }
@@ -2252,7 +2296,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 121,
+            "line": 132,
             "description": "Specify a `parentId` to the player.",
             "itemtype": "method",
             "name": "setParentId",
@@ -2268,7 +2312,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 133,
+            "line": 144,
             "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
             "itemtype": "method",
             "name": "attachTo",
@@ -2284,7 +2328,18 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 210,
+            "line": 155,
+            "description": "Determine if the player is ready.",
+            "return": {
+                "description": "true if the player is ready. ie PLAYER_READY event has fired",
+                "type": "Boolean"
+            },
+            "class": "Player",
+            "module": "components"
+        },
+        {
+            "file": "src/components/player.js",
+            "line": 263,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -2303,14 +2358,14 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 223,
+            "line": 276,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
             "params": [
                 {
                     "name": "sources",
-                    "description": "source or sources of video.",
+                    "description": "source or sources of video.\nsources can be a string or {source: <<source URL>>, mimeType: <<source mime type>>}",
                     "type": "Object"
                 },
                 {
@@ -2324,7 +2379,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 234,
+            "line": 288,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -2333,7 +2388,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 242,
+            "line": 296,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -2342,7 +2397,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 250,
+            "line": 304,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -2351,7 +2406,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 258,
+            "line": 312,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -2360,7 +2415,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 267,
+            "line": 321,
             "description": "seeks the current video (`source`). For example, `player.seek(120)` will seek to second 120 (2minutes) of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -2376,7 +2431,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 276,
+            "line": 330,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seekPercentage",
@@ -2392,7 +2447,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 285,
+            "line": 339,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -2408,7 +2463,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 294,
+            "line": 348,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -2421,7 +2476,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 303,
+            "line": 357,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -2430,7 +2485,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 311,
+            "line": 365,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -2439,7 +2494,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 319,
+            "line": 373,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -2452,7 +2507,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 328,
+            "line": 382,
             "description": "enables to configure a player after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2468,7 +2523,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 337,
+            "line": 391,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2491,7 +2546,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 355,
+            "line": 409,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -2504,7 +2559,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 364,
+            "line": 418,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",
@@ -2542,12 +2597,20 @@
             "line": " src/components/container_factory/container_factory.js:5"
         },
         {
+            "message": "Missing item type\nDetermine if the core is ready.",
+            "line": " src/components/core/core.js:284"
+        },
+        {
             "message": "Missing item type\nThe MediaControl is responsible for displaying the Player controls.",
             "line": " src/components/media_control/media_control.js:5"
         },
         {
             "message": "Missing item type\nThe mediator is a singleton for handling global events.",
             "line": " src/components/mediator.js:5"
+        },
+        {
+            "message": "Missing item type\nDetermine if the player is ready.",
+            "line": " src/components/player.js:155"
         }
     ]
 }

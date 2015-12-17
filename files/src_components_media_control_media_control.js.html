@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.25</em>
+            <em>API Docs for: 0.2.28</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -106,7 +106,6 @@ import Kibo from &#x27;base/kibo&#x27;
 import Styler from &#x27;base/styler&#x27;
 import UIObject from &#x27;base/ui_object&#x27;
 import Browser from &#x27;components/browser&#x27;
-import SeekTime from &#x27;components/seek_time&#x27;
 import Mediator from &#x27;components/mediator&#x27;
 import template from &#x27;base/template&#x27;
 import Playback from &#x27;base/playback&#x27;
@@ -160,7 +159,6 @@ export default class MediaControl extends UIObject {
     this.mute = this.options.mute
     this.persistConfig = this.options.persistConfig
     this.container = options.container
-    this.seekTime = new SeekTime(this)
     this.currentPositionValue = null
     this.currentDurationValue = null
     var initialVolume = (this.persistConfig) ? Config.restore(&quot;volume&quot;) : 100
@@ -174,12 +172,16 @@ export default class MediaControl extends UIObject {
       default: [&#x27;position&#x27;, &#x27;seekbar&#x27;, &#x27;duration&#x27;]
     }
 
-    if (!$.isEmptyObject(this.container.settings)) {
-      this.settings = $.extend({}, this.container.settings)
+    if (this.container) {
+      if (!$.isEmptyObject(this.container.settings)) {
+        this.settings = $.extend({}, this.container.settings)
+      }
+    } else {
+      this.settings = {}
     }
 
     this.disabled = false
-    if (this.container.mediaControlDisabled || this.options.chromeless) {
+    if ((this.container &amp;&amp; this.container.mediaControlDisabled) || this.options.chromeless) {
       this.disable()
     }
     this.stopDragHandler = (event) =&gt; this.stopDrag(event)
@@ -189,19 +191,21 @@ export default class MediaControl extends UIObject {
   }
 
   addEventListeners() {
-    Mediator.on(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerResize, this)
-    this.listenTo(this.container, Events.CONTAINER_PLAY, this.changeTogglePlay)
-    this.listenTo(this.container, Events.CONTAINER_PAUSE, this.changeTogglePlay)
-    this.listenTo(this.container, Events.CONTAINER_DBLCLICK, this.toggleFullscreen)
-    this.listenTo(this.container, Events.CONTAINER_TIMEUPDATE, this.onTimeUpdate)
-    this.listenTo(this.container, Events.CONTAINER_PROGRESS, this.updateProgressBar)
-    this.listenTo(this.container, Events.CONTAINER_SETTINGSUPDATE, this.settingsUpdate)
-    this.listenTo(this.container, Events.CONTAINER_PLAYBACKDVRSTATECHANGED, this.settingsUpdate)
-    this.listenTo(this.container, Events.CONTAINER_HIGHDEFINITIONUPDATE, this.highDefinitionUpdate)
-    this.listenTo(this.container, Events.CONTAINER_MEDIACONTROL_DISABLE, this.disable)
-    this.listenTo(this.container, Events.CONTAINER_MEDIACONTROL_ENABLE, this.enable)
-    this.listenTo(this.container, Events.CONTAINER_ENDED, this.ended)
-    this.listenTo(this.container, Events.CONTAINER_VOLUME, this.onVolumeChanged)
+    if (this.container) {
+      Mediator.on(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerResize, this)
+      this.listenTo(this.container, Events.CONTAINER_PLAY, this.changeTogglePlay)
+      this.listenTo(this.container, Events.CONTAINER_PAUSE, this.changeTogglePlay)
+      this.listenTo(this.container, Events.CONTAINER_DBLCLICK, this.toggleFullscreen)
+      this.listenTo(this.container, Events.CONTAINER_TIMEUPDATE, this.onTimeUpdate)
+      this.listenTo(this.container, Events.CONTAINER_PROGRESS, this.updateProgressBar)
+      this.listenTo(this.container, Events.CONTAINER_SETTINGSUPDATE, this.settingsUpdate)
+      this.listenTo(this.container, Events.CONTAINER_PLAYBACKDVRSTATECHANGED, this.settingsUpdate)
+      this.listenTo(this.container, Events.CONTAINER_HIGHDEFINITIONUPDATE, this.highDefinitionUpdate)
+      this.listenTo(this.container, Events.CONTAINER_MEDIACONTROL_DISABLE, this.disable)
+      this.listenTo(this.container, Events.CONTAINER_MEDIACONTROL_ENABLE, this.enable)
+      this.listenTo(this.container, Events.CONTAINER_ENDED, this.ended)
+      this.listenTo(this.container, Events.CONTAINER_VOLUME, this.onVolumeChanged)
+    }
   }
 
   disable() {
@@ -235,7 +239,7 @@ export default class MediaControl extends UIObject {
   }
 
   changeTogglePlay() {
-    if (this.container.isPlaying()) {
+    if (this.container &amp;&amp; this.container.isPlaying()) {
       this.$playPauseToggle.removeClass(&#x27;paused&#x27;).addClass(&#x27;playing&#x27;)
       this.$playStopToggle.removeClass(&#x27;stopped&#x27;).addClass(&#x27;playing&#x27;)
       this.trigger(Events.MEDIACONTROL_PLAYING)
@@ -383,9 +387,11 @@ export default class MediaControl extends UIObject {
   }
 
   setVolume(value) {
-    this.currentVolume = Math.min(100, Math.max(value, 0))
-    this.container.setVolume(this.currentVolume)
-    this.onVolumeChanged(this.currentVolume)
+    if (value !== undefined &amp;&amp; this.container) {
+      this.currentVolume = Math.min(100, Math.max(value, 0))
+      this.container.setVolume(this.currentVolume)
+      this.onVolumeChanged(this.currentVolume)
+    }
   }
 
   toggleFullscreen() {
@@ -485,11 +491,6 @@ export default class MediaControl extends UIObject {
 
   setKeepVisible() {
     this.keepVisible = true
-  }
-
-  remove() {
-    this.seekTime.remove()
-    super.remove()
   }
 
   resetKeepVisible() {
@@ -688,7 +689,6 @@ export default class MediaControl extends UIObject {
     })
 
     this.parseColors()
-    this.seekTime.render()
     this.highDefinitionUpdate()
 
     this.trigger(Events.MEDIACONTROL_RENDERED)

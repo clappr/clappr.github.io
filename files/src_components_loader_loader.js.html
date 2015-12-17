@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.25</em>
+            <em>API Docs for: 0.2.28</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -119,6 +119,9 @@ import ClickToPausePlugin from &#x27;plugins/click_to_pause&#x27;
 /* Core Plugins */
 import DVRControls from &#x27;plugins/dvr_controls&#x27;
 import Favicon from &#x27;plugins/favicon&#x27;
+import SeekTime from &#x27;plugins/seek_time&#x27;
+import SourcesPlugin from &#x27;plugins/sources&#x27;
+import EndVideo from &#x27;plugins/end_video&#x27;
 
 /**
  * It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.
@@ -139,7 +142,7 @@ export default class Loader extends BaseObject {
     this.playerId = playerId
     this.playbackPlugins = [HTML5VideoPlayback, HTML5AudioPlayback, FlashVideoPlayback, HLSVideoPlayback, FlasHLSVideoPlayback, HTMLImgPlayback, NoOp]
     this.containerPlugins = [SpinnerThreeBouncePlugin, WaterMarkPlugin, PosterPlugin, StatsPlugin, GoogleAnalyticsPlugin, ClickToPausePlugin]
-    this.corePlugins = [DVRControls, Favicon]
+    this.corePlugins = [DVRControls, Favicon, SeekTime, SourcesPlugin, EndVideo]
     if (externalPlugins) {
       this.validateExternalPluginsType(externalPlugins)
       this.addExternalPlugins(externalPlugins)

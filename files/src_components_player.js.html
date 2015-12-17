@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.25</em>
+            <em>API Docs for: 0.2.28</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -132,6 +132,10 @@ var baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &quot;&quot;)
  * &#x60;&#x60;&#x60;
  */
 export default class Player extends BaseObject {
+
+  set loader(loader) { this._loader = loader }
+  get loader() { return this._loader = this._loader || new Loader(this.options.plugins || {}, this.options.playerId) }
+
   /**
    * ## Player&#x27;s constructor
    *
@@ -152,6 +156,10 @@ export default class Player extends BaseObject {
    * the id of the element on the page that the player should be inserted into
    * @param {Object} [options.parent]
    * a reference to a dom element that the player should be inserted into
+   * @param {String} [options.source]
+   * The media source URL, or {source: &lt;&lt;source URL&gt;&gt;, mimeType: &lt;&lt;source mime type&gt;&gt;}
+   * @param {Object} [options.sources]
+   * An array of media source URL&#x27;s, or an array of {source: &lt;&lt;source URL&gt;&gt;, mimeType: &lt;&lt;source mime type&gt;&gt;}
    * @param {Boolean} [options.autoPlay]
    * automatically play after page load **default**: &#x60;false&#x60;
    * @param {Boolean} [options.loop]
@@ -192,14 +200,17 @@ export default class Player extends BaseObject {
    * define a poster by adding its address &#x60;poster: &#x27;http://url/img.png&#x27;&#x60;. It will appear after video embed, disappear on play and go back when user stops the video.
    * @param {String} [options.playbackNotSupportedMessage]
    * define a custom message to be displayed when a playback is not supported.
+   * @param {Object} [options.events]
+   * Specify listeners which will be registered with their corresponding player events.
+   * E.g. onReady -&gt; &quot;PLAYER_READY&quot;, onTimeUpdate -&gt; &quot;PLAYER_TIMEUPDATE&quot;
    */
   constructor(options) {
     super(options)
     var defaultOptions = {playerId: uniqueId(&quot;&quot;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl}
     this.options = $.extend(defaultOptions, options)
     this.options.sources = this.normalizeSources(options)
-    this.loader = new Loader(this.options.plugins || {}, this.options.playerId)
-    this.coreFactory = new CoreFactory(this, this.loader)
+    this.registerOptionEventListeners()
+    this.coreFactory = new CoreFactory(this)
     this.playerInfo = PlayerInfo.getInstance(this.options.playerId)
     this.playerInfo.currentSize = {width: options.width, height: options.height}
     this.playerInfo.options = this.options
@@ -234,9 +245,24 @@ export default class Player extends BaseObject {
     this.addEventListeners()
   }
 
+  /**
+   * Determine if the player is ready.
+   * @return {boolean} true if the player is ready. ie PLAYER_READY event has fired
+   */
+  isReady() {
+    return !!this.ready
+  }
+
   addEventListeners() {
-    this.listenTo(this.core, Events.CORE_READY, this.onReady)
-    this.listenTo(this.core.mediaControl,  Events.MEDIACONTROL_CONTAINERCHANGED, this.containerChanged)
+    if (!this.core.isReady()) {
+      this.listenToOnce(this.core, Events.CORE_READY, this.onReady)
+    } else {
+      this.onReady()
+    }
+    this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED, this.containerChanged)
+  }
+
+  addContainerEventListeners() {
     var container = this.core.mediaControl.container
     if (!!container) {
       this.listenTo(container, Events.CONTAINER_PLAY, this.onPlay)
@@ -250,12 +276,39 @@ export default class Player extends BaseObject {
     }
   }
 
+  registerOptionEventListeners() {
+    var eventsMapping = {
+      &quot;onReady&quot;: Events.PLAYER_READY,
+      &quot;onResize&quot;: Events.PLAYER_RESIZE,
+      &quot;onPlay&quot;: Events.PLAYER_PLAY,
+      &quot;onPause&quot;: Events.PLAYER_PAUSE,
+      &quot;onStop&quot;: Events.PLAYER_STOP,
+      &quot;onEnded&quot;: Events.PLAYER_ENDED,
+      &quot;onSeek&quot;: Events.PLAYER_SEEK,
+      &quot;onError&quot;: Events.PLAYER_ERROR,
+      &quot;onTimeUpdate&quot;: Events.PLAYER_TIMEUPDATE,
+      &quot;onVolumeUpdate&quot;: Events.PLAYER_VOLUMEUPDATE
+    }
+    var userEvents = this.options.events || {}
+
+    Object.keys(userEvents).forEach((userEvent) =&gt; {
+      var eventType = eventsMapping[userEvent]
+      if (eventType) {
+        var eventFunction = userEvents[userEvent]
+        eventFunction = typeof eventFunction === &quot;function&quot; &amp;&amp; eventFunction
+        eventFunction &amp;&amp; this.listenTo(this, eventType, eventFunction)
+      }
+    })
+  }
+
   containerChanged() {
     this.stopListening()
     this.addEventListeners()
   }
 
   onReady() {
+    this.ready = true
+    this.addContainerEventListeners()
     this.trigger(Events.PLAYER_READY)
   }
 
@@ -296,8 +349,8 @@ export default class Player extends BaseObject {
   }
 
   normalizeSources(options) {
-    var sources = options.sources || (options.source !== undefined? [options.source.toString()] : [])
-    return sources.length === 0 ? [&#x27;no.op&#x27;] : sources
+    var sources = options.sources || (options.source !== undefined? [options.source] : [])
+    return sources.length === 0 ? [{source:&quot;&quot;, mimeType:&quot;&quot;}] : sources
   }
 
   /**
@@ -317,6 +370,7 @@ export default class Player extends BaseObject {
    * loads a new source.
    * @method load
    * @param {Object} sources source or sources of video.
+   * sources can be a string or {source: &lt;&lt;source URL&gt;&gt;, mimeType: &lt;&lt;source mime type&gt;&gt;}
    * @param {Object} mimeType a mime type, example: &#x60;&#x27;application/vnd.apple.mpegurl&#x27;&#x60;
    *
    */
