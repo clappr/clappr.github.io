@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.28</em>
+            <em>API Docs for: 0.2.29</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -133,7 +133,7 @@ export default class HTML5Video extends Playback {
     return {
       &#x27;timeupdate&#x27;: &#x27;timeUpdated&#x27;,
       &#x27;progress&#x27;: &#x27;progress&#x27;,
-      &#x27;ended&#x27;: &#x27;ended&#x27;,
+      &#x27;ended&#x27;: &#x27;onEnded&#x27;,
       &#x27;stalled&#x27;: &#x27;stalled&#x27;,
       &#x27;waiting&#x27;: &#x27;waiting&#x27;,
       &#x27;canplaythrough&#x27;: &#x27;bufferFull&#x27;,
@@ -146,6 +146,14 @@ export default class HTML5Video extends Playback {
     }
   }
 
+  /**
+   * Determine if the playback has ended.
+   * @property ended
+   * @type Boolean
+   */
+  get ended() {
+    return this.el.ended
+  }
 
   constructor(options) {
     super(options)
@@ -259,7 +267,7 @@ export default class HTML5Video extends Playback {
     this.trigger(Events.PLAYBACK_PAUSE);
   }
 
-  ended() {
+  onEnded() {
     this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
     this.trigger(Events.PLAYBACK_ENDED, this.name)
     this.trigger(Events.PLAYBACK_TIMEUPDATE, { current: 0, total: this.el.duration }, this.name)
@@ -310,7 +318,7 @@ export default class HTML5Video extends Playback {
 
   checkInitialSeek() {
     var seekTime = seekStringToSeconds(window.location.href)
-    this.seek(seekTime)
+    if (seekTime !== 0) this.seek(seekTime)
   }
 
   getCurrentTime() {
@@ -362,8 +370,11 @@ export default class HTML5Video extends Playback {
   }
 
   ready() {
-    this.trigger(Events.PLAYBACK_READY, this.name)
+    if (this.isReadyState) {
+      return
+    }
     this.isReadyState = true
+    this.trigger(Events.PLAYBACK_READY, this.name)
     if (this.firstBuffer) {
       this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
       this.firstBuffer = this.buffering = false

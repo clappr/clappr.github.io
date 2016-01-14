@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.28</em>
+            <em>API Docs for: 0.2.29</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -132,6 +132,15 @@ export default class Container extends UIObject {
       &#x27;mouseenter&#x27;: &#x27;mouseEnter&#x27;,
       &#x27;mouseleave&#x27;: &#x27;mouseLeave&#x27;
     }
+  }
+
+  /**
+   * Determine if the playback has ended.
+   * @property ended
+   * @type Boolean
+   */
+  get ended() {
+    return this.playback.ended
   }
 
   /**

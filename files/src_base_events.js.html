@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.28</em>
+            <em>API Docs for: 0.2.29</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -486,16 +486,59 @@ Events.PLAYBACK_LEVEL_SWITCH_END = &#x27;playback:levels:switch:end&#x27;
  * the playback type
  */
 Events.PLAYBACK_PLAYBACKSTATE = &#x27;playback:playbackstate&#x27;
+/**
+ * Fired when DVR becomes enabled/disabled.
+ *
+ * @event PLAYBACK_DVR
+ * @param {boolean} state true if dvr enabled 
+ */
 Events.PLAYBACK_DVR = &#x27;playback:dvr&#x27;
+// TODO doc
 Events.PLAYBACK_MEDIACONTROL_DISABLE = &#x27;playback:mediacontrol:disable&#x27;
+// TODO doc
 Events.PLAYBACK_MEDIACONTROL_ENABLE = &#x27;playback:mediacontrol:enable&#x27;
+/**
+ * Fired when the media for a playback ends.
+ *
+ * @event PLAYBACK_ENDED
+ * @param {String} name the name of the playback
+ */
 Events.PLAYBACK_ENDED = &#x27;playback:ended&#x27;
+/**
+ * Fired when the media for a playback starts playing.
+ * This is not necessarily when the user requests &#x60;play()&#x60;
+ * The media may have to buffer first.
+ * I.e. &#x60;isPlaying()&#x60; might return &#x60;true&#x60; before this event is fired,
+ * because &#x60;isPlaying()&#x60; represents the intended state.
+ *
+ * @event PLAYBACK_PLAY
+ */
 Events.PLAYBACK_PLAY = &#x27;playback:play&#x27;
+/**
+ * Fired when the media for a playback pauses.
+ *
+ * @event PLAYBACK_PAUSE
+ */
 Events.PLAYBACK_PAUSE = &#x27;playback:pause&#x27;
+/**
+ * Fired when the media for a playback is stopped.
+ *
+ * @event PLAYBACK_STOP
+ */
 Events.PLAYBACK_STOP = &#x27;playback:stop&#x27;
+/**
+ * Fired if an error occurs in the playback.
+ *
+ * @event PLAYBACK_ERROR
+ * @param {Object} error An object containing the error details
+ * @param {String} name Playback name
+ */
 Events.PLAYBACK_ERROR = &#x27;playback:error&#x27;
+// TODO doc
 Events.PLAYBACK_STATS_ADD = &#x27;playback:stats:add&#x27;
+// TODO doc
 Events.PLAYBACK_FRAGMENT_LOADED = &#x27;playback:fragment:loaded&#x27;
+// TODO doc
 Events.PLAYBACK_LEVEL_SWITCH = &#x27;playback:level:switch&#x27;
 
 /**

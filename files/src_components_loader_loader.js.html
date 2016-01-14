@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.28</em>
+            <em>API Docs for: 0.2.29</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -144,9 +144,29 @@ export default class Loader extends BaseObject {
     this.containerPlugins = [SpinnerThreeBouncePlugin, WaterMarkPlugin, PosterPlugin, StatsPlugin, GoogleAnalyticsPlugin, ClickToPausePlugin]
     this.corePlugins = [DVRControls, Favicon, SeekTime, SourcesPlugin, EndVideo]
     if (externalPlugins) {
-      this.validateExternalPluginsType(externalPlugins)
+      if (!Array.isArray(externalPlugins)) {
+        this.validateExternalPluginsType(externalPlugins)
+      }
       this.addExternalPlugins(externalPlugins)
     }
+  }
+
+  /**
+   * groups by type the external plugins that were passed through &#x60;options.plugins&#x60; it they&#x27;re on a flat array
+   * @method addExternalPlugins
+   * @private
+   * @param {Object} an config object or an array of plugins
+   * @return {Object} plugins the config object with the plugins separated by type
+   */
+  groupPluginsByType(plugins) {
+    if (Array.isArray(plugins)) {
+      plugins = plugins.reduce(function(memo, plugin) {
+        memo[plugin.type] || (memo[plugin.type] = [])
+        memo[plugin.type].push(plugin)
+        return memo
+      }, {})
+    }
+    return plugins
   }
 
   /**
@@ -156,6 +176,7 @@ export default class Loader extends BaseObject {
    * @param {Object} plugins the config object with all plugins
    */
   addExternalPlugins(plugins) {
+    plugins = this.groupPluginsByType(plugins)
     var pluginName = function(plugin) { return plugin.prototype.name }
     if (plugins.playback) { this.playbackPlugins = uniq(plugins.playback.concat(this.playbackPlugins), pluginName) }
     if (plugins.container) { this.containerPlugins = uniq(plugins.container.concat(this.containerPlugins), pluginName) }

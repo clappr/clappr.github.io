@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.28</em>
+            <em>API Docs for: 0.2.29</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -133,6 +133,15 @@ export default class Core extends UIObject {
       &#x27;data-player&#x27;: &#x27;&#x27;,
       tabindex: 9999,
     }
+  }
+
+  /**
+   * checks if the core is ready.
+   * @property isReady
+   * @type {Boolean} &#x60;true&#x60; if the core is ready, otherwise &#x60;false&#x60;
+   */
+  get isReady() {
+    return !!this.ready
   }
 
   constructor(options) {
@@ -372,14 +381,6 @@ export default class Core extends UIObject {
       this.$el.removeClass(&#x27;nocursor&#x27;)
     else if (Fullscreen.isFullscreen())
       this.$el.addClass(&#x27;nocursor&#x27;)
-  }
-
-  /**
-   * Determine if the core is ready.
-   * @return {boolean} true if the core is ready. ie CORE_READY event fired
-   */
-  isReady() {
-    return !!this.ready
   }
 
   /**
