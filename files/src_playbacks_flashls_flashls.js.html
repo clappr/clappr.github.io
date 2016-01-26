@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -128,6 +128,16 @@ export default class FlasHLS extends BaseFlashPlayback {
    */
   get ended() {
     return this.hasEnded
+  }
+
+  /**
+   * Determine if the playback is buffering.
+   * This is related to the PLAYBACK_BUFFERING and PLAYBACK_BUFFERFULL events
+   * @property buffering
+   * @type Boolean
+   */
+  get buffering() {
+    return !!this.bufferingState &amp;&amp; !this.hasEnded
   }
 
   constructor(options) {
@@ -454,7 +464,7 @@ export default class FlasHLS extends BaseFlashPlayback {
   }
 
   levelChanged(level) {
-    var currentLevel = this.levels[level]
+    var currentLevel = this.el.getLevels()[level]
     if (currentLevel) {
       this.highDefinition = (currentLevel.height &gt;= 720 || (currentLevel.bitrate / 1000) &gt;= 2000);
       this.trigger(Events.PLAYBACK_HIGHDEFINITIONUPDATE, this.highDefinition)
@@ -536,10 +546,12 @@ export default class FlasHLS extends BaseFlashPlayback {
 
   setPlaybackState(state) {
     if ([&quot;PLAYING_BUFFERING&quot;, &quot;PAUSED_BUFFERING&quot;].indexOf(state) &gt;= 0)  {
+      this.bufferingState = true
       this.trigger(Events.PLAYBACK_BUFFERING, this.name)
       this.updateCurrentState(state)
     } else if ([&quot;PLAYING&quot;, &quot;PAUSED&quot;].indexOf(state) &gt;= 0) {
       if ([&quot;PLAYING_BUFFERING&quot;, &quot;PAUSED_BUFFERING&quot;, &quot;IDLE&quot;].indexOf(this.currentState) &gt;= 0) {
+        this.bufferingState = false
         this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
       }
       this.updateCurrentState(state)

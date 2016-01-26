@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -112,6 +112,17 @@ export default class Playback extends UIObject {
   }
 
   /**
+   * Determine if the playback is having to buffer in order for
+   * playback to be smooth.
+   * (i.e if a live stream is playing smoothly, this will be false)
+   * @property buffering
+   * @type Boolean
+   */
+  get buffering() {
+    return false
+  }
+
+  /**
    * @method constructor
    * @param {Object} options the options object
    */
@@ -143,14 +154,14 @@ export default class Playback extends UIObject {
    * @method seek
    * @param {Number} time should be a number between 0 and the video duration
    */
-  seek(time) {}
+  seek(time) { /*jshint unused:false*/ }
 
   /**
    * seeks the playback to a given &#x60;percentage&#x60; in percentage
    * @method seekPercentage
    * @param {Number} time should be a number between 0 and 100
    */
-  seekPercentage(percentage) {}
+  seekPercentage(percentage) {/*jshint unused:false*/}
 
   /**
    * gets the duration in seconds
@@ -207,7 +218,7 @@ export default class Playback extends UIObject {
    * @method volume
    * @param {Number} value a number between 0 (&#x60;muted&#x60;) to 100 (&#x60;max&#x60;)
    */
-  volume(value) {}
+  volume(value) {/*jshint unused:false*/}
 
   /**
    * destroys the playback, removing it from DOM
@@ -233,6 +244,7 @@ Playback.extend = function(properties) {
  * @return {Boolean} &#x60;true&#x60; if the playback is playable, otherwise &#x60;false&#x60;
  */
 Playback.canPlay = (source, mimeType) =&gt; {
+  /*jshint unused:false*/
   return false
 }
 

@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -101,128 +101,10 @@ import execOnce from &#x27;lodash.once&#x27;
 
 var slice = Array.prototype.slice
 
-/**
- * @class Events
- * @constructor
- * @module base
- */
-export default class Events {
-  /**
-   * listen to an event indefinitely, if you want to stop you need to call &#x60;off&#x60;
-   * @method on
-   * @param {String} name
-   * @param {Function} callback
-   * @param {Object} context
-   */
-  on(name, callback, context) {
-    if (!eventsApi(this, &#x27;on&#x27;, name, [callback, context]) || !callback) return this
-    this._events || (this._events = {})
-    var events = this._events[name] || (this._events[name] = [])
-    events.push({callback: callback, context: context, ctx: context || this})
-    return this
-  }
-
-  /**
-   * listen to an event only once
-   * @method once
-   * @param {String} name
-   * @param {Function} callback
-   * @param {Object} context
-   */
-  once(name, callback, context) {
-    if (!eventsApi(this, &#x27;once&#x27;, name, [callback, context]) || !callback) return this
-    var self = this
-    var once = execOnce(function() {
-      self.off(name, once)
-      callback.apply(this, arguments)
-    })
-    once._callback = callback
-    return this.on(name, once, context)
-  }
-
-  /**
-   * stop listening to an event
-   * @method off
-   * @param {String} name
-   * @param {Function} callback
-   * @param {Object} context
-   */
-  off(name, callback, context) {
-    var retain, ev, events, names, i, l, j, k
-    if (!this._events || !eventsApi(this, &#x27;off&#x27;, name, [callback, context])) return this
-    if (!name &amp;&amp; !callback &amp;&amp; !context) {
-      this._events = void 0
-      return this
-    }
-    names = name ? [name] : Object.keys(this._events)
-    for (i = 0, l = names.length; i &lt; l; i++) {
-      name = names[i]
-      events = this._events[name]
-      if (events) {
-        this._events[name] = retain = []
-        if (callback || context) {
-          for (j = 0, k = events.length; j &lt; k; j++) {
-            ev = events[j]
-            if ((callback &amp;&amp; callback !== ev.callback &amp;&amp; callback !== ev.callback._callback) ||
-                (context &amp;&amp; context !== ev.context)) {
-              retain.push(ev)
-            }
-          }
-        }
-        if (!retain.length) delete this._events[name]
-      }
-    }
-    return this
-  }
-
-  /**
-   * triggers an event given its &#x60;name&#x60;
-   * @method trigger
-   * @param {String} name
-   */
-  trigger(name) {
-    try {
-      var klass = this.name || this.constructor.name
-      Log.debug.apply(Log, [klass].concat(Array.prototype.slice.call(arguments)))
-      if (!this._events) return this
-      var args = slice.call(arguments, 1)
-      if (!eventsApi(this, &#x27;trigger&#x27;, name, args)) return this
-      var events = this._events[name]
-      var allEvents = this._events.all
-      if (events) triggerEvents(events, args)
-      if (allEvents) triggerEvents(allEvents, arguments)
-    } catch (exception) {
-      Log.error.apply(Log, [klass, &#x27;error on event&#x27;, name, &#x27;trigger&#x27;,&#x27;-&#x27;, exception])
-    }
-    return this
-  }
-
-  /**
-   * stop listening an event for a given object
-   * @method stopListening
-   * @param {Object} obj
-   * @param {String} name
-   * @param {Function} callback
-   */
-  stopListening(obj, name, callback) {
-    var listeningTo = this._listeningTo
-    if (!listeningTo) return this
-    var remove = !name &amp;&amp; !callback
-    if (!callback &amp;&amp; typeof name === &#x27;object&#x27;) callback = this
-    if (obj) (listeningTo = {})[obj._listenId] = obj
-    for (var id in listeningTo) {
-      obj = listeningTo[id]
-      obj.off(name, callback, this)
-      if (remove || Object.keys(obj._events).length === 0) delete this._listeningTo[id]
-    }
-    return this
-  }
-}
-
 var eventSplitter = /\s+/
 
 var eventsApi = function(obj, action, name, rest) {
-  if (!name) return true
+  if (!name) {return true}
 
   // Handle event maps.
   if (typeof name === &#x27;object&#x27;) {
@@ -247,13 +129,133 @@ var eventsApi = function(obj, action, name, rest) {
 var triggerEvents = function(events, args) {
   var ev, i = -1, l = events.length, a1 = args[0], a2 = args[1], a3 = args[2]
   switch (args.length) {
-    case 0: while (++i &lt; l) (ev = events[i]).callback.call(ev.ctx); return
-    case 1: while (++i &lt; l) (ev = events[i]).callback.call(ev.ctx, a1); return
-    case 2: while (++i &lt; l) (ev = events[i]).callback.call(ev.ctx, a1, a2); return
-    case 3: while (++i &lt; l) (ev = events[i]).callback.call(ev.ctx, a1, a2, a3); return
-    default: while (++i &lt; l) (ev = events[i]).callback.apply(ev.ctx, args); return
+    case 0: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx) } return
+    case 1: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1) } return
+    case 2: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1, a2) } return
+    case 3: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1, a2, a3) } return
+    default: while (++i &lt; l) { (ev = events[i]).callback.apply(ev.ctx, args) } return
   }
 }
+
+/**
+ * @class Events
+ * @constructor
+ * @module base
+ */
+export default class Events {
+  /**
+   * listen to an event indefinitely, if you want to stop you need to call &#x60;off&#x60;
+   * @method on
+   * @param {String} name
+   * @param {Function} callback
+   * @param {Object} context
+   */
+  on(name, callback, context) {
+    if (!eventsApi(this, &#x27;on&#x27;, name, [callback, context]) || !callback) {return this}
+    this._events || (this._events = {})
+    var events = this._events[name] || (this._events[name] = [])
+    events.push({callback: callback, context: context, ctx: context || this})
+    return this
+  }
+
+  /**
+   * listen to an event only once
+   * @method once
+   * @param {String} name
+   * @param {Function} callback
+   * @param {Object} context
+   */
+  once(name, callback, context) {
+    if (!eventsApi(this, &#x27;once&#x27;, name, [callback, context]) || !callback) {return this}
+    var self = this
+    var once = execOnce(function() {
+      self.off(name, once)
+      callback.apply(this, arguments)
+    })
+    once._callback = callback
+    return this.on(name, once, context)
+  }
+
+  /**
+   * stop listening to an event
+   * @method off
+   * @param {String} name
+   * @param {Function} callback
+   * @param {Object} context
+   */
+  off(name, callback, context) {
+    var retain, ev, events, names, i, l, j, k
+    if (!this._events || !eventsApi(this, &#x27;off&#x27;, name, [callback, context])) {return this}
+    if (!name &amp;&amp; !callback &amp;&amp; !context) {
+      this._events = void 0
+      return this
+    }
+    names = name ? [name] : Object.keys(this._events)
+    // jshint maxdepth:5
+    for (i = 0, l = names.length; i &lt; l; i++) {
+      name = names[i]
+      events = this._events[name]
+      if (events) {
+        this._events[name] = retain = []
+        if (callback || context) {
+          for (j = 0, k = events.length; j &lt; k; j++) {
+            ev = events[j]
+            if ((callback &amp;&amp; callback !== ev.callback &amp;&amp; callback !== ev.callback._callback) ||
+                (context &amp;&amp; context !== ev.context)) {
+              retain.push(ev)
+            }
+          }
+        }
+        if (!retain.length) {delete this._events[name]}
+      }
+    }
+    return this
+  }
+
+  /**
+   * triggers an event given its &#x60;name&#x60;
+   * @method trigger
+   * @param {String} name
+   */
+  trigger(name) {
+    var klass = this.name || this.constructor.name
+    try {
+      Log.debug.apply(Log, [klass].concat(Array.prototype.slice.call(arguments)))
+      if (!this._events) {return this}
+      var args = slice.call(arguments, 1)
+      if (!eventsApi(this, &#x27;trigger&#x27;, name, args)) {return this}
+      var events = this._events[name]
+      var allEvents = this._events.all
+      if (events) {triggerEvents(events, args)}
+      if (allEvents) {triggerEvents(allEvents, arguments)}
+    } catch (exception) {
+      Log.error.apply(Log, [klass, &#x27;error on event&#x27;, name, &#x27;trigger&#x27;,&#x27;-&#x27;, exception])
+    }
+    return this
+  }
+
+  /**
+   * stop listening an event for a given object
+   * @method stopListening
+   * @param {Object} obj
+   * @param {String} name
+   * @param {Function} callback
+   */
+  stopListening(obj, name, callback) {
+    var listeningTo = this._listeningTo
+    if (!listeningTo) {return this}
+    var remove = !name &amp;&amp; !callback
+    if (!callback &amp;&amp; typeof name === &#x27;object&#x27;) {callback = this}
+    if (obj) {(listeningTo = {})[obj._listenId] = obj}
+    for (var id in listeningTo) {
+      obj = listeningTo[id]
+      obj.off(name, callback, this)
+      if (remove || Object.keys(obj._events).length === 0) {delete this._listeningTo[id]}
+    }
+    return this
+  }
+}
+
 
 /**
  * listen to an event indefinitely for a given &#x60;obj&#x60;
@@ -286,7 +288,7 @@ Object.keys(listenMethods).forEach(function(method) {
     var listeningTo = this._listeningTo || (this._listeningTo = {})
     var id = obj._listenId || (obj._listenId = uniqueId(&#x27;l&#x27;))
     listeningTo[id] = obj
-    if (!callback &amp;&amp; typeof name === &#x27;object&#x27;) callback = this
+    if (!callback &amp;&amp; typeof name === &#x27;object&#x27;) {callback = this}
     obj[listenMethods[method]](name, callback, this)
     return this
   }
@@ -398,13 +400,22 @@ Events.PLAYBACK_TIMEUPDATE = &#x27;playback:timeupdate&#x27;
  */
 Events.PLAYBACK_READY = &#x27;playback:ready&#x27;
 /**
- * Fired when playback is buffering
+ * Fired when the playback starts having to buffer because
+ * playback can currently not be smooth.
+ *
+ * This corresponds to the playback &#x60;buffering&#x60; property being
+ * &#x60;true&#x60;.
  *
  * @event PLAYBACK_BUFFERING
  */
 Events.PLAYBACK_BUFFERING = &#x27;playback:buffering&#x27;
 /**
- * Fired when playback filled the buffer
+ * Fired when the playback has enough in the buffer to be
+ * able to play smoothly, after previously being unable to
+ * do this.
+ *
+ * This corresponds to the playback &#x60;buffering&#x60; property being
+ * &#x60;false&#x60;.
  *
  * @event PLAYBACK_BUFFERFULL
  */

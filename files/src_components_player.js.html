@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -145,6 +145,17 @@ export default class Player extends BaseObject {
     return this.core.mediaControl.container.ended
   }
 
+  /**
+   * Determine if the playback is having to buffer in order for
+   * playback to be smooth.
+   * (i.e if a live stream is playing smoothly, this will be false)
+   * @property buffering
+   * @type Boolean
+   */
+  get buffering() {
+    return this.core.mediaControl.container.buffering
+  }
+
   /*
    * determine if the player is ready.
    * @property isReady
@@ -210,6 +221,8 @@ export default class Player extends BaseObject {
    * when embedded with width less than 320, volume bar will hide. You can force this behavior for all sizes by adding &#x60;true&#x60; **default**: &#x60;false&#x60;
    * @param {String} [options.watermark]
    * put &#x60;watermark: &#x27;http://url/img.png&#x27;&#x60; on your embed parameters to automatically add watermark on your video. You can customize corner position by defining position parameter. Positions can be &#x60;bottom-left&#x60;, &#x60;bottom-right&#x60;, &#x60;top-left&#x60; and &#x60;top-right&#x60;.
+   * @param {String} [options.watermarkLink]
+   * &#x60;watermarkLink: &#x27;http://example.net/&#x27;&#x60; - define URL to open when the watermark is clicked. If not provided watermark will not be clickable. 
    * @param {Boolean} [options.disableVideoTagContextMenu]
    * disables the context menu (right click) on the video element if a HTML5Video playback is used.
    * @param {Boolean} [options.autoSeekFromUrl]

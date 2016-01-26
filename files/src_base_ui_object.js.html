@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -234,10 +234,10 @@ export default class UIObject extends BaseObject {
    * @return {UIObject} itself
    */
   setElement(element, delegate) {
-    if (this.$el) this.undelegateEvents()
+    if (this.$el) {this.undelegateEvents()}
     this.$el = element instanceof $ ? element : $(element)
     this.el = this.$el[0]
-    if (delegate !== false) this.delegateEvents()
+    if (delegate !== false) {this.delegateEvents()}
     return this
   }
 
@@ -248,12 +248,12 @@ export default class UIObject extends BaseObject {
    * @return {UIObject} itself
    */
   delegateEvents(events) {
-    if (!(events || (events = result(this, &#x27;events&#x27;)))) return this
+    if (!(events || (events = result(this, &#x27;events&#x27;)))) {return this}
     this.undelegateEvents()
     for (var key in events) {
       var method = events[key]
-      if ((method &amp;&amp; method.constructor !== Function)) method = this[events[key]]
-      if (!method) continue
+      if ((method &amp;&amp; method.constructor !== Function)) {method = this[events[key]]}
+      if (!method) {continue}
 
       var match = key.match(delegateEventSplitter)
       var eventName = match[1], selector = match[2]
@@ -286,8 +286,8 @@ export default class UIObject extends BaseObject {
   _ensureElement() {
     if (!this.el) {
       var attrs = $.extend({}, result(this, &#x27;attributes&#x27;))
-      if (this.id) attrs.id = result(this, &#x27;id&#x27;)
-      if (this.className) attrs[&#x27;class&#x27;] = result(this, &#x27;className&#x27;)
+      if (this.id) {attrs.id = result(this, &#x27;id&#x27;)}
+      if (this.className) {attrs[&#x27;class&#x27;] = result(this, &#x27;className&#x27;)}
       var $el = $(&#x27;&lt;&#x27; + result(this, &#x27;tagName&#x27;) + &#x27;&gt;&#x27;).attr(attrs)
       this.setElement($el, false)
     } else {

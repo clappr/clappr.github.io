@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -131,18 +131,21 @@ export default class HTML5Video extends Playback {
 
   get events() {
     return {
-      &#x27;timeupdate&#x27;: &#x27;timeUpdated&#x27;,
-      &#x27;progress&#x27;: &#x27;progress&#x27;,
+      &#x27;canplay&#x27;: &#x27;handleBufferingEvents&#x27;,
+      &#x27;canplaythrough&#x27;: &#x27;handleBufferingEvents&#x27;,
+      &#x27;durationchange&#x27;: &#x27;onDurationChange&#x27;,
       &#x27;ended&#x27;: &#x27;onEnded&#x27;,
-      &#x27;stalled&#x27;: &#x27;stalled&#x27;,
-      &#x27;waiting&#x27;: &#x27;waiting&#x27;,
-      &#x27;canplaythrough&#x27;: &#x27;bufferFull&#x27;,
-      &#x27;loadedmetadata&#x27;: &#x27;loadedMetadata&#x27;,
-      &#x27;canplay&#x27;: &#x27;ready&#x27;,
-      &#x27;durationchange&#x27;: &#x27;durationChange&#x27;,
-      &#x27;error&#x27;: &#x27;error&#x27;,
-      &#x27;playing&#x27;: &#x27;playing&#x27;,
-      &#x27;pause&#x27;: &#x27;paused&#x27;
+      &#x27;error&#x27;: &#x27;onError&#x27;,
+      &#x27;loadedmetadata&#x27;: &#x27;onLoadedMetadata&#x27;,
+      &#x27;loadstart&#x27;: &#x27;onLoadStart&#x27;,
+      &#x27;pause&#x27;: &#x27;onPause&#x27;,
+      &#x27;playing&#x27;: &#x27;onPlaying&#x27;,
+      &#x27;progress&#x27;: &#x27;onProgress&#x27;,
+      &#x27;seeked&#x27;: &#x27;handleBufferingEvents&#x27;,
+      &#x27;seeking&#x27;: &#x27;handleBufferingEvents&#x27;,
+      &#x27;stalled&#x27;: &#x27;handleBufferingEvents&#x27;,
+      &#x27;timeupdate&#x27;: &#x27;onTimeUpdate&#x27;,
+      &#x27;waiting&#x27;: &#x27;handleBufferingEvents&#x27;
     }
   }
 
@@ -155,19 +158,36 @@ export default class HTML5Video extends Playback {
     return this.el.ended
   }
 
+  /**
+   * Determine if the playback is having to buffer in order for
+   * playback to be smooth.
+   * This is related to the PLAYBACK_BUFFERING and PLAYBACK_BUFFERFULL events
+   * @property buffering
+   * @type Boolean
+   */
+  get buffering() {
+    return this.bufferingState
+  }
+
   constructor(options) {
     super(options)
+    this.loadStarted = false
+    this.playheadMoving = false
+    this.playheadMovingTimer = null
     this.options = options
     this.setupSrc(options.src)
     this.el.loop = options.loop
-    this.firstBuffer = true
-    this.settings = {default: [&#x27;seekbar&#x27;]}
+    if (options.poster) {
+      this.$el.attr(&quot;poster&quot;, options.poster)
+    }
+    this.el.autoplay = options.autoPlay
     if (Browser.isSafari) {
       this.setupSafari()
     } else {
       this.el.preload = options.preload ? options.preload: &#x27;metadata&#x27;
       this.settings.seekEnabled = true
     }
+    this.settings = {default: [&#x27;seekbar&#x27;]}
     this.settings.left = [&quot;playpause&quot;, &quot;position&quot;, &quot;duration&quot;]
     this.settings.right = [&quot;fullscreen&quot;, &quot;volume&quot;, &quot;hd-indicator&quot;]
   }
@@ -186,16 +206,22 @@ export default class HTML5Video extends Playback {
     this.el.preload = &#x27;auto&#x27;
   }
 
-  loadedMetadata(e) {
-    this.durationChange()
+  onLoadedMetadata(e) {
+    this.handleBufferingEvents()
+    this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: e.target.duration, data: e})
+    this.updateSettings()
     var autoSeekFromUrl = typeof(this.options.autoSeekFromUrl) === &quot;undefined&quot; || this.options.autoSeekFromUrl
     if (this.getPlaybackType() !== Playback.LIVE &amp;&amp; autoSeekFromUrl) {
       this.checkInitialSeek()
     }
-    this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: e.target.duration, data: e})
   }
 
-  durationChange() {
+  onDurationChange() {
+    this.updateSettings()
+    this.onTimeUpdate()
+  }
+
+  updateSettings() {
     // we can&#x27;t figure out if hls resource is VoD or not until it is being loaded or duration has changed.
     // that&#x27;s why we check it again and update media control accordingly.
     if (this.getPlaybackType() === Playback.VOD) {
@@ -220,6 +246,10 @@ export default class HTML5Video extends Playback {
   }
 
   play() {
+    if (!this.loadStarted &amp;&amp; this.el.preload === &#x27;none&#x27;) {
+      this.loadStarted = true
+      this.handleBufferingEvents()
+    }
     this.el.play()
   }
 
@@ -229,10 +259,10 @@ export default class HTML5Video extends Playback {
 
   stop() {
     this.pause()
-    if (this.el.readyState !== 0) {
-      this.el.currentTime = 0
-      this.trigger(Events.PLAYBACK_STOP)
-    }
+    this.el.currentTime = 0
+    this.stopPlayheadMovingChecks()
+    this.handleBufferingEvents()
+    this.trigger(Events.PLAYBACK_STOP)
   }
 
   volume(value) {
@@ -259,51 +289,84 @@ export default class HTML5Video extends Playback {
     return this.isReadyState
   }
 
-  playing() {
-    this.trigger(Events.PLAYBACK_PLAY);
+  startPlayheadMovingChecks() {
+    if (this.playheadMovingTimer !== null) {
+      return
+    }
+    this.playheadMovingTimeOnCheck = null
+    this.determineIfPlayheadMoving()
+    this.playheadMovingTimer = setInterval(this.determineIfPlayheadMoving.bind(this), 500)
   }
 
-  paused() {
-    this.trigger(Events.PLAYBACK_PAUSE);
+  stopPlayheadMovingChecks() {
+    if (this.playheadMovingTimer === null) {
+      return
+    }
+    clearInterval(this.playheadMovingTimer)
+    this.playheadMovingTimer = null
+    this.playheadMoving = false
+  }
+
+  determineIfPlayheadMoving() {
+    var before = this.playheadMovingTimeOnCheck
+    var now = this.el.currentTime
+    this.playheadMoving = before !== now
+    this.playheadMovingTimeOnCheck = now
+    this.handleBufferingEvents()
+  }
+
+  onLoadStart() {
+    if (this.el.preload !== &#x27;none&#x27;) {
+      // when preload is none the onLoadStart event is still fired
+      // immediately. Pretend that load starts in play()
+      this.loadStarted = true
+      this.handleBufferingEvents()
+    }
+  }
+
+  onPlaying() {
+    this.startPlayheadMovingChecks()
+    this.handleBufferingEvents()
+    this.trigger(Events.PLAYBACK_PLAY)
+  }
+
+  onPause() {
+    this.stopPlayheadMovingChecks()
+    this.handleBufferingEvents()
+    this.trigger(Events.PLAYBACK_PAUSE)
   }
 
   onEnded() {
-    this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
+    this.handleBufferingEvents()
     this.trigger(Events.PLAYBACK_ENDED, this.name)
-    this.trigger(Events.PLAYBACK_TIMEUPDATE, { current: 0, total: this.el.duration }, this.name)
   }
 
-  stalled() {
-    if (this.getPlaybackType() === Playback.VOD &amp;&amp; this.el.readyState &lt; this.el.HAVE_FUTURE_DATA) {
-      this.trigger(Events.PLAYBACK_BUFFERING, this.name)
-    }
-  }
-
-  waiting() {
-    if(this.el.readyState &lt; this.el.HAVE_FUTURE_DATA) {
-      this.trigger(Events.PLAYBACK_BUFFERING, this.name)
-    }
-  }
-
-  bufferFull() {
-    if (this.options.poster &amp;&amp; this.firstBuffer) {
-      this.firstBuffer = false
-      if (!this.isPlaying()) {
-        this.el.poster = this.options.poster
+  // The playback should be classed as buffering if the following are true:
+  // - the ready state is less then HAVE_FUTURE_DATA or the playhead isn&#x27;t moving and it should be
+  // - the media hasn&#x27;t &quot;ended&quot;
+  // - loading has started
+  handleBufferingEvents() {
+    var playheadShouldBeMoving = !this.el.ended &amp;&amp; !this.el.paused
+    var buffering = this.loadStarted &amp;&amp; !this.el.ended &amp;&amp; ((playheadShouldBeMoving &amp;&amp; !this.playheadMoving) || this.el.readyState &lt; this.el.HAVE_FUTURE_DATA)
+    if (this.bufferingState !== buffering) {
+      this.bufferingState = buffering
+      if (buffering) {
+        this.trigger(Events.PLAYBACK_BUFFERING, this.name)
       }
-    } else {
-      this.el.poster = &#x27;&#x27;
+      else {
+        this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
+      }
     }
-    this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
   }
 
-  error(event) {
+  onError(event) {
     this.trigger(Events.PLAYBACK_ERROR, this.el.error, this.name)
   }
 
   destroy() {
     this.stop()
     this.el.src = &#x27;&#x27;
+    this.src = null
     this.$el.remove()
   }
 
@@ -318,7 +381,9 @@ export default class HTML5Video extends Playback {
 
   checkInitialSeek() {
     var seekTime = seekStringToSeconds(window.location.href)
-    if (seekTime !== 0) this.seek(seekTime)
+    if (seekTime !== 0) {
+      this.seek(seekTime)
+    }
   }
 
   getCurrentTime() {
@@ -329,7 +394,8 @@ export default class HTML5Video extends Playback {
     return this.el.duration
   }
 
-  timeUpdated() {
+  onTimeUpdate() {
+    this.handleBufferingEvents()
     if (this.getPlaybackType() === Playback.LIVE) {
       this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: 1, total: 1}, this.name)
     } else {
@@ -337,8 +403,10 @@ export default class HTML5Video extends Playback {
     }
   }
 
-  progress() {
-    if (!this.el.buffered.length) return
+  onProgress() {
+    if (!this.el.buffered.length) {
+      return
+    }
     var bufferedPos = 0
     for (var i = 0;  i &lt; this.el.buffered.length; i++) {
       if (this.el.currentTime &gt;= this.el.buffered.start(i) &amp;&amp; this.el.currentTime &lt;= this.el.buffered.end(i)) {
@@ -346,7 +414,6 @@ export default class HTML5Video extends Playback {
         break
       }
     }
-    this.checkBufferState(this.el.buffered.end(bufferedPos))
     this.trigger(Events.PLAYBACK_PROGRESS, {
       start: this.el.buffered.start(bufferedPos),
       current: this.el.buffered.end(bufferedPos),
@@ -354,19 +421,10 @@ export default class HTML5Video extends Playback {
     })
   }
 
-  checkBufferState(bufferedPos) {
-    var playbackPos = this.el.currentTime + 0.05; // 50 ms threshold
-    if (this.isPlaying() &amp;&amp; playbackPos &gt;= bufferedPos) {
-      this.trigger(Events.PLAYBACK_BUFFERING, this.name)
-      this.buffering = true
-    } else if (this.buffering) {
-      this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
-      this.buffering = false
-    }
-  }
-
   typeFor(src) {
-    return (src.indexOf(&#x27;.m3u8&#x27;) &gt; 0) ? &#x27;application/vnd.apple.mpegurl&#x27; : &#x27;video/mp4&#x27;
+    var resourceParts = src.split(&#x27;?&#x27;)[0].match(/.*\.(.*)$/) || []
+    var isHls = resourceParts.length &gt; 1 &amp;&amp; resourceParts[1] === &quot;m3u8&quot;
+    return isHls ? &#x27;application/vnd.apple.mpegurl&#x27; : &#x27;video/mp4&#x27;
   }
 
   ready() {
@@ -375,10 +433,6 @@ export default class HTML5Video extends Playback {
     }
     this.isReadyState = true
     this.trigger(Events.PLAYBACK_READY, this.name)
-    if (this.firstBuffer) {
-      this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
-      this.firstBuffer = this.buffering = false
-    }
   }
 
   render() {
@@ -397,11 +451,7 @@ export default class HTML5Video extends Playback {
     }
 
     this.$el.append(style)
-
-    process.nextTick(() =&gt; this.options.autoPlay &amp;&amp; this.play())
-    if (this.el.readyState === this.el.HAVE_ENOUGH_DATA) {
-      this.ready()
-    }
+    this.ready()
     return this
   }
 }

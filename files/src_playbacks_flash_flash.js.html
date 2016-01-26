@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.29</em>
+            <em>API Docs for: 0.2.33</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -121,6 +121,16 @@ export default class Flash extends BaseFlashPlayback {
     return this.currentState === &quot;ENDED&quot;
   }
 
+  /**
+   * Determine if the playback is buffering.
+   * This is related to the PLAYBACK_BUFFERING and PLAYBACK_BUFFERFULL events
+   * @property buffering
+   * @type Boolean
+   */
+  get buffering() {
+    return !!this.bufferingState &amp;&amp; this.currentState !== &quot;ENDED&quot;
+  }
+
   constructor(options) {
     super(options)
     this.src = options.src
@@ -198,9 +208,11 @@ export default class Flash extends BaseFlashPlayback {
     if (this.isIdle || this.currentState === &quot;PAUSED&quot;) {
       return
     } else if (this.currentState !== &quot;PLAYING_BUFFERING&quot; &amp;&amp; this.el.getState() === &quot;PLAYING_BUFFERING&quot;) {
+      this.bufferingState = true
       this.trigger(Events.PLAYBACK_BUFFERING, this.name)
       this.currentState = &quot;PLAYING_BUFFERING&quot;
     } else if (this.el.getState() === &quot;PLAYING&quot;) {
+      this.bufferingState = false
       this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
       this.currentState = &quot;PLAYING&quot;
     } else if (this.el.getState() === &quot;IDLE&quot;) {
