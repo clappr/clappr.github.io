@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.33</em>
+            <em>API Docs for: 0.2.39</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -138,11 +138,8 @@ export default class MediaControl extends UIObject {
       &#x27;click .drawer-icon[data-volume]&#x27;: &#x27;toggleMute&#x27;,
       &#x27;mouseenter .drawer-container[data-volume]&#x27;: &#x27;showVolumeBar&#x27;,
       &#x27;mouseleave .drawer-container[data-volume]&#x27;: &#x27;hideVolumeBar&#x27;,
-      &#x27;mousedown .segmented-bar-element[data-volume]&#x27;: &#x27;mousedownOnVolumeBar&#x27;,
-      &#x27;mouseleave .media-control-layer&#x27;: &#x27;mouseleaveOnVolumeBar&#x27;,
-      &#x27;mousemove .segmented-bar-element[data-volume]&#x27;: &#x27;mousemoveOnVolumeBar&#x27;,
-      &#x27;mouseup .segmented-bar-element[data-volume]&#x27;: &#x27;mouseupOnVolumeBar&#x27;,
-      &#x27;mousedown .bar-scrubber[data-volume]&#x27;: &#x27;startVolumeDrag&#x27;,
+      &#x27;mousedown .bar-container[data-volume]&#x27;: &#x27;startVolumeDrag&#x27;,
+      &#x27;mousemove .bar-container[data-volume]&#x27;: &#x27;mousemoveOnVolumeBar&#x27;,
       &#x27;mousedown .bar-scrubber[data-seekbar]&#x27;: &#x27;startSeekDrag&#x27;,
       &#x27;mousemove .bar-container[data-seekbar]&#x27;: &#x27;mousemoveOnSeekBar&#x27;,
       &#x27;mouseleave .bar-container[data-seekbar]&#x27;: &#x27;mouseleaveOnSeekBar&#x27;,
@@ -155,7 +152,7 @@ export default class MediaControl extends UIObject {
 
   get stylesheet() { return Styler.getStyleFor(mediaControlStyle, {baseUrl: this.options.baseUrl}) }
 
-  get volume() { return this.intendedVolume }
+  get volume() { return (this.container &amp;&amp; this.container.isReady) ? this.container.volume : this.intendedVolume }
   get muted() { return this.volume === 0 }
 
   constructor(options) {
@@ -168,7 +165,6 @@ export default class MediaControl extends UIObject {
     var initialVolume = (this.persistConfig) ? Config.restore(&quot;volume&quot;) : 100
     this.setVolume(this.options.mute ? 0 : initialVolume)
     this.keepVisible = false
-    this.volumeBarClickDown = false
     this.addEventListeners()
     this.settings = {
       left: [&#x27;play&#x27;, &#x27;stop&#x27;, &#x27;pause&#x27;],
@@ -245,6 +241,16 @@ export default class MediaControl extends UIObject {
       // this will be called after a render
       return
     }
+    // update volume bar scrubber/fill on bar mode
+    this.$volumeBarContainer.find(&#x27;.bar-fill-2&#x27;).css({})
+    var containerWidth = this.$volumeBarContainer.width()
+    var barWidth = this.$volumeBarBackground.width()
+    var offset = (containerWidth - barWidth) / 2.0
+    var pos = barWidth * this.volume / 100.0 + offset
+    this.$volumeBarFill.css({ width: &#x60;${this.volume}%&#x60; })
+    this.$volumeBarScrubber.css({ left: pos })
+
+    // update volume bar segments on segmented bar mode
     this.$volumeBarContainer.find(&#x27;.segmented-bar-element&#x27;).removeClass(&#x27;fill&#x27;)
     var item = Math.ceil(this.volume / 10.0)
     this.$volumeBarContainer.find(&#x27;.segmented-bar-element&#x27;).slice(0, item).addClass(&#x27;fill&#x27;)
@@ -284,35 +290,8 @@ export default class MediaControl extends UIObject {
   }
 
   mousemoveOnVolumeBar(event) {
-    if(this.volumeBarClickDown) {
+    if(this.draggingVolumeBar) {
       this.setVolume(this.getVolumeFromUIEvent(event))
-    }
-  }
-
-  mousedownOnVolumeBar() {
-    this.$el.addClass(&#x27;dragging&#x27;)
-    this.volumeBarClickDown = true
-  }
-
-  mouseupOnVolumeBar() {
-    this.$el.removeClass(&#x27;dragging&#x27;)
-    this.volumeBarClickDown = false
-  }
-
-  mouseleaveOnVolumeBar(event) {
-    var volOffset = this.$volumeBarContainer.offset()
-
-    var outsideByLeft = event.pageX &lt; volOffset.left
-    var outsideByRight = event.pageX &gt; (volOffset.left + volOffset.width)
-    var outsideHorizontally = (outsideByLeft || outsideByRight)
-
-    var outsideByTop = event.pageY &lt; volOffset.top
-    var outsideByBottom = event.pageY &gt; (volOffset.top + volOffset.height)
-
-    var outsideVertically = (outsideByTop || outsideByBottom)
-
-    if(outsideHorizontally || outsideVertically) {
-      this.mouseupOnVolumeBar()
     }
   }
 
@@ -410,8 +389,7 @@ export default class MediaControl extends UIObject {
     var setWhenContainerReady = () =&gt; {
       if (this.container.isReady) {
         this.container.setVolume(value)
-      }
-      else {
+      } else {
         this.listenToOnce(this.container, Events.CONTAINER_READY, () =&gt; {
           this.container.setVolume(value)
         })
@@ -422,8 +400,7 @@ export default class MediaControl extends UIObject {
       this.listenToOnce(this, Events.MEDIACONTROL_CONTAINERCHANGED, () =&gt; {
         setWhenContainerReady()
       })
-    }
-    else {
+    } else {
       setWhenContainerReady()
     }
   }
@@ -603,6 +580,9 @@ export default class MediaControl extends UIObject {
     this.$volumeBarContainer = $layer.find(&#x27;.bar-container[data-volume]&#x27;)
     this.$volumeContainer = $layer.find(&#x27;.drawer-container[data-volume]&#x27;)
     this.$volumeIcon = $layer.find(&#x27;.drawer-icon[data-volume]&#x27;)
+    this.$volumeBarBackground = this.$el.find(&#x27;.bar-background[data-volume]&#x27;)
+    this.$volumeBarFill = this.$el.find(&#x27;.bar-fill-1[data-volume]&#x27;)
+    this.$volumeBarScrubber = this.$el.find(&#x27;.bar-scrubber[data-volume]&#x27;)
     this.resetIndicators()
   }
 

@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.33</em>
+            <em>API Docs for: 0.2.39</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -290,6 +290,10 @@ export default class Container extends UIObject {
     return this.playback.isPlaying()
   }
 
+  getStartTimeOffset() {
+    return this.playback.getStartTimeOffset()
+  }
+
   getCurrentTime() {
     return this.currentTime
   }
@@ -361,15 +365,21 @@ export default class Container extends UIObject {
   }
 
   clicked() {
-    this.trigger(Events.CONTAINER_CLICK, this, this.name)
+    if (!this.options.chromeless || this.options.allowUserInteraction) {
+      this.trigger(Events.CONTAINER_CLICK, this, this.name)
+    }
   }
 
   dblClicked() {
-    this.trigger(Events.CONTAINER_DBLCLICK, this, this.name)
+    if (!this.options.chromeless || this.options.allowUserInteraction) {
+      this.trigger(Events.CONTAINER_DBLCLICK, this, this.name)
+    }
   }
 
   onContextMenu() {
-    this.trigger(Events.CONTAINER_CONTEXTMENU, this, this.name)
+    if (!this.options.chromeless || this.options.allowUserInteraction) {
+      this.trigger(Events.CONTAINER_CONTEXTMENU, this, this.name)
+    }
   }
 
   seek(time) {
@@ -431,11 +441,15 @@ export default class Container extends UIObject {
   }
 
   mouseEnter() {
-    this.trigger(Events.CONTAINER_MOUSE_ENTER)
+    if (!this.options.chromeless || this.options.allowUserInteraction) {
+      this.trigger(Events.CONTAINER_MOUSE_ENTER)
+    }
   }
 
   mouseLeave() {
-    this.trigger(Events.CONTAINER_MOUSE_LEAVE)
+    if (!this.options.chromeless || this.options.allowUserInteraction) {
+      this.trigger(Events.CONTAINER_MOUSE_LEAVE)
+    }
   }
 
   settingsUpdate() {
@@ -461,6 +475,14 @@ export default class Container extends UIObject {
     this.trigger(Events.CONTAINER_MEDIACONTROL_ENABLE)
   }
 
+  updateStyle() {
+    if (!this.options.chromeless || this.options.allowUserInteraction) {
+      this.$el.removeClass(&#x27;chromeless&#x27;)
+    } else {
+      this.$el.addClass(&#x27;chromeless&#x27;)
+    }
+  }
+
   /**
    * enables to configure the container after its creation
    * @method configure
@@ -468,6 +490,7 @@ export default class Container extends UIObject {
    */
   configure(options) {
     this.options = $.extend(this.options, options)
+    this.updateStyle()
     this.trigger(Events.CONTAINER_OPTIONS_CHANGE)
   }
 
@@ -475,6 +498,7 @@ export default class Container extends UIObject {
     var s = Styler.getStyleFor(style)
     this.$el.append(s)
     this.$el.append(this.playback.render().el)
+    this.updateStyle()
     return this
   }
 }

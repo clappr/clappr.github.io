@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.33</em>
+            <em>API Docs for: 0.2.39</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -163,10 +163,20 @@ export default class Playback extends UIObject {
    */
   seekPercentage(percentage) {/*jshint unused:false*/}
 
+
+  /**
+   * The time that &quot;0&quot; now represents relative to when playback started.
+   * For a stream with a sliding window this will increase as content is
+   * removed from the beginning.
+   * @method getStartTimeOffset
+   * @return {Number} time (in seconds) that time &quot;0&quot; represents.
+   */
+  getStartTimeOffset() { return 0 }
+
   /**
    * gets the duration in seconds
    * @method getDuration
-   * @return {Number} duration time (in seconds) of the current source
+   * @return {Number} duration (in seconds) of the current source
    */
   getDuration() { return 0 }
 

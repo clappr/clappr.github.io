@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.33</em>
+            <em>API Docs for: 0.2.39</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -190,6 +190,10 @@
                             </li>
                             <li class="index-item method">
                                 <a href="#method_getPlaybackType">getPlaybackType</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getStartTimeOffset">getStartTimeOffset</a>
 
                             </li>
                             <li class="index-item method">
@@ -698,7 +702,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l143"><code>src&#x2F;base&#x2F;playback.js:143</code></a>
+        <a href="../files/src_base_playback.js.html#l153"><code>src&#x2F;base&#x2F;playback.js:153</code></a>
         </p>
 
 
@@ -888,7 +892,7 @@ from the source extension.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l130"><code>src&#x2F;base&#x2F;playback.js:130</code></a>
+        <a href="../files/src_base_playback.js.html#l140"><code>src&#x2F;base&#x2F;playback.js:140</code></a>
         </p>
 
 
@@ -922,7 +926,7 @@ from the source extension.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l73"><code>src&#x2F;base&#x2F;playback.js:73</code></a>
+        <a href="../files/src_base_playback.js.html#l83"><code>src&#x2F;base&#x2F;playback.js:83</code></a>
         </p>
 
 
@@ -940,7 +944,7 @@ from the source extension.</p>
 
             <div class="returns-description">
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
-                    <p>duration time (in seconds) of the current source</p>
+                    <p>duration (in seconds) of the current source</p>
 
             </div>
         </div>
@@ -965,7 +969,7 @@ from the source extension.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l98"><code>src&#x2F;base&#x2F;playback.js:98</code></a>
+        <a href="../files/src_base_playback.js.html#l108"><code>src&#x2F;base&#x2F;playback.js:108</code></a>
         </p>
 
 
@@ -1002,6 +1006,51 @@ flashHlsPlayback.getPlaybackType() //live
             </div>
         </div>
 </div>
+<div id="method_getStartTimeOffset" class="method item">
+    <h3 class="name"><code>getStartTimeOffset</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l74"><code>src&#x2F;base&#x2F;playback.js:74</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>The time that &quot;0&quot; now represents relative to when playback started.
+For a stream with a sliding window this will increase as content is
+removed from the beginning.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>time (in seconds) that time &quot;0&quot; represents.</p>
+
+            </div>
+        </div>
+
+
+</div>
 <div id="method_isHighDefinitionInUse" class="method item">
     <h3 class="name"><code>isHighDefinitionInUse</code></h3>
 
@@ -1020,7 +1069,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l114"><code>src&#x2F;base&#x2F;playback.js:114</code></a>
+        <a href="../files/src_base_playback.js.html#l124"><code>src&#x2F;base&#x2F;playback.js:124</code></a>
         </p>
 
 
@@ -1063,7 +1112,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l80"><code>src&#x2F;base&#x2F;playback.js:80</code></a>
+        <a href="../files/src_base_playback.js.html#l90"><code>src&#x2F;base&#x2F;playback.js:90</code></a>
         </p>
 
 
@@ -2121,7 +2170,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l123"><code>src&#x2F;base&#x2F;playback.js:123</code></a>
+        <a href="../files/src_base_playback.js.html#l133"><code>src&#x2F;base&#x2F;playback.js:133</code></a>
         </p>
 
 
@@ -2195,7 +2244,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l166"><code>src&#x2F;base&#x2F;playback.js:166</code></a>
+                            <a href="../files/src_base_playback.js.html#l176"><code>src&#x2F;base&#x2F;playback.js:176</code></a>
                             </p>
                     
                     
@@ -2403,7 +2452,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l89"><code>src&#x2F;base&#x2F;playback.js:89</code></a>
+                            <a href="../files/src_base_playback.js.html#l99"><code>src&#x2F;base&#x2F;playback.js:99</code></a>
                             </p>
                     
                     
@@ -2429,7 +2478,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l174"><code>src&#x2F;base&#x2F;playback.js:174</code></a>
+                            <a href="../files/src_base_playback.js.html#l184"><code>src&#x2F;base&#x2F;playback.js:184</code></a>
                             </p>
                     
                     
@@ -2455,7 +2504,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l182"><code>src&#x2F;base&#x2F;playback.js:182</code></a>
+                            <a href="../files/src_base_playback.js.html#l192"><code>src&#x2F;base&#x2F;playback.js:192</code></a>
                             </p>
                     
                     
@@ -2481,7 +2530,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l190"><code>src&#x2F;base&#x2F;playback.js:190</code></a>
+                            <a href="../files/src_base_playback.js.html#l200"><code>src&#x2F;base&#x2F;playback.js:200</code></a>
                             </p>
                     
                     
@@ -2532,7 +2581,7 @@ flashHlsPlayback.getPlaybackType() //live
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/src_base_playback.js.html#l158"><code>src&#x2F;base&#x2F;playback.js:158</code></a>
+                            <a href="../files/src_base_playback.js.html#l168"><code>src&#x2F;base&#x2F;playback.js:168</code></a>
                             </p>
                     
                     

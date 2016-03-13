@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.33</em>
+            <em>API Docs for: 0.2.39</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -114,7 +114,13 @@ export default class FlasHLS extends BaseFlashPlayback {
   get swfPath() { return template(hlsSwf)({baseUrl: this.baseUrl}) }
 
   get levels() { return this._levels || [] }
-  get currentLevel() { return this._currentLevel || AUTO }
+  get currentLevel() {
+    if (this._currentLevel === null || this._currentLevel === undefined) {
+      return AUTO;
+    } else {
+      return this._currentLevel; //0 is a valid level ID
+    }
+  }
   set currentLevel(id) {
     this._currentLevel = id
     this.trigger(Events.PLAYBACK_LEVEL_SWITCH_START)
@@ -230,8 +236,8 @@ export default class FlasHLS extends BaseFlashPlayback {
       this.currentState = &quot;IDLE&quot;
       this.setFlashSettings()
       this.updatePlaybackType()
-      if (this.autoPlay || this._shouldPlayOnBootstrap) {
-          this.play()
+      if (this.autoPlay || this._shouldPlayOnManifestLoaded) {
+        this.play()
       }
       this.trigger(Events.PLAYBACK_READY, this.name)
     } else {
@@ -563,7 +569,7 @@ export default class FlasHLS extends BaseFlashPlayback {
       } else {
         this.updateCurrentState(state)
         this.hasEnded = true
-        this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: 0, total: this.el.getDuration()}, this.name)
+        this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: 0, total: this.getDuration()}, this.name)
         this.trigger(Events.PLAYBACK_ENDED, this.name)
       }
     }
@@ -618,13 +624,11 @@ export default class FlasHLS extends BaseFlashPlayback {
   }
 
   firstPlay() {
+    this._shouldPlayOnManifestLoaded = true
     if (this.el.playerLoad) {
       this.setFlashSettings() //ensure flushLiveURLCache will work (#327)
       this.el.playerLoad(this.src)
-      Mediator.once(this.cid + &#x27;:manifestloaded&#x27;,() =&gt; this.el.playerPlay())
       this.srcLoaded = true
-    } else {
-      this._shouldPlayOnBootstrap = true
     }
   }
 
@@ -670,7 +674,7 @@ export default class FlasHLS extends BaseFlashPlayback {
   normalizeDuration(duration) {
     if (this.playbackType === Playback.LIVE) {
       // estimate 10 seconds of buffer time for live streams for seek positions
-      duration = duration - 10
+      duration = Math.max(0, duration - 10)
     }
     return duration
   }
@@ -685,13 +689,10 @@ export default class FlasHLS extends BaseFlashPlayback {
   }
 
   seek(time) {
-    var duration = this.el.getDuration()
+    var duration = this.getDuration()
     if (this.playbackType === Playback.LIVE) {
-      // seek operations to a time within 5 seconds from live stream will position playhead back to live
-      var dvrInUse = (time &gt;= 0 &amp;&amp; duration - time &gt; 5)
-      if (!dvrInUse) {
-        time = -1
-      }
+      // seek operations to a time within 3 seconds from live stream will position playhead back to live
+      var dvrInUse = duration - time &gt; 3
       this.updateDvr(dvrInUse)
     }
     this.el.playerSeek(time)
@@ -714,19 +715,24 @@ export default class FlasHLS extends BaseFlashPlayback {
   }
 
   manifestLoaded(duration, loadmetrics) {
+    if (this._shouldPlayOnManifestLoaded) {
+      this._shouldPlayOnManifestLoaded = false
+      // this method initialises the player (and starts playback)
+      // this needs to happen before PLAYBACK_LOADEDMETADATA is fired
+      // as the user may call seek() in a LOADEDMETADATA listener.
+      /// when playerPlay() is called the player seeks to 0
+      this.el.playerPlay()
+    }
+
     var levels = this.el.getLevels()
     var levelsLength = levels.length
     this._levels = []
 
     for (var index = 0 ; index &lt; levelsLength ; index++) {
-      this._levels.push({id: index, label: &#x60;${levels[index].height}p&#x60;})
+      this._levels.push({id: index, label: &#x60;${levels[index].height}p&#x60;, level: levels[index]})
     }
     this.trigger(Events.PLAYBACK_LEVELS_AVAILABLE, this._levels)
     this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: duration, data: loadmetrics})
-  }
-
-  timeUpdate(time, duration) {
-    this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: time, total: duration}, this.name)
   }
 
   destroy() {

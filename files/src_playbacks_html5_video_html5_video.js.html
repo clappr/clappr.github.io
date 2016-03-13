@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.33</em>
+            <em>API Docs for: 0.2.39</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -131,13 +131,13 @@ export default class HTML5Video extends Playback {
 
   get events() {
     return {
-      &#x27;canplay&#x27;: &#x27;handleBufferingEvents&#x27;,
+      &#x27;canplay&#x27;: &#x27;onCanPlay&#x27;,
       &#x27;canplaythrough&#x27;: &#x27;handleBufferingEvents&#x27;,
       &#x27;durationchange&#x27;: &#x27;onDurationChange&#x27;,
       &#x27;ended&#x27;: &#x27;onEnded&#x27;,
       &#x27;error&#x27;: &#x27;onError&#x27;,
+      &#x27;loadeddata&#x27;: &#x27;onLoadedData&#x27;,
       &#x27;loadedmetadata&#x27;: &#x27;onLoadedMetadata&#x27;,
-      &#x27;loadstart&#x27;: &#x27;onLoadStart&#x27;,
       &#x27;pause&#x27;: &#x27;onPause&#x27;,
       &#x27;playing&#x27;: &#x27;onPlaying&#x27;,
       &#x27;progress&#x27;: &#x27;onProgress&#x27;,
@@ -145,7 +145,7 @@ export default class HTML5Video extends Playback {
       &#x27;seeking&#x27;: &#x27;handleBufferingEvents&#x27;,
       &#x27;stalled&#x27;: &#x27;handleBufferingEvents&#x27;,
       &#x27;timeupdate&#x27;: &#x27;onTimeUpdate&#x27;,
-      &#x27;waiting&#x27;: &#x27;handleBufferingEvents&#x27;
+      &#x27;waiting&#x27;: &#x27;onWaiting&#x27;
     }
   }
 
@@ -166,7 +166,7 @@ export default class HTML5Video extends Playback {
    * @type Boolean
    */
   get buffering() {
-    return this.bufferingState
+    return !!this.bufferingState
   }
 
   constructor(options) {
@@ -174,6 +174,7 @@ export default class HTML5Video extends Playback {
     this.loadStarted = false
     this.playheadMoving = false
     this.playheadMovingTimer = null
+    this.stopped = false
     this.options = options
     this.setupSrc(options.src)
     this.el.loop = options.loop
@@ -246,10 +247,8 @@ export default class HTML5Video extends Playback {
   }
 
   play() {
-    if (!this.loadStarted &amp;&amp; this.el.preload === &#x27;none&#x27;) {
-      this.loadStarted = true
-      this.handleBufferingEvents()
-    }
+    this.stopped = false
+    this.handleBufferingEvents()
     this.el.play()
   }
 
@@ -259,6 +258,7 @@ export default class HTML5Video extends Playback {
 
   stop() {
     this.pause()
+    this.stopped = true
     this.el.currentTime = 0
     this.stopPlayheadMovingChecks()
     this.handleBufferingEvents()
@@ -315,13 +315,34 @@ export default class HTML5Video extends Playback {
     this.handleBufferingEvents()
   }
 
-  onLoadStart() {
-    if (this.el.preload !== &#x27;none&#x27;) {
-      // when preload is none the onLoadStart event is still fired
-      // immediately. Pretend that load starts in play()
-      this.loadStarted = true
-      this.handleBufferingEvents()
-    }
+  // this seems to happen when the user is having to wait
+  // for something to happen AFTER A USER INTERACTION
+  // e.g the player might be buffering, but when &#x60;play()&#x60; is called
+  // only at this point will this be called.
+  // Or the user may seek somewhere but the new area requires buffering,
+  // so it will fire then as well.
+  // On devices where playing is blocked until requested with a user action,
+  // buffering may start, but never finish until the user initiates a play,
+  // but this only happens when play is actually requested
+  onWaiting() {
+    this.loadStarted = true
+    this.handleBufferingEvents()
+  }
+  
+  // called after the first frame has loaded
+  // note this doesn&#x27;t fire on ios before the user has requested play
+  // ideally the &quot;loadstart&quot; event would be used instead, but this fires
+  // before a user has requested play on iOS, and also this is always fired
+  // even if the preload setting is &quot;none&quot;. In both these cases this causes
+  // infinite buffering until the user does something which isn&#x27;t great.
+  onLoadedData() {
+    this.loadStarted = true
+    this.handleBufferingEvents()
+  }
+
+  // note this doesn&#x27;t fire on ios before user has requested play
+  onCanPlay() {
+    this.handleBufferingEvents()
   }
 
   onPlaying() {
@@ -343,11 +364,12 @@ export default class HTML5Video extends Playback {
 
   // The playback should be classed as buffering if the following are true:
   // - the ready state is less then HAVE_FUTURE_DATA or the playhead isn&#x27;t moving and it should be
-  // - the media hasn&#x27;t &quot;ended&quot;
+  // - the media hasn&#x27;t &quot;ended&quot;,
+  // - the media hasn&#x27;t been stopped
   // - loading has started
   handleBufferingEvents() {
     var playheadShouldBeMoving = !this.el.ended &amp;&amp; !this.el.paused
-    var buffering = this.loadStarted &amp;&amp; !this.el.ended &amp;&amp; ((playheadShouldBeMoving &amp;&amp; !this.playheadMoving) || this.el.readyState &lt; this.el.HAVE_FUTURE_DATA)
+    var buffering = this.loadStarted &amp;&amp; !this.el.ended &amp;&amp; !this.stopped &amp;&amp; ((playheadShouldBeMoving &amp;&amp; !this.playheadMoving) || this.el.readyState &lt; this.el.HAVE_FUTURE_DATA)
     if (this.bufferingState !== buffering) {
       this.bufferingState = buffering
       if (buffering) {
