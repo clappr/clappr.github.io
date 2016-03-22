@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.39</em>
+            <em>API Docs for: 0.2.40</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -309,6 +309,13 @@ Events.PLAYER_READY = &#x27;ready&#x27;
  */
 Events.PLAYER_RESIZE = &#x27;resize&#x27;
 /**
+ * Fired when player changes its fullscreen state
+ *
+ * @event PLAYER_FULLSCREEN
+ * @param {Boolean} whether or not the player is on fullscreen mode
+ */
+Events.PLAYER_FULLSCREEN = &#x27;fullscreen&#x27;
+/**
  * Fired when player starts to play
  *
  * @event PLAYER_PLAY
@@ -501,7 +508,7 @@ Events.PLAYBACK_PLAYBACKSTATE = &#x27;playback:playbackstate&#x27;
  * Fired when DVR becomes enabled/disabled.
  *
  * @event PLAYBACK_DVR
- * @param {boolean} state true if dvr enabled 
+ * @param {boolean} state true if dvr enabled
  */
 Events.PLAYBACK_DVR = &#x27;playback:dvr&#x27;
 // TODO doc
@@ -564,6 +571,13 @@ Events.CORE_OPTIONS_CHANGE = &#x27;core:options:change&#x27;
  * @event CORE_READY
  */
 Events.CORE_READY = &#x27;core:ready&#x27;
+/**
+ * Fired when the fullscreen state change
+ *
+ * @param {Boolean} whether or not the player is on fullscreen mode
+ * @event CORE_READY
+ */
+Events.CORE_FULLSCREEN = &#x27;core:fullscreen&#x27;
 
 // Container Events
 /**

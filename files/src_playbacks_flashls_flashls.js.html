@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.39</em>
+            <em>API Docs for: 0.2.40</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -213,7 +213,6 @@ export default class FlasHLS extends BaseFlashPlayback {
     Mediator.on(this.cid + &#x27;:levelchanged&#x27;, (level) =&gt; this.levelChanged(level))
     Mediator.on(this.cid + &#x27;:error&#x27;, (code, url, message) =&gt; this.flashPlaybackError(code, url, message))
     Mediator.on(this.cid + &#x27;:fragmentloaded&#x27;,(loadmetrics) =&gt; this.onFragmentLoaded(loadmetrics))
-    Mediator.once(this.cid + &#x27;:manifestloaded&#x27;, (duration, loadmetrics) =&gt; this.manifestLoaded(duration, loadmetrics))
   }
 
   stopListening() {
@@ -626,6 +625,7 @@ export default class FlasHLS extends BaseFlashPlayback {
   firstPlay() {
     this._shouldPlayOnManifestLoaded = true
     if (this.el.playerLoad) {
+      Mediator.once(this.cid + &#x27;:manifestloaded&#x27;, (duration, loadmetrics) =&gt; this.manifestLoaded(duration, loadmetrics))
       this.setFlashSettings() //ensure flushLiveURLCache will work (#327)
       this.el.playerLoad(this.src)
       this.srcLoaded = true

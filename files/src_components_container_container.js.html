@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.39</em>
+            <em>API Docs for: 0.2.40</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -466,13 +466,17 @@ export default class Container extends UIObject {
   }
 
   disableMediaControl() {
-    this.mediaControlDisabled = true
-    this.trigger(Events.CONTAINER_MEDIACONTROL_DISABLE)
+    if (!this.mediaControlDisabled) {
+      this.mediaControlDisabled = true
+      this.trigger(Events.CONTAINER_MEDIACONTROL_DISABLE)
+    }
   }
 
   enableMediaControl() {
-    this.mediaControlDisabled = false
-    this.trigger(Events.CONTAINER_MEDIACONTROL_ENABLE)
+    if (this.mediaControlDisabled) {
+      this.mediaControlDisabled = false
+      this.trigger(Events.CONTAINER_MEDIACONTROL_ENABLE)
+    }
   }
 
   updateStyle() {

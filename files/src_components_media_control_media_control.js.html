@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.39</em>
+            <em>API Docs for: 0.2.40</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -114,6 +114,15 @@ import $ from &#x27;clappr-zepto&#x27;
 
 import mediaControlStyle from &#x27;./public/media-control.scss&#x27;
 import mediaControlHTML from &#x27;./public/media-control.html&#x27;
+
+import playIcon from &#x27;icons/01-play.svg&#x27;
+import pauseIcon from &#x27;icons/02-pause.svg&#x27;
+import stopIcon from &#x27;icons/03-stop.svg&#x27;
+import volumeIcon from &#x27;icons/04-volume.svg&#x27;
+import volumeMuteIcon from &#x27;icons/05-mute.svg&#x27;
+import fullscreenIcon from &#x27;icons/06-expand.svg&#x27;
+import exitFullscreenIcon from &#x27;icons/07-shrink.svg&#x27;
+import hdIcon from &#x27;icons/08-hd.svg&#x27;
 
 export default class MediaControl extends UIObject {
   get name() { return &#x27;MediaControl&#x27; }
@@ -254,21 +263,26 @@ export default class MediaControl extends UIObject {
     this.$volumeBarContainer.find(&#x27;.segmented-bar-element&#x27;).removeClass(&#x27;fill&#x27;)
     var item = Math.ceil(this.volume / 10.0)
     this.$volumeBarContainer.find(&#x27;.segmented-bar-element&#x27;).slice(0, item).addClass(&#x27;fill&#x27;)
+    this.$volumeIcon.html(&#x27;&#x27;)
+    this.$volumeIcon.removeClass(&#x27;muted&#x27;)
     if (!this.muted) {
-      this.$volumeIcon.removeClass(&#x27;muted&#x27;)
+      this.$volumeIcon.append(volumeIcon)
     } else {
+      this.$volumeIcon.append(volumeMuteIcon)
       this.$volumeIcon.addClass(&#x27;muted&#x27;)
     }
   }
 
   changeTogglePlay() {
+    this.$playPauseToggle.html(&#x27;&#x27;)
+    this.$playStopToggle.html(&#x27;&#x27;)
     if (this.container &amp;&amp; this.container.isPlaying()) {
-      this.$playPauseToggle.removeClass(&#x27;paused&#x27;).addClass(&#x27;playing&#x27;)
-      this.$playStopToggle.removeClass(&#x27;stopped&#x27;).addClass(&#x27;playing&#x27;)
+      this.$playPauseToggle.append(pauseIcon)
+      this.$playStopToggle.append(stopIcon)
       this.trigger(Events.MEDIACONTROL_PLAYING)
     } else {
-      this.$playPauseToggle.removeClass(&#x27;playing&#x27;).addClass(&#x27;paused&#x27;)
-      this.$playStopToggle.removeClass(&#x27;playing&#x27;).addClass(&#x27;stopped&#x27;)
+      this.$playPauseToggle.append(playIcon)
+      this.$playStopToggle.append(pauseIcon)
       this.trigger(Events.MEDIACONTROL_NOTPLAYING)
     }
   }
@@ -296,10 +310,11 @@ export default class MediaControl extends UIObject {
   }
 
   playerResize(size) {
+    this.$fullscreenToggle.html(&#x27;&#x27;)
     if (Fullscreen.isFullscreen()) {
-      this.$fullscreenToggle.addClass(&#x27;shrink&#x27;)
+      this.$fullscreenToggle.append(exitFullscreenIcon)
     } else {
-      this.$fullscreenToggle.removeClass(&#x27;shrink&#x27;)
+      this.$fullscreenToggle.append(fullscreenIcon)
     }
     this.$el.removeClass(&#x27;w320&#x27;)
     if (size.width &lt;= 320 || this.options.hideVolumeBar) {
@@ -562,7 +577,7 @@ export default class MediaControl extends UIObject {
 
   highDefinitionUpdate(isHD) {
     var method = !!isHD ? &#x27;addClass&#x27; : &#x27;removeClass&#x27;
-    this.$el.find(&#x27;button[data-hd-indicator]&#x27;)[method](&#x27;enabled&#x27;)
+    this.$hdIndicator[method](&#x27;enabled&#x27;)
   }
 
   createCachedElements() {
@@ -583,12 +598,26 @@ export default class MediaControl extends UIObject {
     this.$volumeBarBackground = this.$el.find(&#x27;.bar-background[data-volume]&#x27;)
     this.$volumeBarFill = this.$el.find(&#x27;.bar-fill-1[data-volume]&#x27;)
     this.$volumeBarScrubber = this.$el.find(&#x27;.bar-scrubber[data-volume]&#x27;)
+    this.$hdIndicator = this.$el.find(&#x27;button.media-control-button[data-hd-indicator]&#x27;)
     this.resetIndicators()
+    this.initializeIcons()
   }
 
   resetIndicators() {
     this.displayedPosition = this.$position.text()
     this.displayedDuration = this.$duration.text()
+  }
+
+  initializeIcons() {
+    var $layer = this.$el.find(&#x27;.media-control-layer&#x27;)
+    $layer.find(&#x27;button.media-control-button[data-play]&#x27;).append(playIcon)
+    $layer.find(&#x27;button.media-control-button[data-pause]&#x27;).append(pauseIcon)
+    $layer.find(&#x27;button.media-control-button[data-stop]&#x27;).append(stopIcon)
+    this.$playPauseToggle.append(playIcon)
+    this.$playStopToggle.append(playIcon)
+    this.$volumeIcon.append(volumeIcon)
+    this.$fullscreenToggle.append(fullscreenIcon)
+    this.$hdIndicator.append(hdIcon)
   }
 
   setSeekPercentage(value) {
