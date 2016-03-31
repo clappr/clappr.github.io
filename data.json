@@ -2407,6 +2407,12 @@
                             "optional": true
                         },
                         {
+                            "name": "disableKeyboardShortcuts",
+                            "description": "\ndisable keyboard shortcuts. **default**: `false`. `true` if `allowUserInteraction` is `false`.",
+                            "type": "Boolean",
+                            "optional": true
+                        },
+                        {
                             "name": "muted",
                             "description": "\nstart the video muted **default**: `false`",
                             "type": "Boolean",
@@ -2534,7 +2540,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 168,
+            "line": 178,
             "description": "Specify a `parentId` to the player.",
             "itemtype": "method",
             "name": "setParentId",
@@ -2550,7 +2556,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 180,
+            "line": 190,
             "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
             "itemtype": "method",
             "name": "attachTo",
@@ -2566,7 +2572,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 296,
+            "line": 306,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -2585,7 +2591,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 309,
+            "line": 319,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
@@ -2606,7 +2612,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 321,
+            "line": 331,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -2615,7 +2621,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 329,
+            "line": 339,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -2624,7 +2630,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 337,
+            "line": 347,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -2633,7 +2639,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 345,
+            "line": 355,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -2642,7 +2648,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 354,
+            "line": 364,
             "description": "seeks the current video (`source`). For example, `player.seek(120)` will seek to second 120 (2minutes) of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -2658,7 +2664,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 363,
+            "line": 373,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seekPercentage",
@@ -2674,7 +2680,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 372,
+            "line": 382,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -2690,7 +2696,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 381,
+            "line": 391,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -2703,7 +2709,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 390,
+            "line": 400,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -2712,7 +2718,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 398,
+            "line": 408,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -2721,7 +2727,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 406,
+            "line": 416,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -2734,7 +2740,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 415,
+            "line": 425,
             "description": "enables to configure a player after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2750,7 +2756,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 424,
+            "line": 434,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2773,7 +2779,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 442,
+            "line": 452,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -2786,7 +2792,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 451,
+            "line": 461,
             "description": "The time that \"0\" now represents relative to when playback started.\nFor a stream with a sliding window this will increase as content is\nremoved from the beginning.",
             "itemtype": "method",
             "name": "getStartTimeOffset",
@@ -2799,7 +2805,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 462,
+            "line": 472,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",

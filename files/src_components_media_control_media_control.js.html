@@ -271,6 +271,7 @@ export default class MediaControl extends UIObject {
       this.$volumeIcon.append(volumeMuteIcon)
       this.$volumeIcon.addClass(&#x27;muted&#x27;)
     }
+    this.applyButtonStyle(this.$volumeIcon)
   }
 
   changeTogglePlay() {
@@ -285,6 +286,8 @@ export default class MediaControl extends UIObject {
       this.$playStopToggle.append(pauseIcon)
       this.trigger(Events.MEDIACONTROL_NOTPLAYING)
     }
+    this.applyButtonStyle(this.$playPauseToggle)
+    this.applyButtonStyle(this.$playStopToggle)
   }
 
   mousemoveOnSeekBar(event) {
@@ -316,6 +319,7 @@ export default class MediaControl extends UIObject {
     } else {
       this.$fullscreenToggle.append(fullscreenIcon)
     }
+    this.applyButtonStyle(this.$fullscreenToggle)
     this.$el.removeClass(&#x27;w320&#x27;)
     if (size.width &lt;= 320 || this.options.hideVolumeBar) {
       this.$el.addClass(&#x27;w320&#x27;)
@@ -664,11 +668,17 @@ export default class MediaControl extends UIObject {
 
   parseColors() {
     if (this.options.mediacontrol) {
-      var buttonsColor = this.options.mediacontrol.buttons
+      this.buttonsColor = this.options.mediacontrol.buttons
       var seekbarColor = this.options.mediacontrol.seekbar
       this.$el.find(&#x27;.bar-fill-2[data-seekbar]&#x27;).css(&#x27;background-color&#x27;, seekbarColor)
-      this.$el.find(&#x27;[data-media-control] &gt; .media-control-icon, .drawer-icon&#x27;).css(&#x27;color&#x27;, buttonsColor)
-      this.$el.find(&#x27;.segmented-bar-element[data-volume]&#x27;).css(&#x27;boxShadow&#x27;, &quot;inset 2px 0 0 &quot; + buttonsColor)
+      this.$el.find(&#x27;.media-control-icon svg path&#x27;).css(&#x27;fill&#x27;, this.buttonsColor)
+      this.$el.find(&#x27;.segmented-bar-element[data-volume]&#x27;).css(&#x27;boxShadow&#x27;, &quot;inset 2px 0 0 &quot; + this.buttonsColor)
+    }
+  }
+
+  applyButtonStyle(element) {
+    if (this.buttonsColor &amp;&amp; element) {
+      $(element).find(&#x27;svg path&#x27;).css(&#x27;fill&#x27;, this.buttonsColor)
     }
   }
 
@@ -711,8 +721,9 @@ export default class MediaControl extends UIObject {
       if (!this.container.settings.seekEnabled) {
         this.$seekBarContainer.addClass(&#x27;seek-disabled&#x27;)
       }
-
-      this.bindKeyEvents()
+      if (!this.options.disableKeyboardShortcuts) {
+        this.bindKeyEvents()
+      }
       this.playerResize({width: this.options.width, height: this.options.height})
       this.hideVolumeBar(0)
     })
