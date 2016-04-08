@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.40</em>
+            <em>API Docs for: 0.2.41</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -164,6 +164,26 @@ export default class Player extends BaseObject {
    */
   get isReady() {
     return !!this.ready
+  }
+
+  /**
+   * An events map that allows the user to add custom callbacks in player&#x27;s options.
+   * @property eventsMapping
+   * @type {Object}
+   */
+  get eventsMapping() {
+    return {
+      onReady: Events.PLAYER_READY,
+      onResize: Events.PLAYER_RESIZE,
+      onPlay: Events.PLAYER_PLAY,
+      onPause: Events.PLAYER_PAUSE,
+      onStop: Events.PLAYER_STOP,
+      onEnded: Events.PLAYER_ENDED,
+      onSeek: Events.PLAYER_SEEK,
+      onError: Events.PLAYER_ERROR,
+      onTimeUpdate: Events.PLAYER_TIMEUPDATE,
+      onVolumeUpdate: Events.PLAYER_VOLUMEUPDATE
+    }
   }
 
   /**
@@ -316,26 +336,13 @@ export default class Player extends BaseObject {
   }
 
   registerOptionEventListeners() {
-    var eventsMapping = {
-      &quot;onReady&quot;: Events.PLAYER_READY,
-      &quot;onResize&quot;: Events.PLAYER_RESIZE,
-      &quot;onPlay&quot;: Events.PLAYER_PLAY,
-      &quot;onPause&quot;: Events.PLAYER_PAUSE,
-      &quot;onStop&quot;: Events.PLAYER_STOP,
-      &quot;onEnded&quot;: Events.PLAYER_ENDED,
-      &quot;onSeek&quot;: Events.PLAYER_SEEK,
-      &quot;onError&quot;: Events.PLAYER_ERROR,
-      &quot;onTimeUpdate&quot;: Events.PLAYER_TIMEUPDATE,
-      &quot;onVolumeUpdate&quot;: Events.PLAYER_VOLUMEUPDATE
-    }
     var userEvents = this.options.events || {}
-
     Object.keys(userEvents).forEach((userEvent) =&gt; {
-      var eventType = eventsMapping[userEvent]
+      var eventType = this.eventsMapping[userEvent]
       if (eventType) {
         var eventFunction = userEvents[userEvent]
         eventFunction = typeof eventFunction === &quot;function&quot; &amp;&amp; eventFunction
-        eventFunction &amp;&amp; this.listenTo(this, eventType, eventFunction)
+        eventFunction &amp;&amp; this.on(eventType, eventFunction)
       }
     })
   }

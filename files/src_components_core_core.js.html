@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.40</em>
+            <em>API Docs for: 0.2.41</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -329,7 +329,7 @@ export default class Core extends UIObject {
 
   createMediaControl(options) {
     if(options.mediacontrol &amp;&amp; options.mediacontrol.external) {
-      return new options.mediacontrol.external(options);
+      return new options.mediacontrol.external(options).render();
     } else {
       return new MediaControl(options).render();
     }
@@ -405,7 +405,7 @@ export default class Core extends UIObject {
   }
 
   render() {
-    var style = Styler.getStyleFor(coreStyle);
+    var style = Styler.getStyleFor(coreStyle, {baseUrl: this.options.baseUrl});
     this.$el.append(style)
     this.$el.append(this.mediaControl.render().el)
 

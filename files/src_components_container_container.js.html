@@ -17,7 +17,7 @@
                 <h1><img src="https://cloud.githubusercontent.com/assets/244265/6373134/a845eb50-bce7-11e4-80f2-592ba29972ab.png" title="Clappr"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.40</em>
+            <em>API Docs for: 0.2.41</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -383,13 +383,13 @@ export default class Container extends UIObject {
   }
 
   seek(time) {
-    this.trigger(Events.CONTAINER_SEEK, time, this.name);
-    this.playback.seek(time);
+    this.trigger(Events.CONTAINER_SEEK, time, this.name)
+    this.playback.seek(time)
   }
 
   seekPercentage(percentage) {
     var duration = this.getDuration()
-    if (percentage &gt; 0 &amp;&amp; percentage &lt;= 100) {
+    if (percentage &gt;= 0 &amp;&amp; percentage &lt;= 100) {
       var time = duration * (percentage / 100)
       this.seek(time)
     }
