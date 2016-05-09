@@ -2316,7 +2316,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 47,
+            "line": 52,
             "description": "Determine if the playback has ended.",
             "itemtype": "property",
             "name": "ended",
@@ -2326,7 +2326,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 56,
+            "line": 61,
             "description": "Determine if the playback is having to buffer in order for\nplayback to be smooth.\n(i.e if a live stream is playing smoothly, this will be false)",
             "itemtype": "property",
             "name": "buffering",
@@ -2336,7 +2336,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 76,
+            "line": 81,
             "description": "An events map that allows the user to add custom callbacks in player's options.",
             "itemtype": "property",
             "name": "eventsMapping",
@@ -2346,7 +2346,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 96,
+            "line": 101,
             "description": "## Player's constructor\n\nYou might pass the options object to build the player.\n```javascript\nvar options = {source: \"http://example.com/video.mp4\", param1: \"val1\"};\nvar player = new Clappr.Player(options);\n```",
             "itemtype": "method",
             "name": "constructor",
@@ -2460,7 +2460,7 @@
                         },
                         {
                             "name": "maxBufferLength",
-                            "description": "\nthe default behavior for the **HLS playback** is to keep buffering indefinitely, even on VoD. This replicates the behavior for progressive download, which continues buffering when pausing the video, thus making the video available for playback even on slow networks. To change this behavior use `maxBufferLength` where **value is in seconds**.",
+                            "description": "\nthe default behavior for the **HLS playback** is to keep buffering indefinitely, even on VoD.\nThis replicates the behavior for progressive download, which continues buffering when pausing the video, thus making the video available for playback even on slow networks.\nTo change this behavior use `maxBufferLength` where **value is in seconds**.",
                             "type": "Number",
                             "optional": true
                         },
@@ -2496,7 +2496,7 @@
                         },
                         {
                             "name": "watermark",
-                            "description": "\nput `watermark: 'http://url/img.png'` on your embed parameters to automatically add watermark on your video. You can customize corner position by defining position parameter. Positions can be `bottom-left`, `bottom-right`, `top-left` and `top-right`.",
+                            "description": "\nput `watermark: 'http://url/img.png'` on your embed parameters to automatically add watermark on your video.\nYou can customize corner position by defining position parameter. Positions can be `bottom-left`, `bottom-right`, `top-left` and `top-right`.",
                             "type": "String",
                             "optional": true
                         },
@@ -2550,7 +2550,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 198,
+            "line": 206,
             "description": "Specify a `parentId` to the player.",
             "itemtype": "method",
             "name": "setParentId",
@@ -2561,12 +2561,16 @@
                     "type": "String"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 210,
+            "line": 220,
             "description": "You can use this method to attach the player to a given element. You don't need to do this when you specify it during the player instantiation passing the `parentId` param.",
             "itemtype": "method",
             "name": "attachTo",
@@ -2577,12 +2581,16 @@
                     "type": "Object"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 313,
+            "line": 328,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -2593,6 +2601,10 @@
                     "type": "Object"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "example": [
                 "\n```javascript\nplayer.resize({height: 360, width: 640})\n```"
             ],
@@ -2601,64 +2613,91 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 326,
+            "line": 343,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
             "params": [
                 {
                     "name": "sources",
-                    "description": "source or sources of video.\nsources can be a string or {source: <<source URL>>, mimeType: <<source mime type>>}",
-                    "type": "Object"
+                    "description": "source or sources of video.\nAn array item can be a string or {source: <<source URL>>, mimeType: <<source mime type>>}",
+                    "type": "Array|String"
                 },
                 {
                     "name": "mimeType",
                     "description": "a mime type, example: `'application/vnd.apple.mpegurl'`",
-                    "type": "Object"
+                    "type": "String"
+                },
+                {
+                    "name": "startPlay",
+                    "description": "whether playing should be started immediately",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 338,
+            "line": 360,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 346,
+            "line": 370,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 354,
+            "line": 380,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 362,
+            "line": 390,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 371,
+            "line": 401,
             "description": "seeks the current video (`source`). For example, `player.seek(120)` will seek to second 120 (2minutes) of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -2669,12 +2708,16 @@
                     "type": "Number"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 380,
+            "line": 412,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seekPercentage",
@@ -2685,12 +2728,16 @@
                     "type": "Number"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 389,
+            "line": 423,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -2701,12 +2748,16 @@
                     "type": "Number"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 398,
+            "line": 436,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -2719,25 +2770,33 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 407,
+            "line": 445,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 415,
+            "line": 456,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 423,
+            "line": 467,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -2750,7 +2809,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 432,
+            "line": 476,
             "description": "enables to configure a player after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2761,12 +2820,16 @@
                     "type": "Object"
                 }
             ],
+            "return": {
+                "description": "itself",
+                "type": "Player"
+            },
             "class": "Player",
             "module": "components"
         },
         {
             "file": "src/components/player.js",
-            "line": 441,
+            "line": 487,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2789,7 +2852,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 459,
+            "line": 505,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -2802,7 +2865,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 468,
+            "line": 514,
             "description": "The time that \"0\" now represents relative to when playback started.\nFor a stream with a sliding window this will increase as content is\nremoved from the beginning.",
             "itemtype": "method",
             "name": "getStartTimeOffset",
@@ -2815,7 +2878,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 479,
+            "line": 525,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",

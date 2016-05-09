@@ -213,6 +213,7 @@ export default class FlasHLS extends BaseFlashPlayback {
     Mediator.on(this.cid + &#x27;:levelchanged&#x27;, (level) =&gt; this.levelChanged(level))
     Mediator.on(this.cid + &#x27;:error&#x27;, (code, url, message) =&gt; this.flashPlaybackError(code, url, message))
     Mediator.on(this.cid + &#x27;:fragmentloaded&#x27;,(loadmetrics) =&gt; this.onFragmentLoaded(loadmetrics))
+    Mediator.on(this.cid + &#x27;:levelendlist&#x27;, (level) =&gt; this.onLevelEndlist(level))
   }
 
   stopListening() {
@@ -224,6 +225,7 @@ export default class FlasHLS extends BaseFlashPlayback {
     Mediator.off(this.cid + &#x27;:playbackerror&#x27;)
     Mediator.off(this.cid + &#x27;:fragmentloaded&#x27;)
     Mediator.off(this.cid + &#x27;:manifestloaded&#x27;)
+    Mediator.off(this.cid + &#x27;:levelendlist&#x27;)
   }
 
   bootstrap() {
@@ -473,6 +475,9 @@ export default class FlasHLS extends BaseFlashPlayback {
     if (currentLevel) {
       this.highDefinition = (currentLevel.height &gt;= 720 || (currentLevel.bitrate / 1000) &gt;= 2000);
       this.trigger(Events.PLAYBACK_HIGHDEFINITIONUPDATE, this.highDefinition)
+
+      if (!this._levels || this._levels.length === 0) this.fillLevels()
+
       this.trigger(Events.PLAYBACK_BITRATE, {
         height: currentLevel.height,
         width: currentLevel.width,
@@ -622,6 +627,10 @@ export default class FlasHLS extends BaseFlashPlayback {
     }
   }
 
+  onLevelEndlist(level) {
+    this.updatePlaybackType()
+  }
+
   firstPlay() {
     this._shouldPlayOnManifestLoaded = true
     if (this.el.playerLoad) {
@@ -724,6 +733,11 @@ export default class FlasHLS extends BaseFlashPlayback {
       this.el.playerPlay()
     }
 
+    this.fillLevels()
+    this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: duration, data: loadmetrics})
+  }
+
+  fillLevels() {
     var levels = this.el.getLevels()
     var levelsLength = levels.length
     this._levels = []
@@ -732,7 +746,6 @@ export default class FlasHLS extends BaseFlashPlayback {
       this._levels.push({id: index, label: &#x60;${levels[index].height}p&#x60;, level: levels[index]})
     }
     this.trigger(Events.PLAYBACK_LEVELS_AVAILABLE, this._levels)
-    this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: duration, data: loadmetrics})
   }
 
   destroy() {
