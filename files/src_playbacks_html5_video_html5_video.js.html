@@ -131,21 +131,21 @@ export default class HTML5Video extends Playback {
 
   get events() {
     return {
-      &#x27;canplay&#x27;: &#x27;onCanPlay&#x27;,
-      &#x27;canplaythrough&#x27;: &#x27;handleBufferingEvents&#x27;,
-      &#x27;durationchange&#x27;: &#x27;onDurationChange&#x27;,
-      &#x27;ended&#x27;: &#x27;onEnded&#x27;,
-      &#x27;error&#x27;: &#x27;onError&#x27;,
-      &#x27;loadeddata&#x27;: &#x27;onLoadedData&#x27;,
-      &#x27;loadedmetadata&#x27;: &#x27;onLoadedMetadata&#x27;,
-      &#x27;pause&#x27;: &#x27;onPause&#x27;,
-      &#x27;playing&#x27;: &#x27;onPlaying&#x27;,
-      &#x27;progress&#x27;: &#x27;onProgress&#x27;,
-      &#x27;seeked&#x27;: &#x27;handleBufferingEvents&#x27;,
-      &#x27;seeking&#x27;: &#x27;handleBufferingEvents&#x27;,
-      &#x27;stalled&#x27;: &#x27;handleBufferingEvents&#x27;,
-      &#x27;timeupdate&#x27;: &#x27;onTimeUpdate&#x27;,
-      &#x27;waiting&#x27;: &#x27;onWaiting&#x27;
+      &#x27;canplay&#x27;: &#x27;_onCanPlay&#x27;,
+      &#x27;canplaythrough&#x27;: &#x27;_handleBufferingEvents&#x27;,
+      &#x27;durationchange&#x27;: &#x27;_onDurationChange&#x27;,
+      &#x27;ended&#x27;: &#x27;_onEnded&#x27;,
+      &#x27;error&#x27;: &#x27;_onError&#x27;,
+      &#x27;loadeddata&#x27;: &#x27;_onLoadedData&#x27;,
+      &#x27;loadedmetadata&#x27;: &#x27;_onLoadedMetadata&#x27;,
+      &#x27;pause&#x27;: &#x27;_onPause&#x27;,
+      &#x27;playing&#x27;: &#x27;_onPlaying&#x27;,
+      &#x27;progress&#x27;: &#x27;_onProgress&#x27;,
+      &#x27;seeked&#x27;: &#x27;_handleBufferingEvents&#x27;,
+      &#x27;seeking&#x27;: &#x27;_handleBufferingEvents&#x27;,
+      &#x27;stalled&#x27;: &#x27;_handleBufferingEvents&#x27;,
+      &#x27;timeupdate&#x27;: &#x27;_onTimeUpdate&#x27;,
+      &#x27;waiting&#x27;: &#x27;_onWaiting&#x27;
     }
   }
 
@@ -166,28 +166,28 @@ export default class HTML5Video extends Playback {
    * @type Boolean
    */
   get buffering() {
-    return !!this.bufferingState
+    return !!this._bufferingState
   }
 
   constructor(options) {
     super(options)
-    this.loadStarted = false
-    this.playheadMoving = false
-    this.playheadMovingTimer = null
-    this.stopped = false
-    this.options = options
-    this.setupSrc(options.src)
+    this._loadStarted = false
+    this._playheadMoving = false
+    this._playheadMovingTimer = null
+    this._stopped = false
+    this._options = options
+    this._setupSrc(options.src)
     this.el.loop = options.loop
     if (options.poster) {
       this.$el.attr(&quot;poster&quot;, options.poster)
     }
     this.el.autoplay = options.autoPlay
     if (Browser.isSafari) {
-      this.setupSafari()
+      this._setupSafari()
     } else {
       this.el.preload = options.preload ? options.preload: &#x27;metadata&#x27;
-      this.settings.seekEnabled = true
     }
+    // TODO should settings be private?
     this.settings = {default: [&#x27;seekbar&#x27;]}
     this.settings.left = [&quot;playpause&quot;, &quot;position&quot;, &quot;duration&quot;]
     this.settings.right = [&quot;fullscreen&quot;, &quot;volume&quot;, &quot;hd-indicator&quot;]
@@ -196,35 +196,36 @@ export default class HTML5Video extends Playback {
   /**
    * Sets the source url on the &lt;video&gt; element, and also the &#x27;src&#x27; property.
    * @method setupSrc
+   * @private
    * @param {String} srcUrl The source URL.
    */
-  setupSrc(srcUrl) {
-    this.src = srcUrl
+  _setupSrc(srcUrl) {
+    this._src = srcUrl
     this.el.src = srcUrl
   }
 
-  setupSafari() {
+  _setupSafari() {
     this.el.preload = &#x27;auto&#x27;
   }
 
-  onLoadedMetadata(e) {
-    this.handleBufferingEvents()
+  _onLoadedMetadata(e) {
+    this._handleBufferingEvents()
     this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: e.target.duration, data: e})
-    this.updateSettings()
-    var autoSeekFromUrl = typeof(this.options.autoSeekFromUrl) === &quot;undefined&quot; || this.options.autoSeekFromUrl
+    this._updateSettings()
+    var autoSeekFromUrl = typeof(this._options.autoSeekFromUrl) === &quot;undefined&quot; || this._options.autoSeekFromUrl
     if (this.getPlaybackType() !== Playback.LIVE &amp;&amp; autoSeekFromUrl) {
-      this.checkInitialSeek()
+      this._checkInitialSeek()
     }
   }
 
-  onDurationChange() {
-    this.updateSettings()
-    this.onTimeUpdate()
+  _onDurationChange() {
+    this._updateSettings()
+    this._onTimeUpdate()
     // onProgress uses the duration
-    this.onProgress()
+    this._onProgress()
   }
 
-  updateSettings() {
+  _updateSettings() {
     // we can&#x27;t figure out if hls resource is VoD or not until it is being loaded or duration has changed.
     // that&#x27;s why we check it again and update media control accordingly.
     if (this.getPlaybackType() === Playback.VOD) {
@@ -249,8 +250,8 @@ export default class HTML5Video extends Playback {
   }
 
   play() {
-    this.stopped = false
-    this.handleBufferingEvents()
+    this._stopped = false
+    this._handleBufferingEvents()
     this.el.play()
   }
 
@@ -260,10 +261,10 @@ export default class HTML5Video extends Playback {
 
   stop() {
     this.pause()
-    this.stopped = true
+    this._stopped = true
     this.el.currentTime = 0
-    this.stopPlayheadMovingChecks()
-    this.handleBufferingEvents()
+    this._stopPlayheadMovingChecks()
+    this._handleBufferingEvents()
     this.trigger(Events.PLAYBACK_STOP)
   }
 
@@ -288,33 +289,33 @@ export default class HTML5Video extends Playback {
   }
 
   get isReady() {
-    return this.isReadyState
+    return this._isReadyState
   }
 
-  startPlayheadMovingChecks() {
-    if (this.playheadMovingTimer !== null) {
+  _startPlayheadMovingChecks() {
+    if (this._playheadMovingTimer !== null) {
       return
     }
-    this.playheadMovingTimeOnCheck = null
-    this.determineIfPlayheadMoving()
-    this.playheadMovingTimer = setInterval(this.determineIfPlayheadMoving.bind(this), 500)
+    this._playheadMovingTimeOnCheck = null
+    this._determineIfPlayheadMoving()
+    this._playheadMovingTimer = setInterval(this._determineIfPlayheadMoving.bind(this), 500)
   }
 
-  stopPlayheadMovingChecks() {
-    if (this.playheadMovingTimer === null) {
+  _stopPlayheadMovingChecks() {
+    if (this._playheadMovingTimer === null) {
       return
     }
-    clearInterval(this.playheadMovingTimer)
-    this.playheadMovingTimer = null
-    this.playheadMoving = false
+    clearInterval(this._playheadMovingTimer)
+    this._playheadMovingTimer = null
+    this._playheadMoving = false
   }
 
-  determineIfPlayheadMoving() {
-    var before = this.playheadMovingTimeOnCheck
+  _determineIfPlayheadMoving() {
+    var before = this._playheadMovingTimeOnCheck
     var now = this.el.currentTime
-    this.playheadMoving = before !== now
-    this.playheadMovingTimeOnCheck = now
-    this.handleBufferingEvents()
+    this._playheadMoving = before !== now
+    this._playheadMovingTimeOnCheck = now
+    this._handleBufferingEvents()
   }
 
   // this seems to happen when the user is having to wait
@@ -326,9 +327,9 @@ export default class HTML5Video extends Playback {
   // On devices where playing is blocked until requested with a user action,
   // buffering may start, but never finish until the user initiates a play,
   // but this only happens when play is actually requested
-  onWaiting() {
-    this.loadStarted = true
-    this.handleBufferingEvents()
+  _onWaiting() {
+    this._loadStarted = true
+    this._handleBufferingEvents()
   }
 
   // called after the first frame has loaded
@@ -337,30 +338,30 @@ export default class HTML5Video extends Playback {
   // before a user has requested play on iOS, and also this is always fired
   // even if the preload setting is &quot;none&quot;. In both these cases this causes
   // infinite buffering until the user does something which isn&#x27;t great.
-  onLoadedData() {
-    this.loadStarted = true
-    this.handleBufferingEvents()
+  _onLoadedData() {
+    this._loadStarted = true
+    this._handleBufferingEvents()
   }
 
   // note this doesn&#x27;t fire on ios before user has requested play
-  onCanPlay() {
-    this.handleBufferingEvents()
+  _onCanPlay() {
+    this._handleBufferingEvents()
   }
 
-  onPlaying() {
-    this.startPlayheadMovingChecks()
-    this.handleBufferingEvents()
+  _onPlaying() {
+    this._startPlayheadMovingChecks()
+    this._handleBufferingEvents()
     this.trigger(Events.PLAYBACK_PLAY)
   }
 
-  onPause() {
-    this.stopPlayheadMovingChecks()
-    this.handleBufferingEvents()
+  _onPause() {
+    this._stopPlayheadMovingChecks()
+    this._handleBufferingEvents()
     this.trigger(Events.PLAYBACK_PAUSE)
   }
 
-  onEnded() {
-    this.handleBufferingEvents()
+  _onEnded() {
+    this._handleBufferingEvents()
     this.trigger(Events.PLAYBACK_ENDED, this.name)
   }
 
@@ -369,11 +370,11 @@ export default class HTML5Video extends Playback {
   // - the media hasn&#x27;t &quot;ended&quot;,
   // - the media hasn&#x27;t been stopped
   // - loading has started
-  handleBufferingEvents() {
+  _handleBufferingEvents() {
     var playheadShouldBeMoving = !this.el.ended &amp;&amp; !this.el.paused
-    var buffering = this.loadStarted &amp;&amp; !this.el.ended &amp;&amp; !this.stopped &amp;&amp; ((playheadShouldBeMoving &amp;&amp; !this.playheadMoving) || this.el.readyState &lt; this.el.HAVE_FUTURE_DATA)
-    if (this.bufferingState !== buffering) {
-      this.bufferingState = buffering
+    var buffering = this._loadStarted &amp;&amp; !this.el.ended &amp;&amp; !this.stopped &amp;&amp; ((playheadShouldBeMoving &amp;&amp; !this._playheadMoving) || this.el.readyState &lt; this.el.HAVE_FUTURE_DATA)
+    if (this._bufferingState !== buffering) {
+      this._bufferingState = buffering
       if (buffering) {
         this.trigger(Events.PLAYBACK_BUFFERING, this.name)
       }
@@ -383,15 +384,14 @@ export default class HTML5Video extends Playback {
     }
   }
 
-  onError(event) {
+  _onError(event) {
     this.trigger(Events.PLAYBACK_ERROR, this.el.error, this.name)
   }
 
   destroy() {
-    this.stop()
-    this.el.src = &#x27;&#x27;
-    this.src = null
     this.$el.remove()
+    this.el.src = &#x27;&#x27;
+    this._src = null
   }
 
   seek(time) {
@@ -403,7 +403,7 @@ export default class HTML5Video extends Playback {
     this.seek(time)
   }
 
-  checkInitialSeek() {
+  _checkInitialSeek() {
     var seekTime = seekStringToSeconds(window.location.href)
     if (seekTime !== 0) {
       this.seek(seekTime)
@@ -418,8 +418,8 @@ export default class HTML5Video extends Playback {
     return this.el.duration
   }
 
-  onTimeUpdate() {
-    this.handleBufferingEvents()
+  _onTimeUpdate() {
+    this._handleBufferingEvents()
     if (this.getPlaybackType() === Playback.LIVE) {
       this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: 1, total: 1}, this.name)
     } else {
@@ -427,7 +427,7 @@ export default class HTML5Video extends Playback {
     }
   }
 
-  onProgress() {
+  _onProgress() {
     if (!this.el.buffered.length) {
       return
     }
@@ -445,37 +445,37 @@ export default class HTML5Video extends Playback {
     })
   }
 
-  typeFor(src) {
+  _typeFor(src) {
     var resourceParts = src.split(&#x27;?&#x27;)[0].match(/.*\.(.*)$/) || []
     var isHls = resourceParts.length &gt; 1 &amp;&amp; resourceParts[1] === &quot;m3u8&quot;
     return isHls ? &#x27;application/vnd.apple.mpegurl&#x27; : &#x27;video/mp4&#x27;
   }
 
-  ready() {
-    if (this.isReadyState) {
+  _ready() {
+    if (this._isReadyState) {
       return
     }
-    this.isReadyState = true
+    this._isReadyState = true
     this.trigger(Events.PLAYBACK_READY, this.name)
   }
 
   render() {
     var style = Styler.getStyleFor(tagStyle)
 
-    this.src &amp;&amp; this.$el.html(this.template({ src: this.src, type: this.typeFor(this.src) }))
+    this._src &amp;&amp; this.$el.html(this.template({ src: this._src, type: this._typeFor(this._src) }))
 
-    if (this.options.useVideoTagDefaultControls) {
+    if (this._options.useVideoTagDefaultControls) {
       this.$el.attr(&#x27;controls&#x27;, &#x27;controls&#x27;)
     }
 
-    if (this.options.disableVideoTagContextMenu) {
+    if (this._options.disableVideoTagContextMenu) {
       this.$el.on(&quot;contextmenu&quot;, () =&gt; {
         return false
       })
     }
 
     this.$el.append(style)
-    this.ready()
+    this._ready()
     return this
   }
 }
