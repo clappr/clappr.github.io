@@ -118,7 +118,7 @@ export default class Flash extends BaseFlashPlayback {
    * @type Boolean
    */
   get ended() {
-    return this._currentState === &quot;ENDED&quot;
+    return this._currentState === &#x27;ENDED&#x27;
   }
 
   /**
@@ -128,7 +128,7 @@ export default class Flash extends BaseFlashPlayback {
    * @type Boolean
    */
   get buffering() {
-    return !!this._bufferingState &amp;&amp; this._currentState !== &quot;ENDED&quot;
+    return !!this._bufferingState &amp;&amp; this._currentState !== &#x27;ENDED&#x27;
   }
 
   constructor(options) {
@@ -137,8 +137,8 @@ export default class Flash extends BaseFlashPlayback {
     this._baseUrl = options.baseUrl
     this._autoPlay = options.autoPlay
     this.settings = {default: [&#x27;seekbar&#x27;]}
-    this.settings.left = [&quot;playpause&quot;, &quot;position&quot;, &quot;duration&quot;]
-    this.settings.right = [&quot;fullscreen&quot;, &quot;volume&quot;]
+    this.settings.left = [&#x27;playpause&#x27;, &#x27;position&#x27;, &#x27;duration&#x27;]
+    this.settings.right = [&#x27;fullscreen&#x27;, &#x27;volume&#x27;]
     this.settings.seekEnabled = true
     this._isReadyState = false
     this._addListeners()
@@ -147,12 +147,12 @@ export default class Flash extends BaseFlashPlayback {
 
   _bootstrap() {
     if (this.el.playerPlay) {
-      this.el.width = &quot;100%&quot;
-      this.el.height = &quot;100%&quot;
+      this.el.width = &#x27;100%&#x27;
+      this.el.height = &#x27;100%&#x27;
       if (this._currentState === &#x27;PLAYING&#x27;) {
         this._firstPlay()
       } else {
-        this._currentState = &quot;IDLE&quot;
+        this._currentState = &#x27;IDLE&#x27;
         this._autoPlay &amp;&amp; this.play()
       }
       $(&#x27;&lt;div style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%&quot; /&gt;&#x27;).insertAfter(this.$el)
@@ -166,7 +166,7 @@ export default class Flash extends BaseFlashPlayback {
       if (++this._attempts &lt;= MAX_ATTEMPTS) {
         setTimeout(() =&gt; this._bootstrap(), 50)
       } else {
-        this.trigger(Events.PLAYBACK_ERROR, {message: &quot;Max number of attempts reached&quot;}, this.name)
+        this.trigger(Events.PLAYBACK_ERROR, {message: &#x27;Max number of attempts reached&#x27;}, this.name)
       }
     }
   }
@@ -205,28 +205,28 @@ export default class Flash extends BaseFlashPlayback {
   }
 
   _checkState() {
-    if (this._isIdle || this._currentState === &quot;PAUSED&quot;) {
+    if (this._isIdle || this._currentState === &#x27;PAUSED&#x27;) {
       return
-    } else if (this._currentState !== &quot;PLAYING_BUFFERING&quot; &amp;&amp; this.el.getState() === &quot;PLAYING_BUFFERING&quot;) {
+    } else if (this._currentState !== &#x27;PLAYING_BUFFERING&#x27; &amp;&amp; this.el.getState() === &#x27;PLAYING_BUFFERING&#x27;) {
       this._bufferingState = true
       this.trigger(Events.PLAYBACK_BUFFERING, this.name)
-      this._currentState = &quot;PLAYING_BUFFERING&quot;
-    } else if (this.el.getState() === &quot;PLAYING&quot;) {
+      this._currentState = &#x27;PLAYING_BUFFERING&#x27;
+    } else if (this.el.getState() === &#x27;PLAYING&#x27;) {
       this._bufferingState = false
       this.trigger(Events.PLAYBACK_BUFFERFULL, this.name)
-      this._currentState = &quot;PLAYING&quot;
-    } else if (this.el.getState() === &quot;IDLE&quot;) {
-      this._currentState = &quot;IDLE&quot;
-    } else if (this.el.getState() === &quot;ENDED&quot;) {
+      this._currentState = &#x27;PLAYING&#x27;
+    } else if (this.el.getState() === &#x27;IDLE&#x27;) {
+      this._currentState = &#x27;IDLE&#x27;
+    } else if (this.el.getState() === &#x27;ENDED&#x27;) {
       this.trigger(Events.PLAYBACK_ENDED, this.name)
       this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: 0, total: this.el.getDuration()}, this.name)
-      this._currentState = &quot;ENDED&quot;
+      this._currentState = &#x27;ENDED&#x27;
       this._isIdle = true
     }
   }
 
   _progress() {
-    if (this._currentState !== &quot;IDLE&quot; &amp;&amp; this._currentState !== &quot;ENDED&quot;) {
+    if (this._currentState !== &#x27;IDLE&#x27; &amp;&amp; this._currentState !== &#x27;ENDED&#x27;) {
       this.trigger(Events.PLAYBACK_PROGRESS,{
         start: 0,
         current: this.el.getBytesLoaded(),
@@ -240,7 +240,7 @@ export default class Flash extends BaseFlashPlayback {
       this._isIdle = false
       this.el.playerPlay(this._src)
       this.listenToOnce(this, Events.PLAYBACK_BUFFERFULL, () =&gt; this._checkInitialSeek())
-      this._currentState = &quot;PLAYING&quot;
+      this._currentState = &#x27;PLAYING&#x27;
     } else {
       this.listenToOnce(this, Events.PLAYBACK_READY, this._firstPlay)
     }
@@ -254,8 +254,9 @@ export default class Flash extends BaseFlashPlayback {
   }
 
   play() {
+    this.trigger(Events.PLAYBACK_PLAY_INTENT)
     if (this._currentState === &#x27;PAUSED&#x27; || this._currentState === &#x27;PLAYING_BUFFERING&#x27;) {
-      this._currentState = &quot;PLAYING&quot;
+      this._currentState = &#x27;PLAYING&#x27;
       this.el.playerResume()
       this.trigger(Events.PLAYBACK_PLAY, this.name)
     } else if (this._currentState !== &#x27;PLAYING&#x27;) {
@@ -273,7 +274,7 @@ export default class Flash extends BaseFlashPlayback {
   }
 
   pause() {
-    this._currentState = &quot;PAUSED&quot;
+    this._currentState = &#x27;PAUSED&#x27;
     this.el.playerPause()
     this.trigger(Events.PLAYBACK_PAUSE, this.name)
   }
@@ -285,7 +286,7 @@ export default class Flash extends BaseFlashPlayback {
   }
 
   isPlaying() {
-    return !!(this.isReady &amp;&amp; this._currentState.indexOf(&quot;PLAYING&quot;) &gt; -1)
+    return !!(this.isReady &amp;&amp; this._currentState.indexOf(&#x27;PLAYING&#x27;) &gt; -1)
   }
 
   get isReady(){
@@ -309,7 +310,7 @@ export default class Flash extends BaseFlashPlayback {
     if (this.isReady &amp;&amp; this.el.playerSeek) {
       this.el.playerSeek(time)
       this.trigger(Events.PLAYBACK_TIMEUPDATE, {current: time, total: this.el.getDuration()}, this.name)
-      if (this._currentState === &quot;PAUSED&quot;) {
+      if (this._currentState === &#x27;PAUSED&#x27;) {
         this.el.playerPause()
       }
     } else {

@@ -106,7 +106,7 @@ import PlayerInfo from &#x27;components/player_info&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 import find from &#x27;lodash.find&#x27;
 
-var baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &quot;&quot;)
+var baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &#x27;&#x27;)
 
 /**
  * @class Player
@@ -137,9 +137,9 @@ export default class Player extends BaseObject {
   set loader(loader) { this._loader = loader }
   get loader() {
     if (!this._loader) {
-      this._loader = new Loader(this.options.plugins || {}, this.options.playerId);
+      this._loader = new Loader(this.options.plugins || {}, this.options.playerId)
     }
-    return this._loader;
+    return this._loader
   }
 
   /**
@@ -272,7 +272,7 @@ export default class Player extends BaseObject {
    */
   constructor(options) {
     super(options)
-    var defaultOptions = {playerId: uniqueId(&quot;&quot;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl, allowUserInteraction: Browser.isMobile}
+    var defaultOptions = {playerId: uniqueId(&#x27;&#x27;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl, allowUserInteraction: Browser.isMobile}
     this.options = $.extend(defaultOptions, options)
     this.options.sources = this._normalizeSources(options)
     if (!this.options.chromeless) {
@@ -307,7 +307,7 @@ export default class Player extends BaseObject {
     if (el) {
       this.attachTo(el)
     }
-    return this;
+    return this
   }
 
   /**
@@ -320,7 +320,7 @@ export default class Player extends BaseObject {
     this.options.parentElement = element
     this.core = this._coreFactory.create()
     this._addEventListeners()
-    return this;
+    return this
   }
 
   _addEventListeners() {
@@ -331,12 +331,12 @@ export default class Player extends BaseObject {
     }
     this.listenTo(this.core.mediaControl, Events.MEDIACONTROL_CONTAINERCHANGED, this._containerChanged)
     this.listenTo(this.core, Events.CORE_FULLSCREEN, this._onFullscreenChange)
-    return this;
+    return this
   }
 
   _addContainerEventListeners() {
     var container = this.core.mediaControl.container
-    if (!!container) {
+    if (container) {
       this.listenTo(container, Events.CONTAINER_PLAY, this._onPlay)
       this.listenTo(container, Events.CONTAINER_PAUSE, this._onPause)
       this.listenTo(container, Events.CONTAINER_STOP, this._onStop)
@@ -346,7 +346,7 @@ export default class Player extends BaseObject {
       this.listenTo(container, Events.CONTAINER_TIMEUPDATE, this._onTimeUpdate)
       this.listenTo(container, Events.CONTAINER_VOLUME, this._onVolumeUpdate)
     }
-    return this;
+    return this
   }
 
   _registerOptionEventListeners() {
@@ -355,11 +355,11 @@ export default class Player extends BaseObject {
       var eventType = this.eventsMapping[userEvent]
       if (eventType) {
         var eventFunction = userEvents[userEvent]
-        eventFunction = typeof eventFunction === &quot;function&quot; &amp;&amp; eventFunction
+        eventFunction = typeof eventFunction === &#x27;function&#x27; &amp;&amp; eventFunction
         eventFunction &amp;&amp; this.on(eventType, eventFunction)
       }
     })
-    return this;
+    return this
   }
 
   _containerChanged() {
@@ -416,7 +416,7 @@ export default class Player extends BaseObject {
 
   _normalizeSources(options) {
     var sources = options.sources || (options.source !== undefined? [options.source] : [])
-    return sources.length === 0 ? [{source:&quot;&quot;, mimeType:&quot;&quot;}] : sources
+    return sources.length === 0 ? [{source:&#x27;&#x27;, mimeType:&#x27;&#x27;}] : sources
   }
 
   /**
@@ -430,8 +430,8 @@ export default class Player extends BaseObject {
    * &#x60;&#x60;&#x60;
    */
   resize(size) {
-    this.core.resize(size);
-    return this;
+    this.core.resize(size)
+    return this
   }
 
   /**
@@ -440,15 +440,15 @@ export default class Player extends BaseObject {
    * @param {Array|String} sources source or sources of video.
    * An array item can be a string or {source: &lt;&lt;source URL&gt;&gt;, mimeType: &lt;&lt;source mime type&gt;&gt;}
    * @param {String} mimeType a mime type, example: &#x60;&#x27;application/vnd.apple.mpegurl&#x27;&#x60;
-   * @param {Boolean} [startPlay=false] whether playing should be started immediately
+   * @param {Boolean} [autoPlay=false] whether playing should be started immediately
    * @return {Player} itself
    */
-  load(sources, mimeType, startPlay) {
-    this.core.load(sources, mimeType);
-    if (startPlay) {
-      this.play();
+  load(sources, mimeType, autoPlay) {
+    if (autoPlay !== undefined) {
+      this.configure({autoPlay: !!autoPlay})
     }
-    return this;
+    this.core.load(sources, mimeType)
+    return this
   }
 
   /**
@@ -458,7 +458,7 @@ export default class Player extends BaseObject {
    */
   destroy() {
     this.core.destroy()
-    return this;
+    return this
   }
 
   /**
@@ -467,8 +467,8 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   play() {
-    this.core.mediaControl.container.play();
-    return this;
+    this.core.mediaControl.container.play()
+    return this
   }
 
   /**
@@ -477,8 +477,8 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   pause() {
-    this.core.mediaControl.container.pause();
-    return this;
+    this.core.mediaControl.container.pause()
+    return this
   }
 
   /**
@@ -487,8 +487,8 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   stop() {
-    this.core.mediaControl.container.stop();
-    return this;
+    this.core.mediaControl.container.stop()
+    return this
   }
 
 
@@ -499,8 +499,8 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   seek(time) {
-    this.core.mediaControl.container.seek(time);
-    return this;
+    this.core.mediaControl.container.seek(time)
+    return this
   }
 
   /**
@@ -510,8 +510,8 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   seekPercentage(percentage) {
-    this.core.mediaControl.container.seekPercentage(percentage);
-    return this;
+    this.core.mediaControl.container.seekPercentage(percentage)
+    return this
   }
 
   /**
@@ -522,9 +522,9 @@ export default class Player extends BaseObject {
    */
   setVolume(volume) {
     if (this.core &amp;&amp; this.core.mediaControl) {
-      this.core.mediaControl.setVolume(volume);
+      this.core.mediaControl.setVolume(volume)
     }
-    return this;
+    return this
   }
 
   /**
@@ -533,7 +533,7 @@ export default class Player extends BaseObject {
    * @return {Number} volume should be a number between 0 and 100, 0 being mute and 100 the max volume.
    */
   getVolume() {
-    return this.core &amp;&amp; this.core.mediaControl ? this.core.mediaControl.volume : 0;
+    return this.core &amp;&amp; this.core.mediaControl ? this.core.mediaControl.volume : 0
   }
 
   /**
@@ -542,9 +542,9 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   mute() {
-    this._mutedVolume = this.getVolume();
-    this.setVolume(0);
-    return this;
+    this._mutedVolume = this.getVolume()
+    this.setVolume(0)
+    return this
   }
 
   /**
@@ -553,9 +553,9 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   unmute() {
-    this.setVolume(typeof this._mutedVolume === &quot;number&quot; ? this._mutedVolume : 100);
-    this._mutedVolume = null;
-    return this;
+    this.setVolume(typeof this._mutedVolume === &#x27;number&#x27; ? this._mutedVolume : 100)
+    this._mutedVolume = null
+    return this
   }
 
   /**
@@ -564,7 +564,7 @@ export default class Player extends BaseObject {
    * @return {Boolean} &#x60;true&#x60; if the current source is playing, otherwise &#x60;false&#x60;
    */
   isPlaying() {
-    return this.core.mediaControl.container.isPlaying();
+    return this.core.mediaControl.container.isPlaying()
   }
 
   /**
@@ -593,7 +593,7 @@ export default class Player extends BaseObject {
    */
   configure(options) {
     this.core.configure(options)
-    return this;
+    return this
   }
 
   /**
@@ -608,10 +608,10 @@ export default class Player extends BaseObject {
    * &#x60;&#x60;&#x60;
    */
   getPlugin(name) {
-    var plugins = this.core.plugins.concat(this.core.mediaControl.container.plugins);
+    var plugins = this.core.plugins.concat(this.core.mediaControl.container.plugins)
     return find(plugins, function(plugin) {
-      return plugin.name === name;
-    });
+      return plugin.name === name
+    })
   }
 
   /**
@@ -631,7 +631,7 @@ export default class Player extends BaseObject {
    * @return {Number} time (in seconds) that time &quot;0&quot; represents.
    */
   getStartTimeOffset() {
-   return this.core.mediaControl.container.getStartTimeOffset()
+    return this.core.mediaControl.container.getStartTimeOffset()
   }
 
   /**

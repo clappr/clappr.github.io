@@ -108,17 +108,17 @@ import find from &#x27;lodash.find&#x27;
 
 export default class ContainerFactory extends BaseObject {
   constructor(options, loader) {
-    super(options);
-    this.options = options;
-    this.loader = loader;
+    super(options)
+    this.options = options
+    this.loader = loader
   }
 
   createContainers() {
     return $.Deferred((promise) =&gt; {
       promise.resolve(this.options.sources.map((source) =&gt; {
-        return this.createContainer(source);
-      }));
-    });
+        return this.createContainer(source)
+      }))
+    })
   }
 
   findPlaybackPlugin(source, mimeType) {
@@ -128,7 +128,7 @@ export default class ContainerFactory extends BaseObject {
   createContainer(source) {
     var resolvedSource = null
     var mimeType = this.options.mimeType
-    if (typeof source === &quot;string&quot; || source instanceof String) {
+    if (typeof source === &#x27;string&#x27; || source instanceof String) {
       resolvedSource = source.toString()
     }
     else {
@@ -137,8 +137,8 @@ export default class ContainerFactory extends BaseObject {
         mimeType = source.mimeType
       }
     }
-    
-    if (!!resolvedSource.match(/^\/\//)) resolvedSource = window.location.protocol + resolvedSource
+
+    if (resolvedSource.match(/^\/\//)) resolvedSource = window.location.protocol + resolvedSource
 
     var options = $.extend({}, this.options, {
       src: resolvedSource,
@@ -152,15 +152,15 @@ export default class ContainerFactory extends BaseObject {
     var container = new Container(options)
     var defer = $.Deferred()
     defer.promise(container)
-    this.addContainerPlugins(container, resolvedSource)
+    this.addContainerPlugins(container)
     this.listenToOnce(container, Events.CONTAINER_READY, () =&gt; defer.resolve(container))
     return container
   }
 
-  addContainerPlugins(container, source) {
+  addContainerPlugins(container) {
     this.loader.containerPlugins.forEach((Plugin) =&gt; {
       container.addPlugin(new Plugin(container))
-    });
+    })
   }
 }
 

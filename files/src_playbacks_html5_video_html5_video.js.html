@@ -105,9 +105,10 @@ import Events from &#x27;base/events&#x27;
 import tagStyle from &#x27;./public/style.scss&#x27;
 import sourceHTML from &#x27;./public/index.html&#x27;
 import find from &#x27;lodash.find&#x27;
+import $ from &#x27;clappr-zepto&#x27;
 
 const MIMETYPES = {
-  &#x27;mp4&#x27;: [&quot;avc1.42E01E&quot;, &quot;avc1.58A01E&quot;, &quot;avc1.4D401E&quot;, &quot;avc1.64001E&quot;, &quot;mp4v.20.8&quot;, &quot;mp4v.20.240&quot;, &quot;mp4a.40.2&quot;].map(
+  &#x27;mp4&#x27;: [&#x27;avc1.42E01E&#x27;, &#x27;avc1.58A01E&#x27;, &#x27;avc1.4D401E&#x27;, &#x27;avc1.64001E&#x27;, &#x27;mp4v.20.8&#x27;, &#x27;mp4v.20.240&#x27;, &#x27;mp4a.40.2&#x27;].map(
     (codec) =&gt; { return &#x27;video/mp4; codecs=&quot;&#x27; + codec + &#x27;, mp4a.40.2&quot;&#x27;}),
   &#x27;ogg&#x27;: [&#x27;video/ogg; codecs=&quot;theora, vorbis&quot;&#x27;, &#x27;video/ogg; codecs=&quot;dirac&quot;&#x27;, &#x27;video/ogg; codecs=&quot;theora, speex&quot;&#x27;],
   &#x27;3gpp&#x27;: [&#x27;video/3gpp; codecs=&quot;mp4v.20.8, samr&quot;&#x27;],
@@ -177,20 +178,23 @@ export default class HTML5Video extends Playback {
     this._stopped = false
     this._options = options
     this._setupSrc(options.src)
-    this.el.loop = options.loop
-    if (options.poster) {
-      this.$el.attr(&quot;poster&quot;, options.poster)
-    }
-    this.el.autoplay = options.autoPlay
-    if (Browser.isSafari) {
-      this._setupSafari()
-    } else {
-      this.el.preload = options.preload ? options.preload: &#x27;metadata&#x27;
-    }
+
+    var playbackConfig = (options.playbackConfig || {})
+    var preload = playbackConfig.preload || ((Browser.isSafari)?&#x27;auto&#x27;:options.preload)
+
+    $.extend(this.el, {
+      loop: options.loop,
+      autoplay: options.autoPlay,
+      poster: options.poster,
+      preload: preload || &#x27;metadata&#x27;,
+      controls: playbackConfig.controls || options.useVideoTagDefaultControls,
+      crossOrigin: playbackConfig.crossOrigin
+    })
+
     // TODO should settings be private?
     this.settings = {default: [&#x27;seekbar&#x27;]}
-    this.settings.left = [&quot;playpause&quot;, &quot;position&quot;, &quot;duration&quot;]
-    this.settings.right = [&quot;fullscreen&quot;, &quot;volume&quot;, &quot;hd-indicator&quot;]
+    this.settings.left = [&#x27;playpause&#x27;, &#x27;position&#x27;, &#x27;duration&#x27;]
+    this.settings.right = [&#x27;fullscreen&#x27;, &#x27;volume&#x27;, &#x27;hd-indicator&#x27;]
   }
 
   /**
@@ -204,15 +208,11 @@ export default class HTML5Video extends Playback {
     this.el.src = srcUrl
   }
 
-  _setupSafari() {
-    this.el.preload = &#x27;auto&#x27;
-  }
-
   _onLoadedMetadata(e) {
     this._handleBufferingEvents()
     this.trigger(Events.PLAYBACK_LOADEDMETADATA, {duration: e.target.duration, data: e})
     this._updateSettings()
-    var autoSeekFromUrl = typeof(this._options.autoSeekFromUrl) === &quot;undefined&quot; || this._options.autoSeekFromUrl
+    var autoSeekFromUrl = typeof(this._options.autoSeekFromUrl) === &#x27;undefined&#x27; || this._options.autoSeekFromUrl
     if (this.getPlaybackType() !== Playback.LIVE &amp;&amp; autoSeekFromUrl) {
       this._checkInitialSeek()
     }
@@ -229,9 +229,9 @@ export default class HTML5Video extends Playback {
     // we can&#x27;t figure out if hls resource is VoD or not until it is being loaded or duration has changed.
     // that&#x27;s why we check it again and update media control accordingly.
     if (this.getPlaybackType() === Playback.VOD) {
-      this.settings.left = [&quot;playpause&quot;, &quot;position&quot;, &quot;duration&quot;]
+      this.settings.left = [&#x27;playpause&#x27;, &#x27;position&#x27;, &#x27;duration&#x27;]
     } else {
-      this.settings.left = [&quot;playstop&quot;]
+      this.settings.left = [&#x27;playstop&#x27;]
     }
     this.settings.seekEnabled = this.isSeekEnabled()
     this.trigger(Events.PLAYBACK_SETTINGSUPDATE)
@@ -250,6 +250,7 @@ export default class HTML5Video extends Playback {
   }
 
   play() {
+    this.trigger(Events.PLAYBACK_PLAY_INTENT)
     this._stopped = false
     this._handleBufferingEvents()
     this.el.play()
@@ -384,7 +385,7 @@ export default class HTML5Video extends Playback {
     }
   }
 
-  _onError(event) {
+  _onError() {
     this.trigger(Events.PLAYBACK_ERROR, this.el.error, this.name)
   }
 
@@ -447,7 +448,7 @@ export default class HTML5Video extends Playback {
 
   _typeFor(src) {
     var resourceParts = src.split(&#x27;?&#x27;)[0].match(/.*\.(.*)$/) || []
-    var isHls = resourceParts.length &gt; 1 &amp;&amp; resourceParts[1] === &quot;m3u8&quot;
+    var isHls = resourceParts.length &gt; 1 &amp;&amp; resourceParts[1] === &#x27;m3u8&#x27;
     return isHls ? &#x27;application/vnd.apple.mpegurl&#x27; : &#x27;video/mp4&#x27;
   }
 
@@ -469,7 +470,7 @@ export default class HTML5Video extends Playback {
     }
 
     if (this._options.disableVideoTagContextMenu) {
-      this.$el.on(&quot;contextmenu&quot;, () =&gt; {
+      this.$el.on(&#x27;contextmenu&#x27;, () =&gt; {
         return false
       })
     }

@@ -95,7 +95,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import {isNumber,Fullscreen, requestAnimationFrame, cancelAnimationFrame} from &#x27;base/utils&#x27;
+import {isNumber,Fullscreen} from &#x27;base/utils&#x27;
 
 import Events from &#x27;base/events&#x27;
 import Styler from &#x27;base/styler&#x27;
@@ -131,7 +131,7 @@ export default class Core extends UIObject {
   get attributes() {
     return {
       &#x27;data-player&#x27;: &#x27;&#x27;,
-      tabindex: 9999,
+      tabindex: 9999
     }
   }
 
@@ -195,11 +195,11 @@ export default class Core extends UIObject {
 
   resize(options) {
     if (!isNumber(options.height) &amp;&amp; !isNumber(options.width))  {
-      this.el.style.height = &#x60;${options.height}&#x60;;
-      this.el.style.width = &#x60;${options.width}&#x60;;
+      this.el.style.height = &#x60;${options.height}&#x60;
+      this.el.style.width = &#x60;${options.width}&#x60;
     } else {
-      this.el.style.height = &#x60;${options.height}px&#x60;;
-      this.el.style.width = &#x60;${options.width}px&#x60;;
+      this.el.style.height = &#x60;${options.height}px&#x60;
+      this.el.style.width = &#x60;${options.width}px&#x60;
     }
     this.playerInfo.previousSize = { width: this.options.width, height: this.options.height }
     this.options.width = options.width
@@ -255,7 +255,7 @@ export default class Core extends UIObject {
 
   load(sources, mimeType) {
     this.options.mimeType = mimeType
-    sources = sources &amp;&amp; sources.constructor === Array ? sources : [sources.toString()];
+    sources = sources &amp;&amp; sources.constructor === Array ? sources : [sources]
     this.containers.forEach((container) =&gt; container.destroy())
     this.mediaControl.container = null
     this.containerFactory.options = $.extend(this.options, {sources})
@@ -339,9 +339,9 @@ export default class Core extends UIObject {
 
   createMediaControl(options) {
     if(options.mediacontrol &amp;&amp; options.mediacontrol.external) {
-      return new options.mediacontrol.external(options).render();
+      return new options.mediacontrol.external(options).render()
     } else {
-      return new MediaControl(options).render();
+      return new MediaControl(options).render()
     }
   }
 
@@ -381,7 +381,7 @@ export default class Core extends UIObject {
     this.mediaControl.show(event)
   }
 
-  hideMediaControl(event) {
+  hideMediaControl() {
     this.mediaControl.hide(this.options.hideMediaControlDelay)
   }
 
@@ -415,7 +415,7 @@ export default class Core extends UIObject {
   }
 
   render() {
-    var style = Styler.getStyleFor(coreStyle, {baseUrl: this.options.baseUrl});
+    var style = Styler.getStyleFor(coreStyle, {baseUrl: this.options.baseUrl})
     this.$el.append(style)
     this.$el.append(this.mediaControl.render().el)
 
