@@ -413,6 +413,16 @@
         {
             "file": "src/base/base_object.js",
             "line": 15,
+            "description": "returns the object options",
+            "itemtype": "property",
+            "name": "options",
+            "type": "Object",
+            "class": "BaseObject",
+            "module": "base"
+        },
+        {
+            "file": "src/base/base_object.js",
+            "line": 22,
             "itemtype": "method",
             "name": "constructor",
             "params": [
@@ -427,23 +437,12 @@
         },
         {
             "file": "src/base/base_object.js",
-            "line": 23,
+            "line": 31,
             "description": "a unique id prefixed with `'o'`, `o1, o232`",
             "itemtype": "property",
             "name": "uniqueId",
             "type": "String",
             "class": "BaseObject",
-            "module": "base"
-        },
-        {
-            "file": "src/base/container_plugin.js",
-            "line": 19,
-            "description": "provides the read-only options to the container plugin",
-            "itemtype": "property",
-            "name": "options",
-            "type": "Object",
-            "default": "\"`{}`\"",
-            "class": "ContainerPlugin",
             "module": "base"
         },
         {
@@ -1803,17 +1802,6 @@
             "module": "base"
         },
         {
-            "file": "src/base/ui_container_plugin.js",
-            "line": 24,
-            "description": "provides the read-only options to the ui container plugin",
-            "itemtype": "property",
-            "name": "options",
-            "type": "Object",
-            "default": "\"`{}`\"",
-            "class": "UIContainerPlugin",
-            "module": "base"
-        },
-        {
             "file": "src/base/ui_object.js",
             "line": 20,
             "description": "a unique id prefixed with `'c'`, `c1, c232`",
@@ -2091,7 +2079,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 93,
+            "line": 92,
             "description": "binds playback events to the methods of the container.\nit listens to playback's events and triggers them as container events.\n\n| Playback |\n|----------|\n| progress |\n| timeupdate |\n| ready |\n| buffering |\n| bufferfull |\n| settingsupdate |\n| loadedmetadata |\n| highdefinitionupdate |\n| bitrate |\n| playbackstate |\n| dvr |\n| mediacontrol_disable |\n| mediacontrol_enable |\n| ended |\n| play |\n| pause |\n| error |\n\nps: the events usually translate from PLABACK_x to CONTAINER_x, you can check all the events at `Event` class.",
             "itemtype": "method",
             "name": "bindEvents",
@@ -2100,7 +2088,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 164,
+            "line": 163,
             "description": "returns `true` if DVR is enable otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrEnabled",
@@ -2113,7 +2101,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 173,
+            "line": 172,
             "description": "returns `true` if DVR is in use otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrInUse",
@@ -2126,7 +2114,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 182,
+            "line": 181,
             "description": "destroys the container",
             "itemtype": "method",
             "name": "destroy",
@@ -2135,7 +2123,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 250,
+            "line": 249,
             "description": "plays the playback",
             "itemtype": "method",
             "name": "play",
@@ -2144,7 +2132,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 258,
+            "line": 257,
             "description": "stops the playback",
             "itemtype": "method",
             "name": "stop",
@@ -2153,7 +2141,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 267,
+            "line": 266,
             "description": "pauses the playback",
             "itemtype": "method",
             "name": "pause",
@@ -2162,7 +2150,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 333,
+            "line": 332,
             "description": "adds plugin to the container",
             "itemtype": "method",
             "name": "addPlugin",
@@ -2178,7 +2166,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 342,
+            "line": 341,
             "description": "checks if a plugin, given its name, exist",
             "itemtype": "method",
             "name": "hasPlugin",
@@ -2198,7 +2186,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 352,
+            "line": 351,
             "description": "get the plugin given its name",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2214,7 +2202,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 408,
+            "line": 407,
             "description": "enables to configure the container after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2257,7 +2245,7 @@
         },
         {
             "file": "src/components/core/core.js",
-            "line": 313,
+            "line": 312,
             "description": "enables to configure the container after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -3049,7 +3037,7 @@
         },
         {
             "file": "src/playbacks/html5_video/html5_video.js",
-            "line": 60,
+            "line": 73,
             "description": "Determine if the playback has ended.",
             "itemtype": "property",
             "name": "ended",
@@ -3059,7 +3047,7 @@
         },
         {
             "file": "src/playbacks/html5_video/html5_video.js",
-            "line": 69,
+            "line": 82,
             "description": "Determine if the playback is having to buffer in order for\nplayback to be smooth.\nThis is related to the PLAYBACK_BUFFERING and PLAYBACK_BUFFERFULL events",
             "itemtype": "property",
             "name": "buffering",
@@ -3069,7 +3057,7 @@
         },
         {
             "file": "src/playbacks/html5_video/html5_video.js",
-            "line": 107,
+            "line": 121,
             "description": "Sets the source url on the <video> element, and also the 'src' property.",
             "itemtype": "method",
             "name": "setupSrc",
