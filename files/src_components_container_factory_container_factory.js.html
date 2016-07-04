@@ -47,13 +47,16 @@
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/Strings.html">Strings</a></li>
                                 <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
+                
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/base.html">base</a></li>
                                 <li><a href="../modules/components.html">components</a></li>
+                                <li><a href="../modules/plugins.html">plugins</a></li>
                             </ul>
                         </div>
                     </div>
@@ -105,10 +108,12 @@ import Container from &#x27;components/container&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 
 import find from &#x27;lodash.find&#x27;
+import isPlainObject from &#x27;lodash.isplainobject&#x27;
 
 export default class ContainerFactory extends BaseObject {
-  constructor(options, loader) {
+  constructor(options, loader, i18n) {
     super(options)
+    this._i18n = i18n
     this.options = options
     this.loader = loader
   }
@@ -128,14 +133,13 @@ export default class ContainerFactory extends BaseObject {
   createContainer(source) {
     var resolvedSource = null
     var mimeType = this.options.mimeType
-    if (typeof source === &#x27;string&#x27; || source instanceof String) {
-      resolvedSource = source.toString()
-    }
-    else {
+    if (isPlainObject(source)) {
       resolvedSource = source.source.toString()
       if (source.mimeType) {
         mimeType = source.mimeType
       }
+    } else {
+      resolvedSource = source.toString()
     }
 
     if (resolvedSource.match(/^\/\//)) resolvedSource = window.location.protocol + resolvedSource
@@ -145,11 +149,11 @@ export default class ContainerFactory extends BaseObject {
       mimeType: mimeType
     })
     var playbackPlugin = this.findPlaybackPlugin(resolvedSource, mimeType)
-    var playback = new playbackPlugin(options)
+    var playback = new playbackPlugin(options, this._i18n)
 
     options = $.extend(options, {playback: playback})
 
-    var container = new Container(options)
+    var container = new Container(options, this._i18n)
     var defer = $.Deferred()
     defer.promise(container)
     this.addContainerPlugins(container)

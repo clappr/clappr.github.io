@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/base/base_object.js - Clappr</title>
+    <title>src/plugins/strings.js - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,40 +90,67 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/base/base_object.js</h1>
+<h1 class="file-heading">File: src/plugins/strings.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-// Copyright 2014 Globo.com Player authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
+import {getBrowserLanguage} from &#x27;base/utils&#x27;
 
-import {uniqueId} from &#x27;./utils&#x27;
-import Events from &#x27;./events&#x27;
+import CorePlugin from &#x27;base/core_plugin&#x27;
+import merge from &#x27;lodash.merge&#x27;
 
 /**
- * @class BaseObject
+ * The internationalization (i18n) plugin
+ * @class Strings
  * @constructor
- * @extends Events
- * @module base
+ * @extends CorePlugin
+ * @module plugins
  */
-export default class BaseObject extends Events {
-  /**
-   * @method constructor
-   * @param {Object} options
-   */
-  constructor(options={}) {
-    super(options)
-    this.uniqueId = uniqueId(&#x27;o&#x27;)
+export default class Strings extends CorePlugin {
+  get name() {return &#x27;strings&#x27;}
+
+  constructor(core) {
+    super(core)
+    this._initializeMessages()
   }
   /**
-  * a unique id prefixed with &#x60;&#x27;o&#x27;&#x60;, &#x60;o1, o232&#x60;
-  *
-  * @property uniqueId
-  * @type String
-  */
-}
+   * Gets a translated string for the given key.
+   * @method t
+   * @param {String} key the key to all messages
+   * @return {String} translated label
+   */
+  t(key) {
+    var lang = this._language()
+    var i18n = lang &amp;&amp; this._messages[lang] || this._messages[&#x27;en&#x27;]
+    return i18n[key] || key
+  }
 
+  _language() {return this.core.options.language || getBrowserLanguage()}
+
+  _initializeMessages() {
+    this._messages = merge({
+      &#x27;en&#x27;: {
+        &#x27;live&#x27;: &#x27;live&#x27;,
+        &#x27;back_to_live&#x27;: &#x27;back to live&#x27;,
+        &#x27;playback_not_supported&#x27;: &#x27;Your browser does not support the playback of this video. Please try using a different browser.&#x27;
+      },
+      &#x27;pt&#x27;: {
+        &#x27;live&#x27;: &#x27;ao vivo&#x27;,
+        &#x27;back_to_live&#x27;: &#x27;voltar para o ao vivo&#x27;,
+        &#x27;playback_not_supported&#x27;: &#x27;Seu navegador não supporta a reprodução deste video. Por favor, tente usar um navegador diferente.&#x27;
+      },
+      &#x27;es&#x27;: {
+        &#x27;live&#x27;: &#x27;vivo&#x27;,
+        &#x27;back_to_live&#x27;: &#x27;volver en vivo&#x27;,
+        &#x27;playback_not_supported&#x27;: &#x27;Su navegador no soporta la reproducción de un video. Por favor, trate de usar un navegador diferente.&#x27;
+      }
+    }, this.core.options.strings || {})
+
+    this._messages[&#x27;pt-BR&#x27;] = this._messages[&#x27;pt&#x27;]
+    this._messages[&#x27;en-us&#x27;] = this._messages[&#x27;en&#x27;]
+    this._messages[&#x27;es-419&#x27;] = this._messages[&#x27;es&#x27;]
+  }
+}
 
     </pre>
 </div>

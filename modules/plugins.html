@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/base/base_object.js - Clappr</title>
+    <title>plugins - Clappr</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,42 +90,39 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: src/base/base_object.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
-// Copyright 2014 Globo.com Player authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-import {uniqueId} from &#x27;./utils&#x27;
-import Events from &#x27;./events&#x27;
-
-/**
- * @class BaseObject
- * @constructor
- * @extends Events
- * @module base
- */
-export default class BaseObject extends Events {
-  /**
-   * @method constructor
-   * @param {Object} options
-   */
-  constructor(options={}) {
-    super(options)
-    this.uniqueId = uniqueId(&#x27;o&#x27;)
-  }
-  /**
-  * a unique id prefixed with &#x60;&#x27;o&#x27;&#x60;, &#x60;o1, o232&#x60;
-  *
-  * @property uniqueId
-  * @type String
-  */
-}
+<h1>plugins Module</h1>
+<div class="box clearfix meta">
 
 
-    </pre>
+        <div class="foundat">
+            Defined in: <a href="../files/src_plugins_strings.js.html#l6"><code>src&#x2F;plugins&#x2F;strings.js:6</code></a>
+        </div>
+
+</div>
+
+
+<div class="box intro">
+    <p>The internationalization (i18n) plugin</p>
+
+</div>
+
+
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+            <p>This module provides the following classes:</p>
+
+            <ul class="module-classes">
+                <li class="module-class">
+                    <a href="../classes/Strings.html">
+                        Strings
+                    </a>
+                </li>
+            </ul>
+    </div>
+
+
+    <div class="yui3-u-1-2">
+    </div>
 </div>
                     </div>
                 </div>

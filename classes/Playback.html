@@ -47,13 +47,16 @@
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/Strings.html">Strings</a></li>
                                 <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
+                
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/base.html">base</a></li>
                                 <li><a href="../modules/components.html">components</a></li>
+                                <li><a href="../modules/plugins.html">plugins</a></li>
                             </ul>
                         </div>
                     </div>
@@ -314,6 +317,10 @@
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_events">events</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_i18n">i18n</a>
 
                             </li>
                             <li class="index-item property">
@@ -591,7 +598,7 @@
         </div>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
         </span>
 
 
@@ -620,7 +627,7 @@
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">selector</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -635,7 +642,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
                     an element, if it exists.
             </div>
         </div>
@@ -697,7 +704,7 @@
         </div>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
 
 
@@ -710,7 +717,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l153"><code>src&#x2F;base&#x2F;playback.js:153</code></a>
+        <a href="../files/src_base_playback.js.html#l164"><code>src&#x2F;base&#x2F;playback.js:164</code></a>
         </p>
 
 
@@ -730,7 +737,7 @@ from the source extension.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">source</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -741,7 +748,7 @@ from the source extension.</p>
                 </li>
                 <li class="param">
                         <code class="param-name optional">[mimeType]</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
 
 
@@ -758,7 +765,7 @@ from the source extension.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
                     <p><code>true</code> if the playback is playable, otherwise <code>false</code></p>
 
             </div>
@@ -773,6 +780,9 @@ from the source extension.</p>
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
                         <code>options</code>
+                </li>
+                <li class="arg">
+                        <code>i18n</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -790,7 +800,7 @@ from the source extension.</p>
                 BaseObject
             </a>
             but overwritten in
-        <a href="../files/src_base_playback.js.html#l32"><code>src&#x2F;base&#x2F;playback.js:32</code></a>
+        <a href="../files/src_base_playback.js.html#l41"><code>src&#x2F;base&#x2F;playback.js:41</code></a>
         </p>
 
 
@@ -807,11 +817,22 @@ from the source extension.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">options</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
                         <p>the options object</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">i18n</code>
+                        <span class="type"><a href="../classes/Strings.html" class="crosslink">Strings</a></span>
+
+
+                    <div class="param-description">
+                        <p>the internationalization component</p>
 
                     </div>
 
@@ -863,7 +884,7 @@ from the source extension.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">events</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -900,7 +921,7 @@ from the source extension.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l140"><code>src&#x2F;base&#x2F;playback.js:140</code></a>
+        <a href="../files/src_base_playback.js.html#l151"><code>src&#x2F;base&#x2F;playback.js:151</code></a>
         </p>
 
 
@@ -922,7 +943,7 @@ from the source extension.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
         </span>
 
 
@@ -934,7 +955,7 @@ from the source extension.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l83"><code>src&#x2F;base&#x2F;playback.js:83</code></a>
+        <a href="../files/src_base_playback.js.html#l94"><code>src&#x2F;base&#x2F;playback.js:94</code></a>
         </p>
 
 
@@ -951,7 +972,7 @@ from the source extension.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
                     <p>duration (in seconds) of the current source</p>
 
             </div>
@@ -965,7 +986,7 @@ from the source extension.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
         </span>
 
 
@@ -977,7 +998,7 @@ from the source extension.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l108"><code>src&#x2F;base&#x2F;playback.js:108</code></a>
+        <a href="../files/src_base_playback.js.html#l119"><code>src&#x2F;base&#x2F;playback.js:119</code></a>
         </p>
 
 
@@ -994,7 +1015,7 @@ from the source extension.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
                     <p>you should write the playback type otherwise it'll assume <code>'no_op'</code></p>
 
             </div>
@@ -1020,7 +1041,7 @@ flashHlsPlayback.getPlaybackType() //live
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
         </span>
 
 
@@ -1032,7 +1053,7 @@ flashHlsPlayback.getPlaybackType() //live
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l74"><code>src&#x2F;base&#x2F;playback.js:74</code></a>
+        <a href="../files/src_base_playback.js.html#l85"><code>src&#x2F;base&#x2F;playback.js:85</code></a>
         </p>
 
 
@@ -1051,7 +1072,7 @@ removed from the beginning.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
                     <p>time (in seconds) that time &quot;0&quot; represents.</p>
 
             </div>
@@ -1065,7 +1086,7 @@ removed from the beginning.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
 
 
@@ -1077,7 +1098,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l124"><code>src&#x2F;base&#x2F;playback.js:124</code></a>
+        <a href="../files/src_base_playback.js.html#l135"><code>src&#x2F;base&#x2F;playback.js:135</code></a>
         </p>
 
 
@@ -1094,7 +1115,7 @@ removed from the beginning.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
                     <p><code>true</code> if the playback is playing in HD, otherwise <code>false</code></p>
 
             </div>
@@ -1108,7 +1129,7 @@ removed from the beginning.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
 
 
@@ -1120,7 +1141,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l90"><code>src&#x2F;base&#x2F;playback.js:90</code></a>
+        <a href="../files/src_base_playback.js.html#l101"><code>src&#x2F;base&#x2F;playback.js:101</code></a>
         </p>
 
 
@@ -1137,7 +1158,7 @@ removed from the beginning.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
                     <p><code>true</code> if the current playback is playing, otherwise <code>false</code></p>
 
             </div>
@@ -1193,7 +1214,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">obj</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1203,7 +1224,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1213,7 +1234,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1223,7 +1244,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1294,7 +1315,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">obj</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1304,7 +1325,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1314,7 +1335,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1324,7 +1345,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1392,7 +1413,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1402,7 +1423,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1412,7 +1433,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1471,7 +1492,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1481,7 +1502,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1491,7 +1512,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1550,7 +1571,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1560,7 +1581,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1570,7 +1591,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1599,7 +1620,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l47"><code>src&#x2F;base&#x2F;playback.js:47</code></a>
+        <a href="../files/src_base_playback.js.html#l58"><code>src&#x2F;base&#x2F;playback.js:58</code></a>
         </p>
 
 
@@ -1630,7 +1651,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l41"><code>src&#x2F;base&#x2F;playback.js:41</code></a>
+        <a href="../files/src_base_playback.js.html#l52"><code>src&#x2F;base&#x2F;playback.js:52</code></a>
         </p>
 
 
@@ -1749,7 +1770,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l59"><code>src&#x2F;base&#x2F;playback.js:59</code></a>
+        <a href="../files/src_base_playback.js.html#l70"><code>src&#x2F;base&#x2F;playback.js:70</code></a>
         </p>
 
 
@@ -1767,7 +1788,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">time</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
 
 
                     <div class="param-description">
@@ -1803,7 +1824,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l66"><code>src&#x2F;base&#x2F;playback.js:66</code></a>
+        <a href="../files/src_base_playback.js.html#l77"><code>src&#x2F;base&#x2F;playback.js:77</code></a>
         </p>
 
 
@@ -1821,7 +1842,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">time</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
 
 
                     <div class="param-description">
@@ -1880,7 +1901,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">element</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
 
 
                     <div class="param-description">
@@ -1890,7 +1911,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">delegate</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
 
                     <div class="param-description">
@@ -1927,7 +1948,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l53"><code>src&#x2F;base&#x2F;playback.js:53</code></a>
+        <a href="../files/src_base_playback.js.html#l64"><code>src&#x2F;base&#x2F;playback.js:64</code></a>
         </p>
 
 
@@ -1988,7 +2009,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">obj</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1998,7 +2019,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -2008,7 +2029,7 @@ removed from the beginning.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -2028,7 +2049,7 @@ removed from the beginning.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
         </span>
 
 
@@ -2056,7 +2077,7 @@ removed from the beginning.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
                     tag's name
             </div>
         </div>
@@ -2102,7 +2123,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -2178,7 +2199,7 @@ removed from the beginning.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_base_playback.js.html#l133"><code>src&#x2F;base&#x2F;playback.js:133</code></a>
+        <a href="../files/src_base_playback.js.html#l144"><code>src&#x2F;base&#x2F;playback.js:144</code></a>
         </p>
 
 
@@ -2196,7 +2217,7 @@ removed from the beginning.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">value</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
 
 
                     <div class="param-description">
@@ -2216,393 +2237,418 @@ removed from the beginning.</p>
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_$el" class="property item inherited">
-                        <h3 class="name"><code>$el</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_$el">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l32"><code>src&#x2F;base&#x2F;ui_object.js:32</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            the dom element wrapped by <code>$</code>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_AOD" class="property item">
-                        <h3 class="name"><code>AOD</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l175"><code>src&#x2F;base&#x2F;playback.js:175</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a playback type for audio on demand</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_attributes" class="property item inherited">
-                        <h3 class="name"><code>attributes</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_attributes">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l67"><code>src&#x2F;base&#x2F;ui_object.js:67</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            a literal object mapping attributes and values to the element
-                    element's attribute name and the value the attribute value
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <pre class="code prettyprint"><code class="language-javascript">
-                    class MyButton extends UIObject {
-                       constructor(options) { super(options) }
-                       get attributes() { return { class: 'my-button'} }
-                    }
-                    
-                    // MyButton.el.className will be 'my-button'
-                    </code></pre>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
-                    <div id="property_buffering" class="property item">
-                        <h3 class="name"><code>buffering</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l21"><code>src&#x2F;base&#x2F;playback.js:21</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Determine if the playback is having to buffer in order for
-                    playback to be smooth.
-                    (i.e if a live stream is playing smoothly, this will be false)</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_cid" class="property item inherited">
-                        <h3 class="name"><code>cid</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_cid">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l20"><code>src&#x2F;base&#x2F;ui_object.js:20</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            a unique id prefixed with <code>&#x27;c&#x27;</code>, <code>c1, c232</code>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_el" class="property item inherited">
-                        <h3 class="name"><code>el</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_el">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l26"><code>src&#x2F;base&#x2F;ui_object.js:26</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            the dom element itself
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_ended" class="property item">
-                        <h3 class="name"><code>ended</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l12"><code>src&#x2F;base&#x2F;playback.js:12</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Determine if the playback has ended.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_events" class="property item inherited">
-                        <h3 class="name"><code>events</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_events">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l46"><code>src&#x2F;base&#x2F;ui_object.js:46</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            a literal object mapping element's events to methods
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <pre class="code prettyprint"><code class="language-javascript">
-                    class MyButton extends UIObject {
-                      constructor(options) {
-                        super(options)
-                        this.myId = 0
-                      }
-                      get events() { return { 'click': 'myClick' } }
-                      myClick(){ this.myId = 42 }
-                    }
-                    
-                    // when you click on MyButton the method <code>myClick</code> will be called
-                    </code></pre>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
-                    <div id="property_isReady" class="property item">
-                        <h3 class="name"><code>isReady</code></h3>
-                        <span class="type">Boolean <code>true</code> if the current playback is ready, otherwise <code>false</code></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l99"><code>src&#x2F;base&#x2F;playback.js:99</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>checks if the playback is ready.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_LIVE" class="property item">
-                        <h3 class="name"><code>LIVE</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l183"><code>src&#x2F;base&#x2F;playback.js:183</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a playback type for live video</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_NO_OP" class="property item">
-                        <h3 class="name"><code>NO_OP</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l191"><code>src&#x2F;base&#x2F;playback.js:191</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a default playback type</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_type" class="property item">
-                        <h3 class="name"><code>type</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l199"><code>src&#x2F;base&#x2F;playback.js:199</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>the plugin type</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_uniqueId" class="property item inherited">
-                        <h3 class="name"><code>uniqueId</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/BaseObject.html#property_uniqueId">BaseObject</a>:
-                            <a href="../files/src_base_base_object.js.html#l23"><code>src&#x2F;base&#x2F;base_object.js:23</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a unique id prefixed with <code>'o'</code>, <code>o1, o232</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_VOD" class="property item">
-                        <h3 class="name"><code>VOD</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_base_playback.js.html#l167"><code>src&#x2F;base&#x2F;playback.js:167</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a playback type for video on demand</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
+<div id="property_$el" class="property item inherited">
+    <h3 class="name"><code>$el</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_$el">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l32"><code>src&#x2F;base&#x2F;ui_object.js:32</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        the dom element wrapped by <code>$</code>
+    </div>
+
+
+
+</div>
+<div id="property_AOD" class="property item">
+    <h3 class="name"><code>AOD</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l186"><code>src&#x2F;base&#x2F;playback.js:186</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a playback type for audio on demand</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_attributes" class="property item inherited">
+    <h3 class="name"><code>attributes</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_attributes">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l67"><code>src&#x2F;base&#x2F;ui_object.js:67</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        a literal object mapping attributes and values to the element
+element's attribute name and the value the attribute value
+    </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">
+class MyButton extends UIObject {
+   constructor(options) { super(options) }
+   get attributes() { return { class: 'my-button'} }
+}
+
+// MyButton.el.className will be 'my-button'
+</code></pre>
+
+            </div>
+        </div>
+
+</div>
+<div id="property_buffering" class="property item">
+    <h3 class="name"><code>buffering</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l30"><code>src&#x2F;base&#x2F;playback.js:30</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Determine if the playback is having to buffer in order for
+playback to be smooth.
+(i.e if a live stream is playing smoothly, this will be false)</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_cid" class="property item inherited">
+    <h3 class="name"><code>cid</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_cid">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l20"><code>src&#x2F;base&#x2F;ui_object.js:20</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        a unique id prefixed with <code>&#x27;c&#x27;</code>, <code>c1, c232</code>
+    </div>
+
+
+
+</div>
+<div id="property_el" class="property item inherited">
+    <h3 class="name"><code>el</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_el">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l26"><code>src&#x2F;base&#x2F;ui_object.js:26</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        the dom element itself
+    </div>
+
+
+
+</div>
+<div id="property_ended" class="property item">
+    <h3 class="name"><code>ended</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l12"><code>src&#x2F;base&#x2F;playback.js:12</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Determine if the playback has ended.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_events" class="property item inherited">
+    <h3 class="name"><code>events</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_events">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l46"><code>src&#x2F;base&#x2F;ui_object.js:46</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        a literal object mapping element's events to methods
+    </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">
+class MyButton extends UIObject {
+  constructor(options) {
+    super(options)
+    this.myId = 0
+  }
+  get events() { return { 'click': 'myClick' } }
+  myClick(){ this.myId = 42 }
+}
+
+// when you click on MyButton the method <code>myClick</code> will be called
+</code></pre>
+
+            </div>
+        </div>
+
+</div>
+<div id="property_i18n" class="property item">
+    <h3 class="name"><code>i18n</code></h3>
+    <span class="type"><a href="../classes/Strings.html" class="crosslink">Strings</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l21"><code>src&#x2F;base&#x2F;playback.js:21</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>The internationalization plugin.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_isReady" class="property item">
+    <h3 class="name"><code>isReady</code></h3>
+    <span class="type">Boolean <code>true</code> if the current playback is ready, otherwise <code>false</code></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l110"><code>src&#x2F;base&#x2F;playback.js:110</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>checks if the playback is ready.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_LIVE" class="property item">
+    <h3 class="name"><code>LIVE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l194"><code>src&#x2F;base&#x2F;playback.js:194</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a playback type for live video</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_NO_OP" class="property item">
+    <h3 class="name"><code>NO_OP</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l202"><code>src&#x2F;base&#x2F;playback.js:202</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a default playback type</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_type" class="property item">
+    <h3 class="name"><code>type</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l210"><code>src&#x2F;base&#x2F;playback.js:210</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>the plugin type</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_uniqueId" class="property item inherited">
+    <h3 class="name"><code>uniqueId</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/BaseObject.html#property_uniqueId">BaseObject</a>:
+        <a href="../files/src_base_base_object.js.html#l23"><code>src&#x2F;base&#x2F;base_object.js:23</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a unique id prefixed with <code>'o'</code>, <code>o1, o232</code></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_VOD" class="property item">
+    <h3 class="name"><code>VOD</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_base_playback.js.html#l178"><code>src&#x2F;base&#x2F;playback.js:178</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a playback type for video on demand</p>
+
+    </div>
+
+
+
+</div>
             </div>
 
 
@@ -2637,7 +2683,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">bitrate</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2649,7 +2695,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[bandwidth]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2660,7 +2706,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[width]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2671,7 +2717,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[height]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2682,7 +2728,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[level]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2727,7 +2773,7 @@ removed from the beginning.</p>
                                     <li class="param">
                                             <code class="param-name">isHD
                     true</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -2769,7 +2815,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">metadata</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2781,7 +2827,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[duration]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2792,7 +2838,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[data]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2911,7 +2957,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">state</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2923,7 +2969,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[type]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2967,7 +3013,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2979,7 +3025,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[start]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2990,7 +3036,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3001,7 +3047,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3070,7 +3116,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">time</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
@@ -3187,7 +3233,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3199,7 +3245,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3210,7 +3256,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3383,7 +3429,7 @@ removed from the beginning.</p>
                                     <li class="param">
                                             <code class="param-name">event
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3426,7 +3472,7 @@ removed from the beginning.</p>
                                     <li class="param">
                                             <code class="param-name">event
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3543,7 +3589,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">bitrate</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3555,7 +3601,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[bandwidth]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3566,7 +3612,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[width]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3577,7 +3623,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[height]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3588,7 +3634,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[level]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3689,7 +3735,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">state</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -3731,7 +3777,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">name</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
                     
                                         <div class="param-description">
@@ -3773,7 +3819,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">error</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3784,7 +3830,7 @@ removed from the beginning.</p>
                                     </li>
                                     <li class="param">
                                             <code class="param-name">name</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
                     
                                         <div class="param-description">
@@ -3827,7 +3873,7 @@ removed from the beginning.</p>
                                     <li class="param">
                                             <code class="param-name">isHD
                     true</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -3920,7 +3966,7 @@ removed from the beginning.</p>
                                     <li class="param">
                                             <code class="param-name">levels
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
                     
                     
                                         <div class="param-description">
@@ -3932,7 +3978,7 @@ removed from the beginning.</p>
                                     <li class="param">
                                             <code class="param-name">initial
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
@@ -3974,7 +4020,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">metadata</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3986,7 +4032,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[duration]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3997,7 +4043,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[data]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4120,7 +4166,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">state</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4132,7 +4178,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[type]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4176,7 +4222,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4188,7 +4234,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[start]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4199,7 +4245,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4210,7 +4256,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4329,7 +4375,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4341,7 +4387,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4352,7 +4398,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4421,7 +4467,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">error</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4463,7 +4509,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">whether</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -4580,7 +4626,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">currentSize</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4622,7 +4668,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">time</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
@@ -4689,7 +4735,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4701,7 +4747,7 @@ removed from the beginning.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4712,7 +4758,7 @@ removed from the beginning.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4756,7 +4802,7 @@ removed from the beginning.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">volume</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">

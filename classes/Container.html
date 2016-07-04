@@ -47,13 +47,16 @@
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/Strings.html">Strings</a></li>
                                 <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
+                
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/base.html">base</a></li>
                                 <li><a href="../modules/components.html">components</a></li>
+                                <li><a href="../modules/plugins.html">plugins</a></li>
                             </ul>
                         </div>
                     </div>
@@ -173,10 +176,6 @@ TODO: describe its responsabilities</p>
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_addPlugin">addPlugin</a>
-
-                            </li>
-                            <li class="index-item method">
                                 <a href="#method_bindEvents">bindEvents</a>
 
                             </li>
@@ -198,6 +197,10 @@ TODO: describe its responsabilities</p>
                             </li>
                             <li class="index-item method">
                                 <a href="#method_getPlugin">getPlugin</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_hasPlugin">hasPlugin</a>
 
                             </li>
                             <li class="index-item method">
@@ -305,6 +308,10 @@ TODO: describe its responsabilities</p>
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_events">events</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_i18n">i18n</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -558,7 +565,7 @@ TODO: describe its responsabilities</p>
         </div>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
         </span>
 
 
@@ -588,7 +595,7 @@ TODO: describe its responsabilities</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">selector</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -604,7 +611,7 @@ TODO: describe its responsabilities</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>:
                     <p>an element, if it exists.</p>
 
             </div>
@@ -659,59 +666,6 @@ TODO: describe its responsabilities</p>
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>name</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/src_components_container_container.js.html#l332"><code>src&#x2F;components&#x2F;container&#x2F;container.js:332</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>checks if a plugin, given its name, exist</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-
-
-</div>
-<div id="method_addPlugin" class="method item">
-    <h3 class="name"><code>addPlugin</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
                         <code>plugin</code>
                 </li>
             </ul><span class="paren">)</span>
@@ -727,7 +681,7 @@ TODO: describe its responsabilities</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l323"><code>src&#x2F;components&#x2F;container&#x2F;container.js:323</code></a>
+        <a href="../files/src_components_container_container.js.html#l333"><code>src&#x2F;components&#x2F;container&#x2F;container.js:333</code></a>
         </p>
 
 
@@ -745,7 +699,7 @@ TODO: describe its responsabilities</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">plugin</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -774,7 +728,7 @@ TODO: describe its responsabilities</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l82"><code>src&#x2F;components&#x2F;container&#x2F;container.js:82</code></a>
+        <a href="../files/src_components_container_container.js.html#l93"><code>src&#x2F;components&#x2F;container&#x2F;container.js:93</code></a>
         </p>
 
 
@@ -873,7 +827,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l397"><code>src&#x2F;components&#x2F;container&#x2F;container.js:397</code></a>
+        <a href="../files/src_components_container_container.js.html#l408"><code>src&#x2F;components&#x2F;container&#x2F;container.js:408</code></a>
         </p>
 
 
@@ -891,7 +845,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">options</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -914,6 +868,9 @@ it listens to playback's events and triggers them as container events.</p>
                 <li class="arg">
                         <code>options</code>
                 </li>
+                <li class="arg">
+                        <code>i18n</code>
+                </li>
             </ul><span class="paren">)</span>
         </div>
 
@@ -930,7 +887,7 @@ it listens to playback's events and triggers them as container events.</p>
                 BaseObject
             </a>
             but overwritten in
-        <a href="../files/src_components_container_container.js.html#l64"><code>src&#x2F;components&#x2F;container&#x2F;container.js:64</code></a>
+        <a href="../files/src_components_container_container.js.html#l73"><code>src&#x2F;components&#x2F;container&#x2F;container.js:73</code></a>
         </p>
 
 
@@ -948,11 +905,22 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">options</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
                         <p>the options object</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">i18n</code>
+                        <span class="type"><a href="../classes/Strings.html" class="crosslink">Strings</a></span>
+
+
+                    <div class="param-description">
+                        <p>the internationalization component</p>
 
                     </div>
 
@@ -1005,7 +973,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">events</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1043,7 +1011,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l171"><code>src&#x2F;components&#x2F;container&#x2F;container.js:171</code></a>
+        <a href="../files/src_components_container_container.js.html#l182"><code>src&#x2F;components&#x2F;container&#x2F;container.js:182</code></a>
         </p>
 
 
@@ -1080,7 +1048,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l341"><code>src&#x2F;components&#x2F;container&#x2F;container.js:341</code></a>
+        <a href="../files/src_components_container_container.js.html#l352"><code>src&#x2F;components&#x2F;container&#x2F;container.js:352</code></a>
         </p>
 
 
@@ -1098,7 +1066,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1112,13 +1080,19 @@ it listens to playback's events and triggers them as container events.</p>
 
 
 </div>
-<div id="method_isDvrEnabled" class="method item">
-    <h3 class="name"><code>isDvrEnabled</code></h3>
+<div id="method_hasPlugin" class="method item">
+    <h3 class="name"><code>hasPlugin</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
 
 
@@ -1130,7 +1104,64 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l153"><code>src&#x2F;components&#x2F;container&#x2F;container.js:153</code></a>
+        <a href="../files/src_components_container_container.js.html#l342"><code>src&#x2F;components&#x2F;container&#x2F;container.js:342</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>checks if a plugin, given its name, exist</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_isDvrEnabled" class="method item">
+    <h3 class="name"><code>isDvrEnabled</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l164"><code>src&#x2F;components&#x2F;container&#x2F;container.js:164</code></a>
         </p>
 
 
@@ -1147,7 +1178,7 @@ it listens to playback's events and triggers them as container events.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
             </div>
         </div>
 
@@ -1159,7 +1190,7 @@ it listens to playback's events and triggers them as container events.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
 
 
@@ -1171,7 +1202,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l162"><code>src&#x2F;components&#x2F;container&#x2F;container.js:162</code></a>
+        <a href="../files/src_components_container_container.js.html#l173"><code>src&#x2F;components&#x2F;container&#x2F;container.js:173</code></a>
         </p>
 
 
@@ -1188,7 +1219,7 @@ it listens to playback's events and triggers them as container events.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
             </div>
         </div>
 
@@ -1242,7 +1273,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">obj</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1252,7 +1283,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1262,7 +1293,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1272,7 +1303,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1343,7 +1374,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">obj</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1353,7 +1384,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1363,7 +1394,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1373,7 +1404,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1402,7 +1433,7 @@ it listens to playback's events and triggers them as container events.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
         </span>
 
 
@@ -1431,7 +1462,7 @@ it listens to playback's events and triggers them as container events.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
                     <p>container's name</p>
 
             </div>
@@ -1484,7 +1515,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1494,7 +1525,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1504,7 +1535,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1563,7 +1594,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1573,7 +1604,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1583,7 +1614,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1642,7 +1673,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1652,7 +1683,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -1662,7 +1693,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">context</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1691,7 +1722,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l257"><code>src&#x2F;components&#x2F;container&#x2F;container.js:257</code></a>
+        <a href="../files/src_components_container_container.js.html#l267"><code>src&#x2F;components&#x2F;container&#x2F;container.js:267</code></a>
         </p>
 
 
@@ -1722,7 +1753,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l240"><code>src&#x2F;components&#x2F;container&#x2F;container.js:240</code></a>
+        <a href="../files/src_components_container_container.js.html#l250"><code>src&#x2F;components&#x2F;container&#x2F;container.js:250</code></a>
         </p>
 
 
@@ -1869,7 +1900,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">element</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
 
 
                     <div class="param-description">
@@ -1879,7 +1910,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">delegate</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
 
                     <div class="param-description">
@@ -1918,7 +1949,7 @@ it listens to playback's events and triggers them as container events.</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/src_components_container_container.js.html#l248"><code>src&#x2F;components&#x2F;container&#x2F;container.js:248</code></a>
+        <a href="../files/src_components_container_container.js.html#l258"><code>src&#x2F;components&#x2F;container&#x2F;container.js:258</code></a>
         </p>
 
 
@@ -1979,7 +2010,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">obj</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
 
                     <div class="param-description">
@@ -1989,7 +2020,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -1999,7 +2030,7 @@ it listens to playback's events and triggers them as container events.</p>
                 </li>
                 <li class="param">
                         <code class="param-name">callback</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
 
 
                     <div class="param-description">
@@ -2019,7 +2050,7 @@ it listens to playback's events and triggers them as container events.</p>
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
         </span>
 
 
@@ -2048,7 +2079,7 @@ it listens to playback's events and triggers them as container events.</p>
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
                     <p>tag's name</p>
 
             </div>
@@ -2095,7 +2126,7 @@ it listens to playback's events and triggers them as container events.</p>
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">name</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
 
                     <div class="param-description">
@@ -2157,243 +2188,268 @@ it listens to playback's events and triggers them as container events.</p>
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_$el" class="property item inherited">
-                        <h3 class="name"><code>$el</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_$el">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l32"><code>src&#x2F;base&#x2F;ui_object.js:32</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>the dom element wrapped by <code>$</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_attributes" class="property item inherited">
-                        <h3 class="name"><code>attributes</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_attributes">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l67"><code>src&#x2F;base&#x2F;ui_object.js:67</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a literal object mapping attributes and values to the element
-                    element's attribute name and the value the attribute value</p>
-                    
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <pre class="code prettyprint"><code class="language-javascript">
-                    class MyButton extends UIObject {
-                       constructor(options) { super(options) }
-                       get attributes() { return { class: 'my-button'} }
-                    }
-                    
-                    // MyButton.el.className will be 'my-button'
-                    </code></pre>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
-                    <div id="property_buffering" class="property item">
-                        <h3 class="name"><code>buffering</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_components_container_container.js.html#l53"><code>src&#x2F;components&#x2F;container&#x2F;container.js:53</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Determine if the playback is having to buffer in order for
-                    playback to be smooth.
-                    (i.e if a live stream is playing smoothly, this will be false)</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_cid" class="property item inherited">
-                        <h3 class="name"><code>cid</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_cid">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l20"><code>src&#x2F;base&#x2F;ui_object.js:20</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a unique id prefixed with <code>'c'</code>, <code>c1, c232</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_el" class="property item inherited">
-                        <h3 class="name"><code>el</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/Document_Object_Model_(DOM)/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_el">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l26"><code>src&#x2F;base&#x2F;ui_object.js:26</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>the dom element itself</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_ended" class="property item">
-                        <h3 class="name"><code>ended</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/src_components_container_container.js.html#l44"><code>src&#x2F;components&#x2F;container&#x2F;container.js:44</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Determine if the playback has ended.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_events" class="property item inherited">
-                        <h3 class="name"><code>events</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/UIObject.html#property_events">UIObject</a>:
-                            <a href="../files/src_base_ui_object.js.html#l46"><code>src&#x2F;base&#x2F;ui_object.js:46</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a literal object mapping element's events to methods</p>
-                    
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <pre class="code prettyprint"><code class="language-javascript">
-                    class MyButton extends UIObject {
-                      constructor(options) {
-                        super(options)
-                        this.myId = 0
-                      }
-                      get events() { return { 'click': 'myClick' } }
-                      myClick(){ this.myId = 42 }
-                    }
-                    
-                    // when you click on MyButton the method <code>myClick</code> will be called
-                    </code></pre>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
-                    <div id="property_uniqueId" class="property item inherited">
-                        <h3 class="name"><code>uniqueId</code></h3>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/BaseObject.html#property_uniqueId">BaseObject</a>:
-                            <a href="../files/src_base_base_object.js.html#l23"><code>src&#x2F;base&#x2F;base_object.js:23</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>a unique id prefixed with <code>'o'</code>, <code>o1, o232</code></p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
+<div id="property_$el" class="property item inherited">
+    <h3 class="name"><code>$el</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_$el">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l32"><code>src&#x2F;base&#x2F;ui_object.js:32</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>the dom element wrapped by <code>$</code></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_attributes" class="property item inherited">
+    <h3 class="name"><code>attributes</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_attributes">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l67"><code>src&#x2F;base&#x2F;ui_object.js:67</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a literal object mapping attributes and values to the element
+element's attribute name and the value the attribute value</p>
+
+    </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">
+class MyButton extends UIObject {
+   constructor(options) { super(options) }
+   get attributes() { return { class: 'my-button'} }
+}
+
+// MyButton.el.className will be 'my-button'
+</code></pre>
+
+            </div>
+        </div>
+
+</div>
+<div id="property_buffering" class="property item">
+    <h3 class="name"><code>buffering</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l53"><code>src&#x2F;components&#x2F;container&#x2F;container.js:53</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Determine if the playback is having to buffer in order for
+playback to be smooth.
+(i.e if a live stream is playing smoothly, this will be false)</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_cid" class="property item inherited">
+    <h3 class="name"><code>cid</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_cid">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l20"><code>src&#x2F;base&#x2F;ui_object.js:20</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a unique id prefixed with <code>'c'</code>, <code>c1, c232</code></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_el" class="property item inherited">
+    <h3 class="name"><code>el</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement" class="crosslink external" target="_blank">HTMLElement</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_el">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l26"><code>src&#x2F;base&#x2F;ui_object.js:26</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>the dom element itself</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_ended" class="property item">
+    <h3 class="name"><code>ended</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l44"><code>src&#x2F;components&#x2F;container&#x2F;container.js:44</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Determine if the playback has ended.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_events" class="property item inherited">
+    <h3 class="name"><code>events</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/UIObject.html#property_events">UIObject</a>:
+        <a href="../files/src_base_ui_object.js.html#l46"><code>src&#x2F;base&#x2F;ui_object.js:46</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a literal object mapping element's events to methods</p>
+
+    </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code class="language-javascript">
+class MyButton extends UIObject {
+  constructor(options) {
+    super(options)
+    this.myId = 0
+  }
+  get events() { return { 'click': 'myClick' } }
+  myClick(){ this.myId = 42 }
+}
+
+// when you click on MyButton the method <code>myClick</code> will be called
+</code></pre>
+
+            </div>
+        </div>
+
+</div>
+<div id="property_i18n" class="property item">
+    <h3 class="name"><code>i18n</code></h3>
+    <span class="type"><a href="../classes/Strings.html" class="crosslink">Strings</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_components_container_container.js.html#l64"><code>src&#x2F;components&#x2F;container&#x2F;container.js:64</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>The internationalization plugin.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_uniqueId" class="property item inherited">
+    <h3 class="name"><code>uniqueId</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/BaseObject.html#property_uniqueId">BaseObject</a>:
+        <a href="../files/src_base_base_object.js.html#l23"><code>src&#x2F;base&#x2F;base_object.js:23</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>a unique id prefixed with <code>'o'</code>, <code>o1, o232</code></p>
+
+    </div>
+
+
+
+</div>
             </div>
 
 
@@ -2428,7 +2484,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">bitrate</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2440,7 +2496,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[bandwidth]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2451,7 +2507,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[width]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2462,7 +2518,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[height]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2473,7 +2529,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[level]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2518,7 +2574,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     <li class="param">
                                             <code class="param-name">isHD
                     true</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -2560,7 +2616,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">metadata</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2572,7 +2628,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[duration]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2583,7 +2639,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[data]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2702,7 +2758,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">state</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2714,7 +2770,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[type]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2758,7 +2814,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2770,7 +2826,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[start]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2781,7 +2837,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2792,7 +2848,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -2861,7 +2917,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">time</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
@@ -2978,7 +3034,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -2990,7 +3046,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3001,7 +3057,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3174,7 +3230,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     <li class="param">
                                             <code class="param-name">event
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3217,7 +3273,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     <li class="param">
                                             <code class="param-name">event
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3334,7 +3390,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">bitrate</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3346,7 +3402,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[bandwidth]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3357,7 +3413,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[width]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3368,7 +3424,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[height]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3379,7 +3435,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[level]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3480,7 +3536,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">state</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -3522,7 +3578,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">name</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
                     
                                         <div class="param-description">
@@ -3564,7 +3620,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">error</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3575,7 +3631,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     </li>
                                     <li class="param">
                                             <code class="param-name">name</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                     
                     
                                         <div class="param-description">
@@ -3618,7 +3674,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     <li class="param">
                                             <code class="param-name">isHD
                     true</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -3711,7 +3767,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     <li class="param">
                                             <code class="param-name">levels
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
                     
                     
                                         <div class="param-description">
@@ -3723,7 +3779,7 @@ it listens to playback's events and triggers them as container events.</p>
                                     <li class="param">
                                             <code class="param-name">initial
                     the</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
@@ -3765,7 +3821,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">metadata</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3777,7 +3833,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[duration]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3788,7 +3844,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[data]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3911,7 +3967,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">state</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3923,7 +3979,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[type]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3967,7 +4023,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -3979,7 +4035,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[start]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -3990,7 +4046,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4001,7 +4057,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4120,7 +4176,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4132,7 +4188,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4143,7 +4199,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4212,7 +4268,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">error</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4254,7 +4310,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">whether</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
                     
                     
                                         <div class="param-description">
@@ -4371,7 +4427,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">currentSize</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4413,7 +4469,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">time</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">
@@ -4480,7 +4536,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">progress</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
                     
                                         <div class="param-description">
@@ -4492,7 +4548,7 @@ it listens to playback's events and triggers them as container events.</p>
                                             <ul class="params-list">
                                                 <li class="param">
                                                         <code class="param-name optional">[current]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4503,7 +4559,7 @@ it listens to playback's events and triggers them as container events.</p>
                                                 </li>
                                                 <li class="param">
                                                         <code class="param-name optional">[total]</code>
-                                                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                                                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
                                                     <div class="param-description">
@@ -4547,7 +4603,7 @@ it listens to playback's events and triggers them as container events.</p>
                                 <ul class="params-list">
                                     <li class="param">
                                             <code class="param-name">volume</code>
-                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                                            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
                     
                     
                                         <div class="param-description">

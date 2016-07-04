@@ -47,13 +47,16 @@
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/Strings.html">Strings</a></li>
                                 <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
+                
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/base.html">base</a></li>
                                 <li><a href="../modules/components.html">components</a></li>
+                                <li><a href="../modules/plugins.html">plugins</a></li>
                             </ul>
                         </div>
                     </div>
@@ -122,6 +125,7 @@ import Favicon from &#x27;plugins/favicon&#x27;
 import SeekTime from &#x27;plugins/seek_time&#x27;
 import SourcesPlugin from &#x27;plugins/sources&#x27;
 import EndVideo from &#x27;plugins/end_video&#x27;
+import Strings from &#x27;plugins/strings&#x27;
 
 /**
  * It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.
@@ -142,7 +146,7 @@ export default class Loader extends BaseObject {
     this.playerId = playerId
     this.playbackPlugins = [HLSVideoPlayback, HTML5VideoPlayback, HTML5AudioPlayback, FlashVideoPlayback, FlasHLSVideoPlayback, HTMLImgPlayback, NoOp]
     this.containerPlugins = [SpinnerThreeBouncePlugin, WaterMarkPlugin, PosterPlugin, StatsPlugin, GoogleAnalyticsPlugin, ClickToPausePlugin]
-    this.corePlugins = [DVRControls, Favicon, SeekTime, SourcesPlugin, EndVideo]
+    this.corePlugins = [DVRControls, Favicon, SeekTime, SourcesPlugin, EndVideo, Strings]
     if (externalPlugins) {
       if (!Array.isArray(externalPlugins)) {
         this.validateExternalPluginsType(externalPlugins)

@@ -151,12 +151,24 @@
             "classes": {},
             "fors": {},
             "namespaces": {}
+        },
+        "src/plugins/strings.js": {
+            "name": "src/plugins/strings.js",
+            "modules": {
+                "plugins": 1
+            },
+            "classes": {
+                "Strings": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
         "base": {
             "name": "base",
             "submodules": {},
+            "elements": {},
             "classes": {
                 "BaseObject": 1,
                 "ContainerPlugin": 1,
@@ -175,6 +187,7 @@
         "components": {
             "name": "components",
             "submodules": {},
+            "elements": {},
             "classes": {
                 "Core": 1,
                 "CoreFactory": 1,
@@ -187,6 +200,20 @@
             "file": "src/components/player.js",
             "line": 18,
             "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state."
+        },
+        "plugins": {
+            "name": "plugins",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Strings": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/plugins/strings.js",
+            "line": 6,
+            "description": "The internationalization (i18n) plugin"
         }
     },
     "classes": {
@@ -341,7 +368,7 @@
             "module": "components",
             "namespace": "",
             "file": "src/components/loader/loader.js",
-            "line": 33,
+            "line": 34,
             "description": "It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.",
             "is_constructor": 1,
             "extends": "BaseObject"
@@ -363,8 +390,25 @@
             "example": [
                 "\n### Using the Player\n\nAdd the following script on your HTML:\n```html\n<head>\n  <script type=\"text/javascript\" src=\"http://cdn.clappr.io/latest/clappr.min.js\"></script>\n</head>\n```\nNow, create the player:\n```html\n<body>\n  <div id=\"player\"></div>\n  <script>\n    var player = new Clappr.Player({source: \"http://your.video/here.mp4\", parentId: \"#player\"});\n  </script>\n</body>\n```"
             ]
+        },
+        "Strings": {
+            "name": "Strings",
+            "shortname": "Strings",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "plugins",
+            "namespace": "",
+            "file": "src/plugins/strings.js",
+            "line": 6,
+            "description": "The internationalization (i18n) plugin",
+            "is_constructor": 1,
+            "extends": "CorePlugin"
         }
     },
+    "elements": {},
     "classitems": [
         {
             "file": "src/base/base_object.js",
@@ -1477,6 +1521,16 @@
         {
             "file": "src/base/playback.js",
             "line": 21,
+            "description": "The internationalization plugin.",
+            "itemtype": "property",
+            "name": "i18n",
+            "type": "{Strings}",
+            "class": "Playback",
+            "module": "base"
+        },
+        {
+            "file": "src/base/playback.js",
+            "line": 30,
             "description": "Determine if the playback is having to buffer in order for\nplayback to be smooth.\n(i.e if a live stream is playing smoothly, this will be false)",
             "itemtype": "property",
             "name": "buffering",
@@ -1486,7 +1540,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 32,
+            "line": 41,
             "itemtype": "method",
             "name": "constructor",
             "params": [
@@ -1494,6 +1548,11 @@
                     "name": "options",
                     "description": "the options object",
                     "type": "Object"
+                },
+                {
+                    "name": "i18n",
+                    "description": "the internationalization component",
+                    "type": "Strings"
                 }
             ],
             "class": "Playback",
@@ -1501,7 +1560,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 41,
+            "line": 52,
             "description": "plays the playback.",
             "itemtype": "method",
             "name": "play",
@@ -1510,7 +1569,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 47,
+            "line": 58,
             "description": "pauses the playback.",
             "itemtype": "method",
             "name": "pause",
@@ -1519,7 +1578,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 53,
+            "line": 64,
             "description": "stops the playback.",
             "itemtype": "method",
             "name": "stop",
@@ -1528,7 +1587,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 59,
+            "line": 70,
             "description": "seeks the playback to a given `time` in seconds",
             "itemtype": "method",
             "name": "seek",
@@ -1544,7 +1603,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 66,
+            "line": 77,
             "description": "seeks the playback to a given `percentage` in percentage",
             "itemtype": "method",
             "name": "seekPercentage",
@@ -1560,7 +1619,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 74,
+            "line": 85,
             "description": "The time that \"0\" now represents relative to when playback started.\nFor a stream with a sliding window this will increase as content is\nremoved from the beginning.",
             "itemtype": "method",
             "name": "getStartTimeOffset",
@@ -1573,7 +1632,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 83,
+            "line": 94,
             "description": "gets the duration in seconds",
             "itemtype": "method",
             "name": "getDuration",
@@ -1586,7 +1645,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 90,
+            "line": 101,
             "description": "checks if the playback is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -1599,7 +1658,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 99,
+            "line": 110,
             "description": "checks if the playback is ready.",
             "itemtype": "property",
             "name": "isReady",
@@ -1609,7 +1668,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 108,
+            "line": 119,
             "description": "gets the playback type (`'vod', 'live', 'aod'`)",
             "itemtype": "method",
             "name": "getPlaybackType",
@@ -1625,7 +1684,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 124,
+            "line": 135,
             "description": "checks if the playback is in HD.",
             "itemtype": "method",
             "name": "isHighDefinitionInUse",
@@ -1638,7 +1697,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 133,
+            "line": 144,
             "description": "sets the volume for the playback",
             "itemtype": "method",
             "name": "volume",
@@ -1654,7 +1713,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 140,
+            "line": 151,
             "description": "destroys the playback, removing it from DOM",
             "itemtype": "method",
             "name": "destroy",
@@ -1663,7 +1722,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 153,
+            "line": 164,
             "description": "checks if the playback can play a given `source`\nIf a mimeType is provided then this will be used instead of inferring the mimetype\nfrom the source extension.",
             "itemtype": "method",
             "name": "canPlay",
@@ -1690,7 +1749,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 167,
+            "line": 178,
             "description": "a playback type for video on demand",
             "itemtype": "property",
             "name": "VOD",
@@ -1701,7 +1760,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 175,
+            "line": 186,
             "description": "a playback type for audio on demand",
             "itemtype": "property",
             "name": "AOD",
@@ -1712,7 +1771,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 183,
+            "line": 194,
             "description": "a playback type for live video",
             "itemtype": "property",
             "name": "LIVE",
@@ -1723,7 +1782,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 191,
+            "line": 202,
             "description": "a default playback type",
             "itemtype": "property",
             "name": "NO_OP",
@@ -1734,7 +1793,7 @@
         },
         {
             "file": "src/base/playback.js",
-            "line": 199,
+            "line": 210,
             "description": "the plugin type",
             "itemtype": "property",
             "name": "type",
@@ -2002,6 +2061,16 @@
         {
             "file": "src/components/container/container.js",
             "line": 64,
+            "description": "The internationalization plugin.",
+            "itemtype": "property",
+            "name": "i18n",
+            "type": "{Strings}",
+            "class": "Container",
+            "module": "base"
+        },
+        {
+            "file": "src/components/container/container.js",
+            "line": 73,
             "description": "it builds a container",
             "itemtype": "method",
             "name": "constructor",
@@ -2010,6 +2079,11 @@
                     "name": "options",
                     "description": "the options object",
                     "type": "Object"
+                },
+                {
+                    "name": "i18n",
+                    "description": "the internationalization component",
+                    "type": "Strings"
                 }
             ],
             "class": "Container",
@@ -2017,7 +2091,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 82,
+            "line": 93,
             "description": "binds playback events to the methods of the container.\nit listens to playback's events and triggers them as container events.\n\n| Playback |\n|----------|\n| progress |\n| timeupdate |\n| ready |\n| buffering |\n| bufferfull |\n| settingsupdate |\n| loadedmetadata |\n| highdefinitionupdate |\n| bitrate |\n| playbackstate |\n| dvr |\n| mediacontrol_disable |\n| mediacontrol_enable |\n| ended |\n| play |\n| pause |\n| error |\n\nps: the events usually translate from PLABACK_x to CONTAINER_x, you can check all the events at `Event` class.",
             "itemtype": "method",
             "name": "bindEvents",
@@ -2026,7 +2100,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 153,
+            "line": 164,
             "description": "returns `true` if DVR is enable otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrEnabled",
@@ -2039,7 +2113,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 162,
+            "line": 173,
             "description": "returns `true` if DVR is in use otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrInUse",
@@ -2052,7 +2126,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 171,
+            "line": 182,
             "description": "destroys the container",
             "itemtype": "method",
             "name": "destroy",
@@ -2061,7 +2135,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 240,
+            "line": 250,
             "description": "plays the playback",
             "itemtype": "method",
             "name": "play",
@@ -2070,7 +2144,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 248,
+            "line": 258,
             "description": "stops the playback",
             "itemtype": "method",
             "name": "stop",
@@ -2079,7 +2153,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 257,
+            "line": 267,
             "description": "pauses the playback",
             "itemtype": "method",
             "name": "pause",
@@ -2088,7 +2162,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 323,
+            "line": 333,
             "description": "adds plugin to the container",
             "itemtype": "method",
             "name": "addPlugin",
@@ -2104,10 +2178,10 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 332,
+            "line": 342,
             "description": "checks if a plugin, given its name, exist",
             "itemtype": "method",
-            "name": "addPlugin",
+            "name": "hasPlugin",
             "params": [
                 {
                     "name": "name",
@@ -2115,12 +2189,16 @@
                     "type": "String"
                 }
             ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
             "class": "Container",
             "module": "base"
         },
         {
             "file": "src/components/container/container.js",
-            "line": 341,
+            "line": 352,
             "description": "get the plugin given its name",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2136,7 +2214,7 @@
         },
         {
             "file": "src/components/container/container.js",
-            "line": 397,
+            "line": 408,
             "description": "enables to configure the container after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2169,7 +2247,17 @@
         },
         {
             "file": "src/components/core/core.js",
-            "line": 304,
+            "line": 54,
+            "description": "The internationalization plugin.",
+            "itemtype": "property",
+            "name": "i18n",
+            "type": "{Strings}",
+            "class": "Core",
+            "module": "components"
+        },
+        {
+            "file": "src/components/core/core.js",
+            "line": 313,
             "description": "enables to configure the container after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2227,7 +2315,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 41,
+            "line": 42,
             "description": "builds the loader",
             "itemtype": "method",
             "name": "constructor",
@@ -2248,7 +2336,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 61,
+            "line": 62,
             "description": "groups by type the external plugins that were passed through `options.plugins` it they're on a flat array",
             "itemtype": "method",
             "name": "addExternalPlugins",
@@ -2270,7 +2358,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 79,
+            "line": 80,
             "description": "adds all the external plugins that were passed through `options.plugins`",
             "itemtype": "method",
             "name": "addExternalPlugins",
@@ -2288,7 +2376,7 @@
         },
         {
             "file": "src/components/loader/loader.js",
-            "line": 94,
+            "line": 95,
             "description": "validate if the external plugins that were passed through `options.plugins` are associated to the correct type",
             "itemtype": "method",
             "name": "validateExternalPluginsType",
@@ -2594,7 +2682,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 329,
+            "line": 324,
             "description": "resizes the current player canvas.",
             "itemtype": "method",
             "name": "resize",
@@ -2617,7 +2705,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 344,
+            "line": 339,
             "description": "loads a new source.",
             "itemtype": "method",
             "name": "load",
@@ -2649,7 +2737,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 361,
+            "line": 356,
             "description": "destroys the current player and removes it from the DOM.",
             "itemtype": "method",
             "name": "destroy",
@@ -2662,7 +2750,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 371,
+            "line": 366,
             "description": "plays the current video (`source`).",
             "itemtype": "method",
             "name": "play",
@@ -2675,7 +2763,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 381,
+            "line": 376,
             "description": "pauses the current video (`source`).",
             "itemtype": "method",
             "name": "pause",
@@ -2688,7 +2776,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 391,
+            "line": 386,
             "description": "stops the current video (`source`).",
             "itemtype": "method",
             "name": "stop",
@@ -2701,7 +2789,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 402,
+            "line": 397,
             "description": "seeks the current video (`source`). For example, `player.seek(120)` will seek to second 120 (2minutes) of the current video.",
             "itemtype": "method",
             "name": "seek",
@@ -2721,7 +2809,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 413,
+            "line": 408,
             "description": "seeks the current video (`source`). For example, `player.seek(50)` will seek to the middle of the current video.",
             "itemtype": "method",
             "name": "seekPercentage",
@@ -2741,7 +2829,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 424,
+            "line": 419,
             "description": "Set the volume for the current video (`source`).",
             "itemtype": "method",
             "name": "setVolume",
@@ -2761,7 +2849,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 437,
+            "line": 432,
             "description": "Get the volume for the current video",
             "itemtype": "method",
             "name": "getVolume",
@@ -2774,7 +2862,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 446,
+            "line": 441,
             "description": "mutes the current video (`source`).",
             "itemtype": "method",
             "name": "mute",
@@ -2787,7 +2875,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 457,
+            "line": 452,
             "description": "unmutes the current video (`source`).",
             "itemtype": "method",
             "name": "unmute",
@@ -2800,7 +2888,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 468,
+            "line": 463,
             "description": "checks if the player is playing.",
             "itemtype": "method",
             "name": "isPlaying",
@@ -2813,7 +2901,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 477,
+            "line": 472,
             "description": "returns `true` if DVR is enable otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrEnabled",
@@ -2826,7 +2914,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 486,
+            "line": 481,
             "description": "returns `true` if DVR is in use otherwise `false`.",
             "itemtype": "method",
             "name": "isDvrInUse",
@@ -2839,7 +2927,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 495,
+            "line": 490,
             "description": "enables to configure a player after its creation",
             "itemtype": "method",
             "name": "configure",
@@ -2859,7 +2947,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 506,
+            "line": 501,
             "description": "get a plugin by its name.",
             "itemtype": "method",
             "name": "getPlugin",
@@ -2882,7 +2970,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 524,
+            "line": 519,
             "description": "the current time in seconds.",
             "itemtype": "method",
             "name": "getCurrentTime",
@@ -2895,7 +2983,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 533,
+            "line": 528,
             "description": "The time that \"0\" now represents relative to when playback started.\nFor a stream with a sliding window this will increase as content is\nremoved from the beginning.",
             "itemtype": "method",
             "name": "getStartTimeOffset",
@@ -2908,7 +2996,7 @@
         },
         {
             "file": "src/components/player.js",
-            "line": 544,
+            "line": 539,
             "description": "the duration time in seconds.",
             "itemtype": "method",
             "name": "getDuration",
@@ -2926,7 +3014,7 @@
             "itemtype": "property",
             "name": "ended",
             "type": "Boolean",
-            "class": "",
+            "class": "Strings",
             "module": "components"
         },
         {
@@ -2936,7 +3024,7 @@
             "itemtype": "property",
             "name": "buffering",
             "type": "Boolean",
-            "class": "",
+            "class": "Strings",
             "module": "components"
         },
         {
@@ -2946,7 +3034,7 @@
             "itemtype": "property",
             "name": "ended",
             "type": "Boolean",
-            "class": "",
+            "class": "Strings",
             "module": "components"
         },
         {
@@ -2956,7 +3044,7 @@
             "itemtype": "property",
             "name": "buffering",
             "type": "Boolean",
-            "class": "",
+            "class": "Strings",
             "module": "components"
         },
         {
@@ -2966,7 +3054,7 @@
             "itemtype": "property",
             "name": "ended",
             "type": "Boolean",
-            "class": "",
+            "class": "Strings",
             "module": "components"
         },
         {
@@ -2976,7 +3064,7 @@
             "itemtype": "property",
             "name": "buffering",
             "type": "Boolean",
-            "class": "",
+            "class": "Strings",
             "module": "components"
         },
         {
@@ -2994,8 +3082,28 @@
                     "type": "String"
                 }
             ],
-            "class": "",
+            "class": "Strings",
             "module": "components"
+        },
+        {
+            "file": "src/plugins/strings.js",
+            "line": 20,
+            "description": "Gets a translated string for the given key.",
+            "itemtype": "method",
+            "name": "t",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key to all messages",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "translated label",
+                "type": "String"
+            },
+            "class": "Strings",
+            "module": "plugins"
         }
     ],
     "warnings": [

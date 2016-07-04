@@ -10,12 +10,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "Loader",
         "Playback",
         "Player",
+        "Strings",
         "UIContainerPlugin",
         "UIObject"
     ],
     "modules": [
         "base",
-        "components"
+        "components",
+        "plugins"
     ],
     "allModules": [
         {
@@ -26,7 +28,13 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "components",
             "name": "components",
             "description": "The Core is responsible to manage Containers, the mediator, MediaControl\nand the player state."
+        },
+        {
+            "displayName": "plugins",
+            "name": "plugins",
+            "description": "The internationalization (i18n) plugin"
         }
-    ]
+    ],
+    "elements": []
 } };
 });

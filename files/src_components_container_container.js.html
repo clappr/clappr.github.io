@@ -47,13 +47,16 @@
                                 <li><a href="../classes/Loader.html">Loader</a></li>
                                 <li><a href="../classes/Playback.html">Playback</a></li>
                                 <li><a href="../classes/Player.html">Player</a></li>
+                                <li><a href="../classes/Strings.html">Strings</a></li>
                                 <li><a href="../classes/UIContainerPlugin.html">UIContainerPlugin</a></li>
                                 <li><a href="../classes/UIObject.html">UIObject</a></li>
                             </ul>
                 
+                
                             <ul id="api-modules" class="apis modules">
                                 <li><a href="../modules/base.html">base</a></li>
                                 <li><a href="../modules/components.html">components</a></li>
+                                <li><a href="../modules/plugins.html">plugins</a></li>
                             </ul>
                         </div>
                     </div>
@@ -155,12 +158,23 @@ export default class Container extends UIObject {
   }
 
   /**
+   * The internationalization plugin.
+   * @property i18n
+   * @type {Strings}
+   */
+  get i18n() {
+    return this._i18n
+  }
+
+  /**
    * it builds a container
    * @method constructor
    * @param {Object} options the options object
+   * @param {Strings} i18n the internationalization component
    */
-  constructor(options) {
+  constructor(options, i18n) {
     super(options)
+    this._i18n = i18n
     this.currentTime = 0
     this.volume = 100
     this.options = options
@@ -268,7 +282,6 @@ export default class Container extends UIObject {
   destroy() {
     this.trigger(Events.CONTAINER_DESTROYED, this, this.name)
     this.stopListening()
-    this.playback.destroy()
     this.plugins.forEach((plugin) =&gt; plugin.destroy())
     this.$el.remove()
   }
@@ -424,8 +437,9 @@ export default class Container extends UIObject {
 
   /**
    * checks if a plugin, given its name, exist
-   * @method addPlugin
+   * @method hasPlugin
    * @param {String} name
+   * @return {Boolean}
    */
   hasPlugin(name) {
     return !!this.getPlugin(name)
