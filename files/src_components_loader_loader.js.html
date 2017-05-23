@@ -98,34 +98,33 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import BaseObject from &#x27;base/base_object&#x27;
-import PlayerInfo from &#x27;components/player_info&#x27;
-import uniqBy from &#x27;lodash.uniqby&#x27;
+import BaseObject from &#x27;../../base/base_object&#x27;
+import PlayerInfo from &#x27;../player_info&#x27;
 
 /* Playback Plugins */
-import HTML5VideoPlayback from &#x27;playbacks/html5_video&#x27;
-import FlashVideoPlayback from &#x27;playbacks/flash&#x27;
-import HTML5AudioPlayback from &#x27;playbacks/html5_audio&#x27;
-import FlasHLSVideoPlayback from &#x27;playbacks/flashls&#x27;
-import HLSVideoPlayback from &#x27;playbacks/hls&#x27;
-import HTMLImgPlayback from &#x27;playbacks/html_img&#x27;
-import NoOp from &#x27;playbacks/no_op&#x27;
+import HTML5VideoPlayback from &#x27;../../playbacks/html5_video&#x27;
+import FlashVideoPlayback from &#x27;../../playbacks/flash&#x27;
+import HTML5AudioPlayback from &#x27;../../playbacks/html5_audio&#x27;
+import FlasHLSVideoPlayback from &#x27;../../playbacks/flashls&#x27;
+import HLSVideoPlayback from &#x27;../../playbacks/hls&#x27;
+import HTMLImgPlayback from &#x27;../../playbacks/html_img&#x27;
+import NoOp from &#x27;../../playbacks/no_op&#x27;
 
 /* Container Plugins */
-import SpinnerThreeBouncePlugin from &#x27;plugins/spinner_three_bounce&#x27;
-import StatsPlugin from &#x27;plugins/stats&#x27;
-import WaterMarkPlugin from &#x27;plugins/watermark&#x27;
-import PosterPlugin from &#x27;plugins/poster&#x27;
-import GoogleAnalyticsPlugin from &#x27;plugins/google_analytics&#x27;
-import ClickToPausePlugin from &#x27;plugins/click_to_pause&#x27;
+import SpinnerThreeBouncePlugin from &#x27;../../plugins/spinner_three_bounce&#x27;
+import StatsPlugin from &#x27;../../plugins/stats&#x27;
+import WaterMarkPlugin from &#x27;../../plugins/watermark&#x27;
+import PosterPlugin from &#x27;../../plugins/poster&#x27;
+import GoogleAnalyticsPlugin from &#x27;../../plugins/google_analytics&#x27;
+import ClickToPausePlugin from &#x27;../../plugins/click_to_pause&#x27;
 
 /* Core Plugins */
-import DVRControls from &#x27;plugins/dvr_controls&#x27;
-import Favicon from &#x27;plugins/favicon&#x27;
-import SeekTime from &#x27;plugins/seek_time&#x27;
-import SourcesPlugin from &#x27;plugins/sources&#x27;
-import EndVideo from &#x27;plugins/end_video&#x27;
-import Strings from &#x27;plugins/strings&#x27;
+import DVRControls from &#x27;../../plugins/dvr_controls&#x27;
+import Favicon from &#x27;../../plugins/favicon&#x27;
+import SeekTime from &#x27;../../plugins/seek_time&#x27;
+import SourcesPlugin from &#x27;../../plugins/sources&#x27;
+import EndVideo from &#x27;../../plugins/end_video&#x27;
+import Strings from &#x27;../../plugins/strings&#x27;
 
 /**
  * It keeps a list of the default plugins (playback, container, core) and it merges external plugins with its internals.
@@ -173,6 +172,21 @@ export default class Loader extends BaseObject {
     return plugins
   }
 
+  removeDups(list) {
+    const groupUp = (plugins, plugin) =&gt; {
+      plugins[plugin.prototype.name] &amp;&amp; delete plugins[plugin.prototype.name]
+      plugins[plugin.prototype.name] = plugin
+      return plugins
+    }
+    const pluginsMap = list.reduceRight(groupUp, Object.create(null))
+
+    const plugins = []
+    for (let key in pluginsMap) {
+      plugins.unshift(pluginsMap[key])
+    }
+    return plugins
+  }
+
   /**
    * adds all the external plugins that were passed through &#x60;options.plugins&#x60;
    * @method addExternalPlugins
@@ -181,10 +195,16 @@ export default class Loader extends BaseObject {
    */
   addExternalPlugins(plugins) {
     plugins = this.groupPluginsByType(plugins)
-    var pluginName = function(plugin) { return plugin.prototype.name }
-    if (plugins.playback) { this.playbackPlugins = uniqBy(plugins.playback.concat(this.playbackPlugins), pluginName) }
-    if (plugins.container) { this.containerPlugins = uniqBy(plugins.container.concat(this.containerPlugins), pluginName) }
-    if (plugins.core) { this.corePlugins = uniqBy(plugins.core.concat(this.corePlugins), pluginName) }
+    if (plugins.playback) {
+      this.playbackPlugins = this.removeDups(plugins.playback.concat(this.playbackPlugins))
+    }
+    if (plugins.container) {
+      this.containerPlugins = this.removeDups(plugins.container.concat(this.containerPlugins))
+    }
+    if (plugins.core) {
+      this.corePlugins = this.removeDups(plugins.core.concat(this.corePlugins))
+    }
+
     PlayerInfo.getInstance(this.playerId).playbackPlugins = this.playbackPlugins
   }
 
@@ -195,10 +215,10 @@ export default class Loader extends BaseObject {
    * @param {Object} plugins the config object with all plugins
    */
   validateExternalPluginsType(plugins) {
-    var plugintypes = [&#x27;playback&#x27;, &#x27;container&#x27;, &#x27;core&#x27;]
+    const plugintypes = [&#x27;playback&#x27;, &#x27;container&#x27;, &#x27;core&#x27;]
     plugintypes.forEach((type) =&gt; {
       (plugins[type] || []).forEach((el) =&gt; {
-        var errorMessage = &#x27;external &#x27; + el.type + &#x27; plugin on &#x27; + type + &#x27; array&#x27;
+        const errorMessage = &#x27;external &#x27; + el.type + &#x27; plugin on &#x27; + type + &#x27; array&#x27;
         if (el.type !== type) { throw new ReferenceError(errorMessage) }
       })
     })

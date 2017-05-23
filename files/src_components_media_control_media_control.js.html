@@ -102,33 +102,35 @@
  * The MediaControl is responsible for displaying the Player controls.
  */
 
-import {Config, Fullscreen, formatTime, extend} from &#x27;base/utils&#x27;
-import {Kibo} from &#x27;vendor&#x27;
+import {Config, Fullscreen, formatTime, extend, removeArrayItem} from &#x27;../../base/utils&#x27;
+import {Kibo} from &#x27;../../vendor&#x27;
 
-import Events from &#x27;base/events&#x27;
-import Styler from &#x27;base/styler&#x27;
-import UIObject from &#x27;base/ui_object&#x27;
-import Browser from &#x27;components/browser&#x27;
-import Mediator from &#x27;components/mediator&#x27;
-import template from &#x27;base/template&#x27;
-import Playback from &#x27;base/playback&#x27;
+import Events from &#x27;../../base/events&#x27;
+import Styler from &#x27;../../base/styler&#x27;
+import UIObject from &#x27;../../base/ui_object&#x27;
+import Browser from &#x27;../../components/browser&#x27;
+import Mediator from &#x27;../../components/mediator&#x27;
+import template from &#x27;../../base/template&#x27;
+import Playback from &#x27;../../base/playback&#x27;
 
 import $ from &#x27;clappr-zepto&#x27;
 
 import mediaControlStyle from &#x27;./public/media-control.scss&#x27;
 import mediaControlHTML from &#x27;./public/media-control.html&#x27;
 
-import playIcon from &#x27;icons/01-play.svg&#x27;
-import pauseIcon from &#x27;icons/02-pause.svg&#x27;
-import stopIcon from &#x27;icons/03-stop.svg&#x27;
-import volumeIcon from &#x27;icons/04-volume.svg&#x27;
-import volumeMuteIcon from &#x27;icons/05-mute.svg&#x27;
-import fullscreenIcon from &#x27;icons/06-expand.svg&#x27;
-import exitFullscreenIcon from &#x27;icons/07-shrink.svg&#x27;
-import hdIcon from &#x27;icons/08-hd.svg&#x27;
+import playIcon from &#x27;../../icons/01-play.svg&#x27;
+import pauseIcon from &#x27;../../icons/02-pause.svg&#x27;
+import stopIcon from &#x27;../../icons/03-stop.svg&#x27;
+import volumeIcon from &#x27;../../icons/04-volume.svg&#x27;
+import volumeMuteIcon from &#x27;../../icons/05-mute.svg&#x27;
+import fullscreenIcon from &#x27;../../icons/06-expand.svg&#x27;
+import exitFullscreenIcon from &#x27;../../icons/07-shrink.svg&#x27;
+import hdIcon from &#x27;../../icons/08-hd.svg&#x27;
+import ccIcon from &#x27;../../icons/09-cc.svg&#x27;
 
 export default class MediaControl extends UIObject {
   get name() { return &#x27;MediaControl&#x27; }
+  get disabled() { return this.userDisabled || (this.container &amp;&amp; this.container.getPlaybackType() === Playback.NO_OP)}
 
   get attributes() {
     return {
@@ -148,6 +150,7 @@ export default class MediaControl extends UIObject {
       &#x27;click .bar-container[data-seekbar]&#x27;: &#x27;seek&#x27;,
       &#x27;click .bar-container[data-volume]&#x27;: &#x27;onVolumeClick&#x27;,
       &#x27;click .drawer-icon[data-volume]&#x27;: &#x27;toggleMute&#x27;,
+      &#x27;click [data-cc-button]&#x27;: &#x27;toggleClosedCaptions&#x27;,
       &#x27;mouseenter .drawer-container[data-volume]&#x27;: &#x27;showVolumeBar&#x27;,
       &#x27;mouseleave .drawer-container[data-volume]&#x27;: &#x27;hideVolumeBar&#x27;,
       &#x27;mousedown .bar-container[data-volume]&#x27;: &#x27;startVolumeDrag&#x27;,
@@ -173,9 +176,10 @@ export default class MediaControl extends UIObject {
     this.container = options.container
     this.currentPositionValue = null
     this.currentDurationValue = null
-    var initialVolume = (this.persistConfig) ? Config.restore(&#x27;volume&#x27;) : 100
+    const initialVolume = (this.persistConfig) ? Config.restore(&#x27;volume&#x27;) : 100
     this.setVolume(this.options.mute ? 0 : initialVolume)
     this.keepVisible = false
+    this.fullScreenOnVideoTagSupported = null // unknown
     this.addEventListeners()
     this.settings = {
       left: [&#x27;play&#x27;, &#x27;stop&#x27;, &#x27;pause&#x27;],
@@ -191,7 +195,7 @@ export default class MediaControl extends UIObject {
       this.settings = {}
     }
 
-    this.disabled = false
+    this.userDisabled = false
     if ((this.container &amp;&amp; this.container.mediaControlDisabled) || this.options.chromeless) {
       this.disable()
     }
@@ -206,28 +210,34 @@ export default class MediaControl extends UIObject {
       Mediator.on(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerResize, this)
       this.listenTo(this.container, Events.CONTAINER_PLAY, this.changeTogglePlay)
       this.listenTo(this.container, Events.CONTAINER_PAUSE, this.changeTogglePlay)
+      this.listenTo(this.container, Events.CONTAINER_STOP, this.changeTogglePlay)
       this.listenTo(this.container, Events.CONTAINER_DBLCLICK, this.toggleFullscreen)
       this.listenTo(this.container, Events.CONTAINER_TIMEUPDATE, this.onTimeUpdate)
       this.listenTo(this.container, Events.CONTAINER_PROGRESS, this.updateProgressBar)
       this.listenTo(this.container, Events.CONTAINER_SETTINGSUPDATE, this.settingsUpdate)
       this.listenTo(this.container, Events.CONTAINER_PLAYBACKDVRSTATECHANGED, this.settingsUpdate)
       this.listenTo(this.container, Events.CONTAINER_HIGHDEFINITIONUPDATE, this.highDefinitionUpdate)
+      this.listenTo(this.container, Events.CONTAINER_LOADEDTEXTTRACK, this.ccAvailable.bind(this, true))
       this.listenTo(this.container, Events.CONTAINER_MEDIACONTROL_DISABLE, this.disable)
       this.listenTo(this.container, Events.CONTAINER_MEDIACONTROL_ENABLE, this.enable)
       this.listenTo(this.container, Events.CONTAINER_ENDED, this.ended)
       this.listenTo(this.container, Events.CONTAINER_VOLUME, this.onVolumeChanged)
+      if (this.container.playback.el.nodeName.toLowerCase() === &#x27;video&#x27;) {
+        // wait until the metadata has loaded and then check if fullscreen on video tag is supported
+        this.listenToOnce(this.container, Events.CONTAINER_LOADEDMETADATA, this.onLoadedMetadataOnVideoTag)
+      }
     }
   }
 
   disable() {
-    this.disabled = true
+    this.userDisabled = true
     this.hide()
     this.$el.hide()
   }
 
   enable() {
     if (this.options.chromeless) return
-    this.disabled = false
+    this.userDisabled = false
     this.show()
   }
 
@@ -247,6 +257,16 @@ export default class MediaControl extends UIObject {
     this.updateVolumeUI()
   }
 
+  onLoadedMetadataOnVideoTag() {
+    let video = this.container.playback.el
+    // video.webkitSupportsFullscreen is deprecated but iOS appears to only use this
+    // see https://github.com/clappr/clappr/issues/1127
+    if (!Fullscreen.fullscreenEnabled() &amp;&amp; video.webkitSupportsFullscreen) {
+      this.fullScreenOnVideoTagSupported = true
+      this.settingsUpdate()
+    }
+  }
+
   updateVolumeUI() {
     if (!this.rendered) {
       // this will be called after a render
@@ -254,16 +274,16 @@ export default class MediaControl extends UIObject {
     }
     // update volume bar scrubber/fill on bar mode
     this.$volumeBarContainer.find(&#x27;.bar-fill-2&#x27;).css({})
-    var containerWidth = this.$volumeBarContainer.width()
-    var barWidth = this.$volumeBarBackground.width()
-    var offset = (containerWidth - barWidth) / 2.0
-    var pos = barWidth * this.volume / 100.0 + offset
+    const containerWidth = this.$volumeBarContainer.width()
+    const barWidth = this.$volumeBarBackground.width()
+    const offset = (containerWidth - barWidth) / 2.0
+    const pos = barWidth * this.volume / 100.0 + offset
     this.$volumeBarFill.css({ width: &#x60;${this.volume}%&#x60; })
     this.$volumeBarScrubber.css({ left: pos })
 
     // update volume bar segments on segmented bar mode
     this.$volumeBarContainer.find(&#x27;.segmented-bar-element&#x27;).removeClass(&#x27;fill&#x27;)
-    var item = Math.ceil(this.volume / 10.0)
+    const item = Math.ceil(this.volume / 10.0)
     this.$volumeBarContainer.find(&#x27;.segmented-bar-element&#x27;).slice(0, item).addClass(&#x27;fill&#x27;)
     this.$volumeIcon.html(&#x27;&#x27;)
     this.$volumeIcon.removeClass(&#x27;muted&#x27;)
@@ -287,14 +307,17 @@ export default class MediaControl extends UIObject {
       this.$playPauseToggle.append(playIcon)
       this.$playStopToggle.append(playIcon)
       this.trigger(Events.MEDIACONTROL_NOTPLAYING)
+      if (Browser.isMobile) {
+        this.show()
+      }
     }
     this.applyButtonStyle(this.$playPauseToggle)
     this.applyButtonStyle(this.$playStopToggle)
   }
 
   mousemoveOnSeekBar(event) {
-    if (this.container.settings.seekEnabled) {
-      var offsetX = event.pageX - this.$seekBarContainer.offset().left - (this.$seekBarHover.width() / 2)
+    if (this.settings.seekEnabled) {
+      const offsetX = event.pageX - this.$seekBarContainer.offset().left - (this.$seekBarHover.width() / 2)
       this.$seekBarHover.css({left: offsetX})
     }
     this.trigger(Events.MEDIACONTROL_MOUSEMOVE_SEEKBAR, event)
@@ -328,6 +351,16 @@ export default class MediaControl extends UIObject {
     }
   }
 
+  toggleClosedCaptions() {
+    if (this.container.playback.el.textTracks[0].mode === &#x27;showing&#x27;) {
+      this.container.playback.el.textTracks[0].mode = &#x27;hidden&#x27;
+      this.$ccButton.removeClass(&#x27;enabled&#x27;)
+    } else {
+      this.container.playback.el.textTracks[0].mode = &#x27;showing&#x27;
+      this.$ccButton.addClass(&#x27;enabled&#x27;)
+    }
+  }
+
   togglePlayPause() {
     if (this.container.isPlaying()) {
       this.container.pause()
@@ -346,7 +379,7 @@ export default class MediaControl extends UIObject {
   }
 
   startSeekDrag(event) {
-    if (!this.container.settings.seekEnabled) return
+    if (!this.settings.seekEnabled) return
     this.draggingSeekBar = true
     this.$el.addClass(&#x27;dragging&#x27;)
     this.$seekBarLoaded.addClass(&#x27;media-control-notransition&#x27;)
@@ -380,8 +413,8 @@ export default class MediaControl extends UIObject {
   updateDrag(event) {
     if (this.draggingSeekBar) {
       event.preventDefault()
-      var offsetX = event.pageX - this.$seekBarContainer.offset().left
-      var pos = offsetX / this.$seekBarContainer.width() * 100
+      const offsetX = event.pageX - this.$seekBarContainer.offset().left
+      let pos = offsetX / this.$seekBarContainer.width() * 100
       pos = Math.min(100, Math.max(pos, 0))
       this.setSeekPercentage(pos)
     } else if (this.draggingVolumeBar) {
@@ -391,8 +424,8 @@ export default class MediaControl extends UIObject {
   }
 
   getVolumeFromUIEvent(event) {
-    var offsetY = event.pageX - this.$volumeBarContainer.offset().left
-    var volumeFromUI = (offsetY / this.$volumeBarContainer.width()) * 100
+    const offsetY = event.pageX - this.$volumeBarContainer.offset().left
+    const volumeFromUI = (offsetY / this.$volumeBarContainer.width()) * 100
     return volumeFromUI
   }
 
@@ -407,7 +440,7 @@ export default class MediaControl extends UIObject {
     // if the container is not ready etc
     this.intendedVolume = value
     this.persistConfig &amp;&amp; Config.persist(&#x27;volume&#x27;, value)
-    var setWhenContainerReady = () =&gt; {
+    const setWhenContainerReady = () =&gt; {
       if (this.container.isReady) {
         this.container.setVolume(value)
       } else {
@@ -435,6 +468,7 @@ export default class MediaControl extends UIObject {
   setContainer(container) {
     if (this.container) {
       this.stopListening(this.container)
+      this.fullScreenOnVideoTagSupported = null
     }
     Mediator.off(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, this.playerResize, this)
     this.container = container
@@ -474,15 +508,15 @@ export default class MediaControl extends UIObject {
   }
 
   updateProgressBar(progress) {
-    var loadedStart = progress.start / progress.total * 100
-    var loadedEnd = progress.current / progress.total * 100
+    const loadedStart = progress.start / progress.total * 100
+    const loadedEnd = progress.current / progress.total * 100
     this.$seekBarLoaded.css({ left: &#x60;${loadedStart}%&#x60;, width: &#x60;${loadedEnd - loadedStart}%&#x60; })
   }
 
   onTimeUpdate(timeProgress) {
     if (this.draggingSeekBar) return
     // TODO why should current time ever be negative?
-    var position = (timeProgress.current &lt; 0) ? timeProgress.total : timeProgress.current
+    const position = (timeProgress.current &lt; 0) ? timeProgress.total : timeProgress.current
 
     this.currentPositionValue = position
     this.currentDurationValue = timeProgress.total
@@ -502,8 +536,8 @@ export default class MediaControl extends UIObject {
     }
     this.setSeekPercentage(this.currentSeekBarPercentage)
 
-    var newPosition = formatTime(this.currentPositionValue)
-    var newDuration = formatTime(this.currentDurationValue)
+    const newPosition = formatTime(this.currentPositionValue)
+    const newDuration = formatTime(this.currentDurationValue)
     if (newPosition !== this.displayedPosition) {
       this.$position.text(newPosition)
       this.displayedPosition = newPosition
@@ -515,9 +549,9 @@ export default class MediaControl extends UIObject {
   }
 
   seek(event) {
-    if (!this.container.settings.seekEnabled) return
-    var offsetX = event.pageX - this.$seekBarContainer.offset().left
-    var pos = offsetX / this.$seekBarContainer.width() * 100
+    if (!this.settings.seekEnabled) return
+    const offsetX = event.pageX - this.$seekBarContainer.offset().left
+    let pos = offsetX / this.$seekBarContainer.width() * 100
     pos = Math.min(100, Math.max(pos, 0))
     this.container.seekPercentage(pos)
     this.setSeekPercentage(pos)
@@ -545,8 +579,10 @@ export default class MediaControl extends UIObject {
   }
 
   show(event) {
-    if (this.disabled) return
-    var timeout = 2000
+    if (this.disabled) {
+      return
+    }
+    const timeout = 2000
     if (!event || (event.clientX !== this.lastMouseX &amp;&amp; event.clientY !== this.lastMouseY) || navigator.userAgent.match(/firefox/i)) {
       clearTimeout(this.hideId)
       this.$el.show()
@@ -561,10 +597,15 @@ export default class MediaControl extends UIObject {
   }
 
   hide(delay = 0) {
-    var timeout = delay || 2000
+    if (!this.isVisible() || (Browser.isMobile &amp;&amp; !this.container.isPlaying())) {
+      return
+    }
+    const timeout = delay || 2000
     clearTimeout(this.hideId)
-    if (!this.isVisible() || this.options.hideMediaControl === false) return
-    if (delay || this.userKeepVisible || this.keepVisible || this.draggingSeekBar || this.draggingVolumeBar) {
+    if (!this.disabled &amp;&amp; this.options.hideMediaControl === false) {
+      return
+    }
+    if (!this.disabled &amp;&amp; (delay || this.userKeepVisible || this.keepVisible || this.draggingSeekBar || this.draggingVolumeBar)) {
       this.hideId = setTimeout(() =&gt; this.hide(), timeout)
     } else {
       this.trigger(Events.MEDIACONTROL_HIDE, this.name)
@@ -574,20 +615,36 @@ export default class MediaControl extends UIObject {
   }
 
   settingsUpdate() {
-    var settingsChanged = (JSON.stringify(this.settings) !== JSON.stringify(this.container.settings))
-    if (this.container.getPlaybackType() &amp;&amp; settingsChanged) {
-      this.settings = $.extend({}, this.container.settings)
+    const newSettings = this.getSettings()
+    if (newSettings &amp;&amp; !this.fullScreenOnVideoTagSupported &amp;&amp; !Fullscreen.fullscreenEnabled()) {
+      // remove fullscreen from settings if it is present
+      newSettings.default &amp;&amp; removeArrayItem(newSettings.default, &#x27;fullscreen&#x27;)
+      newSettings.left &amp;&amp; removeArrayItem(newSettings.left, &#x27;fullscreen&#x27;)
+      newSettings.right &amp;&amp; removeArrayItem(newSettings.right, &#x27;fullscreen&#x27;)
+    }
+    const settingsChanged = JSON.stringify(this.settings) !== JSON.stringify(newSettings)
+    if (settingsChanged) {
+      this.settings = newSettings
       this.render()
     }
   }
 
+  getSettings() {
+    return $.extend(true, {}, this.container.settings)
+  }
+
   highDefinitionUpdate(isHD) {
-    var method = isHD ? &#x27;addClass&#x27; : &#x27;removeClass&#x27;
+    const method = isHD ? &#x27;addClass&#x27; : &#x27;removeClass&#x27;
     this.$hdIndicator[method](&#x27;enabled&#x27;)
   }
 
+  ccAvailable(hasCC) {
+    const method = hasCC ? &#x27;addClass&#x27; : &#x27;removeClass&#x27;
+    this.$ccButton[method](&#x27;available&#x27;)
+  }
+
   createCachedElements() {
-    var $layer = this.$el.find(&#x27;.media-control-layer&#x27;)
+    const $layer = this.$el.find(&#x27;.media-control-layer&#x27;)
     this.$duration = $layer.find(&#x27;.media-control-indicator[data-duration]&#x27;)
     this.$fullscreenToggle = $layer.find(&#x27;button.media-control-button[data-fullscreen]&#x27;)
     this.$playPauseToggle = $layer.find(&#x27;button.media-control-button[data-playpause]&#x27;)
@@ -605,6 +662,7 @@ export default class MediaControl extends UIObject {
     this.$volumeBarFill = this.$el.find(&#x27;.bar-fill-1[data-volume]&#x27;)
     this.$volumeBarScrubber = this.$el.find(&#x27;.bar-scrubber[data-volume]&#x27;)
     this.$hdIndicator = this.$el.find(&#x27;button.media-control-button[data-hd-indicator]&#x27;)
+    this.$ccButton = this.$el.find(&#x27;button.media-control-button[data-cc-button]&#x27;)
     this.resetIndicators()
     this.initializeIcons()
   }
@@ -615,7 +673,7 @@ export default class MediaControl extends UIObject {
   }
 
   initializeIcons() {
-    var $layer = this.$el.find(&#x27;.media-control-layer&#x27;)
+    const $layer = this.$el.find(&#x27;.media-control-layer&#x27;)
     $layer.find(&#x27;button.media-control-button[data-play]&#x27;).append(playIcon)
     $layer.find(&#x27;button.media-control-button[data-pause]&#x27;).append(pauseIcon)
     $layer.find(&#x27;button.media-control-button[data-stop]&#x27;).append(stopIcon)
@@ -624,6 +682,7 @@ export default class MediaControl extends UIObject {
     this.$volumeIcon.append(volumeIcon)
     this.$fullscreenToggle.append(fullscreenIcon)
     this.$hdIndicator.append(hdIcon)
+    this.$ccButton.append(ccIcon)
   }
 
   setSeekPercentage(value) {
@@ -641,22 +700,35 @@ export default class MediaControl extends UIObject {
   }
 
   seekRelative(delta) {
-    if (!this.container.settings.seekEnabled) return
-    var currentTime = this.container.getCurrentTime()
-    var duration = this.container.getDuration()
-    var position = Math.min(Math.max(currentTime + delta, 0), duration)
+    if (!this.settings.seekEnabled) return
+    const currentTime = this.container.getCurrentTime()
+    const duration = this.container.getDuration()
+    let position = Math.min(Math.max(currentTime + delta, 0), duration)
     position = Math.min(position * 100 / duration, 100)
     this.container.seekPercentage(position)
+  }
+
+  bindKeyAndShow(key, cb) {
+    this.kibo.down(key, () =&gt; {
+      this.show()
+      return cb()
+    })
   }
 
   bindKeyEvents() {
     this.unbindKeyEvents()
     this.kibo = new Kibo(this.options.focusElement)
-    this.kibo.down([&#x27;space&#x27;], () =&gt; this.togglePlayPause())
-    this.kibo.down([&#x27;left&#x27;], () =&gt; this.seekRelative(-15))
-    this.kibo.down([&#x27;right&#x27;], () =&gt; this.seekRelative(15))
-    var keys = [1,2,3,4,5,6,7,8,9,0]
-    keys.forEach((i) =&gt; { this.kibo.down(i.toString(), () =&gt; this.container.settings.seekEnabled &amp;&amp; this.container.seekPercentage(i * 10)) })
+
+    this.bindKeyAndShow(&#x27;space&#x27;, () =&gt; this.togglePlayPause())
+    this.bindKeyAndShow(&#x27;left&#x27;, () =&gt; this.seekRelative(-5))
+    this.bindKeyAndShow(&#x27;right&#x27;, () =&gt; this.seekRelative(5))
+    this.bindKeyAndShow(&#x27;shift left&#x27;, () =&gt; this.seekRelative(-10))
+    this.bindKeyAndShow(&#x27;shift right&#x27;, () =&gt; this.seekRelative(10))
+    this.bindKeyAndShow(&#x27;shift ctrl left&#x27;, () =&gt; this.seekRelative(-15))
+    this.bindKeyAndShow(&#x27;shift ctrl right&#x27;, () =&gt; this.seekRelative(15))
+    // this.kibo.down([&#x27;&#x27;]) // should it be here?
+    const keys = [&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;,&#x27;5&#x27;,&#x27;6&#x27;,&#x27;7&#x27;,&#x27;8&#x27;,&#x27;9&#x27;,&#x27;0&#x27;]
+    keys.forEach((i) =&gt; { this.bindKeyAndShow(i, () =&gt; this.settings.seekEnabled &amp;&amp; this.container.seekPercentage(i * 10)) })
   }
 
   unbindKeyEvents() {
@@ -664,14 +736,18 @@ export default class MediaControl extends UIObject {
       this.kibo.off(&#x27;space&#x27;)
       this.kibo.off(&#x27;left&#x27;)
       this.kibo.off(&#x27;right&#x27;)
-      this.kibo.off([1,2,3,4,5,6,7,8,9,0])
+      this.kibo.off(&#x27;shift left&#x27;)
+      this.kibo.off(&#x27;shift right&#x27;)
+      this.kibo.off(&#x27;shift ctrl left&#x27;)
+      this.kibo.off(&#x27;shift ctrl right&#x27;)
+      this.kibo.off([&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;,&#x27;5&#x27;,&#x27;6&#x27;,&#x27;7&#x27;,&#x27;8&#x27;,&#x27;9&#x27;,&#x27;0&#x27;])
     }
   }
 
   parseColors() {
     if (this.options.mediacontrol) {
       this.buttonsColor = this.options.mediacontrol.buttons
-      var seekbarColor = this.options.mediacontrol.seekbar
+      const seekbarColor = this.options.mediacontrol.seekbar
       this.$el.find(&#x27;.bar-fill-2[data-seekbar]&#x27;).css(&#x27;background-color&#x27;, seekbarColor)
       this.$el.find(&#x27;.media-control-icon svg path&#x27;).css(&#x27;fill&#x27;, this.buttonsColor)
       this.$el.find(&#x27;.segmented-bar-element[data-volume]&#x27;).css(&#x27;boxShadow&#x27;, &#x27;inset 2px 0 0 &#x27; + this.buttonsColor)
@@ -692,7 +768,7 @@ export default class MediaControl extends UIObject {
   }
 
   render() {
-    var timeout = 1000
+    const timeout = 1000
     this.$el.html(this.template({ settings: this.settings }))
     this.$el.append(this.stylesheet)
     this.createCachedElements()
@@ -712,7 +788,7 @@ export default class MediaControl extends UIObject {
     this.$seekBarPosition.addClass(&#x27;media-control-notransition&#x27;)
     this.$seekBarScrubber.addClass(&#x27;media-control-notransition&#x27;)
 
-    var previousSeekPercentage = 0
+    let previousSeekPercentage = 0
     if (this.displayedSeekBarPercentage) {
       previousSeekPercentage = this.displayedSeekBarPercentage
     }
@@ -720,10 +796,10 @@ export default class MediaControl extends UIObject {
     this.setSeekPercentage(previousSeekPercentage)
 
     process.nextTick(() =&gt; {
-      if (!this.container.settings.seekEnabled) {
+      if (!this.settings.seekEnabled) {
         this.$seekBarContainer.addClass(&#x27;seek-disabled&#x27;)
       }
-      if (!this.options.disableKeyboardShortcuts) {
+      if (!Browser.isMobile &amp;&amp; !this.options.disableKeyboardShortcuts) {
         this.bindKeyEvents()
       }
       this.playerResize({width: this.options.width, height: this.options.height})
@@ -732,6 +808,7 @@ export default class MediaControl extends UIObject {
 
     this.parseColors()
     this.highDefinitionUpdate()
+    this.ccAvailable(false)
 
     this.rendered = true
     this.updateVolumeUI()

@@ -98,12 +98,12 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import {uniqueId} from &#x27;./utils&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 import result from &#x27;lodash.result&#x27;
+import {uniqueId, DomRecycler} from &#x27;./utils&#x27;
 import BaseObject from &#x27;./base_object&#x27;
 
-var delegateEventSplitter = /^(\S+)\s*(.*)$/
+const delegateEventSplitter = /^(\S+)\s*(.*)$/
 
 /**
  * A base class to create ui object.
@@ -253,13 +253,13 @@ export default class UIObject extends BaseObject {
   delegateEvents(events) {
     if (!(events || (events = result(this, &#x27;events&#x27;)))) {return this}
     this.undelegateEvents()
-    for (var key in events) {
-      var method = events[key]
+    for (const key in events) {
+      let method = events[key]
       if ((method &amp;&amp; method.constructor !== Function)) {method = this[events[key]]}
       if (!method) {continue}
 
-      var match = key.match(delegateEventSplitter)
-      var eventName = match[1], selector = match[2]
+      const match = key.match(delegateEventSplitter)
+      let eventName = match[1], selector = match[2]
       //method = _.bind(method, this)
       eventName += &#x27;.delegateEvents&#x27; + this.cid
       if (selector === &#x27;&#x27;) {
@@ -288,10 +288,10 @@ export default class UIObject extends BaseObject {
    */
   _ensureElement() {
     if (!this.el) {
-      var attrs = $.extend({}, result(this, &#x27;attributes&#x27;))
+      const attrs = $.extend({}, result(this, &#x27;attributes&#x27;))
       if (this.id) {attrs.id = result(this, &#x27;id&#x27;)}
       if (this.className) {attrs[&#x27;class&#x27;] = result(this, &#x27;className&#x27;)}
-      var $el = $(&#x27;&lt;&#x27; + result(this, &#x27;tagName&#x27;) + &#x27;&gt;&#x27;).attr(attrs)
+      const $el = DomRecycler.create(result(this, &#x27;tagName&#x27;)).attr(attrs)
       this.setElement($el, false)
     } else {
       this.setElement(result(this, &#x27;el&#x27;), false)

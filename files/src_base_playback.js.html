@@ -106,6 +106,15 @@ import UIObject from &#x27;./ui_object&#x27;
  */
 export default class Playback extends UIObject {
   /**
+  * Determine if the playback does not contain video/has video but video should be ignored.
+  * @property isAudioOnly
+  * @type Boolean
+  */
+  get isAudioOnly() {
+    return false
+  }
+
+  /**
    * Determine if the playback has ended.
    * @property ended
    * @type Boolean
@@ -144,6 +153,12 @@ export default class Playback extends UIObject {
     this.settings = {}
     this._i18n = i18n
   }
+
+  /**
+   * Gives user consent to playback (mobile devices).
+   * @method consent
+   */
+  consent() {}
 
   /**
    * plays the playback.

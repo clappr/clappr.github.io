@@ -98,20 +98,19 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import Log from &#x27;plugins/log&#x27;
+import Log from &#x27;../plugins/log&#x27;
 import {uniqueId} from &#x27;./utils&#x27;
-import execOnce from &#x27;lodash.once&#x27;
 
-var slice = Array.prototype.slice
+const slice = Array.prototype.slice
 
-var eventSplitter = /\s+/
+const eventSplitter = /\s+/
 
-var eventsApi = function(obj, action, name, rest) {
+const eventsApi = function(obj, action, name, rest) {
   if (!name) {return true}
 
   // Handle event maps.
   if (typeof name === &#x27;object&#x27;) {
-    for (var key in name) {
+    for (const key in name) {
       obj[action].apply(obj, [key, name[key]].concat(rest))
     }
     return false
@@ -119,8 +118,8 @@ var eventsApi = function(obj, action, name, rest) {
 
   // Handle space separated event names.
   if (eventSplitter.test(name)) {
-    var names = name.split(eventSplitter)
-    for (var i = 0, l = names.length; i &lt; l; i++) {
+    const names = name.split(eventSplitter)
+    for (let i = 0, l = names.length; i &lt; l; i++) {
       obj[action].apply(obj, [names[i]].concat(rest))
     }
     return false
@@ -129,14 +128,24 @@ var eventsApi = function(obj, action, name, rest) {
   return true
 }
 
-var triggerEvents = function(events, args) {
-  var ev, i = -1, l = events.length, a1 = args[0], a2 = args[1], a3 = args[2]
-  switch (args.length) {
-  case 0: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx) } return
-  case 1: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1) } return
-  case 2: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1, a2) } return
-  case 3: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1, a2, a3) } return
-  default: while (++i &lt; l) { (ev = events[i]).callback.apply(ev.ctx, args) } return
+const triggerEvents = function(events, args, klass, name) {
+  let ev, i = -1
+  const l = events.length, a1 = args[0], a2 = args[1], a3 = args[2]
+  run()
+
+  function run() {
+    try {
+      switch (args.length) {
+      case 0: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx) } return
+      case 1: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1) } return
+      case 2: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1, a2) } return
+      case 3: while (++i &lt; l) { (ev = events[i]).callback.call(ev.ctx, a1, a2, a3) } return
+      default: while (++i &lt; l) { (ev = events[i]).callback.apply(ev.ctx, args) } return
+      }
+    } catch (exception) {
+      Log.error.apply(Log, [klass, &#x27;error on event&#x27;, name, &#x27;trigger&#x27;,&#x27;-&#x27;, exception])
+      run()
+    }
   }
 }
 
@@ -156,7 +165,7 @@ export default class Events {
   on(name, callback, context) {
     if (!eventsApi(this, &#x27;on&#x27;, name, [callback, context]) || !callback) {return this}
     this._events || (this._events = {})
-    var events = this._events[name] || (this._events[name] = [])
+    const events = this._events[name] || (this._events[name] = [])
     events.push({callback: callback, context: context, ctx: context || this})
     return this
   }
@@ -170,11 +179,10 @@ export default class Events {
    */
   once(name, callback, context) {
     if (!eventsApi(this, &#x27;once&#x27;, name, [callback, context]) || !callback) {return this}
-    var self = this
-    var once = execOnce(function() {
-      self.off(name, once)
-      callback.apply(this, arguments)
-    })
+    const once = () =&gt; {
+      this.off(name, once)
+      callback.apply(context || this, arguments)
+    }
     once._callback = callback
     return this.on(name, once, context)
   }
@@ -187,7 +195,7 @@ export default class Events {
    * @param {Object} context
    */
   off(name, callback, context) {
-    var retain, ev, events, names, i, l, j, k
+    let retain, ev, events, names, i, l, j, k
     if (!this._events || !eventsApi(this, &#x27;off&#x27;, name, [callback, context])) {return this}
     if (!name &amp;&amp; !callback &amp;&amp; !context) {
       this._events = void 0
@@ -221,19 +229,15 @@ export default class Events {
    * @param {String} name
    */
   trigger(name) {
-    var klass = this.name || this.constructor.name
-    try {
-      Log.debug.apply(Log, [klass].concat(Array.prototype.slice.call(arguments)))
-      if (!this._events) {return this}
-      var args = slice.call(arguments, 1)
-      if (!eventsApi(this, &#x27;trigger&#x27;, name, args)) {return this}
-      var events = this._events[name]
-      var allEvents = this._events.all
-      if (events) {triggerEvents(events, args)}
-      if (allEvents) {triggerEvents(allEvents, arguments)}
-    } catch (exception) {
-      Log.error.apply(Log, [klass, &#x27;error on event&#x27;, name, &#x27;trigger&#x27;,&#x27;-&#x27;, exception])
-    }
+    const klass = this.name || this.constructor.name
+    Log.debug.apply(Log, [klass].concat(Array.prototype.slice.call(arguments)))
+    if (!this._events) {return this}
+    const args = slice.call(arguments, 1)
+    if (!eventsApi(this, &#x27;trigger&#x27;, name, args)) {return this}
+    const events = this._events[name]
+    const allEvents = this._events.all
+    if (events) {triggerEvents(events, args, klass, name)}
+    if (allEvents) {triggerEvents(allEvents, arguments, klass, name)}
     return this
   }
 
@@ -245,12 +249,12 @@ export default class Events {
    * @param {Function} callback
    */
   stopListening(obj, name, callback) {
-    var listeningTo = this._listeningTo
+    let listeningTo = this._listeningTo
     if (!listeningTo) {return this}
-    var remove = !name &amp;&amp; !callback
+    const remove = !name &amp;&amp; !callback
     if (!callback &amp;&amp; typeof name === &#x27;object&#x27;) {callback = this}
     if (obj) {(listeningTo = {})[obj._listenId] = obj}
-    for (var id in listeningTo) {
+    for (const id in listeningTo) {
       obj = listeningTo[id]
       obj.off(name, callback, this)
       if (remove || Object.keys(obj._events).length === 0) {delete this._listeningTo[id]}
@@ -284,12 +288,12 @@ export default class Events {
  * this.listenToOnce(this.core.playback, Events.PLAYBACK_PAUSE, this.callback)
  * &#x60;&#x60;&#x60;
  */
-var listenMethods = {listenTo: &#x27;on&#x27;, listenToOnce: &#x27;once&#x27;}
+const listenMethods = {listenTo: &#x27;on&#x27;, listenToOnce: &#x27;once&#x27;}
 
 Object.keys(listenMethods).forEach(function(method) {
   Events.prototype[method] = function(obj, name, callback) {
-    var listeningTo = this._listeningTo || (this._listeningTo = {})
-    var id = obj._listenId || (obj._listenId = uniqueId(&#x27;l&#x27;))
+    const listeningTo = this._listeningTo || (this._listeningTo = {})
+    const id = obj._listenId || (obj._listenId = uniqueId(&#x27;l&#x27;))
     listeningTo[id] = obj
     if (!callback &amp;&amp; typeof name === &#x27;object&#x27;) {callback = this}
     obj[listenMethods[method]](name, callback, this)
@@ -376,19 +380,24 @@ Events.PLAYER_TIMEUPDATE = &#x27;timeupdate&#x27;
  */
 Events.PLAYER_VOLUMEUPDATE = &#x27;volumeupdate&#x27;
 
+// TODO doc
+Events.PLAYER_TEXTTRACKLOADED = &#x27;texttrackloaded&#x27;
+
 // Playback Events
 /**
  * Fired when the playback is downloading the media
  *
  * @event PLAYBACK_PROGRESS
- * @param {Object} progress Data
- * progress object
- * @param {Number} [progress.start]
- * initial downloaded content
- * @param {Number} [progress.current]
- * current dowloaded content
- * @param {Number} [progress.total]
+ * @param progress {Object}
+ * Data progress object
+ * @param [progress.start] {Number}
+ * start position of buffered content at current position
+ * @param [progress.current] {Number}
+ * end position of buffered content at current position
+ * @param [progress.total] {Number}
  * total content to be downloaded
+ * @param buffered {Array}
+ * array of buffered segments ({start, end}). [Only for supported playbacks]
  */
 Events.PLAYBACK_PROGRESS = &#x27;playback:progress&#x27;
 /**
@@ -567,7 +576,17 @@ Events.PLAYBACK_STATS_ADD = &#x27;playback:stats:add&#x27;
 Events.PLAYBACK_FRAGMENT_LOADED = &#x27;playback:fragment:loaded&#x27;
 // TODO doc
 Events.PLAYBACK_LEVEL_SWITCH = &#x27;playback:level:switch&#x27;
+// TODO doc
+Events.PLAYBACK_SUBTITLE_LOADED = &#x27;playback:subtitle:loaded&#x27;
 
+
+// Core Events
+/**
+ * Fired when the containers are created
+ *
+ * @event CORE_CONTAINERS_CREATED
+ */
+Events.CORE_CONTAINERS_CREATED = &#x27;core:containers:created&#x27;
 /**
  * Fired when the options were changed for the core
  *
@@ -583,10 +602,24 @@ Events.CORE_READY = &#x27;core:ready&#x27;
 /**
  * Fired when the fullscreen state change
  *
+ * @event CORE_FULLSCREEN
  * @param {Boolean} whether or not the player is on fullscreen mode
- * @event CORE_READY
  */
 Events.CORE_FULLSCREEN = &#x27;core:fullscreen&#x27;
+/**
+ * Fired when the screen orientation has changed.
+ * This event is trigger only for mobile devices.
+ *
+ * @event CORE_SCREEN_ORIENTATION_CHANGED
+ * @param {Object} screen An object with screen orientation
+ * screen object
+ * @param {Object} [screen.event]
+ * window resize event object
+ * @param {String} [screen.orientation]
+ * screen orientation (ie: &#x27;landscape&#x27; or &#x27;portrait&#x27;)
+ */
+Events.CORE_SCREEN_ORIENTATION_CHANGED = &#x27;core:screen:orientation:changed&#x27;
+
 
 // Container Events
 /**
@@ -637,6 +670,14 @@ Events.CONTAINER_ERROR = &#x27;container:error&#x27;
  * extra meta data
  */
 Events.CONTAINER_LOADEDMETADATA = &#x27;container:loadedmetadata&#x27;
+
+/**
+ * Fired when a text track is loaded and available on container for display
+ *
+ * @event CONTAINER_LOADEDTEXTTRACK
+ */
+Events.CONTAINER_LOADEDTEXTTRACK = &#x27;container:loadedtexttrack&#x27;
+
 /**
  * Fired when the time is updated on container
  *
@@ -785,9 +826,6 @@ Events.MEDIACONTROL_NOTPLAYING = &#x27;mediacontrol:notplaying&#x27;
  * @event MEDIACONTROL_CONTAINERCHANGED
  */
 Events.MEDIACONTROL_CONTAINERCHANGED = &#x27;mediacontrol:containerchanged&#x27;
-
-// Core Events
-Events.CORE_CONTAINERS_CREATED = &#x27;core:containers:created&#x27;
 
     </pre>
 </div>

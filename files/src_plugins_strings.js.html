@@ -94,10 +94,9 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import {getBrowserLanguage} from &#x27;base/utils&#x27;
-
-import CorePlugin from &#x27;base/core_plugin&#x27;
-import merge from &#x27;lodash.merge&#x27;
+import {getBrowserLanguage} from &#x27;../base/utils&#x27;
+import $ from &#x27;clappr-zepto&#x27;
+import CorePlugin from &#x27;../base/core_plugin&#x27;
 
 /**
  * The internationalization (i18n) plugin
@@ -120,15 +119,15 @@ export default class Strings extends CorePlugin {
    * @return {String} translated label
    */
   t(key) {
-    var lang = this._language()
-    var i18n = lang &amp;&amp; this._messages[lang] || this._messages[&#x27;en&#x27;]
+    const lang = this._language()
+    const i18n = lang &amp;&amp; this._messages[lang] || this._messages[&#x27;en&#x27;]
     return i18n[key] || key
   }
 
   _language() {return this.core.options.language || getBrowserLanguage()}
 
   _initializeMessages() {
-    this._messages = merge({
+    const defaultMessages = {
       &#x27;en&#x27;: {
         &#x27;live&#x27;: &#x27;live&#x27;,
         &#x27;back_to_live&#x27;: &#x27;back to live&#x27;,
@@ -143,12 +142,34 @@ export default class Strings extends CorePlugin {
         &#x27;live&#x27;: &#x27;vivo&#x27;,
         &#x27;back_to_live&#x27;: &#x27;volver en vivo&#x27;,
         &#x27;playback_not_supported&#x27;: &#x27;Su navegador no soporta la reproducción de un video. Por favor, trate de usar un navegador diferente.&#x27;
+      },
+      &#x27;ru&#x27;: {
+        &#x27;live&#x27;: &#x27;прямой эфир&#x27;,
+        &#x27;back_to_live&#x27;: &#x27;к прямому эфиру&#x27;,
+        &#x27;playback_not_supported&#x27;: &#x27;Ваш браузер не поддерживает воспроизведение этого видео. Пожалуйста, попробуйте другой браузер.&#x27;
+      },
+      &#x27;fr&#x27;: {
+        &#x27;live&#x27;: &#x27;en direct&#x27;,
+        &#x27;back_to_live&#x27;: &#x27;retour au direct&#x27;,
+        &#x27;playback_not_supported&#x27;: &#x27;Votre navigateur ne supporte pas la lecture de cette vidéo. Merci de tenter sur un autre navigateur.&#x27;
+      },
+      &#x27;tr&#x27;: {
+        &#x27;live&#x27;: &#x27;canlı&#x27;,
+        &#x27;back_to_live&#x27;: &#x27;canlı yayına dön&#x27;,
+        &#x27;playback_not_supported&#x27;: &#x27;Tarayıcınız bu videoyu oynatma desteğine sahip değil. Lütfen farklı bir tarayıcı ile deneyin.&#x27;,
       }
-    }, this.core.options.strings || {})
+    }
+    const strings = this.core.options.strings || {}
+    this._messages = Object.keys(defaultMessages).reduce((messages, lang) =&gt; {
+      messages[lang] = $.extend({}, defaultMessages[lang], strings[lang])
+      return messages
+    }, {})
 
     this._messages[&#x27;pt-BR&#x27;] = this._messages[&#x27;pt&#x27;]
     this._messages[&#x27;en-US&#x27;] = this._messages[&#x27;en&#x27;]
     this._messages[&#x27;es-419&#x27;] = this._messages[&#x27;es&#x27;]
+    this._messages[&#x27;fr-FR&#x27;] = this._messages[&#x27;fr&#x27;]
+    this._messages[&#x27;tr-TR&#x27;] = this._messages[&#x27;tr&#x27;]
   }
 }
 

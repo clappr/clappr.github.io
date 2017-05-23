@@ -102,15 +102,17 @@
  * The ContainerFactory is responsible for manage playback bootstrap and create containers.
  */
 
-import BaseObject from &#x27;base/base_object&#x27;
-import Events from &#x27;base/events&#x27;
-import Container from &#x27;components/container&#x27;
+import BaseObject from &#x27;../../base/base_object&#x27;
+import Events from &#x27;../../base/events&#x27;
+import Container from &#x27;../../components/container&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 
-import find from &#x27;lodash.find&#x27;
 import isPlainObject from &#x27;lodash.isplainobject&#x27;
 
 export default class ContainerFactory extends BaseObject {
+  get options() { return this._options }
+  set options(options) { this._options = options }
+
   constructor(options, loader, i18n) {
     super(options)
     this._i18n = i18n
@@ -126,12 +128,12 @@ export default class ContainerFactory extends BaseObject {
   }
 
   findPlaybackPlugin(source, mimeType) {
-    return find(this.loader.playbackPlugins, (p) =&gt; { return p.canPlay(source, mimeType) })
+    return this.loader.playbackPlugins.filter(p =&gt; p.canPlay(source, mimeType))[0]
   }
 
   createContainer(source) {
-    var resolvedSource = null
-    var mimeType = this.options.mimeType
+    let resolvedSource = null,
+      mimeType = this.options.mimeType
     if (isPlainObject(source)) {
       resolvedSource = source.source.toString()
       if (source.mimeType) {
@@ -143,17 +145,17 @@ export default class ContainerFactory extends BaseObject {
 
     if (resolvedSource.match(/^\/\//)) resolvedSource = window.location.protocol + resolvedSource
 
-    var options = $.extend({}, this.options, {
+    let options = $.extend({}, this.options, {
       src: resolvedSource,
       mimeType: mimeType
     })
-    var playbackPlugin = this.findPlaybackPlugin(resolvedSource, mimeType)
-    var playback = new playbackPlugin(options, this._i18n)
+    const playbackPlugin = this.findPlaybackPlugin(resolvedSource, mimeType)
+    const playback = new playbackPlugin(options, this._i18n)
 
-    options = $.extend(options, {playback: playback})
+    options = $.extend({}, options, {playback: playback})
 
-    var container = new Container(options, this._i18n)
-    var defer = $.Deferred()
+    const container = new Container(options, this._i18n)
+    const defer = $.Deferred()
     defer.promise(container)
     this.addContainerPlugins(container)
     this.listenToOnce(container, Events.CONTAINER_READY, () =&gt; defer.resolve(container))

@@ -98,18 +98,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import {isNumber,Fullscreen} from &#x27;base/utils&#x27;
+import {isNumber, Fullscreen, DomRecycler} from &#x27;../../base/utils&#x27;
 
-import Events from &#x27;base/events&#x27;
-import Styler from &#x27;base/styler&#x27;
-import UIObject from &#x27;base/ui_object&#x27;
-import Browser from &#x27;components/browser&#x27;
-import ContainerFactory from &#x27;components/container_factory&#x27;
-import MediaControl from &#x27;components/media_control&#x27;
-import Mediator from &#x27;components/mediator&#x27;
-import PlayerInfo from &#x27;components/player_info&#x27;
+import Events from &#x27;../../base/events&#x27;
+import Styler from &#x27;../../base/styler&#x27;
+import UIObject from &#x27;../../base/ui_object&#x27;
+import Browser from &#x27;../../components/browser&#x27;
+import ContainerFactory from &#x27;../../components/container_factory&#x27;
+import MediaControl from &#x27;../../components/media_control&#x27;
+import Mediator from &#x27;../../components/mediator&#x27;
+import PlayerInfo from &#x27;../../components/player_info&#x27;
 
-import find from &#x27;lodash.find&#x27;
 import $ from &#x27;clappr-zepto&#x27;
 
 import coreStyle from &#x27;./public/style.scss&#x27;
@@ -158,6 +157,7 @@ export default class Core extends UIObject {
 
   constructor(options) {
     super(options)
+    this.configureDomRecycler()
     this.playerInfo = PlayerInfo.getInstance(options.playerId)
     this.firstResize = true
     this.plugins = []
@@ -168,6 +168,14 @@ export default class Core extends UIObject {
     $(document).bind(&#x27;fullscreenchange&#x27;, this._boundFullscreenHandler)
     $(document).bind(&#x27;MSFullscreenChange&#x27;, this._boundFullscreenHandler)
     $(document).bind(&#x27;mozfullscreenchange&#x27;, this._boundFullscreenHandler)
+    Browser.isMobile &amp;&amp; $(window).bind(&#x27;resize&#x27;, (o) =&gt; {this.handleWindowResize(o)})
+  }
+
+  configureDomRecycler() {
+    let recycleVideo = (this.options &amp;&amp; this.options.playback &amp;&amp; this.options.playback.recycleVideo) ? true : false
+    DomRecycler.configure({
+      recycleVideo: recycleVideo
+    })
   }
 
   createContainers(options) {
@@ -220,7 +228,7 @@ export default class Core extends UIObject {
   }
 
   enableResizeObserver() {
-    var checkSizeCallback = () =&gt; {
+    const checkSizeCallback = () =&gt; {
       if (this.playerInfo.computedSize.width != this.el.clientWidth ||
           this.playerInfo.computedSize.height != this.el.clientHeight) {
         this.playerInfo.computedSize = { width: this.el.clientWidth, height: this.el.clientHeight }
@@ -231,7 +239,7 @@ export default class Core extends UIObject {
   }
 
   triggerResize(newSize) {
-    var thereWasChange = this.firstResize || this.oldHeight !== newSize.height || this.oldWidth !== newSize.width
+    const thereWasChange = this.firstResize || this.oldHeight !== newSize.height || this.oldWidth !== newSize.width
     if (thereWasChange) {
       Mediator.trigger(&#x60;${this.options.playerId}:${Events.PLAYER_RESIZE}&#x60;, newSize)
       this.oldHeight = newSize.height
@@ -261,7 +269,7 @@ export default class Core extends UIObject {
   }
 
   getPlugin(name) {
-    return find(this.plugins, (plugin) =&gt; plugin.name === name)
+    return this.plugins.filter(plugin =&gt; plugin.name === name)[0]
   }
 
   load(sources, mimeType) {
@@ -290,6 +298,17 @@ export default class Core extends UIObject {
     this.trigger(Events.CORE_FULLSCREEN, Fullscreen.isFullscreen())
     this.updateSize()
     this.mediaControl.show()
+  }
+
+  handleWindowResize(event) {
+    let orientation = ($(window).width() &gt; $(window).height()) ? &#x27;landscape&#x27; : &#x27;portrait&#x27;
+    if (this._screenOrientation === orientation) return
+    this._screenOrientation = orientation
+
+    this.trigger(Events.CORE_SCREEN_ORIENTATION_CHANGED, {
+      event: event,
+      orientation: this._screenOrientation
+    })
   }
 
   setMediaControlContainer(container) {
@@ -331,7 +350,7 @@ export default class Core extends UIObject {
   }
 
   createContainer(source, options) {
-    var container = this.containerFactory.createContainer(source, options)
+    const container = this.containerFactory.createContainer(source, options)
     this.appendContainer(container)
     this.el.appendChild(container.render().el)
     return container
@@ -364,12 +383,12 @@ export default class Core extends UIObject {
   }
 
   getCurrentPlayback() {
-    var container = this.getCurrentContainer()
+    const container = this.getCurrentContainer()
     return container &amp;&amp; container.playback
   }
 
   getPlaybackType() {
-    var container = this.getCurrentContainer()
+    const container = this.getCurrentContainer()
     return container &amp;&amp; container.getPlaybackType()
   }
 
@@ -412,7 +431,8 @@ export default class Core extends UIObject {
    */
   configure(options) {
     this._options = $.extend(this._options, options)
-    var sources = options.source || options.sources
+    this.configureDomRecycler()
+    const sources = options.source || options.sources
 
     if (sources) {
       this.load(sources, options.mimeType || this.options.mimeType)
@@ -426,13 +446,14 @@ export default class Core extends UIObject {
   }
 
   render() {
-    var style = Styler.getStyleFor(coreStyle, {baseUrl: this.options.baseUrl})
-    this.$el.append(style)
+    this.$style &amp;&amp; this.$style.remove()
+    this.$style = Styler.getStyleFor(coreStyle, {baseUrl: this.options.baseUrl})
+    this.$el.append(this.$style)
     this.$el.append(this.mediaControl.render().el)
 
     this.options.width = this.options.width || this.$el.width()
     this.options.height = this.options.height || this.$el.height()
-    var size = {width: this.options.width, height: this.options.height}
+    const size = {width: this.options.width, height: this.options.height}
     this.playerInfo.previousSize = this.playerInfo.currentSize = this.playerInfo.computedSize = size
     this.updateSize()
 

@@ -98,18 +98,17 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import {uniqueId, currentScriptUrl} from &#x27;base/utils&#x27;
+import {uniqueId, currentScriptUrl} from &#x27;../base/utils&#x27;
 
-import BaseObject from &#x27;base/base_object&#x27;
-import Events from &#x27;base/events&#x27;
-import Browser from &#x27;components/browser&#x27;
-import CoreFactory from &#x27;components/core_factory&#x27;
-import Loader from &#x27;components/loader&#x27;
-import PlayerInfo from &#x27;components/player_info&#x27;
+import BaseObject from &#x27;../base/base_object&#x27;
+import Events from &#x27;../base/events&#x27;
+import Browser from &#x27;./browser&#x27;
+import CoreFactory from &#x27;./core_factory&#x27;
+import Loader from &#x27;./loader&#x27;
+import PlayerInfo from &#x27;./player_info&#x27;
 import $ from &#x27;clappr-zepto&#x27;
-import find from &#x27;lodash.find&#x27;
 
-var baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &#x27;&#x27;)
+const baseUrl = currentScriptUrl().replace(/\/[^\/]+$/, &#x27;&#x27;)
 
 /**
  * @class Player
@@ -190,7 +189,8 @@ export default class Player extends BaseObject {
       onSeek: Events.PLAYER_SEEK,
       onError: Events.PLAYER_ERROR,
       onTimeUpdate: Events.PLAYER_TIMEUPDATE,
-      onVolumeUpdate: Events.PLAYER_VOLUMEUPDATE
+      onVolumeUpdate: Events.PLAYER_VOLUMEUPDATE,
+      onTextTrackLoaded: Events.PLAYER_TEXTTRACKLOADED
     }
   }
 
@@ -275,7 +275,7 @@ export default class Player extends BaseObject {
    */
   constructor(options) {
     super(options)
-    var defaultOptions = {playerId: uniqueId(&#x27;&#x27;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl, allowUserInteraction: Browser.isMobile}
+    const defaultOptions = {playerId: uniqueId(&#x27;&#x27;), persistConfig: true, width: 640, height: 360, baseUrl: baseUrl, allowUserInteraction: Browser.isMobile}
     this._options = $.extend(defaultOptions, options)
     this.options.sources = this._normalizeSources(options)
     if (!this.options.chromeless) {
@@ -306,7 +306,7 @@ export default class Player extends BaseObject {
    * @return {Player} itself
    */
   setParentId(parentId) {
-    var el = document.querySelector(parentId)
+    const el = document.querySelector(parentId)
     if (el) {
       this.attachTo(el)
     }
@@ -338,7 +338,7 @@ export default class Player extends BaseObject {
   }
 
   _addContainerEventListeners() {
-    var container = this.core.mediaControl.container
+    const container = this.core.mediaControl.container
     if (container) {
       this.listenTo(container, Events.CONTAINER_PLAY, this._onPlay)
       this.listenTo(container, Events.CONTAINER_PAUSE, this._onPause)
@@ -348,16 +348,17 @@ export default class Player extends BaseObject {
       this.listenTo(container, Events.CONTAINER_ERROR, this._onError)
       this.listenTo(container, Events.CONTAINER_TIMEUPDATE, this._onTimeUpdate)
       this.listenTo(container, Events.CONTAINER_VOLUME, this._onVolumeUpdate)
+      this.listenTo(container, Events.CONTAINER_LOADEDTEXTTRACK, this._onTextTrackLoaded)
     }
     return this
   }
 
   _registerOptionEventListeners() {
-    var userEvents = this.options.events || {}
+    const userEvents = this.options.events || {}
     Object.keys(userEvents).forEach((userEvent) =&gt; {
-      var eventType = this.eventsMapping[userEvent]
+      const eventType = this.eventsMapping[userEvent]
       if (eventType) {
-        var eventFunction = userEvents[userEvent]
+        let eventFunction = userEvents[userEvent]
         eventFunction = typeof eventFunction === &#x27;function&#x27; &amp;&amp; eventFunction
         eventFunction &amp;&amp; this.on(eventType, eventFunction)
       }
@@ -382,6 +383,10 @@ export default class Player extends BaseObject {
 
   _onVolumeUpdate(volume) {
     this.trigger(Events.PLAYER_VOLUMEUPDATE, volume)
+  }
+
+  _onTextTrackLoaded(evt, data) {
+    this.trigger(Events.PLAYER_TEXTTRACKLOADED, evt, data)
   }
 
   _onPlay() {
@@ -413,7 +418,7 @@ export default class Player extends BaseObject {
   }
 
   _normalizeSources(options) {
-    var sources = options.sources || (options.source !== undefined? [options.source] : [])
+    const sources = options.sources || (options.source !== undefined? [options.source] : [])
     return sources.length === 0 ? [{source:&#x27;&#x27;, mimeType:&#x27;&#x27;}] : sources
   }
 
@@ -456,6 +461,16 @@ export default class Player extends BaseObject {
    */
   destroy() {
     this.core.destroy()
+    return this
+  }
+
+  /**
+   * Gives user consent to playback. Required by mobile device after a click event before Player.load().
+   * @method consent
+   * @return {Player} itself
+   */
+  consent() {
+    this.core.getCurrentPlayback().consent()
     return this
   }
 
@@ -606,10 +621,8 @@ export default class Player extends BaseObject {
    * &#x60;&#x60;&#x60;
    */
   getPlugin(name) {
-    var plugins = this.core.plugins.concat(this.core.mediaControl.container.plugins)
-    return find(plugins, function(plugin) {
-      return plugin.name === name
-    })
+    const plugins = this.core.plugins.concat(this.core.mediaControl.container.plugins)
+    return plugins.filter(plugin =&gt; plugin.name === name)[0]
   }
 
   /**

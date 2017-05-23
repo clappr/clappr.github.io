@@ -98,8 +98,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import BaseObject from &#x27;base/base_object&#x27;
-import Core from &#x27;components/core&#x27;
+import BaseObject from &#x27;../../base/base_object&#x27;
+import Core from &#x27;../core&#x27;
 
 /**
  * The Core Factory is responsible for instantiate the core and it&#x27;s plugins.
@@ -143,7 +143,7 @@ export default class CoreFactory extends BaseObject {
    */
   addCorePlugins() {
     this.loader.corePlugins.forEach((Plugin) =&gt; {
-      var plugin = new Plugin(this.core)
+      const plugin = new Plugin(this.core)
       this.core.addPlugin(plugin)
       this.setupExternalInterface(plugin)
     })
@@ -151,8 +151,8 @@ export default class CoreFactory extends BaseObject {
   }
 
   setupExternalInterface(plugin) {
-    var externalFunctions = plugin.getExternalInterface()
-    for (var key in externalFunctions) {
+    const externalFunctions = plugin.getExternalInterface()
+    for (const key in externalFunctions) {
       this.player[key] = externalFunctions[key].bind(plugin)
     }
   }

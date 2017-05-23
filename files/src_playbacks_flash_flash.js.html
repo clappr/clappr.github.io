@@ -98,18 +98,18 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-import {seekStringToSeconds} from &#x27;base/utils&#x27;
+import {seekStringToSeconds} from &#x27;../../base/utils&#x27;
 
-import BaseFlashPlayback from &#x27;playbacks/base_flash_playback&#x27;
-import Browser from &#x27;components/browser&#x27;
-import Mediator from &#x27;components/mediator&#x27;
-import template from &#x27;base/template&#x27;
+import BaseFlashPlayback from &#x27;../../playbacks/base_flash_playback&#x27;
+import Browser from &#x27;../../components/browser&#x27;
+import Mediator from &#x27;../../components/mediator&#x27;
+import template from &#x27;../../base/template&#x27;
 import $ from &#x27;clappr-zepto&#x27;
-import Events from &#x27;base/events&#x27;
-import Playback from &#x27;base/playback&#x27;
+import Events from &#x27;../../base/events&#x27;
+import Playback from &#x27;../../base/playback&#x27;
 import flashSwf from &#x27;./public/Player.swf&#x27;
 
-var MAX_ATTEMPTS = 60
+const MAX_ATTEMPTS = 60
 
 export default class Flash extends BaseFlashPlayback {
   get name() { return &#x27;flash&#x27; }
@@ -250,7 +250,7 @@ export default class Flash extends BaseFlashPlayback {
   }
 
   _checkInitialSeek() {
-    var seekTime = seekStringToSeconds(window.location.href)
+    let seekTime = seekStringToSeconds(window.location.href)
     if (seekTime !== 0) {
       this.seekSeconds(seekTime)
     }
@@ -302,7 +302,7 @@ export default class Flash extends BaseFlashPlayback {
 
   seekPercentage(percentage) {
     if (this.el.getDuration() &gt; 0) {
-      var seekSeconds = this.el.getDuration() * (percentage / 100)
+      let seekSeconds = this.el.getDuration() * (percentage / 100)
       this.seek(seekSeconds)
     } else {
       this.listenToOnce(this, Events.PLAYBACK_BUFFERFULL, () =&gt; this.seekPercentage(percentage))
@@ -332,8 +332,9 @@ Flash.canPlay = function(resource) {
   if (!Browser.hasFlash || !resource || resource.constructor !== String) {
     return false
   } else {
-    var resourceParts = resource.split(&#x27;?&#x27;)[0].match(/.*\.(.*)$/) || []
-    return resourceParts.length &gt; 1 &amp;&amp; !Browser.isMobile &amp;&amp; resourceParts[1].match(/^(mp4|mov|f4v|3gpp|3gp)$/)
+    const resourceParts = resource.split(&#x27;?&#x27;)[0].match(/.*\.(.*)$/) || []
+    return resourceParts.length &gt; 1 &amp;&amp; !Browser.isMobile &amp;&amp; resourceParts[1].toLowerCase().match(/^(mp4|mov|f4v|3gpp|3gp)$/)
+
   }
 }
 
